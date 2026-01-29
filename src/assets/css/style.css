@@ -3880,9 +3880,9 @@ section:hover .section-title h2:before {
 	display          : -webkit-box;
 	display          : -ms-flexbox;
 	display          : flex;
-	-webkit-box-align: start;
-	-ms-flex-align   : start;
-	align-items      : start;
+	-webkit-box-align: flex-start;
+	-ms-flex-align   : flex-start;
+	align-items      : flex-start;
 	overflow         : hidden;
 	margin-bottom    : 45px;
 }
