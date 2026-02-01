@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-route
 import Header from './Utilities/Header/Header';
 import PillNav from './Utilities/PillNav/PillNav';
 import collegelogo from '../assets/img/logo/college-logo.png';
+import IIC_logo from '../assets/img/logo/IIC_logo.png';
+import Abhiyantran_logo from '../assets/img/logo/Abhiyantran-logo.png';
 import Home from './Pages/Home/HomeMain/HomeMain';
 import HomeTwo from './Pages/Home/HomeTwo/HomeTwo';
 import HomeThree from './Pages/Home/HomeThree/HomeThree';
@@ -40,14 +42,12 @@ const AppContent = () => {
 
       {/* PillNav - Desktop Only */}
       <PillNav
-          logo={collegelogo}
-          logoAlt="ICC Cell Logo"
           items={navItems}
           activeHref={location.pathname}
-          baseColor="#ffc010"
-          pillColor="#1a0e22"
-          hoveredPillTextColor="#ffc010"
-          pillTextColor="#ffffff"
+          baseColor="#FDC83A"
+          pillColor="#F08B41"
+          hoveredPillTextColor="#1E90FF"
+          pillTextColor="#333333"
           initialLoadAnimation={true}
       />
 

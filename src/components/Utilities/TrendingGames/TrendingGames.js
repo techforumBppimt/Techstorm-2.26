@@ -30,7 +30,7 @@ const TrendingData = [
 
 const TrendingGames = () => {
     return (
-        <section id="work" className="pt-120 pb-65" style={{ background: '#1a0e22' }}>
+        <section id="work" className="pt-120 pb-65" style={{ background: '#FFF4C7' }}>
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">

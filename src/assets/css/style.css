@@ -104,10 +104,10 @@ body {
 	font-family: "Handjet", sans-serif;
 	font-size  : 15px !important;
 	font-weight: 500;
-	color      : #ffffffc7 !important;
+	color      : #F08B41 !important;
 	font-style : normal;
 	line-height: 26px;
-	background : #000000 !important;
+	background : #FFF4C7 !important;
 	margin     : 0 !important;
 	padding    : 0 !important;
 	overflow-x : hidden;
@@ -707,15 +707,23 @@ label {
 }
 
 .logo {
-	max-width: 180px !important;
+	max-width: 350px !important;
 	display: flex;
     align-items: center;
-    gap: 8px;  
+    gap: 12px;  
+}
+
+.logo a {
+	display: inline-flex;
+	align-items: center;
+	height: 65px;
 }
 
 .logo img {
-	width: 100%;
-	max-width: 100% !important;
+	height: 65px;
+	width: auto;
+	object-fit: contain;
+	max-width: none !important;
 }
 
 /*** Preloader style ** */
@@ -1412,13 +1420,13 @@ label {
 	z-index        : 99;
 	padding-top    : 15px;
 	padding-bottom : 15px;
-	background     : rgba(15, 8, 25, 0.98);
+	background     : rgba(255, 244, 199, 0.98);
 	backdrop-filter: blur(10px);
-	border-bottom  : 1px solid rgba(255, 192, 16, 0.1);
+	border-bottom  : 1px solid rgba(240, 139, 65, 0.3);
 }
 
 .header-three .main-menu ul li a {
-	color: #fff;
+	color: #F08B41;
 }
 
 .header-three .btn.ss-btn {
@@ -6161,18 +6169,18 @@ section:hover .section-title h2:before {
 }
 
 .f-contact h3 {
-	color    : #fff;
+	color    : #F08B41;
 	font-size: 24px;
 }
 
 .footer-top-heiding h2 {
-	color: #fff;
+	color: #F08B41;
 }
 
 .footer-bg {
-	color              : #90949c;
-	border-bottom      : 4px solid #170f0f;
-	background         : #1e191f;
+	color              : #F08B41;
+	border-bottom      : 4px solid #F08B41;
+	background         : #FFF4C7;
 	background-position: center 0 !important;
 }
 
@@ -6182,13 +6190,13 @@ section:hover .section-title h2:before {
 }
 
 .footer-text p {
-	color        : #ddd;
+	color        : #F08B41;
 	margin-bottom: 0;
 }
 
 .footer-social span {
 	font-size   : 14px;
-	color       : #fff;
+	color       : #F08B41;
 	font-weight : 500;
 	font-family : 'Playfair Display', serif;
 	display     : inline-block;
@@ -6202,15 +6210,15 @@ section:hover .section-title h2:before {
 	width           : 36px;
 	height          : 36px;
 	border-radius   : 10px;
-	background-color: rgb(255, 192, 16);
+	background-color: #F08B41;
 	text-align      : center;
 	line-height     : 36px;
-	color           : rgb(255, 255, 255) !important;
+	color           : #FFF4C7 !important;
 }
 
 .footer-social a:hover {
-	background: rgb(255, 138, 1);
-	color     : #fff !important;
+	background: #FDC83A;
+	color     : #FFF4C7 !important;
 }
 
 .f-widget-title h2 {
@@ -6218,7 +6226,7 @@ section:hover .section-title h2:before {
 	margin-bottom : 35px;
 	position      : relative;
 	padding-bottom: 18px;
-	color         : #fff;
+	color         : #F08B41;
 }
 
 .f-widget-title h2:before {
@@ -6228,23 +6236,23 @@ section:hover .section-title h2:before {
 	bottom    : 0;
 	height    : 4px;
 	width     : 34px;
-	background: #ffc010;
+	background: #F08B41;
 }
 
 .footer-link ul li i {
-	color       : #ffc010;
+	color       : #F08B41;
 	margin-right: 5px;
 }
 
 .footer-link ul li a {
-	color      : #90949c;
+	color      : #F08B41;
 	font-weight: 600;
 	display    : inline-block;
 }
 
 .footer-link ul li a:hover {
 	padding-left: 5px;
-	color       : #ffc010;
+	color       : #FDC83A;
 }
 
 .footer-link ul li {
@@ -6315,7 +6323,7 @@ section:hover .section-title h2:before {
 }
 
 .copyright-wrap {
-	color        : #fff;
+	color        : #F08B41;
 	font-size    : 16px;
 	font-weight  : 600;
 	margin-bottom: 30px;
@@ -6323,7 +6331,7 @@ section:hover .section-title h2:before {
 }
 
 .copyright-wrap span {
-	color: #ffc010;
+	color: #FDC83A;
 }
 
 .copyright-wrap li {
@@ -6334,7 +6342,7 @@ section:hover .section-title h2:before {
 }
 
 .copyright-wrap li a {
-	color: #fff;
+	color: #F08B41;
 }
 
 .copyright-wrap li:before {

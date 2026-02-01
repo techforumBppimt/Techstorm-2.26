@@ -27,7 +27,7 @@ class MobileMenu extends Component {
 
     render() {
 
-        const { isOpen, isOpenTwo } = this.state;
+        const { isOpen } = this.state;
 
         return (
             <div>
