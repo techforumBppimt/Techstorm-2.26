@@ -72,7 +72,7 @@ const Matches = () => {
                                             left: 0,
                                             width: '35px',
                                             height: '35px',
-                                            background: 'linear-gradient(135deg, #FDC83A 50%, transparent 50%)',
+                                            background: 'linear-gradient(135deg, #ffc010 50%, transparent 50%)',
                                             opacity: 0.8
                                         }}></div>
                                         <div style={{
@@ -81,7 +81,7 @@ const Matches = () => {
                                             right: 0,
                                             width: '35px',
                                             height: '35px',
-                                            background: 'linear-gradient(315deg, #FDC83A 50%, transparent 50%)',
+                                            background: 'linear-gradient(315deg, #ffc010 50%, transparent 50%)',
                                             opacity: 0.8
                                         }}></div>
                                         
@@ -90,18 +90,18 @@ const Matches = () => {
                                             maxWidth: '70%', 
                                             maxHeight: '65%', 
                                             objectFit: 'contain',
-                                            filter: 'drop-shadow(0 0 15px rgba(30, 144, 255, 0.6))',
+                                            filter: 'drop-shadow(0 0 15px rgba(255, 192, 16, 0.6))',
                                             marginBottom: '15px'
                                         }} />
                                         
                                         {/* Event name */}
                                         <h4 style={{ 
-                                            color: '#FFF4C7', 
+                                            color: '#fff', 
                                             fontSize: '16px', 
                                             margin: 0,
                                             textAlign: 'center',
                                             fontFamily: '"Press Start 2P", system-ui',
-                                            textShadow: '0 0 15px rgba(30, 144, 255, 0.6)',
+                                            textShadow: '0 0 15px rgba(255, 192, 16, 0.6)',
                                             lineHeight: '1.4'
                                         }}>{name}</h4>
                                     </div>

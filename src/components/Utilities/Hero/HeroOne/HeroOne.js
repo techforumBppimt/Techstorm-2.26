@@ -57,19 +57,19 @@ const HeroOne = () => {
                                                 width: '100%',
                                                 maxWidth: '650px',
                                                 height: 'auto',
-                                                filter: 'drop-shadow(0 0 30px rgba(30, 144, 255, 0.8))',
+                                                filter: 'drop-shadow(0 0 30px rgba(255, 192, 16, 0.8))',
                                                 transform: 'scale(1.1)'
                                             }}
                                         />
                                     </div>
                                     <h5 data-animation="fadeInDown" data-delay=".4s">{titleTag}</h5>
                                     <h2 data-animation="fadeInUp" data-delay=".4s">{title}</h2>
-                                    <p data-animation="fadeInUp" data-delay=".6s" style={{color: '#F08B41', fontSize: '18px', marginBottom: '30px'}}>{'INSERT COIN to begin your journey at the ultimate technical fest experience. Where retro meets revolution.'}</p>
+                                    <p data-animation="fadeInUp" data-delay=".6s" style={{color: '#fff', fontSize: '18px', marginBottom: '30px'}}>{'INSERT COIN to begin your journey at the ultimate technical fest experience. Where retro meets revolution.'}</p>
                                     <div className="slider-btn">
                                         <Link to={'/contact'} className="btn ss-btn mr-15">
                                             {btnText}
                                         </Link>
-                                        <Link to={'/about'} className="btn ss-btn" style={{background: 'transparent', border: '2px solid #FDC83A'}}>
+                                        <Link to={'/about'} className="btn ss-btn" style={{background: 'transparent', border: '2px solid #ffc010'}}>
                                             {'Explore Events'}
                                         </Link>
                                     </div>

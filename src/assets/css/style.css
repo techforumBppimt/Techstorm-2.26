@@ -104,10 +104,10 @@ body {
 	font-family: "Handjet", sans-serif;
 	font-size  : 15px !important;
 	font-weight: 500;
-	color      : #F08B41 !important;
+	color      : #ffffffc7 !important;
 	font-style : normal;
 	line-height: 26px;
-	background : #FFF4C7 !important;
+	background : #000000 !important;
 	margin     : 0 !important;
 	padding    : 0 !important;
 	overflow-x : hidden;
@@ -1420,13 +1420,13 @@ label {
 	z-index        : 99;
 	padding-top    : 15px;
 	padding-bottom : 15px;
-	background     : rgba(255, 244, 199, 0.98);
+	background     : rgba(15, 8, 25, 0.98);
 	backdrop-filter: blur(10px);
-	border-bottom  : 1px solid rgba(240, 139, 65, 0.3);
+	border-bottom  : 1px solid rgba(255, 192, 16, 0.1);
 }
 
 .header-three .main-menu ul li a {
-	color: #F08B41;
+	color: #fff;
 }
 
 .header-three .btn.ss-btn {
@@ -6169,18 +6169,18 @@ section:hover .section-title h2:before {
 }
 
 .f-contact h3 {
-	color    : #F08B41;
+	color    : #fff;
 	font-size: 24px;
 }
 
 .footer-top-heiding h2 {
-	color: #F08B41;
+	color: #fff;
 }
 
 .footer-bg {
-	color              : #F08B41;
-	border-bottom      : 4px solid #F08B41;
-	background         : #FFF4C7;
+	color              : #90949c;
+	border-bottom      : 4px solid #170f0f;
+	background         : #1e191f;
 	background-position: center 0 !important;
 }
 
@@ -6190,13 +6190,13 @@ section:hover .section-title h2:before {
 }
 
 .footer-text p {
-	color        : #F08B41;
+	color        : #ddd;
 	margin-bottom: 0;
 }
 
 .footer-social span {
 	font-size   : 14px;
-	color       : #F08B41;
+	color       : #fff;
 	font-weight : 500;
 	font-family : 'Playfair Display', serif;
 	display     : inline-block;
@@ -6210,15 +6210,15 @@ section:hover .section-title h2:before {
 	width           : 36px;
 	height          : 36px;
 	border-radius   : 10px;
-	background-color: #F08B41;
+	background-color: rgb(255, 192, 16);
 	text-align      : center;
 	line-height     : 36px;
-	color           : #FFF4C7 !important;
+	color           : rgb(255, 255, 255) !important;
 }
 
 .footer-social a:hover {
-	background: #FDC83A;
-	color     : #FFF4C7 !important;
+	background: rgb(255, 138, 1);
+	color     : #fff !important;
 }
 
 .f-widget-title h2 {
@@ -6226,7 +6226,7 @@ section:hover .section-title h2:before {
 	margin-bottom : 35px;
 	position      : relative;
 	padding-bottom: 18px;
-	color         : #F08B41;
+	color         : #fff;
 }
 
 .f-widget-title h2:before {
@@ -6236,23 +6236,23 @@ section:hover .section-title h2:before {
 	bottom    : 0;
 	height    : 4px;
 	width     : 34px;
-	background: #F08B41;
+	background: #ffc010;
 }
 
 .footer-link ul li i {
-	color       : #F08B41;
+	color       : #ffc010;
 	margin-right: 5px;
 }
 
 .footer-link ul li a {
-	color      : #F08B41;
+	color      : #90949c;
 	font-weight: 600;
 	display    : inline-block;
 }
 
 .footer-link ul li a:hover {
 	padding-left: 5px;
-	color       : #FDC83A;
+	color       : #ffc010;
 }
 
 .footer-link ul li {
@@ -6323,7 +6323,7 @@ section:hover .section-title h2:before {
 }
 
 .copyright-wrap {
-	color        : #F08B41;
+	color        : #fff;
 	font-size    : 16px;
 	font-weight  : 600;
 	margin-bottom: 30px;
@@ -6331,7 +6331,7 @@ section:hover .section-title h2:before {
 }
 
 .copyright-wrap span {
-	color: #FDC83A;
+	color: #ffc010;
 }
 
 .copyright-wrap li {
@@ -6342,7 +6342,7 @@ section:hover .section-title h2:before {
 }
 
 .copyright-wrap li a {
-	color: #F08B41;
+	color: #fff;
 }
 
 .copyright-wrap li:before {
