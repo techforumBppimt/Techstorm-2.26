@@ -1,11 +1,21 @@
 import React from 'react';
 import matchBgImg from '../../../assets/img/bg/match-bg.png';
-import team1 from '../../../assets/img/matches/team1.png';
-import team2 from '../../../assets/img/matches/team2.png';
-import team3 from '../../../assets/img/matches/team3.png';
-import team4 from '../../../assets/img/matches/team4.png';
-import team5 from '../../../assets/img/matches/team5.png';
-import team6 from '../../../assets/img/matches/team6.png';
+
+// Import pixelated event mascots
+import codeBee from '../../../assets/img/PIXELATED EVENT MASCOTS/CODE BEE.png';
+import hackStorm from '../../../assets/img/PIXELATED EVENT MASCOTS/HACKSTORM.png';
+import technomania from '../../../assets/img/PIXELATED EVENT MASCOTS/TECHNOMANIA.png';
+import roNavigator from '../../../assets/img/PIXELATED EVENT MASCOTS/RO-NAVIGATOR.png';
+import roCombat from '../../../assets/img/PIXELATED EVENT MASCOTS/RO-COMBAT.png';
+import roSoccer from '../../../assets/img/PIXELATED EVENT MASCOTS/RO-SOCCER.png';
+import roTerrance from '../../../assets/img/PIXELATED EVENT MASCOTS/RO-TERRANCE.png';
+import techHunt from '../../../assets/img/PIXELATED EVENT MASCOTS/TECH HUNT.png';
+import omegatrix from '../../../assets/img/PIXELATED EVENT MASCOTS/OMEGATRIX.png';
+import creativeCanvas from '../../../assets/img/PIXELATED EVENT MASCOTS/CREATIVE CANVAS.png';
+import passionWithReels from '../../../assets/img/PIXELATED EVENT MASCOTS/PASSION WITH REELS.png';
+import khet from '../../../assets/img/PIXELATED EVENT MASCOTS/KHET.png';
+import forzaHorizon from '../../../assets/img/PIXELATED EVENT MASCOTS/FORZA HORIZON.png';
+import fifaMobile from '../../../assets/img/PIXELATED EVENT MASCOTS/FIFA Mobile.png';
 
 import SectionTitle from '../SectionTitle/SectionTitle';
 
@@ -13,34 +23,60 @@ const Matches = () => {
     
     const matches = [
         {
-            logoTeamOne: team1,
-            teamTag1: 'Coding',
+            logoTeamOne: codeBee,
+            teamTag1: 'Technical',
             teamName1: 'Code-Bee',
-            time: '[TIME]',
-            date: '[DATE] 2026',
-            logoTeamTwo: team2,
-            teamTag2: 'Hackathon',
+            logoTeamTwo: hackStorm,
+            teamTag2: 'Technical',
             teamName2: 'Hack Storm',
         },
         {
-            logoTeamOne: team3,
-            teamTag1: 'Robotics',
+            logoTeamOne: technomania,
+            teamTag1: 'Technical',
+            teamName1: 'TechnoMania',
+            logoTeamTwo: omegatrix,
+            teamTag2: 'Brain Teaser',
+            teamName2: 'Omegatrix',
+        },
+        {
+            logoTeamOne: techHunt,
+            teamTag1: 'Brain Teaser',
+            teamName1: 'Tech Hunt',
+            logoTeamTwo: roNavigator,
+            teamTag2: 'Rover',
+            teamName2: 'Ro-Navigator',
+        },
+        {
+            logoTeamOne: roCombat,
+            teamTag1: 'Rover',
             teamName1: 'Ro-Combat',
-            time: '[TIME]',
-            date: '[DATE] 2026',
-            logoTeamTwo: team4,
-            teamTag2: 'Robotics',
+            logoTeamTwo: roSoccer,
+            teamTag2: 'Rover',
             teamName2: 'Ro-Soccer',
         },
         {
-            logoTeamOne: team5,
-            teamTag1: 'Gaming',
-            teamName1: 'Forza Horizon',
-            time: '[TIME]',
-            date: '[DATE] 2026',
-            logoTeamTwo: team6,
-            teamTag2: 'Gaming',
-            teamName2: 'FIFA Mobile',
+            logoTeamOne: roTerrance,
+            teamTag1: 'Rover',
+            teamName1: 'Ro-Terrance',
+            logoTeamTwo: creativeCanvas,
+            teamTag2: 'Creative',
+            teamName2: 'Creative Canvas',
+        },
+        {
+            logoTeamOne: passionWithReels,
+            teamTag1: 'Creative',
+            teamName1: 'Passion with Reels',
+            logoTeamTwo: forzaHorizon,
+            teamTag2: 'Games',
+            teamName2: 'Forza Horizon',
+        },
+        {
+            logoTeamOne: fifaMobile,
+            teamTag1: 'Games',
+            teamName1: 'FIFA Mobile',
+            logoTeamTwo: khet,
+            teamTag2: 'Games',
+            teamName2: 'KHET',
         },
     ]
 
@@ -53,23 +89,21 @@ const Matches = () => {
                     </div>
                 </div>
                 {
-                    matches.map(match => {
+                    matches.map((match, index) => {
                         const {
                             logoTeamOne,
                             teamTag1,
                             teamName1,
                             logoTeamTwo,
-                            time,
-                            date,
                             teamTag2,
                             teamName2,
                         } = match;
                         return (
-                            <div className="row align-items-center mb-30 wow fadeInDown animated" data-animation="fadeInRight" data-delay=".4s">
+                            <div key={index} className="row align-items-center mb-30 wow fadeInDown animated" data-animation="fadeInRight" data-delay=".4s">
                                 <div className="col-lg-5">
-                                    <div className="team">
-                                        <img src={logoTeamOne} alt="left" />
-                                        <div className="text">
+                                    <div className="team" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                                        <img src={logoTeamOne} alt={teamName1} style={{ marginBottom: '15px', position: 'relative' }} />
+                                        <div className="text" style={{ position: 'relative', top: 'auto', right: 'auto', left: 'auto', width: 'auto', textAlign: 'center' }}>
                                             <h3>{teamName1}</h3>
                                             <span>{teamTag1}</span>
                                         </div>
@@ -77,14 +111,13 @@ const Matches = () => {
                                 </div>
                                 <div className="col-lg-2">
                                     <div className="match-time text-center">
-                                        <h4>{time}</h4>
-                                        <span>{date}</span>
+                                        <h4 style={{ fontSize: '24px', color: '#ffc010' }}>VS</h4>
                                     </div>
                                 </div>
                                 <div className="col-lg-5">
-                                    <div className="team2">
-                                        <img src={logoTeamTwo} alt="left" />
-                                        <div className="text">
+                                    <div className="team2" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                                        <img src={logoTeamTwo} alt={teamName2} style={{ marginBottom: '15px', float: 'none', position: 'relative' }} />
+                                        <div className="text" style={{ position: 'relative', top: 'auto', right: 'auto', left: 'auto', width: 'auto', textAlign: 'center' }}>
                                             <h3>{teamName2}</h3>
                                             <span>{teamTag2}</span>
                                         </div>
