@@ -133,13 +133,20 @@ const galleryItems = [
 
 const WorkGallery = () => {
     const [items, setItems] = useState(galleryItems);
+    const [activeFilter, setActiveFilter] = useState('All');
     const scrollContainerRef = React.useRef(null);
 
     const fliterItem = (cat) => {
+        setActiveFilter(cat);
         const filterUpdate = galleryItems.filter((currentItem) => {
             return currentItem.cat === cat;
         })
         setItems(filterUpdate);
+    }
+
+    const showAllItems = () => {
+        setActiveFilter('All');
+        setItems(galleryItems);
     }
 
     const scroll = (direction) => {
@@ -233,20 +240,20 @@ const WorkGallery = () => {
                         <div className="col-lg-12">
                             <div className="my-masonry wow fadeInDown animated" data-animation="fadeInRight" data-delay=".4s">
                                 <div className="button-group filter-button-group ">
-                                    <button className="active" onClick={() => setItems(galleryItems)}>All</button>
-                                    <button onClick={() => fliterItem('Coding')}>
+                                    <button className={activeFilter === 'All' ? 'active' : ''} onClick={showAllItems}>All</button>
+                                    <button className={activeFilter === 'Coding' ? 'active' : ''} onClick={() => fliterItem('Coding')}>
                                         {'Coding'}
                                     </button>
-                                    <button onClick={() => fliterItem('Robotics')}>
+                                    <button className={activeFilter === 'Robotics' ? 'active' : ''} onClick={() => fliterItem('Robotics')}>
                                         {'Robotics'}
                                     </button>
-                                    <button onClick={() => fliterItem('Gaming')}>
+                                    <button className={activeFilter === 'Gaming' ? 'active' : ''} onClick={() => fliterItem('Gaming')}>
                                         {'Gaming'}
                                     </button>
-                                    <button onClick={() => fliterItem('Brain')}>
+                                    <button className={activeFilter === 'Brain' ? 'active' : ''} onClick={() => fliterItem('Brain')}>
                                         {'Brain Teaser'}
                                     </button>
-                                    <button onClick={() => fliterItem('Creative')}>
+                                    <button className={activeFilter === 'Creative' ? 'active' : ''} onClick={() => fliterItem('Creative')}>
                                         {'Creative'}
                                     </button>
                                 </div>
