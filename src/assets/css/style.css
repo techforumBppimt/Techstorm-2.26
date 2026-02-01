@@ -107,7 +107,7 @@ body {
 	color      : #ffffffc7 !important;
 	font-style : normal;
 	line-height: 26px;
-	background : #1a0e22 !important;
+	background : #000000 !important;
 	margin     : 0 !important;
 	padding    : 0 !important;
 	overflow-x : hidden;
@@ -723,7 +723,7 @@ label {
 	width              : 100%;
 	height             : 100%;
 	z-index            : 9999999;
-	background-color   : #1a0e22;
+	background-color   : #000000;
 	background-position: center center;
 	background-repeat  : no-repeat;
 	background-image   : url(../img/preloader.gif);

@@ -21,63 +21,21 @@ import SectionTitle from '../SectionTitle/SectionTitle';
 
 const Matches = () => {
     
-    const matches = [
-        {
-            logoTeamOne: codeBee,
-            teamTag1: 'Technical',
-            teamName1: 'Code-Bee',
-            logoTeamTwo: hackStorm,
-            teamTag2: 'Technical',
-            teamName2: 'Hack Storm',
-        },
-        {
-            logoTeamOne: technomania,
-            teamTag1: 'Technical',
-            teamName1: 'TechnoMania',
-            logoTeamTwo: omegatrix,
-            teamTag2: 'Brain Teaser',
-            teamName2: 'Omegatrix',
-        },
-        {
-            logoTeamOne: techHunt,
-            teamTag1: 'Brain Teaser',
-            teamName1: 'Tech Hunt',
-            logoTeamTwo: roNavigator,
-            teamTag2: 'Rover',
-            teamName2: 'Ro-Navigator',
-        },
-        {
-            logoTeamOne: roCombat,
-            teamTag1: 'Rover',
-            teamName1: 'Ro-Combat',
-            logoTeamTwo: roSoccer,
-            teamTag2: 'Rover',
-            teamName2: 'Ro-Soccer',
-        },
-        {
-            logoTeamOne: roTerrance,
-            teamTag1: 'Rover',
-            teamName1: 'Ro-Terrance',
-            logoTeamTwo: creativeCanvas,
-            teamTag2: 'Creative',
-            teamName2: 'Creative Canvas',
-        },
-        {
-            logoTeamOne: passionWithReels,
-            teamTag1: 'Creative',
-            teamName1: 'Passion with Reels',
-            logoTeamTwo: forzaHorizon,
-            teamTag2: 'Games',
-            teamName2: 'Forza Horizon',
-        },
-        {
-            logoTeamOne: fifaMobile,
-            teamTag1: 'Games',
-            teamName1: 'FIFA Mobile',
-            logoTeamTwo: khet,
-            teamTag2: 'Games',
-            teamName2: 'KHET',
-        },
+    const events = [
+        { logo: codeBee, name: 'Code-Bee', category: 'Technical' },
+        { logo: hackStorm, name: 'Hack Storm', category: 'Technical' },
+        { logo: technomania, name: 'TechnoMania', category: 'Technical' },
+        { logo: omegatrix, name: 'Omegatrix', category: 'Brain Teaser' },
+        { logo: techHunt, name: 'Tech Hunt', category: 'Brain Teaser' },
+        { logo: roNavigator, name: 'Ro-Navigator', category: 'Rover' },
+        { logo: roCombat, name: 'Ro-Combat', category: 'Rover' },
+        { logo: roSoccer, name: 'Ro-Soccer', category: 'Rover' },
+        { logo: roTerrance, name: 'Ro-Terrance', category: 'Rover' },
+        { logo: creativeCanvas, name: 'Creative Canvas', category: 'Creative' },
+        { logo: passionWithReels, name: 'Passion with Reels', category: 'Creative' },
+        { logo: forzaHorizon, name: 'Forza Horizon', category: 'Games' },
+        { logo: fifaMobile, name: 'FIFA Mobile', category: 'Games' },
+        { logo: khet, name: 'KHET', category: 'Games' },
     ]
 
     return (
@@ -88,45 +46,70 @@ const Matches = () => {
                         <SectionTitle titlefirst='Featured' titleSec='Events' />
                     </div>
                 </div>
-                {
-                    matches.map((match, index) => {
-                        const {
-                            logoTeamOne,
-                            teamTag1,
-                            teamName1,
-                            logoTeamTwo,
-                            teamTag2,
-                            teamName2,
-                        } = match;
-                        return (
-                            <div key={index} className="row align-items-center mb-30 wow fadeInDown animated" data-animation="fadeInRight" data-delay=".4s">
-                                <div className="col-lg-5">
-                                    <div className="team" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                                        <img src={logoTeamOne} alt={teamName1} style={{ marginBottom: '15px', position: 'relative' }} />
-                                        <div className="text" style={{ position: 'relative', top: 'auto', right: 'auto', left: 'auto', width: 'auto', textAlign: 'center' }}>
-                                            <h3>{teamName1}</h3>
-                                            <span>{teamTag1}</span>
-                                        </div>
+                <div className="row">
+                    {
+                        events.map((event, index) => {
+                            const { logo, name } = event;
+                            return (
+                                <div key={index} className="col-lg-4 col-md-6 col-sm-6 mb-40 wow fadeInUp animated" data-animation="fadeInUp" data-delay={`${0.1 * index}s`}>
+                                    <div style={{
+                                        width: '100%',
+                                        aspectRatio: '16/9',
+                                        background: 'rgba(0, 0, 0, 0.9)',
+                                        clipPath: 'polygon(25px 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%, 0 25px)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                        padding: '20px'
+                                    }}>
+                                        {/* Corner fold effects */}
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            left: 0,
+                                            width: '35px',
+                                            height: '35px',
+                                            background: 'linear-gradient(135deg, #ffc010 50%, transparent 50%)',
+                                            opacity: 0.8
+                                        }}></div>
+                                        <div style={{
+                                            position: 'absolute',
+                                            bottom: 0,
+                                            right: 0,
+                                            width: '35px',
+                                            height: '35px',
+                                            background: 'linear-gradient(315deg, #ffc010 50%, transparent 50%)',
+                                            opacity: 0.8
+                                        }}></div>
+                                        
+                                        {/* Mascot image */}
+                                        <img src={logo} alt={name} style={{ 
+                                            maxWidth: '70%', 
+                                            maxHeight: '65%', 
+                                            objectFit: 'contain',
+                                            filter: 'drop-shadow(0 0 15px rgba(255, 192, 16, 0.6))',
+                                            marginBottom: '15px'
+                                        }} />
+                                        
+                                        {/* Event name */}
+                                        <h4 style={{ 
+                                            color: '#fff', 
+                                            fontSize: '16px', 
+                                            margin: 0,
+                                            textAlign: 'center',
+                                            fontFamily: '"Press Start 2P", system-ui',
+                                            textShadow: '0 0 15px rgba(255, 192, 16, 0.6)',
+                                            lineHeight: '1.4'
+                                        }}>{name}</h4>
                                     </div>
                                 </div>
-                                <div className="col-lg-2">
-                                    <div className="match-time text-center">
-                                        <h4 style={{ fontSize: '24px', color: '#ffc010' }}>VS</h4>
-                                    </div>
-                                </div>
-                                <div className="col-lg-5">
-                                    <div className="team2" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                                        <img src={logoTeamTwo} alt={teamName2} style={{ marginBottom: '15px', float: 'none', position: 'relative' }} />
-                                        <div className="text" style={{ position: 'relative', top: 'auto', right: 'auto', left: 'auto', width: 'auto', textAlign: 'center' }}>
-                                            <h3>{teamName2}</h3>
-                                            <span>{teamTag2}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })
-                }
+                            );
+                        })
+                    }
+                </div>
             </div>
         </section>
     );

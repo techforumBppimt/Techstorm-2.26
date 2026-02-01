@@ -10,7 +10,7 @@ const Offcanvas = ({ onOpne, onClose }) => {
                     <i className="fas fa-times"></i>
                 </span>
                 <form role="search" id="searchform" className="searchform">
-                    <input type="text" name="s" id="search" value="" placeholder="Search" />
+                    <input type="text" name="s" id="search" placeholder="Search" />
                     <button>
                         <i className="fa fa-search"></i>
                     </button>

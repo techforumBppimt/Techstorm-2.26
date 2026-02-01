@@ -12,9 +12,7 @@ const Footer = () => {
                         <div className="col-xl-4 col-lg-4 col-sm-6">
                             <div className="footer-widget mb-30">
                                 <div className="f-widget-title mb-20">
-                                    <Link to={'/'}>
-                                        <Logo logo={logo} />
-                                    </Link>
+                                    <Logo logo={logo} />
                                 </div>
                                 <div className="footer-link">{'TechStorm 2026 - Play the Past, Build the Future. The flagship technical fest celebrating retro arcade culture and modern innovation.'}</div>
                                 <div className="f-contact mt-20">
