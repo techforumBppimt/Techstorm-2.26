@@ -22,7 +22,6 @@ import SectionTitle from '../SectionTitle/SectionTitle';
 const Matches = () => {
     const [hoveredIndex, setHoveredIndex] = React.useState(null);
     const [activeFilter, setActiveFilter] = React.useState('All');
-    const [filteredEvents, setFilteredEvents] = React.useState([]);
     
     const allEvents = [
         { logo: codeBee, name: 'Code-Bee', category: 'Technical' },
@@ -39,11 +38,9 @@ const Matches = () => {
         { logo: forzaHorizon, name: 'Forza Horizon', category: 'Games' },
         { logo: fifaMobile, name: 'FIFA Mobile', category: 'Games' },
         { logo: khet, name: 'KHET', category: 'Games' },
-    ]
+    ];
 
-    React.useEffect(() => {
-        setFilteredEvents(allEvents);
-    }, []);
+    const [filteredEvents, setFilteredEvents] = React.useState(allEvents);
 
     const filterEvents = (category) => {
         setActiveFilter(category);
