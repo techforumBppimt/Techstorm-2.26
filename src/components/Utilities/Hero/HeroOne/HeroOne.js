@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import PixelSnow from '../../PixelSnow/PixelSnow';
+import FaultyTerminal from '../../FaultyTerminal/FaultyTerminal';
 
 const heroInformation = {
     id: "1",
@@ -12,35 +12,38 @@ const { titleTag, title, btnText } = heroInformation;
 const HeroOne = () => {
     return (
         <section id="home" className="slider-area slider-four fix p-relative" style={{ position: 'relative', minHeight: '600px' }}>
-            {/* Pixel Snow Background Effect */}
+            {/* Faulty Terminal Background Effect */}
             <div style={{ 
                 position: 'absolute', 
                 top: 0, 
                 left: 0, 
                 width: '100%', 
                 height: '100%', 
-                zIndex: 2,
-                pointerEvents: 'none',
+                zIndex: 1,
                 overflow: 'hidden'
             }}>
-                <PixelSnow 
-                    color="#ffffff"
-                    flakeSize={0.026}
-                    minFlakeSize={1.25}
-                    pixelResolution={400}
-                    speed={1.25}
-                    density={0.3}
-                    direction={125}
-                    brightness={1}
-                    depthFade={8}
-                    farPlane={20}
-                    gamma={0.4545}
-                    variant="square"
-                    style={{ width: '100%', height: '100%' }}
+                <FaultyTerminal 
+                    scale={1.5}
+                    gridMul={[2, 1]}
+                    digitSize={2.7}
+                    timeScale={1.4}
+                    pause={false}
+                    scanlineIntensity={1.3}
+                    glitchAmount={1}
+                    flickerAmount={1}
+                    noiseAmp={0.8}
+                    chromaticAberration={0}
+                    dither={0}
+                    curvature={0.02}
+                    tint="#cdf312"
+                    mouseReact
+                    mouseStrength={0.5}
+                    pageLoadAnimation
+                    brightness={0.6}
                 />
             </div>
-            <div className="slider-active" style={{ position: 'relative', zIndex: 1 }}>
-                <div className="single-slider slider-bg d-flex align-items-center" style={{ background: '#0a0a0a' }}>
+            <div className="slider-active" style={{ position: 'relative', zIndex: 2 }}>
+                <div className="single-slider slider-bg d-flex align-items-center" style={{ background: 'transparent' }}>
                     <div className="container" style={{ position: 'relative', zIndex: 3 }}>
                         <div className="row justify-content-center pt-50">
                             <div className="col-lg-1 col-md-1"></div>
