@@ -22,7 +22,7 @@ const About = () => {
                                 position: 'relative',
                                 zIndex: 1
                             }} />
-                            <div className="about-image2 wow fadeInUp" data-wow-delay=".4s" style={{
+                            <div className="about-image2 wow fadeInUp d-none d-md-block" data-wow-delay=".4s" style={{
                                 position: 'absolute',
                                 bottom: '-238px',
                                 right: '-30px',
@@ -46,7 +46,7 @@ const About = () => {
                                     titleSec={''}
                                     className={'about-title second-title'}
                                 />
-                                <p style={{ 
+                                <p className="about-date" style={{ 
                                     position: 'absolute',
                                     top: '30px',
                                     right: '140px',
@@ -62,10 +62,11 @@ const About = () => {
                                 </p>
                             
                             {/* NES.css Message Balloons */}
-                            <div className="nes-container is-dark with-title" style={{
+                            <div className="nes-container is-dark with-title about-nes-container" style={{
                                 background: 'rgba(26, 14, 34, 0.9)',
                                 border: '4px solid #ffc010',
-                                marginBottom: '30px'
+                                marginBottom: '30px',
+                                marginTop: '20px'
                             }}>
                                 <p className="title" style={{
                                     background: '#1a0e22',

@@ -525,6 +525,21 @@
         margin-top: 25px;
         max-width : 100%;
     }
+    
+    /* About Section Tablet Fixes */
+    .about-date {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        font-size: 20px !important;
+        text-align: center !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .about-nes-container .nes-balloon {
+        max-width: 350px !important;
+        font-size: 12px !important;
+    }
 
     .about-image3 {
         right: -45px;
@@ -781,6 +796,25 @@
         margin-left  : 0;
         text-align   : center;
         margin-bottom: 30px;
+    }
+    
+    /* About Section Mobile Adjustments */
+    .about-date {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        font-size: 16px !important;
+        text-align: center !important;
+        margin-bottom: 20px !important;
+        line-height: 1.8 !important;
+    }
+    
+    .about-nes-container .nes-balloon p {
+        font-size: 12px !important;
+    }
+    
+    .about-content3 ul.green li {
+        font-size: 12px !important;
     }
 
     .about-content.pl-30 {
@@ -2641,7 +2675,7 @@
 
 @media only screen and (max-width: 420px) {
     .experience-years {
-        width: 50%;
+        display: none;
     }
 
     .services-area .services-box {
@@ -2658,6 +2692,44 @@
 
     .contact-map {
         min-height: 500px;
+    }
+    
+    /* About Section Mobile Fixes */
+    .about-date {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        font-size: 18px !important;
+        text-align: center !important;
+        margin-bottom: 20px !important;
+        margin-top: 10px !important;
+    }
+    
+    .about-nes-container {
+        padding: 15px !important;
+    }
+    
+    .about-nes-container .message {
+        margin-bottom: 15px !important;
+    }
+    
+    .about-nes-container .nes-balloon {
+        max-width: 100% !important;
+        font-size: 11px !important;
+    }
+    
+    .about-nes-container .nes-mario,
+    .about-nes-container .nes-ash,
+    .about-nes-container .nes-kirby {
+        font-size: 24px !important;
+    }
+    
+    .about-content.s-about-content {
+        padding-top: 30px !important;
+    }
+    
+    .about-area.pb-140 {
+        padding-bottom: 60px !important;
     }
 }
 
