@@ -18,9 +18,9 @@ const Header = () => {
     
     const [isScrolled, setIsScrolled] = useState(false);
 
-    const heandelOpen = () => {
-        setOpenCanves(!openCanvas);
-    }
+    // const heandelOpen = () => {
+    //     setOpenCanves(!openCanvas);
+    // }
 
     useEffect(() => {
         const handleScroll = () => {
