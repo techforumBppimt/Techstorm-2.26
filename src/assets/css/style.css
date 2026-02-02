@@ -23,6 +23,31 @@
 
 */
 
+/* Custom Pixel Cursors */
+* {
+	cursor: url('../img/cursor.png'), auto !important;
+}
+
+a, button, input[type="submit"], input[type="button"], .btn, [role="button"], 
+select, input[type="radio"], input[type="checkbox"], 
+.slick-arrow, .slick-dots button, .nav-link, .dropdown-toggle,
+.card, .card *, .s-single-services, .single-post, .team-item, 
+.single-brand, .work-process-item, .testimonial-item, .blog-post,
+[class*="hover"], [onclick], .clickable,
+.btn-8bit, .btn-8bit *, .btn-8bit__text, .btn-8bit__shadow,
+.grid-item, .grid-item *, .popup-image, .portfolio button,
+a.popup-image, a.popup-image *,
+.match-area .col-lg-4, .match-area .col-lg-4 *, .match-area .col-md-6,
+.match-area [style*="cursor: pointer"], [style*="cursor: pointer"] *,
+div[style*="cursor: pointer"], div[onmouseenter] {
+	cursor: url('../img/cursor-click.png'), pointer !important;
+}
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="url"],
+input[type="password"], input[type="search"], textarea, select {
+	cursor: url('../img/cursor.png'), text !important;
+}
+
 /* 1. Theme default css */
 
 /* Custom Font Classes */
