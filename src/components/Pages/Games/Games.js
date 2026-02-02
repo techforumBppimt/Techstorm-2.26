@@ -4,14 +4,14 @@ import Breadcrumb from "../../Utilities/Breadcrumb/Breadcrumb";
 import SectionTitle from "../../Utilities/SectionTitle/SectionTitle";
 
 
-import workImg1 from '../../../assets/img/gallery/protfolio-img01.png';
-import workImg2 from '../../../assets/img/gallery/protfolio-img02.png';
-import workImg3 from '../../../assets/img/gallery/protfolio-img03.png';
-import workImg4 from '../../../assets/img/gallery/protfolio-img04.png';
-import workImg5 from '../../../assets/img/gallery/protfolio-img05.png';
-import workImg6 from '../../../assets/img/gallery/protfolio-img06.png';
-import workImg7 from '../../../assets/img/gallery/protfolio-img07.png';
-import workImg8 from '../../../assets/img/gallery/protfolio-img08.png';
+import workImg1 from '../../../assets/img/gallery/c1.jpeg';
+import workImg2 from '../../../assets/img/gallery/c2.jpeg';
+import workImg3 from '../../../assets/img/gallery/c3.jpeg';
+import workImg4 from '../../../assets/img/gallery/c4.jpeg';
+import workImg5 from '../../../assets/img/gallery/c5.jpeg';
+import workImg6 from '../../../assets/img/gallery/c6.jpeg';
+import workImg7 from '../../../assets/img/gallery/c7.jpeg';
+import workImg8 from '../../../assets/img/gallery/c8.jpeg';
 const gameItems = [
     {
         img: workImg1,

@@ -5,22 +5,29 @@ import bgImg from '../../../assets/img/bg/trendiang-bg.png';
 
 
 import SectionTitle from '../SectionTitle/SectionTitle';
-import LiveStreamingVideo from '../LiveStreamingVideo/LiveStreamingVideo';
 import RetroCard from '../RetroCard/RetroCard';
+import AnimateOnScroll from '../ScrollAnimation/AnimateOnScroll';
 
-import workImg1 from '../../../assets/img/gallery/protfolio-img01.png';
-import workImg2 from '../../../assets/img/gallery/protfolio-img02.png';
-import workImg3 from '../../../assets/img/gallery/protfolio-img03.png';
-import workImg4 from '../../../assets/img/gallery/protfolio-img04.png';
-import workImg5 from '../../../assets/img/gallery/protfolio-img05.png';
-import workImg6 from '../../../assets/img/gallery/protfolio-img06.png';
-import workImg7 from '../../../assets/img/gallery/protfolio-img07.png';
-import workImg8 from '../../../assets/img/gallery/protfolio-img08.png';
+// Event Images
+import codebeeImg from '../../../assets/img/events/codebee.png';
+import hackstormImg from '../../../assets/img/events/hackstorm.png';
+import technomaniaImg from '../../../assets/img/events/technomania.png';
+import omegatrixImg from '../../../assets/img/events/omegatrix.png';
+import techhuntImg from '../../../assets/img/events/techhunt.png';
+import ronavigatorImg from '../../../assets/img/events/ronavigator.png';
+import rocombatImg from '../../../assets/img/events/rocombat.png';
+import rosoccerImg from '../../../assets/img/events/rosoccer.png';
+import roterranceImg from '../../../assets/img/events/roterrance.png';
+import creativecanvasImg from '../../../assets/img/events/crreativecanvas.png';
+import passionwithreelsImg from '../../../assets/img/events/passionwithreels.png';
+import forzahorizonImg from '../../../assets/img/events/forzahorizon.png';
+import fifamobileImg from '../../../assets/img/events/fifamobile.png';
+import khetImg from '../../../assets/img/events/khet.png';
 
 const galleryItems = [
     {
         id: '1',
-        img: workImg1,
+        img: codebeeImg,
         tag: 'Coding',
         label: 'Code-Bee',
         description: 'Speed coding competition',
@@ -28,7 +35,7 @@ const galleryItems = [
     },
     {
         id: '2',
-        img: workImg2,
+        img: hackstormImg,
         tag: 'Hackathon',
         label: 'Hack Storm',
         description: '24-hour innovation sprint',
@@ -36,7 +43,7 @@ const galleryItems = [
     },
     {
         id: '3',
-        img: workImg1,
+        img: technomaniaImg,
         tag: 'Technical',
         label: 'TechnoMania',
         description: 'Technical showcase event',
@@ -44,7 +51,7 @@ const galleryItems = [
     },
     {
         id: '4',
-        img: workImg5,
+        img: omegatrixImg,
         tag: 'Brain Teaser',
         label: 'Omegatrix',
         description: 'Mind-bending puzzles',
@@ -52,7 +59,7 @@ const galleryItems = [
     },
     {
         id: '5',
-        img: workImg6,
+        img: techhuntImg,
         tag: 'Brain Teaser',
         label: 'Tech Hunt',
         description: 'Technical treasure hunt',
@@ -60,7 +67,7 @@ const galleryItems = [
     },
     {
         id: '6',
-        img: workImg7,
+        img: ronavigatorImg,
         tag: 'Robotics',
         label: 'Ro-Navigator',
         description: 'Autonomous navigation challenge',
@@ -68,7 +75,7 @@ const galleryItems = [
     },
     {
         id: '7',
-        img: workImg3,
+        img: rocombatImg,
         tag: 'Robotics',
         label: 'Ro-Combat',
         description: 'Robot battle arena',
@@ -76,7 +83,7 @@ const galleryItems = [
     },
     {
         id: '8',
-        img: workImg8,
+        img: rosoccerImg,
         tag: 'Robotics',
         label: 'Ro-Soccer',
         description: 'Robotic football match',
@@ -84,7 +91,7 @@ const galleryItems = [
     },
     {
         id: '9',
-        img: workImg7,
+        img: roterranceImg,
         tag: 'Robotics',
         label: 'Ro-Terrance',
         description: 'All-terrain rover race',
@@ -92,7 +99,7 @@ const galleryItems = [
     },
     {
         id: '10',
-        img: workImg5,
+        img: creativecanvasImg,
         tag: 'Creative',
         label: 'Creative Canvas',
         description: 'Digital art competition',
@@ -100,7 +107,7 @@ const galleryItems = [
     },
     {
         id: '11',
-        img: workImg6,
+        img: passionwithreelsImg,
         tag: 'Creative',
         label: 'Passion with Reels',
         description: 'Short film showcase',
@@ -108,7 +115,7 @@ const galleryItems = [
     },
     {
         id: '12',
-        img: workImg4,
+        img: forzahorizonImg,
         tag: 'Gaming',
         label: 'Forza Horizon',
         description: 'Racing wheel setup',
@@ -116,7 +123,7 @@ const galleryItems = [
     },
     {
         id: '13',
-        img: workImg8,
+        img: fifamobileImg,
         tag: 'Gaming',
         label: 'FIFA Mobile',
         description: 'Football tournament',
@@ -124,7 +131,7 @@ const galleryItems = [
     },
     {
         id: '14',
-        img: workImg2,
+        img: khetImg,
         tag: 'Gaming',
         label: 'KHET',
         description: 'Laser chess competition',
@@ -189,11 +196,13 @@ const WorkGallery = () => {
         <section id="work" className="pt-120 pb-120" style={{ background: `url(${bgImg}) no-repeat` }}>
             <div className="container-fluid px-4">
                 <div className="portfolio ">
-                    <div className="row align-items-center mb-30 wow fadeInUp animated" data-animation="fadeInRight" data-delay=".4s">
+                    <div className="row align-items-center mb-30">
                         <div className="col-lg-12 d-flex justify-content-between align-items-center">
-                            <SectionTitle
-                                titlefirst='All'
-                                titleSec='Events' />
+                            <AnimateOnScroll animation="section-title-wrapper">
+                                <SectionTitle
+                                    titlefirst='All Events'
+                                    titleSec='' />
+                            </AnimateOnScroll>
                             <div style={{ display: 'flex', gap: '10px' }}>
                                 <button 
                                     onClick={() => scroll('left')}
@@ -240,8 +249,9 @@ const WorkGallery = () => {
                             </div>
                         </div>
                         <div className="col-lg-12">
-                            <div className="my-masonry wow fadeInDown animated" data-animation="fadeInRight" data-delay=".4s">
-                                <div className="button-group filter-button-group ">
+                            <AnimateOnScroll animation="fade-slide-up-subtle" delay={100}>
+                                <div className="my-masonry">
+                                    <div className="button-group filter-button-group ">
                                     <button className={activeFilter === 'All' ? 'active' : ''} onClick={showAllItems}>All</button>
                                     <button className={activeFilter === 'Coding' ? 'active' : ''} onClick={() => fliterItem('Coding')}>
                                         {'Coding'}
@@ -255,11 +265,12 @@ const WorkGallery = () => {
                                     <button className={activeFilter === 'Brain' ? 'active' : ''} onClick={() => fliterItem('Brain')}>
                                         {'Brain Teaser'}
                                     </button>
-                                    <button className={activeFilter === 'Creative' ? 'active' : ''} onClick={() => fliterItem('Creative')}>
-                                        {'Creative'}
-                                    </button>
+                                        <button className={activeFilter === 'Creative' ? 'active' : ''} onClick={() => fliterItem('Creative')}>
+                                            {'Creative'}
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            </AnimateOnScroll>
                         </div>
                     </div>
                     <div 
@@ -274,16 +285,26 @@ const WorkGallery = () => {
                             scrollbarWidth: 'thin',
                             scrollbarColor: '#ffc010 #1a0e22'
                         }}
+                        className="gallery-scroll-container"
                     >
                         {
                             items.map((item, index) => {
                                 const { id, img, tag, label, description } = item
+                                const delay = (index % 6) * 100;
                                 return (
-                                    <div 
-                                        className="grid-item" 
-                                        key={id} 
-                                        style={{ minWidth: '350px', maxWidth: '350px', flexShrink: 0 }}
+                                    <AnimateOnScroll 
+                                        key={id}
+                                        animation="fade-scale" 
+                                        delay={delay}
                                     >
+                                        <div 
+                                            className="grid-item gallery-card-wrapper" 
+                                            style={{ 
+                                                minWidth: '350px', 
+                                                maxWidth: '350px', 
+                                                flexShrink: 0 
+                                            }}
+                                        >
                                         <RetroCard 
                                             bg={hoveredIndex === index ? '#1a3d3d' : '#1a0e22'}
                                             textColor={hoveredIndex === index ? '#00ffea' : '#ffffff'}
@@ -291,7 +312,6 @@ const WorkGallery = () => {
                                             shadowColor={hoveredIndex === index ? '#00ffea' : '#ffc010'}
                                             style={{
                                                 width: '100%',
-                                                height: '420px',
                                                 display: 'flex',
                                                 flexDirection: 'column',
                                                 padding: '0',
@@ -303,11 +323,19 @@ const WorkGallery = () => {
                                             onMouseLeave={() => setHoveredIndex(null)}
                                         >
                                             <Link to={img} className="popup-image" style={{ textDecoration: 'none', color: 'inherit', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                                                <div style={{ height: '240px', overflow: 'hidden' }}>
+                                                <div className="gallery-image-container" style={{ 
+                                                    width: '100%',
+                                                    paddingBottom: '80%', 
+                                                    position: 'relative',
+                                                    overflow: 'hidden' 
+                                                }}>
                                                     <img 
                                                         src={img} 
                                                         alt={label} 
                                                         style={{ 
+                                                            position: 'absolute',
+                                                            top: 0,
+                                                            left: 0,
                                                             width: '100%', 
                                                             height: '100%', 
                                                             objectFit: 'cover',
@@ -354,13 +382,13 @@ const WorkGallery = () => {
                                                 </div>
                                             </Link>
                                         </RetroCard>
-                                    </div>
+                                        </div>
+                                    </AnimateOnScroll>
                                 )
                             })
                         }
                     </div>
                 </div>
-                <LiveStreamingVideo />
             </div>
         </section>
     );

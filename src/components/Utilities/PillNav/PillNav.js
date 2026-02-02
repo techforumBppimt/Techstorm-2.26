@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { gsap } from 'gsap';
+import { Button } from '../../ui/8bit/button';
 import './PillNav.css';
 
 const PillNav = ({
@@ -166,34 +167,31 @@ const PillNav = ({
               <li key={item.href || `item-${i}`} role="none" className={item.submenu ? 'pill-item-wrapper' : ''}>
                 {isRouterLink(item.href) && !item.submenu ? (
                   item.href.includes('#') ? (
-                    <a
-                      role="menuitem"
-                      href={item.href}
-                      className={`pill${activeHref === item.href ? ' is-active' : ''}`}
-                      aria-label={item.ariaLabel || item.label}
+                    <Button
+                      variant="outline"
                       onClick={(e) => handleHashClick(e, item.href)}
+                      className={activeHref === item.href ? 'is-active' : ''}
                     >
                       {item.label}
-                    </a>
+                    </Button>
                   ) : (
-                    <Link
-                      role="menuitem"
-                      to={item.href}
-                      className={`pill${activeHref === item.href ? ' is-active' : ''}`}
-                      aria-label={item.ariaLabel || item.label}
-                    >
-                      {item.label}
+                    <Link to={item.href}>
+                      <Button
+                        variant="outline"
+                        className={activeHref === item.href ? 'is-active' : ''}
+                      >
+                        {item.label}
+                      </Button>
                     </Link>
                   )
                 ) : (
-                  <span
-                    role="menuitem"
-                    className={`pill${activeHref === item.href ? ' is-active' : ''}`}
-                    aria-label={item.ariaLabel || item.label}
+                  <Button
+                    variant="outline"
+                    className={activeHref === item.href ? 'is-active' : ''}
                     style={{ cursor: item.submenu ? 'pointer' : 'default' }}
                   >
                     {item.label}
-                  </span>
+                  </Button>
                 )}
                 {/* Dropdown submenu */}
                 {item.submenu && (

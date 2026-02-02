@@ -2113,6 +2113,26 @@
         width: 100%;
     }
 
+    .s-about-img.p-relative {
+        padding-bottom: 0;
+        margin-bottom: 50px;
+    }
+
+    .about-image2 {
+        position: relative !important;
+        bottom: auto !important;
+        right: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        margin-top: 20px !important;
+    }
+
+    .about-image2 img {
+        width: 100% !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+        border: 4px solid #ffc010 !important;
+    }
+
     .chosse-img {
         display: none;
     }
@@ -2705,6 +2725,17 @@
 
     .comment-form {
         padding: 40px 20px;
+    }
+
+    /* Gallery cards - mobile full screen */
+    .gallery-card-wrapper {
+        min-width: calc(100vw - 40px) !important;
+        max-width: calc(100vw - 40px) !important;
+    }
+
+    .gallery-scroll-container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 }
 

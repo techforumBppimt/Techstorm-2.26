@@ -1,7 +1,7 @@
 import SectionTitle from "../SectionTitle/SectionTitle";
-import img1 from '../../../assets/img/gallery/protfolio-img01.png'
-import img2 from '../../../assets/img/gallery/protfolio-img02.png'
-import img3 from '../../../assets/img/gallery/protfolio-img03.png'
+import img1 from '../../../assets/img/gallery/c1.jpeg'
+import img2 from '../../../assets/img/gallery/c2.jpeg'
+import img3 from '../../../assets/img/gallery/c3.jpeg'
 import GameCard from "./GameCard";
 
 const TrendingData = [

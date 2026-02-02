@@ -1,10 +1,10 @@
 import aboutBgImg from '../../../assets/img/bg/about-bg.png';
 import Button8bit from '../Button/Button8bit';
 import experienceImg from '../../../assets/img/features/experience-years.png';
-import features1 from '../../../assets/img/features/about-img1.jpg';
-import features2 from '../../../assets/img/features/about-img2.jpg';
-import features3 from '../../../assets/img/features/about-img3.png';
+import features1 from '../../../assets/img/features/about1.jpeg';
+import features2 from '../../../assets/img/features/about2.jpeg';
 import SectionTitle from '../SectionTitle/SectionTitle';
+import AnimateOnScroll from '../ScrollAnimation/AnimateOnScroll';
 
 const About = () => {
     return (
@@ -12,27 +12,41 @@ const About = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-6 col-md-12 col-sm-12">
-                        <div className="s-about-img p-relative wow fadeInLeft" data-wow-delay=".4s">
-                            <div className="experience-years wow fadeInDown" data-wow-delay=".4s">
-                                <img src={experienceImg} alt="Experience Years" />
-                                <span>{'1st'}</span>
+                        <AnimateOnScroll animation="slide-in-left">
+                            <div className="s-about-img p-relative" style={{ position: 'relative' }}>
+                                <div className="experience-years">
+                                    <img src={experienceImg} alt="Experience Years" />
+                                    <span>{'1st'}</span>
+                                </div>
+                            <img src={features1} alt="TechStorm fest" style={{ 
+                                width: '100%',
+                                position: 'relative',
+                                zIndex: 1
+                            }} />
+                            <div className="about-image2 wow fadeInUp" data-wow-delay=".4s" style={{
+                                position: 'absolute',
+                                bottom: '-238px',
+                                right: '-30px',
+                                zIndex: 2,
+                                width: '70%'
+                            }}>
+                                <img src={features2} alt="Retro arcade" style={{ 
+                                    width: '100%',
+                                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
+                                    border: '4px solid #ffc010'
+                                }} />
                             </div>
-                            <img src={features1} alt="TechStorm fest" />
-                            <div className="about-image2 wow fadeInUp" data-wow-delay=".4s">
-                                <img src={features2} alt="Retro arcade" />
                             </div>
-                            <div className="about-image3 wow fadeInUp" data-wow-delay=".6s">
-                                <img src={features3} alt="Tech competition" />
-                            </div>
-                        </div>
+                        </AnimateOnScroll>
                     </div>
                     <div className="col-lg-6 col-md-12 col-sm-12">
-                        <div className="about-content s-about-content wow fadeInRight" data-wow-delay=".4s">
-                            <SectionTitle
-                                titlefirst={'About TechStorm'}
-                                titleSec={'2026'}
-                                className={'about-title second-title'}
-                            />
+                        <AnimateOnScroll animation="slide-in-right">
+                            <div className="about-content s-about-content">
+                                <SectionTitle
+                                    titlefirst={'About TechStorm'}
+                                    titleSec={''}
+                                    className={'about-title second-title'}
+                                />
                             
                             {/* NES.css Message Balloons */}
                             <div className="nes-container is-dark with-title" style={{
@@ -122,10 +136,11 @@ const About = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="slider-btn2 mt-30">
-                                <Button8bit to={'/about'} variant="primary" size="medium">{'Discover More'}</Button8bit>
+                                <div className="slider-btn2 mt-30">
+                                    <Button8bit to={'/about'} variant="primary" size="medium">{'Discover More'}</Button8bit>
+                                </div>
                             </div>
-                        </div>
+                        </AnimateOnScroll>
                     </div>
                 </div>
             </div>

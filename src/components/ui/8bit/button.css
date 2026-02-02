@@ -1,0 +1,103 @@
+.button-8bit {
+    font-family: 'Press Start 2P', monospace, 'Courier New', Courier;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0 14px;
+    height: 34px;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: transparent;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.button-8bit::before,
+.button-8bit::after {
+    content: '';
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+/* Outline variant */
+.button-outline {
+    color: #ffc010;
+    background: #1a0e22;
+    margin: 0 4px;
+    box-shadow: 
+        0 0 0 2px transparent,
+        0 0 0 4px #ffc010,
+        0 0 0 6px transparent;
+    clip-path: polygon(
+        0 6px, 6px 6px, 6px 0,
+        calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+        100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px),
+        calc(100% - 6px) 100%, 6px 100%, 6px calc(100% - 6px),
+        0 calc(100% - 6px)
+    );
+}
+
+.button-outline:hover {
+    color: #000000;
+    background: #ffc010;
+    box-shadow: 
+        0 0 0 2px transparent,
+        0 0 0 4px #ffc010,
+        0 0 0 6px transparent,
+        0 0 15px rgba(255, 192, 16, 0.4);
+    transform: translateY(-1px);
+}
+
+.button-outline:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 0 0 2px transparent,
+        0 0 0 4px #ffc010,
+        0 0 0 6px transparent;
+}
+
+/* Default variant */
+.button-default {
+    color: #14142A;
+    background: #FFD700;
+    box-shadow: 
+        0 0 0 3px #14142A,
+        0 0 0 6px #FFD700;
+    clip-path: polygon(
+        0 8px, 8px 8px, 8px 0,
+        calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+        100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px),
+        calc(100% - 8px) 100%, 8px 100%, 8px calc(100% - 8px),
+        0 calc(100% - 8px)
+    );
+}
+
+.button-default:hover {
+    background: #FFF;
+    box-shadow: 
+        0 0 0 3px #14142A,
+        0 0 0 6px #FFD700,
+        0 0 20px rgba(255, 215, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.button-default:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 0 0 3px #14142A,
+        0 0 0 6px #FFD700;
+}
+
+/* Disabled state */
+.button-8bit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button-8bit:disabled:hover {
+    transform: none;
+}
