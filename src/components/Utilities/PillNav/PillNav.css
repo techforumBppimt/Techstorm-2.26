@@ -14,7 +14,7 @@
 
 .pill-nav {
   --nav-h: 42px;
-  --logo: 36px;
+  --logo: 50px;
   --pill-pad-x: 18px;
   --pill-gap: 3px;
   width: max-content;
@@ -99,8 +99,9 @@
 }
 
 .pill:hover {
-  background: var(--base, #ffc010);
+  background: rgba(255, 255, 255, 0.7);
   color: var(--hover-text, #1a0e22);
+  font-weight: bold;
 }
 
 /* Dropdown styles */

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import MobileMenu from './MobileMenu/MobileMenu';
 import Logo from '../Logo/Logo';
+import collegelogo from '../../../assets/img/logo/college-logo.png';
 import IIC_logo from '../../../assets/img/logo/IIC_logo.jpeg';
 import Abhiyantran_logo from '../../../assets/img/logo/Abhiyantran-logo.png';
 import toggolIcon from '../../../assets/img/bg/toggle-menu.png';
@@ -29,7 +30,7 @@ const Header = () => {
                             <div className="row align-items-center">
                                 <div className="col-xl-1 col-lg-1 col-6">
                                     <div className="logo ">
-
+                                        
                                         <Logo logo={Abhiyantran_logo}/>
                                         <Logo logo={IIC_logo} />
                                         

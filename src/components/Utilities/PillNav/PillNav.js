@@ -120,6 +120,17 @@ const PillNav = ({
     onMobileMenuClick?.();
   };
 
+  const handleHashClick = (e, href) => {
+    e.preventDefault();
+    const hash = href.includes('#') ? href.split('#')[1] : '';
+    if (hash) {
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
   const isExternalLink = href =>
     href.startsWith('http://') ||
     href.startsWith('https://') ||
@@ -172,14 +183,26 @@ const PillNav = ({
             {items.map((item, i) => (
               <li key={item.href || `item-${i}`} role="none" className={item.submenu ? 'pill-item-wrapper' : ''}>
                 {isRouterLink(item.href) && !item.submenu ? (
-                  <Link
-                    role="menuitem"
-                    to={item.href}
-                    className={`pill${activeHref === item.href ? ' is-active' : ''}`}
-                    aria-label={item.ariaLabel || item.label}
-                  >
-                    {item.label}
-                  </Link>
+                  item.href.includes('#') ? (
+                    <a
+                      role="menuitem"
+                      href={item.href}
+                      className={`pill${activeHref === item.href ? ' is-active' : ''}`}
+                      aria-label={item.ariaLabel || item.label}
+                      onClick={(e) => handleHashClick(e, item.href)}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      role="menuitem"
+                      to={item.href}
+                      className={`pill${activeHref === item.href ? ' is-active' : ''}`}
+                      aria-label={item.ariaLabel || item.label}
+                    >
+                      {item.label}
+                    </Link>
+                  )
                 ) : (
                   <span
                     role="menuitem"
@@ -227,13 +250,26 @@ const PillNav = ({
           {items.map((item, i) => (
             <li key={item.href || `mobile-item-${i}`}>
               {isRouterLink(item.href) ? (
-                <Link
-                  to={item.href}
-                  className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
+                item.href.includes('#') ? (
+                  <a
+                    href={item.href}
+                    className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
+                    onClick={(e) => {
+                      handleHashClick(e, item.href);
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                )
               ) : (
                 <a
                   href={item.href}
