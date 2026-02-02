@@ -81,6 +81,72 @@
     transform: scaleY(1) translateX(-50%);
 }
 
+/* Close button styling for retro theme - positioned above blur overlay */
+.mobile-menu-close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    background: #c93545;
+    border: none;
+    border-radius: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.8);
+    clip-path: polygon(
+        0 6px, 6px 6px, 6px 0,
+        calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+        100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px),
+        calc(100% - 6px) 100%, 6px 100%, 6px calc(100% - 6px),
+        0 calc(100% - 6px)
+    );
+    box-shadow: 
+        0 0 0 2px transparent,
+        0 0 0 4px #ffc010,
+        0 0 0 6px transparent,
+        0 6px 0 rgba(0, 0, 0, 0.4);
+}
+
+.mobile-menu-close.active {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.mobile-menu-close i {
+    color: #ffffff;
+    font-size: 20px;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.mobile-menu-close:hover {
+    background: #e03e4e;
+    transform: translateY(-2px) scale(1);
+    box-shadow: 
+        0 0 0 2px transparent,
+        0 0 0 4px #ffc010,
+        0 0 0 6px transparent,
+        0 8px 0 rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(255, 56, 96, 0.5);
+}
+
+.mobile-menu-close:active {
+    background: #a52a38;
+    transform: translateY(2px) scale(1);
+    box-shadow: 
+        0 0 0 2px transparent,
+        0 0 0 4px #ffc010,
+        0 0 0 6px transparent,
+        0 2px 0 rgba(0, 0, 0, 0.4);
+}
+
 /* Mean Nav - Retro Menu List */
 .mean-nav {
     background: transparent !important;
@@ -282,4 +348,24 @@
 
 .mobile-menu-active .mean-nav li:nth-child(6) {
     animation-delay: 0.35s;
+}
+
+/* Overlay backdrop for closing menu on outside click */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    z-index: 998;
+}
+
+.mobile-menu-overlay.active {
+    visibility: visible;
+    opacity: 1;
 }

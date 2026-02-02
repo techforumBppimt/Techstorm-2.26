@@ -29,6 +29,17 @@ class MobileMenu extends Component {
 
         return (
             <div>
+                {/* Overlay backdrop */}
+                <div 
+                    className={`mobile-menu-overlay ${this.props.toggleMenu ? 'active' : ''}`}
+                    onClick={() => this.props.onClose(false)}
+                />
+                
+                {/* Close button - above overlay */}
+                <span className={`mobile-menu-close ${this.props.toggleMenu ? 'active' : ''}`} onClick={() => this.props.onClose(false)}>
+                    <i className="fas fa-times"></i>
+                </span>
+                
                 <div className={`mobile-menu ${this.props.toggleMenu ? 'mobile-menu-active' : ''}`}>
                     <ul className="mean-nav">
                         <li>
