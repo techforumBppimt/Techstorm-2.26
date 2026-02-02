@@ -49,19 +49,6 @@ const Header = () => {
                 <div 
                     id="header-sticky" 
                     className={`menu-area ${isScrolled ? 'scrolled' : ''}`}
-                    style={{
-                        background: isScrolled ? 'rgba(0, 0, 0, 0.85) !important' : undefined,
-                        backdropFilter: isScrolled ? 'blur(10px) !important' : undefined,
-                        WebkitBackdropFilter: isScrolled ? 'blur(10px) !important' : undefined,
-                        transition: 'all 0.3s ease',
-                        position: isScrolled ? 'fixed' : undefined,
-                        top: isScrolled ? 0 : undefined,
-                        left: isScrolled ? 0 : undefined,
-                        right: isScrolled ? 0 : undefined,
-                        width: isScrolled ? '100%' : undefined,
-                        zIndex: 9999,
-                        boxShadow: isScrolled ? '0 4px 20px rgba(0, 0, 0, 0.5)' : undefined
-                    }}
                 >
                     <div className="container-fluid pl-50 pr-50">
                         <div className="second-menu">
@@ -72,11 +59,6 @@ const Header = () => {
                                         <Logo logo={IIC_logo}/>
                                         <Logo logo={Abhiyantran_logo}/>
                                     </div>
-                                </div>
-                                <div className="col-xl-2 col-lg-2 text-right d-none d-lg-block mt-30 mb-30 ml-auto">
-                                    <button onClick={heandelOpen} className="menu-tigger" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-                                        <img src={toggolIcon} alt="Toggle Icon" />
-                                    </button>
                                 </div>
                                 <div className="col-6 d-block d-lg-none">
 

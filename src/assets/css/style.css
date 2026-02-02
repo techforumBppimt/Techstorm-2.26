@@ -1231,8 +1231,8 @@ label {
 	right             : 0;
 	height            : 100%;
 	width             : 300px;
-	z-index           : 999;
-	background        : #00081b;
+	z-index           : 999999;
+	background        : #000000;
 	top               : 0;
 	padding           : 30px;
 	-webkit-transition: .5s;
@@ -1325,7 +1325,7 @@ label {
 	left              : 0;
 	height            : 100%;
 	width             : 100%;
-	z-index           : 9;
+	z-index           : 999998;
 	opacity           : 0;
 	-ms-filter        : "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	visibility        : hidden;
@@ -1377,13 +1377,26 @@ label {
 	margin-bottom  : 0;
 	margin-top     : 0;
 	border-top     : 0;
-	position       : relative;
-	z-index        : 99;
+	position       : fixed;
+	top            : 0;
+	left           : 0;
+	right          : 0;
+	z-index        : 9998;
+	width          : 100%;
 	padding-top    : 15px;
 	padding-bottom : 15px;
 	background     : rgba(15, 8, 25, 0.98);
-	backdrop-filter: blur(10px);
 	border-bottom  : 1px solid rgba(255, 192, 16, 0.1);
+}
+
+.header-three .menu-area.scrolled {
+	padding-top    : 8px;
+	padding-bottom : 8px;
+}
+
+.header-three .menu-area.scrolled .logo img {
+	height: 55px;
+	transition: height 0.3s ease;
 }
 
 .header-three .main-menu ul li a {
@@ -12464,7 +12477,7 @@ div.single-cta:last-child {
 
 /* Adjust PillNav position when scrolled */
 body.header-scrolled .pill-nav-container {
-    top: 25px !important;
+    top: 20px !important;
 }
 
 /* Mobile logo styles */

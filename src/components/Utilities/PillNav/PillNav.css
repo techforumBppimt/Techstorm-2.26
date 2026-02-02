@@ -1,8 +1,7 @@
 .pill-nav-container {
   position: fixed;
-  top: 42px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 30px;
+  right: 50px;
   z-index: 99999;
   transition: top 0.3s ease;
 }

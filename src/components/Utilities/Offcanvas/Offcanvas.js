@@ -18,7 +18,16 @@ const Offcanvas = ({ onOpne, onClose }) => {
                 <div id="cssmenu3" className="menu-one-page-menu-container">
                     <ul id="menu-one-page-menu-2" className="menu">
                         <li className="menu-item menu-item-type-custom menu-item-object-custom">
-                            <Link to={'/'}>{'Home'}</Link>
+                            <a 
+                                href="#home" 
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    onClose(!onOpne);
+                                }}
+                            >
+                                {'Home'}
+                            </a>
                         </li>
                         <li className="menu-item menu-item-type-custom menu-item-object-custom">
                             <a 
