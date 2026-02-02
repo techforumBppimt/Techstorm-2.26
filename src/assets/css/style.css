@@ -1975,13 +1975,21 @@ label {
 .s-about-img>img {
 	display                : block;
 	margin-left            : auto;
-	border-top-right-radius: 20px;
-	border-top-left-radius : 20px;
+	border-top-right-radius: 0;
+	border-top-left-radius : 0;
+	border                 : 4px solid #ffc010;
+	outline                : 4px solid #1a0e22;
+	outline-offset         : -8px;
+	box-shadow             : 0 0 0 8px #ffc010,
+	                         0 0 0 12px #1a0e22;
+	image-rendering        : pixelated;
+	image-rendering        : -moz-crisp-edges;
+	image-rendering        : crisp-edges;
 }
 
 .experience-years {
 	position: absolute;
-	top     : -50px;
+	top     : 10px;
 	left    : 0;
 }
 
@@ -2000,6 +2008,15 @@ label {
 .experience-years img {
 	-webkit-animation: spin 20s infinite linear;
 	animation        : spin 20s infinite linear;
+	border           : 4px solid #ffc010;
+	border-radius    : 50%;
+	outline          : 4px solid #1a0e22;
+	outline-offset   : -8px;
+	box-shadow       : 0 0 0 8px #ffc010,
+	                   0 0 0 12px #1a0e22;
+	image-rendering  : pixelated;
+	image-rendering  : -moz-crisp-edges;
+	image-rendering  : crisp-edges;
 }
 
 @-webkit-keyframes spin {
@@ -2024,7 +2041,15 @@ label {
 }
 
 .about-image2 img {
-	border-radius: 20px;
+	border-radius  : 0;
+	border         : 4px solid #ffc010;
+	outline        : 4px solid #1a0e22;
+	outline-offset : -8px;
+	box-shadow     : 0 0 0 8px #ffc010,
+	                 0 0 0 12px #1a0e22;
+	image-rendering: pixelated;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: crisp-edges;
 }
 
 .about-image3 {
