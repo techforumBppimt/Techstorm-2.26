@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Collapse } from 'react-bootstrap';
-import './MobileMenu.js';
+import './MobileMenu.css';
 
 class MobileMenu extends Component {
 
@@ -33,9 +33,11 @@ class MobileMenu extends Component {
             <div>
                 <div className={`mobile-menu ${this.props.toggleMenu ? 'mobile-menu-active' : ''}`}>
                     <ul className="mean-nav">
-                        <li onClick={this.isDropDownOpenOne}>
-                            {'Home'}
-                            <i className="fa fa-angle-down"></i>
+                        <li>
+                            <Link onClick={() => this.props.onClose(false)}
+                                to={'/'}>
+                                {'Home'}
+                            </Link>
                         </li>
                         
                         <li>
