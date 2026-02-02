@@ -112,29 +112,31 @@ const PillNav = ({
     const [path, hash] = href.split('#');
     
     if (hash) {
+      // Special handling for home - navigate to root path
+      if (hash === 'home') {
+        history.push('/');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      
+      // Update URL with hash
+      window.history.pushState(null, '', href);
+      
       // If we're not on the target path, navigate first
       if (path && window.location.pathname !== path) {
-        history.push(path);
+        history.push(href);
         // Wait for navigation and scroll
         setTimeout(() => {
-          if (hash === 'home') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else {
-            const element = document.getElementById(hash);
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }
-        }, 100);
-      } else {
-        // Already on the right page, just scroll
-        if (hash === 'home') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
           const element = document.getElementById(hash);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
+        }, 100);
+      } else {
+        // Already on the right page, just scroll
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
     }

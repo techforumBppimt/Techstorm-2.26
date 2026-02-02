@@ -42,38 +42,39 @@
 }
 
 /* ================================================================
-   PRIMARY VARIANT - Golden Yellow Main Button
+   PRIMARY VARIANT - Cream Main Button
    ================================================================ */
 .btn-8bit--primary {
-    background: #ffc010;
-    color: #1a0e22;
+    background: #FFF4C7;
+    color: #280F0E;
     box-shadow: 
-        inset -4px -4px 0px 0px #cc9900,
-        inset 4px 4px 0px 0px #ffd966,
-        0px 0px 0px 4px #1a0e22;
+        inset -4px -4px 0px 0px #e6d9a6,
+        inset 4px 4px 0px 0px #ffffff,
+        0px 0px 0px 4px #280F0E;
 }
 
 .btn-8bit--primary .btn-8bit__text {
-    text-shadow: 2px 2px 0px #ffd966;
+    text-shadow: 2px 2px 0px #ffffff;
 }
 
 .btn-8bit--primary .btn-8bit__shadow {
-    background: #cc9900;
-    box-shadow: 0px 0px 0px 4px #1a0e22;
+    background: #e6d9a6;
+    box-shadow: 0px 0px 0px 4px #280F0E;
 }
 
 .btn-8bit--primary:hover {
-    background: #ffd04d;
+    background: #fffae6;
     transform: translate(2px, 2px);
     box-shadow: 
-        inset -4px -4px 0px 0px #cc9900,
-        inset 4px 4px 0px 0px #ffe599,
-        0px 0px 0px 4px #1a0e22,
-        0px 0px 15px 2px rgba(255, 192, 16, 0.5);
+        inset -4px -4px 0px 0px #e6d9a6,
+        inset 4px 4px 0px 0px #ffffff,
+        0px 0px 0px 4px #280F0E,
+        0px 0px 15px 2px rgba(255, 244, 199, 0.6);
 }
 
 .btn-8bit--primary:hover .btn-8bit__text {
     transform: translate(-2px, -2px);
+    color: #004ecc;
 }
 
 .btn-8bit--primary:hover .btn-8bit__shadow {
@@ -153,7 +154,7 @@
    ================================================================ */
 .btn-8bit--outline {
     background: transparent;
-    color: #ffc010;
+    color: #592600;
     box-shadow: 
         inset 0px 0px 0px 4px #ffc010,
         0px 0px 0px 4px #1a0e22;
@@ -240,8 +241,8 @@
    SIZE VARIANTS
    ================================================================ */
 .btn-8bit--small .btn-8bit__text {
-    padding: 10px 20px;
-    font-size: 11px;
+    padding: 8px 18px;
+    font-size: 10px;
 }
 
 .btn-8bit--small .btn-8bit__shadow {
@@ -250,23 +251,23 @@
 }
 
 .btn-8bit--medium .btn-8bit__text {
-    padding: 16px 32px;
-    font-size: 14px;
+    padding: 12px 26px;
+    font-size: 12px;
 }
 
 .btn-8bit--medium .btn-8bit__shadow {
-    bottom: -6px;
-    right: -6px;
+    bottom: -5px;
+    right: -5px;
 }
 
 .btn-8bit--large .btn-8bit__text {
-    padding: 20px 40px;
-    font-size: 16px;
+    padding: 16px 18px;
+    font-size: 14px;
 }
 
 .btn-8bit--large .btn-8bit__shadow {
-    bottom: -8px;
-    right: -8px;
+    bottom: -6px;
+    right: -6px;
 }
 
 /* ================================================================

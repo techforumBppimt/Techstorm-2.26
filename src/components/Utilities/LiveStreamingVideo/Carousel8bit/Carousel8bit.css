@@ -2,17 +2,20 @@
 
 .carousel-8bit-section {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .carousel-8bit-wrapper {
     position: relative;
     width: 100%;
+    overflow: visible;
+    padding: 0 100px;
 }
 
 .carousel-8bit-container {
     position: relative;
-    width: 100%;
+    width: 85%;
+    margin: 0 auto;
     background: #ffc010;
     /* Enhanced 8-bit pixelated border effect with more layers */
     box-shadow: 
@@ -57,7 +60,8 @@
     aspect-ratio: 16/9;
     overflow: hidden;
     background: #000;
-    min-height: 500px;
+    max-height: 550px;
+    height: 550px;
 }
 
 .carousel-8bit-image-wrapper img {
@@ -124,11 +128,11 @@
 }
 
 .carousel-8bit-prev {
-    left: 20px;
+    left: 60px;
 }
 
 .carousel-8bit-next {
-    right: 20px;
+    right: 60px;
 }
 
 .arrow-icon {
@@ -137,18 +141,23 @@
     margin-top: -4px;
 }
 
+/* Custom dots container - outside carousel */
+.carousel-8bit-dots-container {
+    position: relative;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    z-index: 50;
+}
+
 /* Custom dots styling */
 .carousel-8bit-dots {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     display: flex !important;
     gap: 12px;
     list-style: none;
     padding: 0;
     margin: 0;
-    z-index: 50;
 }
 
 .carousel-8bit-dots li {
@@ -190,59 +199,107 @@
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
+    .carousel-8bit-wrapper {
+        padding: 0 80px;
+    }
+    
+    .carousel-8bit-container {
+        width: 90%;
+    }
+    
     .carousel-8bit-prev {
-        left: 20px;
+        left: 50px;
     }
     
     .carousel-8bit-next {
-        right: 20px;
+        right: 50px;
+    }
+    
+    .carousel-8bit-image-wrapper {
+        height: 500px;
+        max-height: 500px;
     }
 }
 
 @media (max-width: 768px) {
+    .carousel-8bit-section {
+        padding-top: 60px !important;
+        padding-bottom: 60px !important;
+    }
+    
+    .carousel-8bit-wrapper {
+        padding: 0 60px;
+    }
+    
+    .carousel-8bit-container {
+        width: 95%;
+    }
+    
     .carousel-8bit-arrow {
-        width: 44px;
-        height: 44px;
-        font-size: 18px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
     }
     
     .carousel-8bit-prev {
-        left: 10px;
+        left: 35px;
     }
     
     .carousel-8bit-next {
-        right: 10px;
+        right: 35px;
+    }
+    
+    .carousel-8bit-dots-container {
+        margin-top: 20px;
     }
     
     .carousel-8bit-dots {
-        bottom: -40px;
-        gap: 10px;
+        gap: 8px;
     }
     
     .carousel-8bit-dots li button {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
         border: 2px solid #ffc010;
     }
     
     .carousel-8bit-container {
         padding: 6px;
     }
+    
+    .carousel-8bit-image-wrapper {
+        height: auto;
+        max-height: 400px;
+        min-height: 250px;
+    }
 }
 
 @media (max-width: 480px) {
+    .carousel-8bit-section {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+    
+    .carousel-8bit-wrapper {
+        padding: 0 50px;
+    }
+    
+    .carousel-8bit-container {
+        width: 100%;
+    }
+    
     .carousel-8bit-arrow {
-        width: 38px;
-        height: 38px;
-        font-size: 16px;
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
     }
     
     .carousel-8bit-prev {
-        left: 5px;
+        left: 22px;
     }
     
     .carousel-8bit-next {
-        right: 5px;
+        right: 22px;
     }
     
     .carousel-8bit-container {
@@ -255,9 +312,19 @@
         padding: 4px;
     }
     
+    .carousel-8bit-dots-container {
+        margin-top: 15px;
+    }
+    
     .carousel-8bit-dots li button {
-        width: 14px;
-        height: 14px;
+        width: 12px;
+        height: 12px;
+    }
+    
+    .carousel-8bit-image-wrapper {
+        height: auto;
+        max-height: 300px;
+        min-height: 200px;
     }
 }
 

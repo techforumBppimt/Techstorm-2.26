@@ -19,7 +19,7 @@ const HeroOne = () => {
     const [isHovered, setIsHovered] = useState(false);
     
     return (
-        <section id="home" className="slider-area slider-four fix p-relative" style={{ position: 'relative', minHeight: '600px' }}>
+        <section id="home" className="slider-area slider-four fix p-relative" style={{ position: 'relative', minHeight: '100vh' }}>
             {/* Background Image - Desktop */}
             <div className="d-none d-lg-block" style={{ 
                 position: 'absolute', 
@@ -27,8 +27,10 @@ const HeroOne = () => {
                 left: 0, 
                 width: '100%', 
                 height: '100%', 
-                zIndex: 1,
-                overflow: 'hidden'
+                zIndex: 0,
+                overflow: 'hidden',
+                willChange: 'transform',
+                backfaceVisibility: 'hidden'
             }}>
                 <img 
                     src={herobg}
@@ -37,9 +39,22 @@ const HeroOne = () => {
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
-                        opacity: 1
+                        objectPosition: 'center',
+                        display: 'block',
+                        transform: 'translateZ(0)',
+                        opacity: 0.6
                     }}
                 />
+                {/* Gradient overlay at bottom for blending */}
+                <div style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: '200px',
+                    background: 'linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%)',
+                    zIndex: 1
+                }}></div>
             </div>
             {/* Background Image - Mobile */}
             <div className="d-lg-none" style={{ 
@@ -48,8 +63,10 @@ const HeroOne = () => {
                 left: 0, 
                 width: '100%', 
                 height: '100%', 
-                zIndex: 1,
-                overflow: 'hidden'
+                zIndex: 0,
+                overflow: 'hidden',
+                willChange: 'transform',
+                backfaceVisibility: 'hidden'
             }}>
                 <img 
                     src={heroph}
@@ -58,13 +75,26 @@ const HeroOne = () => {
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
-                        opacity: 1
+                        objectPosition: 'center',
+                        display: 'block',
+                        transform: 'translateZ(0)',
+                        opacity: 0.6
                     }}
                 />
+                {/* Gradient overlay at bottom for blending */}
+                <div style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: '150px',
+                    background: 'linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%)',
+                    zIndex: 1
+                }}></div>
             </div>
-            <div className="slider-active" style={{ position: 'relative', zIndex: 2 }}>
-                <div className="single-slider slider-bg d-flex align-items-center" style={{ background: 'transparent' }}>
-                    <div className="container" style={{ position: 'relative', zIndex: 3 }}>
+            <div className="slider-active" style={{ position: 'relative', zIndex: 1 }}>
+                <div className="single-slider slider-bg d-flex align-items-center" style={{ background: 'transparent', minHeight: '100vh' }}>
+                    <div className="container" style={{ position: 'relative', zIndex: 2, paddingBottom: '100px' }}>
                         <div className="row justify-content-center pt-50">
                             <div className="col-lg-1 col-md-1 d-none d-lg-block"></div>
                             <div className="col-lg-6 col-md-6 col-12">
@@ -139,16 +169,16 @@ const HeroOne = () => {
                                         <p style={{color: '#fff', fontSize: '18px', marginBottom: '30px'}}>{'INSERT COIN to begin your journey at the ultimate technical fest experience. Where retro meets revolution.'}</p>
                                     </AnimateOnScroll>
                                     
-                                    {/* Buttons - Desktop horizontal, Mobile vertical centered */}
-                                    <AnimateOnScroll animation="hero-cta">
+                                    {/* Buttons - Mobile */}
+                                    <AnimateOnScroll animation="hero-cta" className="d-lg-none">
                                         <div className="slider-btn btn-8bit-group" style={{
                                             display: 'flex',
-                                            gap: '15px',
+                                            gap: '20px',
                                             alignItems: 'center',
                                             justifyContent: 'center',
                                             width: '100%',
-                                            flexDirection: 'row',
-                                            flexWrap: 'wrap'
+                                            flexDirection: 'column',
+                                            marginTop: '30px'
                                         }}>
                                             <Button8bit to={'/contact'} variant="primary" size="large">
                                                 {btnText}
@@ -171,9 +201,8 @@ const HeroOne = () => {
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        height: '100%',
-                                        paddingTop: '-50px',
-                                        marginTop: '-400px'
+                                        height: '500px',
+                                        marginTop: '-100px'
                                     }}
                                 >
                                     <img 
@@ -186,7 +215,12 @@ const HeroOne = () => {
                                             filter: 'drop-shadow(0 10px 40px rgba(0, 0, 0, 0.5))',
                                             transition: 'opacity 0.3s ease-in-out',
                                             opacity: isHovered ? 0 : 1,
-                                            position: 'absolute'
+                                            position: 'absolute',
+                                            top: '50%',
+                                            left: '50%',
+                                            transform: 'translate(-50%, -50%) translateZ(0)',
+                                            willChange: 'opacity',
+                                            backfaceVisibility: 'hidden'
                                         }}
                                     />
                                     <img 
@@ -199,12 +233,37 @@ const HeroOne = () => {
                                             filter: 'drop-shadow(0 10px 40px rgba(0, 0, 0, 0.5))',
                                             transition: 'opacity 0.3s ease-in-out',
                                             opacity: isHovered ? 1 : 0,
-                                            position: 'absolute'
+                                            position: 'absolute',
+                                            top: '50%',
+                                            left: '50%',
+                                            transform: 'translate(-50%, -50%) translateZ(0)',
+                                            willChange: 'opacity',
+                                            backfaceVisibility: 'hidden'
                                         }}
                                     />
                                 </div>
                             </div>
                         </div>
+                        {/* Buttons positioned in lower right - Desktop only */}
+                        <AnimateOnScroll animation="hero-cta" className="d-none d-lg-block">
+                            <div className="slider-btn btn-8bit-group" style={{
+                                position: 'absolute',
+                                bottom: '0px',
+                                right: '80px',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                gap: '30px',
+                                alignItems: 'center',
+                                zIndex: 10
+                            }}>
+                                <Button8bit to={'/contact'} variant="primary" size="large">
+                                    {btnText}
+                                </Button8bit>
+                                <Button8bit to={'/about'} variant="primary" size="large">
+                                    {'Explore Events'}
+                                </Button8bit>
+                            </div>
+                        </AnimateOnScroll>
                     </div>
                 </div>
             </div>

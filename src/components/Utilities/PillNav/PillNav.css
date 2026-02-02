@@ -1,9 +1,8 @@
 .pill-nav-container {
   position: fixed;
-  top: 30px;
+  top: 20px;
   right: 50px;
   z-index: 99999;
-  transition: top 0.3s ease;
 }
 
 @media (max-width: 991px) {
@@ -105,12 +104,15 @@
   cursor: pointer;
   position: relative;
   transition: background 0.25s ease, color 0.25s ease;
+  border-bottom: 3px solid transparent;
 }
 
-.pill:hover {
+.pill:hover,
+.pill.active {
   background: rgba(255, 255, 255, 0.7);
   color: var(--hover-text, #1a0e22);
   font-weight: bold;
+  border-bottom-color: #000000;
 }
 
 /* Dropdown styles */
