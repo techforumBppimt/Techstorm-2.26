@@ -2,8 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
 
 import Header from './Utilities/Header/Header';
-import collegelogo from '../assets/img/logo/college-logo.png';
-import PillNav from './Utilities/PillNav/PillNav';
 import Home from './Pages/Home/HomeMain/HomeMain';
 import HomeTwo from './Pages/Home/HomeTwo/HomeTwo';
 import HomeThree from './Pages/Home/HomeThree/HomeThree';
@@ -45,21 +43,8 @@ const AppContent = () => {
   return (
     <div className="App">
 
-      {/* Header */}
-      <Header />
-
-      {/* PillNav - Desktop Only */}
-      <PillNav
-          logo={collegelogo}
-          logoAlt="College Logo"
-          items={navItems}
-          activeHref={getActiveHref()}
-          baseColor="#ffc010"
-          pillColor="#1a0e22"
-          hoveredPillTextColor="#000000"
-          pillTextColor="#ffffff"
-          initialLoadAnimation={true}
-      />
+      {/* Integrated Header with PillNav */}
+      <Header navItems={navItems} activeHref={getActiveHref()} />
 
       <Switch>
 

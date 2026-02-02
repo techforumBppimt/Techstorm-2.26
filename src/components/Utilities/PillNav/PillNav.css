@@ -1,9 +1,8 @@
 .pill-nav-container {
   position: fixed;
-  top: 30px;
+  top: 20px;
   right: 50px;
   z-index: 99999;
-  transition: top 0.3s ease;
 }
 
 @media (max-width: 991px) {

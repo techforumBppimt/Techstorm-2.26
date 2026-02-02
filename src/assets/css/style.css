@@ -1383,27 +1383,18 @@ label {
 	right          : 0;
 	z-index        : 9998;
 	width          : 100%;
-	padding-top    : 15px;
-	padding-bottom : 15px;
+	padding-top    : 10px;
+	padding-bottom : 10px;
 	background     : transparent;
 	border-bottom  : none;
-	transition     : padding 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-	will-change    : padding, background;
-	transform      : translateZ(0);
-	-webkit-transform: translateZ(0);
+	transition     : background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+	will-change    : background-color;
 }
 
 .header-three .menu-area.scrolled {
-	padding-top    : 8px;
-	padding-bottom : 8px;
 	background     : rgba(0, 0, 0, 0.95);
 	border-bottom  : 1px solid rgba(255, 192, 16, 0.1);
 	box-shadow     : 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.header-three .menu-area.scrolled .logo img {
-	height: 55px;
-	transition: height 0.3s ease;
 }
 
 .header-three .main-menu ul li a {
@@ -12504,34 +12495,15 @@ div.single-cta:last-child {
 	padding-bottom: 5px !important;
 }
 
-/* Logo transition */
-.header-three .logo img {
-	transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-	will-change: height;
-	transform: translateZ(0);
-	-webkit-transform: translateZ(0);
-}
-
-/* Adjust PillNav position when scrolled */
-body.header-scrolled .pill-nav-container {
-    top: 20px !important;
-}
-
 /* Mobile logo styles */
 @media (max-width: 767px) {
 	.header-three .menu-area {
-		padding-top: 12px !important;
-		padding-bottom: 12px !important;
+		padding-top: 10px !important;
+		padding-bottom: 10px !important;
 		background: transparent !important;
-		transition: padding 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-		will-change: padding, background !important;
-		transform: translateZ(0) !important;
-		-webkit-transform: translateZ(0) !important;
 	}
 	
 	.header-three .menu-area.scrolled {
-		padding-top: 6px !important;
-		padding-bottom: 6px !important;
 		background: rgba(0, 0, 0, 0.95) !important;
 		border-bottom: 1px solid rgba(255, 192, 16, 0.1) !important;
 		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
@@ -12545,28 +12517,12 @@ body.header-scrolled .pill-nav-container {
 	}
 	
 	.header-three .logo a {
-		height: 45px !important;
-		transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-		will-change: height !important;
-		transform: translateZ(0) !important;
-		-webkit-transform: translateZ(0) !important;
+		height: 40px !important;
 	}
 	
 	.header-three .logo img {
-		height: 45px !important;
+		height: 40px !important;
 		width: auto !important;
-		transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-		will-change: height !important;
-		transform: translateZ(0) !important;
-		-webkit-transform: translateZ(0) !important;
-	}
-	
-	.header-three .menu-area.scrolled .logo a {
-		height: 35px !important;
-	}
-	
-	.header-three .menu-area.scrolled .logo img {
-		height: 35px !important;
 	}
 	
 	/* Make mobile hamburger menu white */
