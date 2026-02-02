@@ -4,8 +4,6 @@ import { gsap } from 'gsap';
 import './PillNav.css';
 
 const PillNav = ({
-  logo,
-  logoAlt = 'Logo',
   items,
   activeHref,
   className = '',
@@ -19,8 +17,6 @@ const PillNav = ({
 }) => {
   const resolvedPillTextColor = pillTextColor ?? baseColor;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const logoImgRef = useRef(null);
-  const logoTweenRef = useRef(null);
   const hamburgerRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const navItemsRef = useRef(null);
@@ -55,19 +51,6 @@ const PillNav = ({
       }
     }
   }, [items, ease, initialLoadAnimation]);
-
-  const handleLogoEnter = () => {
-    const img = logoImgRef.current;
-    if (!img) return;
-    logoTweenRef.current?.kill();
-    gsap.set(img, { rotate: 0 });
-    logoTweenRef.current = gsap.to(img, {
-      rotate: 360,
-      duration: 0.2,
-      ease,
-      overwrite: 'auto'
-    });
-  };
 
   const toggleMobileMenu = () => {
     const newState = !isMobileMenuOpen;
@@ -151,32 +134,6 @@ const PillNav = ({
   return (
     <div className="pill-nav-container">
       <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
-        {isRouterLink(items?.[0]?.href) ? (
-          <Link
-            className="pill-logo"
-            to={items[0].href}
-            aria-label="Home"
-            onMouseEnter={handleLogoEnter}
-            role="menuitem"
-            ref={el => {
-              logoRef.current = el;
-            }}
-          >
-            <img src={logo} alt={logoAlt} ref={logoImgRef} />
-          </Link>
-        ) : (
-          <a
-            className="pill-logo"
-            href={items?.[0]?.href || '#'}
-            aria-label="Home"
-            onMouseEnter={handleLogoEnter}
-            ref={el => {
-              logoRef.current = el;
-            }}
-          >
-            <img src={logo} alt={logoAlt} ref={logoImgRef} />
-          </a>
-        )}
 
         <div className="pill-nav-items desktop-only" ref={navItemsRef}>
           <ul className="pill-list" role="menubar">

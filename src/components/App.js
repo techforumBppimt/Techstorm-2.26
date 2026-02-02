@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-route
 
 import Header from './Utilities/Header/Header';
 import PillNav from './Utilities/PillNav/PillNav';
-import collegelogo from '../assets/img/logo/college-logo.png';
 import Home from './Pages/Home/HomeMain/HomeMain';
 import HomeTwo from './Pages/Home/HomeTwo/HomeTwo';
 import HomeThree from './Pages/Home/HomeThree/HomeThree';
@@ -20,11 +19,11 @@ import Error404 from './Pages/404';
 import BlogPost from './Pages/Blog/Blog';
 import ContactUs from './Pages/ContactUs/ContactUs';
 import SinglePost from './Pages/SinglePost/SinglePost';
+import Events from './Pages/Events/Events';
 
 const navItems = [
-    { label: 'Home', href: '/#home' },
-    { label: 'About', href: '/#about' },
-    { label: 'Events', href: '/events' },
+    { label: 'Home', href: '/' },
+    { label: 'Events', href: '/about' },
     { label: 'Gallery', href: '/gallery' },
     { label: 'Schedule', href: '/schedule' },
     { label: 'Team', href: '/team' }
@@ -42,7 +41,7 @@ const AppContent = () => {
       {/* PillNav - Desktop Only */}
       <PillNav
           logo={collegelogo}
-          logoAlt="College Logo"
+          logoAlt="ICC Cell Logo"
           items={navItems}
           activeHref={location.pathname}
           baseColor="#ffc010"
@@ -58,6 +57,7 @@ const AppContent = () => {
         <Route exact path="/home-two" component={HomeTwo} />
         <Route exact path="/home-three" component={HomeThree} />
         <Route exact path="/about" component={AboutUs} />
+        <Route exact path="/events" component={Events} />
         <Route exact path="/gallery" component={Gallery} />
         <Route exact path="/team" component={Teams} />
         <Route exact path="/faq" component={Faqs} />

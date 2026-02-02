@@ -18,10 +18,13 @@ import forzaHorizon from '../../../assets/img/PIXELATED EVENT MASCOTS/FORZA HORI
 import fifaMobile from '../../../assets/img/PIXELATED EVENT MASCOTS/FIFA Mobile.png';
 
 import SectionTitle from '../SectionTitle/SectionTitle';
+import RetroCard from '../RetroCard/RetroCard';
 
 const Matches = () => {
+    const [hoveredIndex, setHoveredIndex] = React.useState(null);
+    const [activeFilter, setActiveFilter] = React.useState('All');
     
-    const events = [
+    const allEvents = [
         { logo: codeBee, name: 'Code-Bee', category: 'Technical' },
         { logo: hackStorm, name: 'Hack Storm', category: 'Technical' },
         { logo: technomania, name: 'TechnoMania', category: 'Technical' },
@@ -36,14 +39,47 @@ const Matches = () => {
         { logo: forzaHorizon, name: 'Forza Horizon', category: 'Games' },
         { logo: fifaMobile, name: 'FIFA Mobile', category: 'Games' },
         { logo: khet, name: 'KHET', category: 'Games' },
-    ]
+    ];
+
+    const [filteredEvents, setFilteredEvents] = React.useState(allEvents);
+
+    const filterEvents = (category) => {
+        setActiveFilter(category);
+        if (category === 'All') {
+            setFilteredEvents(allEvents);
+        } else {
+            const filtered = allEvents.filter(event => {
+                if (category === 'Coding') return event.category === 'Technical';
+                if (category === 'Robotics') return event.category === 'Rover';
+                if (category === 'Gaming') return event.category === 'Games';
+                if (category === 'Brain Teaser') return event.category === 'Brain Teaser';
+                if (category === 'Creative') return event.category === 'Creative';
+                return false;
+            });
+            setFilteredEvents(filtered);
+        }
+    };
+
+    const events = filteredEvents.length > 0 ? filteredEvents : allEvents;
 
     return (
-        <section id="match" className="match-area pt-120 pb-90" style={{ background: `url(${matchBgImg})` }}>
+        <section id="match" className="match-area pt-60 pb-90" style={{ background: `url(${matchBgImg})` }}>
             <div className="container">
-                <div className="row align-items-center">
+                <div className="row align-items-center mb-30">
                     <div className="col-lg-12">
                         <SectionTitle titlefirst='Featured' titleSec='Events' />
+                    </div>
+                    <div className="col-lg-12">
+                        <div className="my-masonry wow fadeInDown animated" data-animation="fadeInRight" data-delay=".4s">
+                            <div className="button-group filter-button-group" style={{ textAlign: 'center', marginBottom: '20px' }}>
+                                <button className={activeFilter === 'All' ? 'active' : ''} onClick={() => filterEvents('All')}>All</button>
+                                <button className={activeFilter === 'Coding' ? 'active' : ''} onClick={() => filterEvents('Coding')}>Coding</button>
+                                <button className={activeFilter === 'Robotics' ? 'active' : ''} onClick={() => filterEvents('Robotics')}>Robotics</button>
+                                <button className={activeFilter === 'Gaming' ? 'active' : ''} onClick={() => filterEvents('Gaming')}>Gaming</button>
+                                <button className={activeFilter === 'Brain Teaser' ? 'active' : ''} onClick={() => filterEvents('Brain Teaser')}>Brain Teaser</button>
+                                <button className={activeFilter === 'Creative' ? 'active' : ''} onClick={() => filterEvents('Creative')}>Creative</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="row">
@@ -52,59 +88,44 @@ const Matches = () => {
                             const { logo, name } = event;
                             return (
                                 <div key={index} className="col-lg-4 col-md-6 col-sm-6 mb-40 wow fadeInUp animated" data-animation="fadeInUp" data-delay={`${0.1 * index}s`}>
-                                    <div style={{
-                                        width: '100%',
-                                        aspectRatio: '16/9',
-                                        background: 'rgba(0, 0, 0, 0.9)',
-                                        clipPath: 'polygon(25px 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%, 0 25px)',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        position: 'relative',
-                                        overflow: 'hidden',
-                                        padding: '20px'
-                                    }}>
-                                        {/* Corner fold effects */}
-                                        <div style={{
-                                            position: 'absolute',
-                                            top: 0,
-                                            left: 0,
-                                            width: '35px',
-                                            height: '35px',
-                                            background: 'linear-gradient(135deg, #ffc010 50%, transparent 50%)',
-                                            opacity: 0.8
-                                        }}></div>
-                                        <div style={{
-                                            position: 'absolute',
-                                            bottom: 0,
-                                            right: 0,
-                                            width: '35px',
-                                            height: '35px',
-                                            background: 'linear-gradient(315deg, #ffc010 50%, transparent 50%)',
-                                            opacity: 0.8
-                                        }}></div>
-                                        
+                                    <RetroCard 
+                                        bg={hoveredIndex === index ? '#1a3d3d' : '#1a0e22'}
+                                        textColor={hoveredIndex === index ? '#00ffea' : '#ffffff'}
+                                        borderColor={hoveredIndex === index ? '#00ffea' : '#ffc010'}
+                                        shadowColor={hoveredIndex === index ? '#00ffea' : '#ffc010'}
+                                        style={{
+                                            width: '100%',
+                                            aspectRatio: '16/9',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            padding: '20px',
+                                            cursor: 'pointer',
+                                            transform: hoveredIndex === index ? 'translateY(-8px)' : 'translateY(0)',
+                                        }}
+                                        onMouseEnter={() => setHoveredIndex(index)}
+                                        onMouseLeave={() => setHoveredIndex(null)}
+                                    >
                                         {/* Mascot image */}
                                         <img src={logo} alt={name} style={{ 
                                             maxWidth: '70%', 
                                             maxHeight: '65%', 
                                             objectFit: 'contain',
-                                            filter: 'drop-shadow(0 0 15px rgba(255, 192, 16, 0.6))',
-                                            marginBottom: '15px'
+                                            filter: hoveredIndex === index ? 'drop-shadow(0 0 20px rgba(0, 255, 234, 0.8))' : 'drop-shadow(0 0 15px rgba(255, 192, 16, 0.6))',
+                                            marginBottom: '15px',
+                                            imageRendering: 'pixelated'
                                         }} />
                                         
                                         {/* Event name */}
                                         <h4 style={{ 
-                                            color: '#fff', 
                                             fontSize: '16px', 
                                             margin: 0,
                                             textAlign: 'center',
                                             fontFamily: '"Press Start 2P", system-ui',
-                                            textShadow: '0 0 15px rgba(255, 192, 16, 0.6)',
                                             lineHeight: '1.4'
                                         }}>{name}</h4>
-                                    </div>
+                                    </RetroCard>
                                 </div>
                             );
                         })

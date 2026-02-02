@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import aboutBgImg from '../../../assets/img/bg/about-bg.png';
+import Button8bit from '../Button/Button8bit';
 import experienceImg from '../../../assets/img/features/experience-years.png';
 import features1 from '../../../assets/img/features/about-img1.jpg';
 import features2 from '../../../assets/img/features/about-img2.jpg';
@@ -33,8 +33,84 @@ const About = () => {
                                 titleSec={'2026'}
                                 className={'about-title second-title'}
                             />
-                            <p><b>Welcome to TechStorm 2026 - where pixels meet passion and classic gaming culture collides with cutting-edge innovation.</b></p>
-                            <p>TechStorm is the flagship annual technical fest of [Your College Name], designed to ignite creativity, challenge intellects, and celebrate the spirit of technology. This year, we take you on a nostalgic journey through the golden era of computing and arcade gaming.</p>
+                            
+                            {/* NES.css Message Balloons */}
+                            <div className="nes-container is-dark with-title" style={{
+                                background: 'rgba(26, 14, 34, 0.9)',
+                                border: '4px solid #ffc010',
+                                marginBottom: '30px'
+                            }}>
+                                <p className="title" style={{
+                                    background: '#1a0e22',
+                                    color: '#ffc010',
+                                    fontFamily: 'Press Start 2P, Minecraft, monospace',
+                                    fontSize: '12px',
+                                    padding: '5px 15px'
+                                }}>Event Info</p>
+                                
+                                <div className="message-list">
+                                    <div className="message -left" style={{ marginBottom: '20px' }}>
+                                        <i className="nes-mario" style={{ 
+                                            fontSize: '32px'
+                                        }}></i>
+                                        <div className="nes-balloon from-left is-dark" style={{
+                                            background: '#2d1b3d',
+                                            border: '4px solid #ffc010',
+                                            color: '#ffd966',
+                                            maxWidth: '400px'
+                                        }}>
+                                            <p style={{ 
+                                                fontFamily: 'Minecraft, monospace',
+                                                fontSize: '13px',
+                                                margin: 0
+                                            }}>
+                                                Welcome to TechStorm 2026! Where pixels meet passion and retro gaming collides with cutting-edge tech!
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="message -right" style={{ marginBottom: '20px' }}>
+                                        <div className="nes-balloon from-right is-dark" style={{
+                                            background: '#2d1b3d',
+                                            border: '4px solid #ffc010',
+                                            color: '#ffd966',
+                                            maxWidth: '400px'
+                                        }}>
+                                            <p style={{ 
+                                                fontFamily: 'Minecraft, monospace',
+                                                fontSize: '13px',
+                                                margin: 0
+                                            }}>
+                                                Press START to join 15+ events including Coding, Robotics, Gaming, and Creative competitions!
+                                            </p>
+                                        </div>
+                                        <i className="nes-ash" style={{ 
+                                            fontSize: '32px'
+                                        }}></i>
+                                    </div>
+
+                                    <div className="message -left">
+                                        <i className="nes-kirby" style={{ 
+                                            fontSize: '32px'
+                                        }}></i>
+                                        <div className="nes-balloon from-left is-dark" style={{
+                                            background: '#2d1b3d',
+                                            border: '4px solid #ffc010',
+                                            color: '#ffd966',
+                                            maxWidth: '400px'
+                                        }}>
+                                            <p style={{ 
+                                                fontFamily: 'Minecraft, monospace',
+                                                fontSize: '13px',
+                                                margin: 0
+                                            }}>
+                                                🏆 Massive prizes + exclusive retro arcade merch! INSERT COIN to begin your journey.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div className="about-content3 mt-30">
                                 <div className="row">
                                     <div className="col-md-12">
@@ -47,7 +123,7 @@ const About = () => {
                                 </div>
                             </div>
                             <div className="slider-btn2 mt-30">
-                                <Link to={'/about'} className="btn ss-btn">{'Discover More'}</Link>
+                                <Button8bit to={'/about'} variant="primary" size="medium">{'Discover More'}</Button8bit>
                             </div>
                         </div>
                     </div>

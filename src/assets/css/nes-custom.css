@@ -1,0 +1,217 @@
+/* Custom NES.css Styling for TechStorm */
+
+/* NES Container - Dark Theme */
+.nes-container.is-dark {
+    position: relative;
+    padding: 20px;
+    background: rgba(26, 14, 34, 0.9);
+    border-image-slice: 3;
+    border-image-width: 3;
+    border-image-repeat: stretch;
+    border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="%23ffc010" /></svg>');
+    border-style: solid;
+    border-width: 4px;
+}
+
+.nes-container.with-title > .title {
+    position: absolute;
+    top: -16px;
+    left: 16px;
+    background: #1a0e22;
+    color: #ffc010;
+    padding: 4px 16px;
+    font-family: 'Press Start 2P', 'Minecraft', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* Message List */
+.message-list {
+    margin: 0;
+    padding: 0;
+}
+
+.message {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+.message.-left {
+    justify-content: flex-start;
+}
+
+.message.-right {
+    justify-content: flex-end;
+}
+
+/* NES Balloon - Dark Theme */
+.nes-balloon {
+    position: relative;
+    padding: 16px;
+    background: #2d1b3d;
+    border: 4px solid #ffc010;
+    color: #ffd966;
+    font-family: 'Minecraft', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    image-rendering: pixelated;
+    box-shadow: 
+        inset -2px -2px 0px 0px rgba(0, 0, 0, 0.3),
+        inset 2px 2px 0px 0px rgba(255, 192, 16, 0.1);
+}
+
+.nes-balloon.is-dark {
+    background: #2d1b3d;
+    border-color: #ffc010;
+    color: #ffd966;
+}
+
+/* Balloon Tail - Left */
+.nes-balloon.from-left::before {
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    margin-top: -12px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12px 20px 12px 0;
+    border-color: transparent #ffc010 transparent transparent;
+}
+
+.nes-balloon.from-left::after {
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    margin-top: -8px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 12px 8px 0;
+    border-color: transparent #2d1b3d transparent transparent;
+}
+
+/* Balloon Tail - Right */
+.nes-balloon.from-right::before {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    margin-top: -12px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12px 0 12px 20px;
+    border-color: transparent transparent transparent #ffc010;
+}
+
+.nes-balloon.from-right::after {
+    position: absolute;
+    top: 50%;
+    right: -12px;
+    margin-top: -8px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 12px;
+    border-color: transparent transparent transparent #2d1b3d;
+}
+
+/* NES Character Icons */
+.nes-mario::before,
+.nes-ash::before,
+.nes-kirby::before,
+.nes-bcrikko::before {
+    content: "🎮";
+    font-style: normal;
+    font-size: 32px;
+    line-height: 1;
+}
+
+.nes-mario::before {
+    content: "🕹️";
+}
+
+.nes-ash::before {
+    content: "👾";
+}
+
+.nes-kirby::before {
+    content: "🎯";
+}
+
+.nes-bcrikko::before {
+    content: "🎮";
+}
+
+/* Hover Effects */
+.nes-balloon:hover {
+    border-color: #ffd966;
+    box-shadow: 
+        inset -2px -2px 0px 0px rgba(0, 0, 0, 0.3),
+        inset 2px 2px 0px 0px rgba(255, 192, 16, 0.2),
+        0 0 15px rgba(255, 192, 16, 0.5);
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .message {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+    
+    .message.-right {
+        align-items: flex-end !important;
+    }
+    
+    .nes-balloon {
+        max-width: 100% !important;
+        font-size: 12px;
+        padding: 12px;
+    }
+    
+    .nes-balloon.from-left::before,
+    .nes-balloon.from-right::before {
+        display: none;
+    }
+    
+    .nes-balloon.from-left::after,
+    .nes-balloon.from-right::after {
+        display: none;
+    }
+    
+    .nes-container.with-title > .title {
+        font-size: 10px;
+        padding: 3px 12px;
+    }
+}
+
+/* Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.message i {
+    animation: float 3s ease-in-out infinite;
+}
+
+.message:nth-child(2) i {
+    animation-delay: 0.5s;
+}
+
+.message:nth-child(3) i {
+    animation-delay: 1s;
+}
