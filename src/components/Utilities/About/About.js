@@ -59,7 +59,7 @@ const About = () => {
                                     lineHeight: '1.5',
                                     margin: '0'
                                 }}>
-                                    {'9-11 APRIL 2026'}
+                                    {'9-11 APRIL 2026 '}
                                 </p>
                             
                             {/* NES.css Message Balloons */}
