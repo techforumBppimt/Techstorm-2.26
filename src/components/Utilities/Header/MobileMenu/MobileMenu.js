@@ -37,28 +37,7 @@ class MobileMenu extends Component {
                             {'Home'}
                             <i className="fa fa-angle-down"></i>
                         </li>
-                        <Collapse in={isOpen}>
-                            <ul>
-                                <li>
-                                    <Link onClick={() => this.props.onClose(false)}
-                                        to={'/'}>
-                                        {'Home Page 01'}
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link onClick={() => this.props.onClose(false)}
-                                        to={'/homeTwo'}>
-                                        {'Home Page 02'}
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link onClick={() => this.props.onClose(false)}
-                                        to={'/homeThree'}>
-                                        {'Home Page 03'}
-                                    </Link>
-                                </li>
-                            </ul>
-                        </Collapse>
+                        
                         <li>
                             <Link onClick={() => this.props.onClose(false)}
                                 to={'/events'}>

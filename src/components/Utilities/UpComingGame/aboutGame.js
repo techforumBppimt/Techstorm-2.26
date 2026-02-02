@@ -15,7 +15,16 @@ const AboutGame = () => {
                         <div className="col-lg-7 col-12">
                             <div className="about-content s-about-content wow fadeInLeft animated" data-animation="fadeInRight" data-delay=".4s">
                                 <SectionTitle titlefirst='We’re the best Gaming' titleSec='Company' />
-                                <p>{'Lpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}</p>
+                                <p style={{ marginBottom: '10px' }}>{'Lpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}</p>
+                                <p style={{ 
+                                    color: '#ffc010', 
+                                    fontSize: '20px', 
+                                    fontWeight: 'bold',
+                                    marginBottom: '20px',
+                                    fontFamily: 'Press Start 2P, monospace'
+                                }}>
+                                    {'9-11 April'}
+                                </p>
                                 <div className="slider-btn2 mt-20">
                                     <Button8bit to={'/about'} variant="primary" size="medium">{'Learn More'}</Button8bit>
                                 </div>

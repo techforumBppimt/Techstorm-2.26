@@ -41,12 +41,26 @@ const About = () => {
                     </div>
                     <div className="col-lg-6 col-md-12 col-sm-12">
                         <AnimateOnScroll animation="slide-in-right">
-                            <div className="about-content s-about-content">
+                            <div className="about-content s-about-content" style={{ position: 'relative' }}>
                                 <SectionTitle
-                                    titlefirst={'About TechStorm'}
+                                    titlefirst={'About TechStorm '}
                                     titleSec={''}
                                     className={'about-title second-title'}
                                 />
+                                <p style={{ 
+                                    position: 'absolute',
+                                    top: '30px',
+                                    right: '140px',
+                                    color: '#ffc010', 
+                                    fontSize: '30px', 
+                                    fontWeight: 'bold',
+                                    fontFamily: 'Press Start 2P, minecraft',
+                                    textAlign: 'left',
+                                    lineHeight: '1.5',
+                                    margin: '0'
+                                }}>
+                                    {'9-11 APRIL 2026'}
+                                </p>
                             
                             {/* NES.css Message Balloons */}
                             <div className="nes-container is-dark with-title" style={{
