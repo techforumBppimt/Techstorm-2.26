@@ -1,6 +1,6 @@
 import aboutBgImg from '../../../assets/img/bg/about-bg.png';
 import Button8bit from '../Button/Button8bit';
-import experienceImg from '../../../assets/img/features/experience-years.png';
+import techstormLogo from '../../../assets/img/logo/iplogo.png';
 import features1 from '../../../assets/img/features/about1.jpeg';
 import features2 from '../../../assets/img/features/about2.jpeg';
 import SectionTitle from '../SectionTitle/SectionTitle';
@@ -15,8 +15,7 @@ const About = () => {
                         <AnimateOnScroll animation="slide-in-left">
                             <div className="s-about-img p-relative" style={{ position: 'relative' }}>
                                 <div className="experience-years">
-                                    <img src={experienceImg} alt="Experience Years" />
-                                    <span>{'1st'}</span>
+                                    <img src={techstormLogo} alt="TechStorm 2.26" />
                                 </div>
                             <img src={features1} alt="TechStorm fest" style={{ 
                                 width: '100%',
