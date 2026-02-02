@@ -34,6 +34,14 @@ const navItems = [
 const AppContent = () => {
   const location = useLocation();
   
+  // Determine active href including hash
+  const getActiveHref = () => {
+    if (location.pathname === '/' && location.hash) {
+      return `/${location.hash}`;
+    }
+    return location.pathname;
+  };
+  
   return (
     <div className="App">
 
@@ -45,7 +53,7 @@ const AppContent = () => {
           logo={collegelogo}
           logoAlt="College Logo"
           items={navItems}
-          activeHref={location.pathname}
+          activeHref={getActiveHref()}
           baseColor="#ffc010"
           pillColor="#1a0e22"
           hoveredPillTextColor="#000000"

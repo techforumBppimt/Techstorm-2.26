@@ -112,9 +112,12 @@ const PillNav = ({
     const [path, hash] = href.split('#');
     
     if (hash) {
+      // Update URL with hash
+      window.history.pushState(null, '', href);
+      
       // If we're not on the target path, navigate first
       if (path && window.location.pathname !== path) {
-        history.push(path);
+        history.push(href);
         // Wait for navigation and scroll
         setTimeout(() => {
           if (hash === 'home') {
