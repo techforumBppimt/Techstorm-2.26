@@ -15,5 +15,6 @@ import './assets/css/default.css';
 import './assets/css/style.css';
 import './assets/css/responsive.css';
 import './components/Utilities/Button/Button8bit.css';
+import './assets/css/nes-custom.css';
 
 ReactDOM.render(<App />,document.getElementById('root'));
