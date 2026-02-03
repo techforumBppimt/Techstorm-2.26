@@ -8,7 +8,7 @@ import AnimateOnScroll from '../ScrollAnimation/AnimateOnScroll';
 
 const About = () => {
     return (
-        <section id="about" className="about-area about-p pt-70 pb-140 p-relative" style={{ position: 'relative' }}>
+        <section id="about" className="about-area about-p pt-70 pb-140 p-relative" style={{ position: 'relative', isolation: 'isolate', zIndex: 2 }}>
             <div style={{
                 position: 'absolute',
                 top: 0,
@@ -25,11 +25,11 @@ const About = () => {
                 top: 0,
                 left: 0,
                 right: 0,
-                height: '150px',
-                background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, transparent 100%)',
+                height: '200px',
+                background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, transparent 100%)',
                 zIndex: 1
             }}></div>
-            <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+            <div className="container" style={{ position: 'relative', zIndex: 3 }}>
                 <div className="row">
                     <div className="col-lg-6 col-md-12 col-sm-12">
                         <AnimateOnScroll animation="slide-in-left">

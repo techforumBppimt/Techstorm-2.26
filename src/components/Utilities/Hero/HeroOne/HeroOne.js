@@ -19,7 +19,7 @@ const HeroOne = () => {
     const [isHovered, setIsHovered] = useState(false);
     
     return (
-        <section id="home" className="slider-area slider-four fix p-relative" style={{ position: 'relative', minHeight: '85vh' }}>
+        <section id="home" className="slider-area slider-four fix p-relative" style={{ position: 'relative', minHeight: '85vh', isolation: 'isolate', zIndex: 1 }}>
             {/* Background Image - Desktop */}
             <div className="d-none d-lg-block" style={{ 
                 position: 'absolute', 
@@ -28,9 +28,7 @@ const HeroOne = () => {
                 width: '100%', 
                 height: '100%', 
                 zIndex: 0,
-                overflow: 'hidden',
-                willChange: 'transform',
-                backfaceVisibility: 'hidden'
+                overflow: 'hidden'
             }}>
                 <img 
                     src={herobg}
@@ -41,7 +39,6 @@ const HeroOne = () => {
                         objectFit: 'cover',
                         objectPosition: 'center',
                         display: 'block',
-                        transform: 'translateZ(0)',
                         opacity: 0.6
                     }}
                 />
@@ -65,9 +62,7 @@ const HeroOne = () => {
                 width: '100%', 
                 height: '100%', 
                 zIndex: 0,
-                overflow: 'hidden',
-                willChange: 'transform',
-                backfaceVisibility: 'hidden'
+                overflow: 'hidden'
             }}>
                 <img 
                     src={heroph}
@@ -78,7 +73,6 @@ const HeroOne = () => {
                         objectFit: 'cover',
                         objectPosition: 'center',
                         display: 'block',
-                        transform: 'translateZ(0)',
                         opacity: 0.6
                     }}
                 />
@@ -93,9 +87,9 @@ const HeroOne = () => {
                     zIndex: 1
                 }}></div>
             </div>
-            <div className="slider-active" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="slider-active" style={{ position: 'relative', zIndex: 2 }}>
                 <div className="single-slider slider-bg d-flex align-items-center" style={{ background: 'transparent', minHeight: '85vh' }}>
-                    <div className="container" style={{ position: 'relative', zIndex: 2, paddingBottom: '60px' }}>
+                    <div className="container" style={{ position: 'relative', zIndex: 3, paddingBottom: '60px' }}>
                         <div className="row justify-content-center pt-50">
                             <div className="col-lg-1 col-md-1 d-none d-lg-block"></div>
                             <div className="col-lg-6 col-md-6 col-12">
@@ -219,9 +213,7 @@ const HeroOne = () => {
                                             position: 'absolute',
                                             top: '50%',
                                             left: '50%',
-                                            transform: 'translate(-50%, -50%) translateZ(0)',
-                                            willChange: 'opacity',
-                                            backfaceVisibility: 'hidden'
+                                            transform: 'translate(-50%, -50%)'
                                         }}
                                     />
                                     <img 
@@ -237,9 +229,7 @@ const HeroOne = () => {
                                             position: 'absolute',
                                             top: '50%',
                                             left: '50%',
-                                            transform: 'translate(-50%, -50%) translateZ(0)',
-                                            willChange: 'opacity',
-                                            backfaceVisibility: 'hidden'
+                                            transform: 'translate(-50%, -50%)'
                                         }}
                                     />
                                 </div>
@@ -255,7 +245,7 @@ const HeroOne = () => {
                                 flexDirection: 'row',
                                 gap: '30px',
                                 alignItems: 'center',
-                                zIndex: 10
+                                zIndex: 100
                             }}>
                                 <Button8bit to={'/contact'} variant="primary" size="large">
                                     {btnText}

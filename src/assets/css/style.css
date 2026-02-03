@@ -1615,14 +1615,13 @@ label {
 	top            : 0;
 	left           : 0;
 	right          : 0;
-	z-index        : 9998;
+	z-index        : 10000;
 	width          : 100%;
 	padding-top    : 10px;
 	padding-bottom : 10px;
 	background     : transparent;
 	border-bottom  : none;
 	transition     : background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-	will-change    : background-color;
 }
 
 .header-three .menu-area.scrolled {
