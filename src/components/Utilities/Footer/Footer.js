@@ -1,11 +1,30 @@
 import { Link } from "react-router-dom";
-
+import { cloudinaryImages } from '../../../config/cloudinary';
 import logo from '../../../assets/img/logo/iplogo.png';
+
+const footerbg = cloudinaryImages.root.footerbg;
 
 const Footer = () => {
     return (
-        <footer className="footer-bg footer-p">
-            <div className="footer-top pt-70">
+        <footer className="footer-bg footer-p" style={{
+            backgroundImage: `url(${footerbg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            position: 'relative'
+        }}>
+            {/* Overlay for reduced opacity */}
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                zIndex: 0
+            }}></div>
+            
+            <div className="footer-top pt-70" style={{ position: 'relative', zIndex: 1, paddingBottom: '40px' }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -110,16 +129,17 @@ const Footer = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="footer-widget mb-30">
+                            <div className="footer-widget mb-30" style={{ marginBottom: '50px' }}>
                                 <div className="f-widget-title">
                                     <h2>{'Map'}</h2>
                                 </div>
-                                <div className="map-f-container">
+                                <div className="map-f-container" style={{ marginBottom: '20px' }}>
                                     <div className="map-f" style={{
                                         border: '4px solid #ffc010',
                                         padding: '0',
                                         background: 'rgba(26, 14, 34, 0.9)',
-                                        position: 'relative'
+                                        position: 'relative',
+                                        marginBottom: '20px'
                                     }}>
                                         <iframe 
                                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3682.8287896869886!2d88.47249007516844!3d22.63474097945438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89fa702ccbc2b%3A0x9e94acde66c43bb9!2sBP%20Poddar%20Institute%20of%20Management%20%26%20Technology!5e0!3m2!1sen!2sin!4v1738522844123!5m2!1sen!2sin"
@@ -137,8 +157,8 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="copyright-wrap">
+            </div>, paddingTop: '20px', marginTop: '20px'
+            <div className="copyright-wrap" style={{ position: 'relative', zIndex: 1 }}>
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-lg-12 col-md-12">

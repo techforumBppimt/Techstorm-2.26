@@ -68,6 +68,7 @@ export const cloudinaryImages = {
     herobg: `${CLOUDINARY_BASE_URL}/eoorox/root/herobg`,
     heroph: `${CLOUDINARY_BASE_URL}/eoorox/root/heroph`,
     aboutbg: `${CLOUDINARY_BASE_URL}/eoorox/root/aboutbg`,
+    footerbg: `${CLOUDINARY_BASE_URL}/eoorox/root/footerbg`,
     pcmain: `${CLOUDINARY_BASE_URL}/eoorox/root/pcmain`,
     pcstart: `${CLOUDINARY_BASE_URL}/eoorox/root/pcstart`,
     preloader: `${CLOUDINARY_BASE_URL}/eoorox/root/preloader`,
