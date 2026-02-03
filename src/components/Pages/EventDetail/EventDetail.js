@@ -243,12 +243,174 @@ const EventDetail = ({ eventData }) => {
                                 }}>
                                     {description}
                                 </p>
-                                <section className="message -right" style={{ marginTop: '25px' }}>
-                                    <div className="nes-balloon from-right" style={{ borderStyle: 'dashed' }}>
+                                <section className="message -right" style={{ 
+                                    marginTop: '25px',
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    alignItems: 'flex-start',
+                                    gap: '10px'
+                                }}>
+                                    <div className="nes-balloon from-right" style={{ borderStyle: 'dashed', flex: 1 }}>
                                         <p style={{ fontSize: '16px' }}>📅 <span style={{ color: '#00ffea' }}>Event Dates: </span>   9-10th April</p>
                                     </div>
-                                    <i className="nes-bcrikko"></i>
+                                    <i className="nes-bcrikko" style={{
+                                        display: 'block'
+                                    }}></i>
                                 </section>
+                                
+                                <style>{`
+                                    @media (max-width: 768px) {
+                                        .message.-right {
+                                            flex-direction: column-reverse !important;
+                                            align-items: center !important;
+                                        }
+                                        .message.-right .nes-bcrikko {
+                                            margin-bottom: 10px;
+                                        }
+                                        
+                                        .about-heading {
+                                            text-align: center;
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                            position: relative;
+                                            width: 100%;
+                                        }
+                                        
+                                        .about-heading .heading-white,
+                                        .about-heading .heading-gold {
+                                            display: block;
+                                            text-align: center;
+                                            margin: 0;
+                                            font-size: 20px !important;
+                                        }
+                                        
+                                        .about-heading .heading-brush {
+                                            position: relative;
+                                            bottom: auto;
+                                            left: auto;
+                                            margin: 10px auto 20px;
+                                            width: 80px;
+                                        }
+                                        
+                                        .about-content p {
+                                            text-align: center !important;
+                                        }
+                                        
+                                        /* Entry fee mobile centering */
+                                        .col-lg-6[style*="paddingLeft"] {
+                                            padding-left: 5px !important;
+                                            padding-right: 5px !important;
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                        }
+                                        
+                                        .entry-heading {
+                                            text-align: center;
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                            position: relative;
+                                            width: 100%;
+                                        }
+                                        
+                                        .entry-heading .heading-white,
+                                        .entry-heading .heading-gold {
+                                            display: block;
+                                            text-align: center;
+                                            margin: 0;
+                                            font-size: 20px !important;
+                                        }
+                                        
+                                        .entry-heading .heading-brush {
+                                            position: relative;
+                                            bottom: auto;
+                                            left: auto;
+                                            margin: 10px auto 20px;
+                                            width: 80px;
+                                        }
+                                        
+                                        .rules-heading {
+                                            text-align: center;
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                            position: relative;
+                                            width: 100%;
+                                        }
+                                        
+                                        .rules-heading .heading-white,
+                                        .rules-heading .heading-gold {
+                                            display: block;
+                                            text-align: center;
+                                            margin: 0;
+                                            font-size: 20px !important;
+                                        }
+                                        
+                                        .rules-heading .heading-brush {
+                                            position: relative;
+                                            bottom: auto;
+                                            left: auto;
+                                            margin: 10px auto 20px;
+                                            width: 80px;
+                                        }
+                                        
+                                        .coordinator-heading {
+                                            text-align: center;
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                            position: relative;
+                                            width: 100%;
+                                        }
+                                        
+                                        .coordinator-heading .heading-white,
+                                        .coordinator-heading .heading-gold {
+                                            display: block;
+                                            text-align: center;
+                                            margin: 0;
+                                            font-size: 20px !important;
+                                        }
+                                        
+                                        .coordinator-heading .heading-brush {
+                                            position: relative !important;
+                                            margin: 10px auto 15px !important;
+                                            width: 80px !important;
+                                            left: 0 !important;
+                                            right: 0 !important;
+                                            bottom: auto !important;
+                                            display: block !important;
+                                        }
+                                        
+                                        .entry-content {
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                            width: 100%;
+                                            padding: 0;
+                                            margin-left: 0;
+                                            margin-right: 0;
+                                        }
+                                        
+                                        .fee-category {
+                                            text-align: center;
+                                            width: 100%;
+                                            max-width: 350px;
+                                            margin-left: auto;
+                                            margin-right: auto;
+                                        }
+                                        
+                                        .fee-amount {
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            gap: 15px;
+                                            margin-left: 0 !important;
+                                            margin-right: 0 !important;
+                                        }
+                                    }
+                                `}</style>
                                 
                                 <div className="event-rounds" style={{ marginTop: '30px' }}>
                                     <div className="rounds-list">
@@ -330,7 +492,7 @@ const EventDetail = ({ eventData }) => {
                 <div className="container">
                     <div className="row">
                         {/* Left: Entry Fee & Payment */}
-                        <div className="col-lg-6 mb-40" style={{ paddingLeft: '80px' }}>
+                        <div className="col-lg-6 mb-40" style={{ paddingLeft: '10px' }}>
                             <div className="entry-heading">
                                 <h2 className="heading-white">ENTRY</h2>
                                 <h2 className="heading-gold">FEE</h2>
