@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import herobg from '../../../../assets/img/herobg.png';
-import heroph from '../../../../assets/img/heroph.png';
+import { cloudinaryImages } from '../../../../config/cloudinary';
 import iplogo from '../../../../assets/img/logo/iplogo.png';
-import pcmain from '../../../../assets/img/pcmain.png';
-import pcstart from '../../../../assets/img/pcstart.png';
 import Button8bit from '../../Button/Button8bit';
 import AnimateOnScroll from '../../ScrollAnimation/AnimateOnScroll';
+
+const herobg = cloudinaryImages.root.herobg;
+const heroph = cloudinaryImages.root.heroph;
+const pcmain = cloudinaryImages.root.pcmain;
+const pcstart = cloudinaryImages.root.pcstart;
 
 const heroInformation = {
     id: "1",

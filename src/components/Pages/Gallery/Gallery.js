@@ -1,22 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { cloudinaryImages } from '../../../config/cloudinary';
 import bgImage from '../../../assets/img/bg/match-bg3.png';
 import SectionTitle from '../../Utilities/SectionTitle/SectionTitle';
-import img1 from '../../../assets/img/gallery/c1.jpeg';
-import img2 from '../../../assets/img/gallery/c2.jpeg';
-import img3 from '../../../assets/img/gallery/c3.jpeg';
-import img4 from '../../../assets/img/gallery/c4.jpeg';
-import img5 from '../../../assets/img/gallery/c5.jpeg';
-import img6 from '../../../assets/img/gallery/c6.jpeg';
-import img7 from '../../../assets/img/gallery/c7.jpeg';
-import img8 from '../../../assets/img/gallery/c8.jpeg';
-import img9 from '../../../assets/img/gallery/c9.jpeg';
-import img10 from '../../../assets/img/gallery/c10.jpeg';
-import img11 from '../../../assets/img/gallery/c11.jpeg';
-import img12 from '../../../assets/img/gallery/c12.jpeg';
-import img13 from '../../../assets/img/gallery/c13.jpeg';
-import img14 from '../../../assets/img/gallery/c14.jpeg';
+
+const img1 = cloudinaryImages.gallery.c1;
+const img2 = cloudinaryImages.gallery.c2;
+const img3 = cloudinaryImages.gallery.c3;
+const img4 = cloudinaryImages.gallery.c4;
+const img5 = cloudinaryImages.gallery.c5;
+const img6 = cloudinaryImages.gallery.c6;
+const img7 = cloudinaryImages.gallery.c7;
+const img8 = cloudinaryImages.gallery.c8;
+const img9 = cloudinaryImages.gallery.c9;
+const img10 = cloudinaryImages.gallery.c10;
+const img11 = cloudinaryImages.gallery.c11;
+const img12 = cloudinaryImages.gallery.c12;
+const img13 = cloudinaryImages.gallery.c13;
+const img14 = cloudinaryImages.gallery.c14;
 
 const galleryImgs = [
     {

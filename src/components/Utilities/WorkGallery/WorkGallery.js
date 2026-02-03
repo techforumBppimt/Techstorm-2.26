@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
-
+import { cloudinaryImages } from '../../../config/cloudinary';
 import bgImg from '../../../assets/img/bg/trendiang-bg.png';
 import './WorkGallery.css';
 
@@ -8,21 +8,21 @@ import SectionTitle from '../SectionTitle/SectionTitle';
 import RetroCard from '../RetroCard/RetroCard';
 import AnimateOnScroll from '../ScrollAnimation/AnimateOnScroll';
 
-// Event Images
-import codebeeImg from '../../../assets/img/events/codebee.png';
-import hackstormImg from '../../../assets/img/events/hackstorm.png';
-import technomaniaImg from '../../../assets/img/events/technomania.png';
-import omegatrixImg from '../../../assets/img/events/omegatrix.png';
-import techhuntImg from '../../../assets/img/events/techhunt.png';
-import ronavigatorImg from '../../../assets/img/events/ronavigator.png';
-import rocombatImg from '../../../assets/img/events/rocombat.png';
-import rosoccerImg from '../../../assets/img/events/rosoccer.png';
-import roterranceImg from '../../../assets/img/events/roterrance.png';
-import creativecanvasImg from '../../../assets/img/events/crreativecanvas.png';
-import passionwithreelsImg from '../../../assets/img/events/passionwithreels.png';
-import forzahorizonImg from '../../../assets/img/events/forzahorizon.png';
-import fifamobileImg from '../../../assets/img/events/fifamobile.png';
-import khetImg from '../../../assets/img/events/khet.png';
+// Event Images from Cloudinary
+const codebeeImg = cloudinaryImages.events.codebee;
+const hackstormImg = cloudinaryImages.events.hackstorm;
+const technomaniaImg = cloudinaryImages.events.technomania;
+const omegatrixImg = cloudinaryImages.events.omegatrix;
+const techhuntImg = cloudinaryImages.events.techhunt;
+const ronavigatorImg = cloudinaryImages.events.ronavigator;
+const rocombatImg = cloudinaryImages.events.rocombat;
+const rosoccerImg = cloudinaryImages.events.rosoccer;
+const roterranceImg = cloudinaryImages.events.roterrance;
+const creativecanvasImg = cloudinaryImages.events.crreativecanvas;
+const passionwithreelsImg = cloudinaryImages.events.passionwithreels;
+const forzahorizonImg = cloudinaryImages.events.forzahorizon;
+const fifamobileImg = cloudinaryImages.events.fifamobile;
+const khetImg = cloudinaryImages.events.khet;
 
 const galleryItems = [
     {

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
-
+import { cloudinaryImages } from '../../../config/cloudinary';
 import MobileMenu from './MobileMenu/MobileMenu';
 import Logo from '../Logo/Logo';
-import collegelogo from '../../../assets/img/logo/college-logo.png';
-import IIC_logo from '../../../assets/img/logo/IIC_logo.png';
-import Abhiyantran_logo from '../../../assets/img/logo/Abhiyantran-logo.png';
 import PillNav from '../PillNav/PillNav';
-
 import Offcanvas from '../Offcanvas/Offcanvas';
+
+const collegelogo = cloudinaryImages.logo.collegelogo;
+const IIC_logo = cloudinaryImages.logo.IIC_logo;
+const Abhiyantran_logo = cloudinaryImages.logo.Abhiyantran_logo;
 
 
 

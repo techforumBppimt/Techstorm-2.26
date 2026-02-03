@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { cloudinaryImages } from '../../../config/cloudinary';
 import Breadcrumb from "../../Utilities/Breadcrumb/Breadcrumb";
 import SectionTitle from "../../Utilities/SectionTitle/SectionTitle";
 
-
-import workImg1 from '../../../assets/img/gallery/c1.jpeg';
-import workImg2 from '../../../assets/img/gallery/c2.jpeg';
-import workImg3 from '../../../assets/img/gallery/c3.jpeg';
-import workImg4 from '../../../assets/img/gallery/c4.jpeg';
-import workImg5 from '../../../assets/img/gallery/c5.jpeg';
-import workImg6 from '../../../assets/img/gallery/c6.jpeg';
-import workImg7 from '../../../assets/img/gallery/c7.jpeg';
-import workImg8 from '../../../assets/img/gallery/c8.jpeg';
+const workImg1 = cloudinaryImages.gallery.c1;
+const workImg2 = cloudinaryImages.gallery.c2;
+const workImg3 = cloudinaryImages.gallery.c3;
+const workImg4 = cloudinaryImages.gallery.c4;
+const workImg5 = cloudinaryImages.gallery.c5;
+const workImg6 = cloudinaryImages.gallery.c6;
+const workImg7 = cloudinaryImages.gallery.c7;
+const workImg8 = cloudinaryImages.gallery.c8;
 const gameItems = [
     {
         img: workImg1,

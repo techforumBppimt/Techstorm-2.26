@@ -2,18 +2,19 @@ import React, { useState, useRef } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { cloudinaryImages } from '../../../../config/cloudinary';
 import SectionTitle from '../../SectionTitle/SectionTitle';
 import './Carousel8bit.css';
 
-// Import carousel images
-import c1 from '../../../../assets/img/carousel/c1.jpeg';
-import c2 from '../../../../assets/img/carousel/c2.jpeg';
-import c3 from '../../../../assets/img/carousel/c3.jpeg';
-import c4 from '../../../../assets/img/carousel/c4.jpeg';
-import c5 from '../../../../assets/img/carousel/c5.jpeg';
-import c6 from '../../../../assets/img/carousel/c6.jpeg';
-import c7 from '../../../../assets/img/carousel/c7.jpeg';
-import c8 from '../../../../assets/img/carousel/c8.jpeg';
+// Carousel images from Cloudinary
+const c1 = cloudinaryImages.carousel.c1;
+const c2 = cloudinaryImages.carousel.c2;
+const c3 = cloudinaryImages.carousel.c3;
+const c4 = cloudinaryImages.carousel.c4;
+const c5 = cloudinaryImages.carousel.c5;
+const c6 = cloudinaryImages.carousel.c6;
+const c7 = cloudinaryImages.carousel.c7;
+const c8 = cloudinaryImages.carousel.c8;
 
 const carouselData = [
     { id: 1, img: c1, alt: 'TechStorm Gaming Event 1' },

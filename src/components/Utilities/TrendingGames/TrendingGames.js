@@ -1,8 +1,10 @@
+import { cloudinaryImages } from '../../../config/cloudinary';
 import SectionTitle from "../SectionTitle/SectionTitle";
-import img1 from '../../../assets/img/gallery/c1.jpeg'
-import img2 from '../../../assets/img/gallery/c2.jpeg'
-import img3 from '../../../assets/img/gallery/c3.jpeg'
 import GameCard from "./GameCard";
+
+const img1 = cloudinaryImages.gallery.c1;
+const img2 = cloudinaryImages.gallery.c2;
+const img3 = cloudinaryImages.gallery.c3;
 
 const TrendingData = [
     {
