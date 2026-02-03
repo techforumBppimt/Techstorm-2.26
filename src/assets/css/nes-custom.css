@@ -172,6 +172,19 @@
         align-items: flex-end !important;
     }
     
+    /* About section messages - all emojis on LEFT side */
+    .about-nes-container .message {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+    }
+    
+    .about-nes-container .message.-left,
+    .about-nes-container .message.-right {
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+    }
+    
     .nes-balloon {
         max-width: 100% !important;
         font-size: 12px;

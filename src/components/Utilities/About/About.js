@@ -86,26 +86,32 @@ const About = () => {
                                 background: 'rgba(26, 14, 34, 0.9)',
                                 border: '4px solid #ffc010',
                                 marginBottom: '30px',
-                                marginTop: '20px'
+                                marginTop: '20px',
+                                position: 'relative',
+                                overflow: 'visible'
                             }}>
-                                <p className="title" style={{
+                                <p className="title about-event-title" style={{
                                     background: '#1a0e22',
                                     color: '#ffc010',
                                     fontFamily: 'Press Start 2P, Minecraft, monospace',
                                     fontSize: '12px',
-                                    padding: '5px 15px'
+                                    padding: '5px 15px',
+                                    position: 'relative',
+                                    zIndex: 1
                                 }}>Event Info</p>
                                 
                                 <div className="message-list">
-                                    <div className="message -left" style={{ marginBottom: '20px' }}>
-                                        <i className="nes-mario" style={{ 
-                                            fontSize: '32px'
+                                    <div className="message -left" style={{ marginBottom: '20px', position: 'relative' }}>
+                                        <i className="nes-mario about-emoji" style={{ 
+                                            fontSize: '32px',
+                                            position: 'relative'
                                         }}></i>
                                         <div className="nes-balloon from-left is-dark" style={{
                                             background: '#2d1b3d',
                                             border: '4px solid #ffc010',
                                             color: '#ffd966',
-                                            maxWidth: '400px'
+                                            maxWidth: '400px',
+                                            position: 'relative'
                                         }}>
                                             <p style={{ 
                                                 fontFamily: 'Minecraft, monospace',
@@ -117,12 +123,13 @@ const About = () => {
                                         </div>
                                     </div>
 
-                                    <div className="message -right" style={{ marginBottom: '20px' }}>
+                                    <div className="message -right" style={{ marginBottom: '20px', position: 'relative' }}>
                                         <div className="nes-balloon from-right is-dark" style={{
                                             background: '#2d1b3d',
                                             border: '4px solid #ffc010',
                                             color: '#ffd966',
-                                            maxWidth: '400px'
+                                            maxWidth: '400px',
+                                            position: 'relative'
                                         }}>
                                             <p style={{ 
                                                 fontFamily: 'Minecraft, monospace',
@@ -132,20 +139,23 @@ const About = () => {
                                                 Press START to join 15+ events including Coding, Robotics, Gaming, and Creative competitions!
                                             </p>
                                         </div>
-                                        <i className="nes-ash" style={{ 
-                                            fontSize: '32px'
+                                        <i className="nes-ash about-emoji" style={{ 
+                                            fontSize: '32px',
+                                            position: 'relative'
                                         }}></i>
                                     </div>
 
-                                    <div className="message -left">
-                                        <i className="nes-kirby" style={{ 
-                                            fontSize: '32px'
+                                    <div className="message -left" style={{ position: 'relative' }}>
+                                        <i className="nes-kirby about-emoji" style={{ 
+                                            fontSize: '32px',
+                                            position: 'relative'
                                         }}></i>
                                         <div className="nes-balloon from-left is-dark" style={{
                                             background: '#2d1b3d',
                                             border: '4px solid #ffc010',
                                             color: '#ffd966',
-                                            maxWidth: '400px'
+                                            maxWidth: '400px',
+                                            position: 'relative'
                                         }}>
                                             <p style={{ 
                                                 fontFamily: 'Minecraft, monospace',

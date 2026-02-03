@@ -2784,32 +2784,62 @@
     
     .about-nes-container {
         padding: 15px !important;
+        padding-top: 35px !important;
+        overflow: visible !important;
+    }
+    
+    /* Fix Event Info title overlapping */
+    .about-event-title {
+        white-space: nowrap !important;
+        overflow: visible !important;
+        font-size: 10px !important;
+        padding: 5px 10px !important;
+        line-height: 1.2 !important;
     }
     
     .about-nes-container .message {
         margin-bottom: 15px !important;
+        position: relative !important;
     }
     
     .about-nes-container .nes-balloon {
         max-width: 100% !important;
         font-size: 11px !important;
+        z-index: 2 !important;
+    }
+    
+    .about-nes-container .nes-balloon p {
+        position: relative !important;
+        z-index: 1 !important;
+    }
+    
+    /* Make emojis fully visible on mobile */
+    .about-emoji {
+        font-size: 32px !important;
+        z-index: 3 !important;
+        position: relative !important;
     }
     
     .about-nes-container .nes-mario,
     .about-nes-container .nes-ash,
     .about-nes-container .nes-kirby {
-        font-size: 24px !important;
+        font-size: 32px !important;
+        z-index: 3 !important;
+        position: relative !important;
     }
     
-    /* Position pixel emoji above Press START box in mobile view */
-    .about-nes-container .message.-right {
-        flex-direction: column-reverse !important;
-        align-items: flex-end !important;
+    .about-nes-container .nes-mario::before,
+    .about-nes-container .nes-ash::before,
+    .about-nes-container .nes-kirby::before {
+        font-size: 32px !important;
     }
     
-    .about-nes-container .message.-right .nes-ash {
-        margin-bottom: 10px !important;
-        margin-right: 0 !important;
+    /* Emojis positioned on left side with proper spacing */
+    .about-nes-container .message.-left .about-emoji,
+    .about-nes-container .message.-right .about-emoji {
+        margin-right: 8px !important;
+        margin-left: 0 !important;
+        flex-shrink: 0 !important;
     }
     
     .about-content.s-about-content {
