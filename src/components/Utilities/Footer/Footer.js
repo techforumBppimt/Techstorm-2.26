@@ -7,8 +7,8 @@ const Footer = () => {
         <footer className="footer-bg footer-p">
             <div className="footer-top pt-70">
                 <div className="container">
-                    <div className="row justify-content-between">
-                        <div className="col-xl-4 col-lg-4 col-sm-6">
+                    <div className="row">
+                        <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                             <div className="footer-widget mb-30">
                                 <div className="f-widget-title mb-20">
                                     <img src={logo} alt="TechStorm Logo" style={{ maxWidth: '350px', height: 'auto' }} />
@@ -42,8 +42,8 @@ const Footer = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-6">
-                            <div className="footer-widget mb-30">
+                        <div className="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6">
+                            <div className="footer-widget mb-30 footer-links-section">
                                 <div className="f-widget-title">
                                     <h2>{'Our Links'}</h2>
                                 </div>
@@ -63,8 +63,8 @@ const Footer = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-6">
-                            <div className="footer-widget mb-30">
+                        <div className="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6">
+                            <div className="footer-widget mb-30 footer-links-section">
                                 <div className="f-widget-title">
                                     <h2>{'Events'}</h2>
                                 </div>
@@ -84,31 +84,54 @@ const Footer = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-lg-3 col-sm-6">
-                            <div className="footer-widget mb-30">
+                        <div className="col-xl-5 col-lg-5 col-md-6 col-sm-12">
+                            <div className="footer-widget mb-30 footer-links-section">
                                 <div className="f-widget-title">
                                     <h2>{'Follow Us'}</h2>
                                 </div>
-                                <div className="footer-social  mt-30"> <button type="button" style={{ background: 'none', border: 'none', cursor: 'pointer' }}><i className="fab fa-facebook-f"></i></button>
-                                    <Link to={'#'}><i className="fab fa-twitter"></i></Link>
-                                    <Link to={'#'}><i className="fab fa-instagram"></i></Link>
+                                <div className="footer-social-nes mt-30">
+                                    <Link to={'https://www.facebook.com'} target="_blank" rel="noopener noreferrer" className="nes-social-icon">
+                                        <i className="nes-icon facebook is-medium"></i>
+                                    </Link>
+                                    <Link to={'https://twitter.com'} target="_blank" rel="noopener noreferrer" className="nes-social-icon">
+                                        <i className="nes-icon twitter is-medium"></i>
+                                    </Link>
+                                    <Link to={'https://www.instagram.com'} target="_blank" rel="noopener noreferrer" className="nes-social-icon">
+                                        <i className="nes-icon instagram is-medium"></i>
+                                    </Link>
+                                    <Link to={'https://www.linkedin.com'} target="_blank" rel="noopener noreferrer" className="nes-social-icon">
+                                        <i className="nes-icon linkedin is-medium"></i>
+                                    </Link>
+                                    <Link to={'mailto:techstorm@college.edu'} className="nes-social-icon">
+                                        <i className="nes-icon gmail is-medium"></i>
+                                    </Link>
+                                    <Link to={'https://wa.me/919038903850'} target="_blank" rel="noopener noreferrer" className="nes-social-icon">
+                                        <i className="nes-icon whatsapp is-medium"></i>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="footer-widget mb-30">
                                 <div className="f-widget-title">
                                     <h2>{'Map'}</h2>
                                 </div>
-                                <div className="map-f">
-                                    <iframe 
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3682.8287896869886!2d88.47249007516844!3d22.63474097945438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89fa702ccbc2b%3A0x9e94acde66c43bb9!2sBP%20Poddar%20Institute%20of%20Management%20%26%20Technology!5e0!3m2!1sen!2sin!4v1738522844123!5m2!1sen!2sin"
-                                        width="100%" 
-                                        height="200" 
-                                        style={{ border: 0 }} 
-                                        allowFullScreen="" 
-                                        loading="lazy" 
-                                        referrerPolicy="no-referrer-when-downgrade"
-                                        title="BPPIMT Location"
-                                    ></iframe>
+                                <div className="map-f-container">
+                                    <div className="map-f" style={{
+                                        border: '4px solid #ffc010',
+                                        padding: '0',
+                                        background: 'rgba(26, 14, 34, 0.9)',
+                                        position: 'relative'
+                                    }}>
+                                        <iframe 
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3682.8287896869886!2d88.47249007516844!3d22.63474097945438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89fa702ccbc2b%3A0x9e94acde66c43bb9!2sBP%20Poddar%20Institute%20of%20Management%20%26%20Technology!5e0!3m2!1sen!2sin!4v1738522844123!5m2!1sen!2sin"
+                                            width="100%" 
+                                            height="200" 
+                                            style={{ border: 0, display: 'block' }} 
+                                            allowFullScreen="" 
+                                            loading="lazy" 
+                                            referrerPolicy="no-referrer-when-downgrade"
+                                            title="BPPIMT Location"
+                                        ></iframe>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -118,10 +141,12 @@ const Footer = () => {
             <div className="copyright-wrap">
                 <div className="container">
                     <div className="row align-items-center">
-                        <div className="col-lg-6">
-                            {'Copyright © 2026'} <span>{'TechStorm | BPPIMT'}</span> <p>{'All Rights Reserved.'}</p>
+                        <div className="col-lg-12 col-md-12">
+                            <div className="copyright-content">
+                                <div>{'Copyright © 2026'} <span>{'TechStorm | BPPIMT'}</span></div>
+                                <div>{'All Rights Reserved.'}</div>
+                            </div>
                         </div>
-                        <div className="col-lg-6 text-right text-xl-right"></div>
                     </div>
                 </div>
             </div>

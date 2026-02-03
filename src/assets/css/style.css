@@ -6435,6 +6435,11 @@ section:hover .section-title h2:before {
 	margin-bottom: 50px;
 }
 
+.footer-top {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
 .f-contact {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -6482,6 +6487,8 @@ section:hover .section-title h2:before {
 	border-bottom      : 4px solid #170f0f;
 	background         : #1e191f;
 	background-position: center 0 !important;
+	padding-bottom     : 0;
+	margin-bottom      : 0;
 }
 
 .f-cta-area.gray-bg {
@@ -6519,6 +6526,55 @@ section:hover .section-title h2:before {
 .footer-social a:hover {
 	background: rgb(255, 138, 1);
 	color     : #fff !important;
+}
+
+/* NES.css Footer Social Icons */
+.footer-social-nes {
+	display        : flex;
+	flex-wrap      : wrap;
+	gap            : 15px;
+	align-items    : center;
+	justify-content: flex-start;
+}
+
+.footer-social-nes .nes-social-icon {
+	display        : inline-flex;
+	align-items    : center;
+	justify-content: center;
+	transition     : transform 0.2s ease, opacity 0.2s ease;
+	padding        : 5px;
+	border-radius  : 4px;
+}
+
+.footer-social-nes .nes-social-icon:hover {
+	transform: scale(1.15) translateY(-3px);
+	opacity  : 0.85;
+}
+
+.footer-social-nes .nes-social-icon i {
+	image-rendering: pixelated;
+}
+
+/* Desktop alignment for footer sections */
+@media (min-width: 992px) {
+	.footer-links-section {
+		padding-top: 80px;
+	}
+}
+
+/* Map Container with borders */
+.map-f-container {
+	margin-top: 20px;
+}
+
+.map-f {
+	overflow      : hidden;
+	border-radius : 0;
+	box-shadow    : 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.map-f iframe {
+	filter: brightness(0.95) contrast(1.05);
 }
 
 .f-widget-title h2 {
@@ -6623,11 +6679,18 @@ section:hover .section-title h2:before {
 }
 
 .copyright-wrap {
-	color        : #fff;
-	font-size    : 16px;
-	font-weight  : 600;
-	margin-bottom: 30px;
-	font-family  : 'Press Start 2P', system-ui;
+	color          : #fff;
+	font-size      : 16px;
+	font-weight    : 600;
+	margin-bottom  : 0;
+	margin-top     : -60px;
+	padding-top    : 0;
+	padding-bottom : 30px;
+	font-family    : 'Press Start 2P', system-ui;
+}
+
+.copyright-wrap .copyright-content div {
+	line-height: 1.8;
 }
 
 .copyright-wrap span {

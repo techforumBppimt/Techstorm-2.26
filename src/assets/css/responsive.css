@@ -402,6 +402,37 @@
         margin-right: 12px;
     }
 
+    .footer-social-nes {
+        justify-content: center;
+        gap            : 18px;
+        flex-wrap      : wrap;
+    }
+
+    .footer-social-nes .nes-icon {
+        width : 48px !important;
+        height: 48px !important;
+    }
+
+    .footer-social-nes .nes-social-icon {
+        padding: 8px;
+    }
+
+    .map-f {
+        border-width: 3px !important;
+    }
+
+    .footer-widget .f-widget-title h2 {
+        font-size: 16px;
+    }
+
+    .footer-link ul li {
+        margin-bottom: 12px;
+    }
+
+    .footer-link ul li a {
+        font-size: 13px;
+    }
+
     .f-insta ul li {
         width: 28%;
     }
@@ -1357,6 +1388,52 @@
 
     .footer-social {
         margin-top: 10px;
+    }
+
+    .footer-social-nes {
+        justify-content: center;
+        gap            : 20px;
+        flex-wrap      : wrap;
+        padding        : 0;
+    }
+
+    .footer-social-nes .nes-icon {
+        width : 52px !important;
+        height: 52px !important;
+    }
+
+    .footer-social-nes .nes-social-icon {
+        padding: 10px;
+    }
+
+    .map-f-container {
+        margin-top: 15px;
+    }
+
+    .map-f {
+        border-width: 3px !important;
+    }
+
+    .map-f iframe {
+        height: 180px !important;
+    }
+
+    /* Two column layout for Our Links and Events on mobile */
+    .footer-top .col-6 .footer-widget {
+        padding-left : 5px;
+        padding-right: 5px;
+    }
+
+    .footer-link ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer-link ul li a {
+        font-size: 12px;
+    }
+
+    .f-widget-title h2 {
+        font-size: 14px;
     }
 
     .portfolio-area2,
@@ -2804,6 +2881,94 @@
 
     .btn {
         min-width: 190px;
+    }
+
+    /* Footer NES.css icons for mobile - 3x2 Grid with less spacing */
+    .footer-social-nes {
+        display              : grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap                  : 8px;
+        padding              : 10px 0;
+        justify-items        : center;
+        max-width            : 220px;
+        margin               : 0 auto;
+    }
+
+    .footer-social-nes .nes-icon {
+        width : 48px !important;
+        height: 48px !important;
+    }
+
+    .footer-social-nes .nes-social-icon {
+        padding        : 4px;
+        transition     : transform 0.3s ease;
+        display        : flex;
+        align-items    : center;
+        justify-content: center;
+    }
+
+    .footer-social-nes .nes-social-icon:active {
+        transform: scale(0.95);
+    }
+
+    .map-f {
+        border-width: 2px !important;
+    }
+
+    .map-f iframe {
+        height: 150px !important;
+    }
+
+    .footer-widget {
+        margin-bottom: 20px !important;
+    }
+
+    .f-widget-title h2 {
+        font-size     : 15px;
+        margin-bottom : 15px;
+        padding-bottom: 10px;
+    }
+
+    .f-widget-title h2:before {
+        width: 25px;
+    }
+
+    /* Two column layout styling */
+    .footer-top .col-6 {
+        padding-left : 10px;
+        padding-right: 10px;
+    }
+
+    .footer-link ul li {
+        margin-bottom: 8px;
+    }
+
+    .footer-link ul li a {
+        font-size: 11px;
+    }
+
+    /* Company info section on mobile */
+    .footer-top .col-sm-6:first-child {
+        margin-bottom: 20px;
+    }
+
+    .footer-top .col-sm-6:first-child img {
+        max-width: 250px !important;
+    }
+
+    .f-contact ul li {
+        font-size    : 12px;
+        margin-bottom: 12px;
+    }
+
+    .f-contact ul li .icon {
+        font-size   : 14px;
+        margin-right: 10px;
+    }
+
+    /* Reset copyright margin for mobile */
+    .copyright-wrap {
+        margin-top: 20px !important;
     }
 
     .comment-form {
