@@ -167,21 +167,14 @@ const Schedule = () => {
                     {/* Important Notes */}
                     <div className="row">
                         <div className="col-12">
+                            <h3 className="schedule-day-title" style={{ marginBottom: '30px' }}>
+                                <i className="nes-pokeball"></i> IMPORTANT NOTES
+                            </h3>
                             <div className="schedule-notes nes-container is-dark">
-                                <h4 className="press-start-2p-regular" style={{ 
-                                    color: '#ffc010', 
-                                    fontSize: '40px',
-                                    marginBottom: '15px',
-                                    display: 'flex',
-                                    alignItems: 'left',
-                                    justifyContent: 'left'
-                                }}>
-                                    <i className="nes-pokeball"></i> IMPORTANT NOTES
-                                </h4>
                                 <ul style={{ 
                                     color: '#ffd966', 
-                                    fontSize: '12px',
-                                    lineHeight: '1.8',
+                                    fontSize: '15px',
+                                    lineHeight: '2',
                                     paddingLeft: '20px'
                                 }}>
                                     <li>Please report to your respective venues 15 minutes before the scheduled time.</li>
