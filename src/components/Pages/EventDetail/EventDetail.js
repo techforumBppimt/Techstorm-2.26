@@ -241,15 +241,14 @@ const EventDetail = ({ eventData }) => {
                                 <div className="heading-brush"></div>
                             </div>
                             <div className="about-content">
-                                <p className="about-text" style={{ 
+                                <p style={{ 
                                     color: '#ffffff', 
-                                    fontSize: '14px',
+                                    fontSize: '18px',
                                     lineHeight: '1.8',
-                                    fontFamily: 'Arial, sans-serif',
+                                    fontFamily: 'Minecraft, monospace',
                                     margin: 0,
-                                    padding: 0,
-                                    display: 'block',
-                                    textShadow: '0 0 5px rgba(255,255,255,0.5)'
+                                    textAlign: 'justify',
+                                    fontWeight: '400'
                                 }}>
                                     {description}
                                 </p>
@@ -301,18 +300,27 @@ const EventDetail = ({ eventData }) => {
                                     </div>
                                 </div>
 
-                                {/* Team Size Container */}
-                                <div className="nes-container is-centered is-dark with-title" style={{ marginTop: '40px' }}>
-                                    <p className="title">Team Size Options</p>
+                                {/* Team Size Options */}
+                                <div className="nes-container with-title" style={{ 
+                                    marginTop: '40px',
+                                    backgroundColor: 'rgba(255, 192, 16, 0.08)',
+                                    borderColor: '#ffc010'
+                                }}>
+                                    <p className="title" style={{ 
+                                        margin: 0, 
+                                        padding: '3px 3px 3px 3px',
+                                        color: '#ffc010'
+                                    }}>Team Options</p>
                                     <p style={{ 
-                                        textAlign: 'center', 
-                                        fontSize: '20px',
-                                        margin: '20px 0'
+                                        fontSize: '18px',
+                                        margin: '0 0 10px 0',
+                                        fontFamily: 'Press Start 2P',
+                                        lineHeight: '1.6',
+                                        color: '#ffc010'
                                     }}>
                                         Solo / Duo / Thrice
                                     </p>
                                 </div>
-
                                 {qrCode && (
                                     <div className="qr-section">
                                         <h4 className="qr-title">Scan to Pay</h4>

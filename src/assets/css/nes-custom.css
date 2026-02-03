@@ -188,7 +188,7 @@
     .nes-balloon {
         max-width: 100% !important;
         font-size: 12px;
-        padding: 12px;
+        padding: 5px;
     }
     
     .nes-balloon.from-left::before,
@@ -203,6 +203,7 @@
     
     .nes-container.with-title > .title {
         font-size: 10px;
+        text-decoration-color: #ffc010;
         padding: 3px 12px;
     }
 }
