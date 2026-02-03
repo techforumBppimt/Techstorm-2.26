@@ -1,0 +1,362 @@
+/* Schedule Page Custom Styles */
+
+/* Schedule Container - No constraints */
+.schedule-container {
+    width: 100%;
+    padding: 0 100px;
+}
+
+/* Table Container - Centered and Smaller */
+.nes-table-responsive {
+    overflow-x: visible;
+    overflow-y: visible;
+    margin: 0 auto 40px;
+    max-width: 70%;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* NES Table Base Styles */
+.nes-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Minecraft', monospace;
+    image-rendering: pixelated;
+    background: rgba(26, 14, 34, 0.95);
+}
+
+/* Bordered Dark Table */
+.nes-table.is-bordered.is-dark {
+    border: 4px solid #ffc010;
+}
+
+/* Centered Table */
+.nes-table.is-centered {
+    text-align: center;
+}
+
+/* Table Headers */
+.nes-table thead tr {
+    background: rgba(255, 192, 16, 0.2);
+}
+
+.nes-table thead th {
+    padding: 16px 14px;
+    font-family: 'Minecraft', monospace;
+    font-size: 13px;
+    color: #ffc010;
+    text-transform: uppercase;
+    border: 3px solid #ffc010;
+    letter-spacing: 0.5px;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+    background: rgba(255, 192, 16, 0.15);
+}
+
+/* Table Body Cells */
+.nes-table tbody td {
+    padding: 14px 12px;
+    color: #ffd966;
+    border: 2px solid #7a5c91;
+    font-size: 15px;
+    line-height: 2;
+    transition: all 0.2s ease;
+    font-family: 'Minecraft', monospace;
+    letter-spacing: 0.5px;
+}
+
+/* Table Row Hover Effect */
+.nes-table tbody tr:hover {
+    background: rgba(0, 255, 255, 0.2) !important;
+    transform: scale(1.01);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.nes-table tbody tr:hover td {
+    border-color: #00ffff;
+    color: #00ffff;
+}
+
+/* Alternating Row Colors */
+.nes-table tbody tr:nth-child(even) {
+    background: rgba(45, 27, 61, 0.5);
+}
+
+.nes-table tbody tr:nth-child(odd) {
+    background: rgba(26, 14, 34, 0.7);
+}
+
+/* Event Name Styling */
+.nes-table .event-name {
+    font-weight: 600;
+    color: #ffd966;
+}
+
+/* Lunch Break Special Styling */
+.nes-table tbody tr.lunch-break-row {
+    background: rgba(255, 192, 16, 0.15) !important;
+}
+
+.nes-table tbody tr.lunch-break-row td {
+    font-weight: 700;
+    color: #ffc010;
+    border-color: #ffc010;
+}
+
+/* Prize Distribution Special Styling */
+.nes-table tbody tr.prize-row {
+    background: rgba(255, 217, 102, 0.1) !important;
+}
+
+.nes-table tbody tr.prize-row td {
+    color: #ffd966;
+    font-weight: 600;
+}
+
+/* Schedule Day Title */
+.schedule-day-title {
+    color: #ffc010;
+    font-size: 24px !important;
+    margin-bottom: 25px;
+    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8);
+    padding: 16px 25px;
+    background: rgba(45, 27, 61, 0.95);
+    border: 4px solid #ffc010;
+    border-radius: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    letter-spacing: 1.5px;
+    font-family: 'Minecraft', monospace;
+    font-weight: 600;
+}
+
+/* NES Icon Sizing */
+.schedule-day-title .nes-mario,
+.schedule-day-title .nes-kirby,
+.schedule-day-title .nes-pokeball,
+.schedule-notes .nes-pokeball {
+    transform: scale(0.7);
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Schedule Notes Container */
+.schedule-notes {
+    margin-top: 40px;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    animation: glow-border 2s ease-in-out infinite alternate;
+}
+
+.schedule-notes h4 {
+    font-family: 'Minecraft', monospace !important;
+}
+
+@keyframes glow-border {
+    from {
+        box-shadow: 0 0 10px rgba(255, 192, 16, 0.3);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(255, 192, 16, 0.6);
+    }
+}
+
+.schedule-notes ul {
+    list-style-type: none;
+}
+
+.schedule-notes ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+}
+
+.schedule-notes ul li::before {
+    content: "▶";
+    position: absolute;
+    left: 0;
+    color: #ffc010;
+    font-size: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .schedule-container {
+        padding: 0 40px;
+    }
+    
+    .nes-table-responsive {
+        max-width: 90%;
+    }
+    
+    .nes-table thead th {
+        font-size: 12px;
+        padding: 12px 10px;
+    }
+    
+    .nes-table tbody td {
+        font-size: 12px;
+        padding: 10px 8px;
+    }
+    
+    .schedule-day-title {
+        font-size: 20px !important;
+        padding: 14px 20px;
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 768px) {
+    .schedule-container {
+        padding: 0 15px;
+    }
+    
+    .nes-table-responsive {
+        max-width: 100%;
+        margin: 0 0 30px 0;
+    }
+    
+    .nes-table thead th {
+        font-size: 11px;
+        padding: 12px 8px;
+        letter-spacing: 0.5px;
+    }
+    
+    .nes-table tbody td {
+        font-size: 11px;
+        padding: 10px 8px;
+    }
+    
+    .schedule-day-title {
+        font-size: 16px !important;
+        padding: 15px;
+        letter-spacing: 1px;
+    }
+    
+    .schedule-notes h4 {
+        font-size: 12px;
+    }
+    
+    .schedule-notes ul li {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 576px) {
+    .schedule-container {
+        padding: 0 10px;
+    }
+    
+    .nes-table-responsive {
+        max-width: 100%;
+        margin: 0 0 25px 0;
+    }
+    
+    .nes-table {
+        font-size: 10px;
+    }
+    
+    .nes-table thead th {
+        font-size: 9px;
+        padding: 8px 4px;
+    }
+    
+    .nes-table tbody td {
+        font-size: 9px;
+        padding: 6px 4px;
+    }
+    
+    .schedule-day-title {
+        font-size: 14px !important;
+        padding: 10px;
+        letter-spacing: 0.5px;
+        max-width: 100%;
+    }
+    
+    .schedule-day-title .nes-mario,
+    .schedule-day-title .nes-kirby,
+    .schedule-day-title .nes-pokeball {
+        transform: scale(0.5);
+        margin-right: 5px;
+    }
+    
+    .schedule-notes {
+        max-width: 100%;
+    }
+    
+    .schedule-notes h4 {
+        font-size: 14px !important;
+    }
+    
+    .schedule-notes ul li {
+        font-size: 10px;
+    }
+}
+
+/* Pixelated Border Effect */
+.nes-table.is-bordered {
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+/* Table Cell Icons */
+.nes-table tbody td:first-child {
+    font-weight: 600;
+    color: #ffd966;
+}
+
+/* Print Styles */
+@media print {
+    .nes-table {
+        border: 2px solid #000;
+    }
+    
+    .nes-table thead th,
+    .nes-table tbody td {
+        border: 1px solid #000;
+        color: #000;
+    }
+    
+    .schedule-day-title {
+        color: #000;
+        border: 2px solid #000;
+    }
+}
+
+/* Accessibility */
+.nes-table tbody tr:focus-within {
+    outline: 3px solid #ffc010;
+    outline-offset: 2px;
+}
+
+/* Smooth Scrolling for Table */
+.nes-table-responsive {
+    scrollbar-width: thin;
+    scrollbar-color: #ffc010 rgba(45, 27, 61, 0.5);
+}
+
+.nes-table-responsive::-webkit-scrollbar {
+    height: 10px;
+}
+
+.nes-table-responsive::-webkit-scrollbar-track {
+    background: rgba(45, 27, 61, 0.5);
+    border-radius: 5px;
+}
+
+.nes-table-responsive::-webkit-scrollbar-thumb {
+    background: #ffc010;
+    border-radius: 5px;
+}
+
+.nes-table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #ffd966;
+}

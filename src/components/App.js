@@ -19,6 +19,7 @@ import BlogPost from './Pages/Blog/Blog';
 import ContactUs from './Pages/ContactUs/ContactUs';
 import SinglePost from './Pages/SinglePost/SinglePost';
 import Events from './Pages/Events/Events';
+import Schedule from './Pages/Schedule/Schedule';
 
 // Import Event Detail Pages
 import CodeBeeEvent from './Pages/EventDetail/CodeBee/CodeBeeEvent';
@@ -124,6 +125,7 @@ const AppContent = () => {
         <Route exact path="/events/khet" component={KhetEvent} />
         
         <Route exact path="/gallery" component={Gallery} />
+        <Route exact path="/schedule" component={Schedule} />
         <Route exact path="/team" component={Teams} />
         <Route exact path="/faq" component={Faqs} />
         <Route exact path="/game" component={Games} />

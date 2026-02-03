@@ -1,62 +1,56 @@
 import React from 'react';
-import team1 from '../../../assets/img/team/team_img02.png';
-import team2 from '../../../assets/img/team/team_img03.png';
-import team3 from '../../../assets/img/team/team_img04.png';
-import team4 from '../../../assets/img/team/team_img05.png';
-import team5 from '../../../assets/img/team/team_img06.png';
-import team6 from '../../../assets/img/team/team_img07.png';
-import Member from "./Member";
-const teamData = [
-    {
-        id: '1',
-        avatar: team1,
-        name: 'Nashid Martines',
-        deg: 'Founder'
-    },
-    {
-        id: '2',
-        avatar: team2,
-        name: 'Konne Backfield',
-        deg: 'CEO'
-    },
-    {
-        id: '3',
-        avatar: team3,
-        name: 'Hackson Willing',
-        deg: 'Developer'
-    },
-    {
-        id: '4',
-        avatar: team4,
-        name: 'Rosalina D. William',
-        deg: 'Developer'
-    },
-    {
-        id: '5',
-        avatar: team5,
-        name: 'Bobby Ballard',
-        deg: 'Developer'
-    },
-    {
-        id: '6',
-        avatar: team6,
-        name: 'Steven Cortez',
-        deg: 'Developer'
-    },
-]
+import CoreMemberCard from './CoreMemberCard';
+import EventTeamSection from '../../Pages/Team/EventTeamSection';
+import { coreMembers, eventTeams } from '../../Pages/Team/teamData';
+import AnimateOnScroll from '../ScrollAnimation/AnimateOnScroll';
 
 const TeamTwo = () => {
-
-    return (
-        <section id="team" className="team-area2" style={{paddingTop: '10px', paddingBottom: '60px'}}>
-            <div className="container">
-                <div className="row">
-                    <Member teamData={teamData} />
-                </div>
+  return (
+    <section id="team" className="team-area2 team-page-retro" style={{ paddingTop: '10px', paddingBottom: '60px' }}>
+      <div className="container">
+        {/* Meet Our Team - Core members as circular pixel cards */}
+        <div className="row">
+          <div className="col-12">
+            <AnimateOnScroll animation="fade-scale">
+              <h2 className="team-retro-title">Meet Our Team</h2>
+              <p className="team-retro-subtitle">Organizing Committee</p>
+            </AnimateOnScroll>
+            <div className="core-members-wrap">
+              {coreMembers.map((member, index) => (
+                <AnimateOnScroll key={member.id} animation="fade-scale" delay={index * 80}>
+                  <CoreMemberCard
+                    avatar={member.avatar}
+                    name={member.name}
+                    deg={member.deg}
+                  />
+                </AnimateOnScroll>
+              ))}
             </div>
-        </section>
-    );
+          </div>
+        </div>
 
-}
+        {/* Event-wise coordinators & volunteers */}
+        <div className="row">
+          <div className="col-12">
+            <AnimateOnScroll animation="fade-scale">
+              <h2 className="team-retro-title">Event Co-ordinators &amp; Volunteers</h2>
+              <p className="team-retro-subtitle">Student Co-ordinators and Volunteers for each event</p>
+            </AnimateOnScroll>
+            <div className="event-teams-section">
+              {eventTeams.map((event) => (
+                <EventTeamSection
+                  key={event.id}
+                  eventName={event.eventName}
+                  coordinators={event.coordinators}
+                  volunteers={event.volunteers}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default TeamTwo;
