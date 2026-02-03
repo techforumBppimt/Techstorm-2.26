@@ -1,10 +1,17 @@
 /* Schedule Page Custom Styles */
 
 /* Schedule heading: same style as Gallery (pixel font + brushstroke dash) */
+.schedule-title-section {
+  padding-top: 24px;
+  padding-bottom: 0;
+}
 .schedule-title-section .container,
 .schedule-title-section .row.align-items-center.mb-30,
 .schedule-title-section .row.align-items-center.mb-30 [class*="col-"] {
   overflow: visible;
+}
+.schedule-title-section .row.align-items-center.mb-30 {
+  margin-bottom: 0 !important;
 }
 .schedule-heading-title.section-title,
 .schedule-heading-title.section-title h2 {
@@ -32,7 +39,7 @@
 .schedule-heading-title.section-title h2::after {
   content: '';
   display: block;
-  margin-top: 12px;
+  margin-top: 0;
   width: 200px;
   height: 28px;
   background: url('../../../assets/img/brushstroke-dash.png') no-repeat left center;
