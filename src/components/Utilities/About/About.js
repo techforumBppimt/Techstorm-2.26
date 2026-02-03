@@ -44,7 +44,7 @@ const About = () => {
                             }} />
                             <div className="about-image2 wow fadeInUp d-none d-md-block" data-wow-delay=".4s" style={{
                                 position: 'absolute',
-                                bottom: '-238px',
+                                bottom: '-220px',
                                 right: '-30px',
                                 zIndex: 2,
                                 width: '70%'
