@@ -1,3 +1,36 @@
+/* CTA base styles + section blending */
+
+.features-area {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Soft gradient blend between previous dark section and CTA background */
+.features-area::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -80px;           /* pull even further into the previous section */
+    height: 160px;        /* taller blend area for an even stronger effect */
+    background: linear-gradient(
+        to bottom,
+        #05030a 0%,
+        rgba(5, 3, 10, 1) 30%,
+        rgba(5, 3, 10, 0.9) 55%,
+        rgba(5, 3, 10, 0.5) 80%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure CTA content stays above the gradient overlay */
+.features-area > * {
+    position: relative;
+    z-index: 1;
+}
+
 /* CTA Mobile Responsive Styles */
 
 /* Tablet styles */

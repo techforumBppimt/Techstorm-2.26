@@ -52,7 +52,8 @@ const Carousel8bit = () => {
                 backgroundColor: '#05030a',
                 backgroundImage: `url(${highlightBg})`,
                 backgroundRepeat: 'no-repeat',
-                backgroundSize: '110% auto',
+                // Ensure the background fully covers the section
+                backgroundSize: 'cover',
                 backgroundPosition: 'center top',
             }}
         >
