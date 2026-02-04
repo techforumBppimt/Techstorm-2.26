@@ -27,7 +27,7 @@ const Footer = () => {
             <div className="footer-top pt-70" style={{ position: 'relative', zIndex: 1, paddingBottom: '40px' }}>
                 <div className="container">
                     <div className="row">
-                        <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                        <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                             <div className="footer-widget mb-30">
                                 <div className="f-widget-title mb-20">
                                     <img src={logo} alt="TechStorm Logo" style={{ maxWidth: '350px', height: 'auto' }} />
@@ -103,7 +103,7 @@ const Footer = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl-5 col-lg-5 col-md-6 col-sm-12">
+                        <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                             <div className="footer-widget mb-30 footer-links-section">
                                 <div className="f-widget-title">
                                     <h2>{'Follow Us'}</h2>

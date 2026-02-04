@@ -50,6 +50,11 @@ const AppContent = () => {
   const location = useLocation();
   const [activeSection, setActiveSection] = React.useState('');
   
+  // Scroll to top on route change
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  
   // Track scroll position and update active section
   React.useEffect(() => {
     const handleScroll = () => {
