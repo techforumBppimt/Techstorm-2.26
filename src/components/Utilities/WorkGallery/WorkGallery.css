@@ -65,6 +65,32 @@
     overflow: visible;
 }
 
+/* Background artwork responsiveness for All Events section */
+@media (max-width: 991px) {
+    #work {
+        /* Let the events background cover the viewport more naturally on tablets/phones */
+        background-size: cover !important;
+        background-position: center top !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #work {
+        /* Keep key artwork centered on smaller screens */
+        background-size: cover !important;
+        background-position: top center !important;
+    }
+}
+
+@media (max-width: 576px) {
+    #work {
+        /* Slightly loosen to avoid harsh cropping on ultra‑small screens */
+        background-position: 50% 10% !important;
+    }
+}
+
 /* Responsive styles */
 @media (max-width: 1200px) {
     .gallery-scroll-container {

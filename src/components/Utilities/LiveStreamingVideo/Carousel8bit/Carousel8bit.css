@@ -350,6 +350,34 @@
     }
 }
 
+/* Background artwork responsiveness for Prev. Year Highlights section */
+@media (max-width: 991px) {
+    .carousel-8bit-section {
+        /* Let the background artwork fill the screen height on tablets/phones */
+        background-size: cover !important;
+        background-position: center top !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important;
+        margin-top: -30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-8bit-section {
+        /* Reduce the overlap with the previous section on small screens */
+        margin-top: -10px;
+        padding-top: 50px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-8bit-section {
+        /* Keep the important part of the artwork visible on very small screens */
+        background-size: cover !important;
+        background-position: top center !important;
+    }
+}
+
 /* Add scanline effect for extra retro feel */
 .carousel-8bit-image-wrapper::after {
     content: '';
