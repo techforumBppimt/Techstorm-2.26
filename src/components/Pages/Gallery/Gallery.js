@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cloudinaryImages } from '../../../config/cloudinary';
-import heroVideo from '../../../assets/img/HERO.mp4';
+import galleryBg from '../../../assets/img/bg/new-bg.png';
 import SectionTitle from '../../Utilities/SectionTitle/SectionTitle';
 import {
   Pagination,
@@ -88,15 +88,11 @@ const Gallery = () => {
   return (
     <React.Fragment>
       <div className="gallery-hero-wrap">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
+        <div
           className="gallery-hero-video"
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+          style={{ backgroundImage: `url(${galleryBg})` }}
+          aria-hidden="true"
+        />
         <div className="gallery-hero-overlay">
           <section className="breadcrumb-area d-flex align-items-center gallery-breadcrumb">
             <div className="container">
@@ -121,7 +117,7 @@ const Gallery = () => {
               </div>
             </div>
           </section>
-          <section id="work" className="pt-40 pb-90">
+          <section id="work" className="pt-40 gallery-work-section">
             <div className="container">
               <div className="row align-items-center mb-30">
                 <div className="col-lg-12">
