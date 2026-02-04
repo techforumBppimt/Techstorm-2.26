@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { cloudinaryImages } from '../../../config/cloudinary';
-import bgImg from '../../../assets/img/bg/trendiang-bg.png';
+import bgImg from '../../../assets/img/eventbg.png';
 import './WorkGallery.css';
 
 import SectionTitle from '../SectionTitle/SectionTitle';
@@ -206,8 +206,26 @@ const WorkGallery = () => {
 
 
     return (
-        <section id="work" className="pt-120 pb-120" style={{ background: `url(${bgImg}) no-repeat` }}>
-            <div className="container-fluid gallery-container">
+        <section id="work" className="pt-120 pb-120" style={{ 
+            background: `url(${bgImg}) no-repeat`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+            position: 'relative'
+        }}>
+            {/* Gradient overlays for brightness reduction at top and bottom */}
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 20%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0.7) 100%)',
+                pointerEvents: 'none',
+                zIndex: 0
+            }}></div>
+            
+            <div className="container-fluid gallery-container" style={{ position: 'relative', zIndex: 1 }}>
                 <div className="portfolio ">
                     <div className="row align-items-center mb-30">
                         <div className="col-lg-12 d-flex justify-content-between align-items-center">
