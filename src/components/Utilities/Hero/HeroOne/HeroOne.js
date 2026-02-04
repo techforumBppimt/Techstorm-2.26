@@ -178,7 +178,7 @@ const HeroOne = () => {
                                     <AnimateOnScroll animation="hero-cta" className="d-lg-none">
                                         <div className="slider-btn btn-8bit-group" style={{
                                             display: 'flex',
-                                            gap: '20px',
+                                            gap: '30px',
                                             alignItems: 'center',
                                             justifyContent: 'center',
                                             width: '100%',
@@ -281,14 +281,14 @@ const HeroOne = () => {
                                 transform: 'translateX(-50%)',
                                 display: 'flex',
                                 flexDirection: 'row',
-                                gap: '30px',
+                                gap: '50px',
                                 alignItems: 'center',
                                 zIndex: 100
                             }}>
-                                <Button8bit to={'/contact'} variant="primary" size="large">
+                                <Button8bit to={'/contact'} variant="primary" size="large" style={{ marginRight: '12px' }}>
                                     {btnText}
                                 </Button8bit>
-                                <Button8bit to={'/about'} variant="primary" size="large">
+                                <Button8bit to={'/about'} variant="primary" size="large" style={{ marginLeft: '12px' }}>
                                     {'Explore Events'}
                                 </Button8bit>
                             </div>

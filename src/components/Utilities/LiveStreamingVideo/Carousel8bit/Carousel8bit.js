@@ -49,7 +49,7 @@ const Carousel8bit = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
-                        <SectionTitle titlefirst='Event' titleSec='Highlights' />
+                        <SectionTitle titlefirst='PREV. YEAR HIGHLIGHTS' titleSec='' />
                     </div>
                 </div>
             </div>

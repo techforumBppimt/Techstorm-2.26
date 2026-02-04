@@ -45,7 +45,7 @@ const UpComingGameTwo = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12 p-relative">
-                        <SectionTitle titlefirst='Event' titleSec='Highlights' />
+                        <SectionTitle titlefirst='PREV. YEAR HIGHLIGHTS' titleSec='' />
                     </div>
                 </div>
                 <div className="row">
