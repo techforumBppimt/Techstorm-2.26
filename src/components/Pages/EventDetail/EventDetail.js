@@ -236,7 +236,7 @@ const EventDetail = ({ eventData }) => {
                                     color: '#fffacd', 
                                     fontSize: 'clamp(12px, 2vw, 16px)',
                                     lineHeight: '1.8',
-                                    fontFamily: 'Minecraft, monospace',
+                                    fontFamily: 'Silkscreen, sans-serif',
                                     margin: 0,
                                     textAlign: 'justify',
                                     fontWeight: '400'

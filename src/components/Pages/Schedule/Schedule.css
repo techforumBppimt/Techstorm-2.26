@@ -18,7 +18,7 @@
   overflow: visible;
 }
 .schedule-heading-title.section-title h2 {
-  font-family: 'Press Start 2P', 'Minecraft', monospace, cursive;
+  font-family: 'Press Start 2P', 'Silkscreen', monospace, cursive;
   color: #fff !important;
   font-size: 1.75rem;
   line-height: 1.6;
@@ -78,7 +78,7 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    font-family: 'Minecraft', monospace;
+    font-family: 'Silkscreen', monospace;
     image-rendering: pixelated;
     background: rgba(26, 14, 34, 0.95);
 }
@@ -100,7 +100,7 @@
 
 .nes-table thead th {
     padding: 16px 14px;
-    font-family: 'Minecraft', monospace;
+    font-family: 'Silkscreen', monospace;
     font-size: 13px;
     color: #ffc010;
     text-transform: uppercase;
@@ -119,7 +119,7 @@
     font-size: 15px;
     line-height: 2;
     transition: all 0.2s ease;
-    font-family: 'Minecraft', monospace;
+    font-family: 'Silkscreen', monospace;
     letter-spacing: 0.5px;
 }
 
@@ -189,7 +189,7 @@
     margin-right: auto;
     text-align: center;
     letter-spacing: 1.5px;
-    font-family: 'Minecraft', monospace;
+    font-family: 'Silkscreen', monospace;
     font-weight: 600;
 }
 
@@ -214,7 +214,7 @@
 }
 
 .schedule-notes h4 {
-    font-family: 'Minecraft', monospace !important;
+    font-family: 'Silkscreen', monospace !important;
 }
 
 @keyframes glow-border {

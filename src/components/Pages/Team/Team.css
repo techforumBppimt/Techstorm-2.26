@@ -209,7 +209,7 @@
 }
 
 .team-events-title {
-  font-family: 'Press Start 2P', 'Minecraft', monospace;
+  font-family: 'Press Start 2P', 'Silkscreen', monospace;
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   color: #fff;
   text-transform: uppercase;
@@ -266,7 +266,7 @@
 }
 
 .team-event-card-title {
-  font-family: 'Press Start 2P', 'Minecraft', monospace;
+  font-family: 'Press Start 2P', 'Silkscreen', monospace;
   font-size: 0.7rem;
   line-height: 1.6;
   color: #ffc010;

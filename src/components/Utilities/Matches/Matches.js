@@ -197,8 +197,8 @@ const Matches = () => {
                             }}>
                                 Previous Year <span style={{ 
                                     color: '#ffd700',
-                                    fontFamily: "'Minecraft', monospace",
-                                    fontWeight: 600
+                                    fontFamily: "'Silkscreen', sans-serif",
+                                    fontWeight: 700
                                 }}>Gallery</span>
                             </h2>
                             <div style={{

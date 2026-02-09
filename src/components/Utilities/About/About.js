@@ -75,7 +75,7 @@ const About = () => {
                                     color: '#ffc010', 
                                     fontSize: '30px', 
                                     fontWeight: 'bold',
-                                    fontFamily: 'Press Start 2P, minecraft',
+                                    fontFamily: 'Press Start 2P, Silkscreen',
                                     textAlign: 'left',
                                     lineHeight: '1.5',
                                     margin: '0'
@@ -95,7 +95,7 @@ const About = () => {
                                 <p className="title about-event-title" style={{
                                     background: '#1a0e22',
                                     color: '#ffc010',
-                                    fontFamily: 'Press Start 2P, Minecraft, monospace',
+                                    fontFamily: 'Press Start 2P, Silkscreen, sans-serif',
                                     fontSize: '12px',
                                     padding: '5px 15px',
                                     position: 'relative',
@@ -116,7 +116,7 @@ const About = () => {
                                             position: 'relative'
                                         }}>
                                             <p style={{ 
-                                                fontFamily: 'Minecraft, monospace',
+                                                fontFamily: 'Silkscreen, sans-serif',
                                                 fontSize: '13px',
                                                 margin: 0
                                             }}>
@@ -134,7 +134,7 @@ const About = () => {
                                             position: 'relative'
                                         }}>
                                             <p style={{ 
-                                                fontFamily: 'Minecraft, monospace',
+                                                fontFamily: 'Silkscreen, sans-serif',
                                                 fontSize: '13px',
                                                 margin: 0
                                             }}>
@@ -160,7 +160,7 @@ const About = () => {
                                             position: 'relative'
                                         }}>
                                             <p style={{ 
-                                                fontFamily: 'Minecraft, monospace',
+                                                fontFamily: 'Silkscreen, sans-serif',
                                                 fontSize: '13px',
                                                 margin: 0
                                             }}>

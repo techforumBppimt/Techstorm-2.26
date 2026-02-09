@@ -57,14 +57,26 @@ input[type="password"], input[type="search"], textarea, select {
 	font-style: normal;
 }
 
-.font-minecraft {
-	font-family: "Minecraft", monospace;
+/* Silkscreen: Retro pixel font for body text and general use
+   Usage: .silkscreen-regular or .silkscreen-bold or .font-silkscreen
+*/
+.font-silkscreen,
+.silkscreen-regular {
+	font-family: "Silkscreen", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.silkscreen-bold {
+	font-family: "Silkscreen", sans-serif;
+	font-weight: 700;
+	font-style: normal;
 }
 
 body {
-	font-family: "Minecraft", monospace;
-	font-size  : 15px !important;
-	font-weight: 500;
+	font-family: "Silkscreen", sans-serif;
+	font-size  : 20px !important;
+	font-weight: 400;
 	color      : #ffffffc7 !important;
 	font-style : normal;
 	line-height: 26px;
@@ -725,7 +737,7 @@ label {
 	display           : inline-block;
 	font-size         : 16px;
 	font-weight       : 600;
-	font-family       : 'Minecraft', monospace;
+	font-family       : 'Silkscreen', sans-serif;
 	letter-spacing    : 0;
 	line-height       : 1;
 	margin-bottom     : 0;
@@ -1114,7 +1126,7 @@ label {
 
 .slider-price h3 {
 	color: #fff;
-	font-family: 'Minecraft', monospace;
+	font-family: 'Silkscreen', sans-serif;
 	font-weight: 600;
 }
 
@@ -1122,7 +1134,7 @@ label {
 	color         : #ffc010;
 	font-size     : 32px;
 	font-weight   : 600;
-	font-family   : 'Minecraft', monospace;
+	font-family   : 'Silkscreen', sans-serif;
 	letter-spacing: 0.5px;
 	line-height   : 1.4;
 }
@@ -1298,7 +1310,7 @@ label {
 	}
 
 	.retro-menu-title {
-		font-family: 'Press Start 2P', monospace;
+		font-family: 'Press Start 2P', sans-serif;
 		font-size: 16px;
 		color: #ffffff;
 		margin-bottom: 15px;
@@ -1311,7 +1323,7 @@ label {
 	}
 
 	.retro-menu-subtitle {
-		font-family: 'Press Start 2P', monospace;
+		font-family: 'Press Start 2P', sans-serif;
 		font-size: 10px;
 		color: #999;
 		margin: 0;
@@ -1352,7 +1364,7 @@ label {
 		            0 6px 0 #2a2a2a,
 		            0 8px 12px rgba(0, 0, 0, 0.5) !important;
 		color: #000 !important;
-		font-family: 'Press Start 2P', monospace !important;
+		font-family: 'Press Start 2P', sans-serif !important;
 		font-size: 11px !important;
 		text-align: center !important;
 		text-transform: uppercase !important;
@@ -1816,7 +1828,7 @@ label {
 	color        : #fff;
 	margin-top   : 140px;
 	position     : relative;
-	font-family  : 'Minecraft', monospace;
+	font-family  : 'Silkscreen', sans-serif;
 	font-weight  : 700;
 }
 
@@ -2533,7 +2545,7 @@ label {
 	opacity    : .05;
 	-ms-filter : "progid:DXImageTransform.Microsoft.Alpha(Opacity=5)";
 	margin     : 0;
-	font-family: 'Minecraft', monospace;
+	font-family: 'Silkscreen', sans-serif;
 	font-weight: 500;
 	font-style : italic;
 	top        : -35px;
@@ -2604,7 +2616,7 @@ label {
 .signature-text {
 	font-size  : 22px;
 	color      : #ffc010;
-	font-family: 'Minecraft', monospace;
+	font-family: 'Silkscreen', sans-serif;
 	font-weight: 600;
 }
 
@@ -2627,7 +2639,7 @@ label {
 .ab-coutner .single-counter p {
 	margin-top : 15px;
 	color      : #4f4f4f;
-	font-family: 'Minecraft', monospace;
+	font-family: 'Silkscreen', sans-serif;
 	font-size  : 20px;
 	font-weight: 600;
 }
@@ -2672,14 +2684,14 @@ label {
 
 .section-title span {
 	color: #ffc010;
-	font-family: 'Minecraft', monospace;
+	font-family: 'Silkscreen', sans-serif;
 	font-weight: 600;
 }
 
 .section-title h5 {
 	color        : #ffc010;
 	margin-bottom: 15px;
-	font-family  : 'Minecraft', monospace;
+	font-family  : 'Silkscreen', sans-serif;
 	font-weight  : 600;
 }
 
@@ -3298,7 +3310,7 @@ section:hover .section-title h2:before {
 	font-size: 16px;
 	line-height: 1.8;
 	color: #FFFFFF;
-	font-family: 'Minecraft', 'Press Start 2P', monospace;
+	font-family: 'Silkscreen', 'Press Start 2P', sans-serif;
 	font-weight: 300;
 	letter-spacing: 0.5px;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
@@ -6502,7 +6514,7 @@ section:hover .section-title h2:before {
 	font-size   : 14px;
 	color       : #fff;
 	font-weight : 500;
-	font-family : 'Minecraft', monospace;
+	font-family : 'Silkscreen', sans-serif;
 	display     : inline-block;
 	margin-right: 20px;
 }
@@ -8864,7 +8876,7 @@ img {
 	text-transform    : uppercase;
 	font-size         : 16px;
 	font-weight       : 600;
-	font-family       : "Minecraft", monospace;
+	font-family       : "Silkscreen", sans-serif;
 	-webkit-transition: .3s;
 	transition        : .3s;
 	letter-spacing    : 1px;
@@ -11514,7 +11526,7 @@ p.checkout-coupon input[type="text"] {
 
 .widget__banner-overly h3 span {
 	display    : block;
-	font-family: 'Minecraft', monospace;
+	font-family: 'Silkscreen', sans-serif;
 	font-size  : 30px;
 	font-weight: 300;
 }
