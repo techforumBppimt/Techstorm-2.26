@@ -16,10 +16,10 @@ const Member = ({ teamData }) => {
                                         <div className="brd">
                                             <img src={avatar} alt={'Avatar'} />
                                         </div>
-                                        <div className="team-info">
-                                            <h4>{name}</h4>
-                                            <span>{deg}</span>
-                                        </div>
+                                    </div>
+                                    <div className="team-info">
+                                        <h4>{name}</h4>
+                                        <span>{deg}</span>
                                     </div>
                                 </div>
                             </AnimateOnScroll>

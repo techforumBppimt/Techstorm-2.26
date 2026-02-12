@@ -13,162 +13,336 @@ import team7 from '../../../assets/img/team/team_img01.png';
 import team8 from '../../../assets/img/team/team_img08.png';
 
 export const coreMembers = [
-    { id: '1', avatar: team1, name: '[Name]', deg: 'Convenor' },
-    { id: '2', avatar: team2, name: '[Name]', deg: 'Co-Convenor' },
-    { id: '3', avatar: team3, name: '[Name]', deg: 'Technical Head' },
-    { id: '4', avatar: team4, name: '[Name]', deg: 'Creative Head' },
-    { id: '5', avatar: team5, name: '[Name]', deg: 'Sponsorship Head' },
-    { id: '6', avatar: team6, name: '[Name]', deg: 'PR Head' },
-    { id: '7', avatar: team7, name: '[Name]', deg: '[Role]' },
-    { id: '8', avatar: team8, name: '[Name]', deg: '[Role]' },
-    { id: '9', avatar: team1, name: '[Name]', deg: '[Role]' },
-    { id: '10', avatar: team2, name: '[Name]', deg: '[Role]' },
-    { id: '11', avatar: team3, name: '[Name]', deg: '[Role]' },
+    // FINANCE MANAGEMENT TEAM
+    { id: '1', avatar: team1, name: 'Aniket De', deg: 'Finance Coordinator' },
+    
+    // EVENT MANAGEMENT TEAM
+    { id: '2', avatar: team2, name: 'Protyoy Bhandary', deg: 'Event Coordinator' },
+    { id: '3', avatar: team3, name: 'Bapan Banik', deg: 'Event Joint Coordinator' },
+    { id: '4', avatar: team4, name: 'Debadrito Saha', deg: 'Event Joint Coordinator' },
+    
+    // PUBLIC RELATIONS MANAGEMENT TEAM
+    { id: '5', avatar: team5, name: 'Anik Paul', deg: 'PR Coordinator' },
+    { id: '6', avatar: team6, name: 'Pushkar Shaw', deg: 'PR Joint Coordinator' },
+    { id: '7', avatar: team7, name: 'Srijita Dutta', deg: 'PR Joint Coordinator' },
+    { id: '8', avatar: team8, name: 'Soumili Saha', deg: 'PR Team Member' },
+    { id: '9', avatar: team1, name: 'Soham Saha', deg: 'PR Team Member' },
+    { id: '10', avatar: team2, name: 'Soumadeep Layek', deg: 'PR Team Member' },
+    { id: '11', avatar: team3, name: 'Gourav Paul', deg: 'PR Team Member' },
+    
+    // SPONSORSHIP MANAGEMENT TEAM
+    { id: '12', avatar: team4, name: 'Pranay Chatterjee', deg: 'Sponsorship Coordinator' },
+    { id: '13', avatar: team5, name: 'Saptarshi Ghosh', deg: 'Sponsorship Joint Coordinator' },
+    { id: '14', avatar: team6, name: 'Harsh Singh', deg: 'Sponsorship Team Member' },
+    { id: '15', avatar: team7, name: 'Prantik Ghosh', deg: 'Sponsorship Team Member' },
+    { id: '16', avatar: team8, name: 'Krishna Kali Sarkar', deg: 'Sponsorship Team Member' },
+    { id: '17', avatar: team1, name: 'Ankita Aman', deg: 'Sponsorship Team Member' },
+    
+    // CREATIVE & SOCIAL MANAGEMENT TEAM
+    { id: '18', avatar: team2, name: 'Gaurav Chaudhary', deg: 'Social Coordinator' },
+    { id: '19', avatar: team3, name: 'Shreya Jha', deg: 'Creative Coordinator' },
+    { id: '20', avatar: team4, name: 'Sania Dhar', deg: 'Creative & Social Member' },
+    { id: '21', avatar: team5, name: 'Olivia Sikder', deg: 'Creative & Social Member' },
+    { id: '22', avatar: team6, name: 'Gourab Dey', deg: 'Creative & Social Member' },
+    
+    // DISCIPLINE & HOSPITALITY MANAGEMENT TEAM
+    { id: '23', avatar: team7, name: 'Souvik Dey', deg: 'Discipline & Hospitality Coordinator' },
+    { id: '24', avatar: team8, name: 'Shreya Saha', deg: 'Discipline & Hospitality Member' },
+    { id: '25', avatar: team1, name: 'Shivam Kumar', deg: 'Discipline & Hospitality Member' },
+    { id: '26', avatar: team2, name: 'Indrani Banik', deg: 'Discipline & Hospitality Member' },
+    { id: '27', avatar: team3, name: 'Aditya Choubey', deg: 'Discipline & Hospitality Member' },
 ];
 
 export const eventTeams = [
+    // TECHNICAL EVENTS
     {
         id: 'code-bee',
-        eventName: 'Code Bee',
+        eventName: 'Code-Bee',
+        category: 'TECHNICAL',
         coordinators: [
-            { name: 'Subrata Bhuin', dept: 'CSE', phone: '8918210742' },
-            { name: 'Shuvechha Nandi', dept: 'CSE', phone: '9477063362' },
-            { name: 'Agradip Banik', dept: 'IT', phone: '6289933166' },
+            { name: 'Saikat Mondal', dept: 'CSE3' },
+            { name: 'Adarsh Kumar', dept: 'IT3' },
+            { name: 'Medhansh Arora', dept: 'CSE3' },
         ],
-        volunteers: ['Madhu Singh (IT)', 'Satarupa Sen (IT)', 'Somshree Saha (BCA)', 'Sauvick Pramanik (MCA)'],
+        volunteers: [
+            { name: 'Sneha Patra', dept: 'CSE2' },
+            { name: 'Sagnik Maitra', dept: 'CSE2' },
+            { name: 'Ayush Misra', dept: 'IT2' },
+            { name: 'Narayan Kumar Jha', dept: 'CSE1' },
+            { name: 'Sayan Karmakar', dept: 'CSE1' },
+        ],
+        facultyCoordinators: [
+            'Mr. Sibasish Senapati',
+            'Ms. Arpita Sen',
+            'Ms. Protyasha Mukherjee',
+            'Mr. Nabin Pal',
+        ],
     },
     {
-        id: 'app-mania',
-        eventName: 'App Mania',
+        id: 'hack-storm',
+        eventName: 'Hack Storm',
+        category: 'TECHNICAL',
         coordinators: [
-            { name: 'Shreya Gupta', dept: 'IT', phone: '9123389663' },
-            { name: 'Dipnarayan Sen', dept: 'CSE', phone: '6290501035' },
+            { name: 'Ootso Dhar Chowdhury', dept: 'CSE3' },
+            { name: 'Sambit Das', dept: 'CSE3' },
+            { name: 'Priyam Kumar', dept: 'IT3' },
         ],
-        volunteers: ['Payel Pal (CSE)', 'Archak Nath (IT)'],
+        volunteers: [
+            { name: 'Pallavi Kumari', dept: 'IT3' },
+            { name: 'Shilpa Banerjee', dept: 'MCA' },
+            { name: 'Sneha Roy', dept: 'CSE2' },
+            { name: 'Dibyojyoti Biswas', dept: 'CSE1' },
+            { name: 'Shaezah Iqbal', dept: 'IT1' },
+        ],
+        facultyCoordinators: [
+            'Mr. Subhasish Mallick',
+            'Ms. Swagata (Gayen) Kundu',
+            'Md. Atif Khan',
+            'Mr. Arghadeep Chatterjee',
+        ],
     },
     {
-        id: 'omegatrix',
-        eventName: 'OMEGATRIX',
+        id: 'technomania',
+        eventName: 'TechnoMania',
+        category: 'TECHNICAL',
         coordinators: [
-            { name: 'Satakshi Guha', dept: 'ECE', phone: '9330206747' },
-            { name: 'Rahul Roy', dept: 'EE', phone: '9903436872' },
+            { name: 'Disha Saha', dept: 'ECE3' },
+            { name: 'Arpita Gupta', dept: 'ECE3' },
         ],
-        volunteers: ['Swarnendu Saha (MCA)', 'Subhrajyoti Roy (BCA)', 'Shubhradip Saha (CSE)', 'Parna Chakraborty (ECE)'],
-    },
-    {
-        id: 'passion-with-reels',
-        eventName: 'Passion With Reels',
-        coordinators: [
-            { name: 'Meghna Gupta', dept: 'CSE', phone: '9339369752' },
-            { name: 'Anupurba Bose', dept: 'IT', phone: '9038001393' },
+        volunteers: [
+            { name: 'Sagor Paul', dept: 'CSE2' },
+            { name: 'Ayush Saha', dept: 'ECE2' },
+            { name: 'Anjali Kumari Mahato', dept: 'ECE1' },
+            { name: 'Jishanuddin Mondal', dept: 'EE1' },
         ],
-        volunteers: ['Madhu Singh (IT 3)', 'Pratham Saha (ECE)'],
-    },
-    {
-        id: 'creative-canvas',
-        eventName: 'Creative Canvas',
-        coordinators: [
-            { name: 'Sheetam Coondoo', dept: 'IT', phone: '9051634001' },
-            { name: 'Ipsita Mitra', dept: 'CSE', phone: '6290410210' },
+        facultyCoordinators: [
+            'Dr. Susmita Dey',
+            'Ms. Ankita Indu',
         ],
-        volunteers: ['Sanjiv Sen (IT)', 'Rohit Kumar Mahato (ECE)'],
     },
-    {
-        id: 'technical-writing',
-        eventName: 'Technical Writing With Poster Presentation',
-        coordinators: [
-            { name: 'Purnima Naskar', dept: 'ECE', phone: '9330189899' },
-            { name: 'Ishika Rana', dept: 'IT', phone: '8017667204' },
-        ],
-        volunteers: ['Ambapali Datta (IT)', 'Sagar Priyadarshani (ECE)', 'Udita Sinha (CSE)'],
-    },
-    {
-        id: 'tech-hunt',
-        eventName: 'Tech - Hunt',
-        coordinators: [
-            { name: 'B. Yaminy', dept: 'EE', phone: '8335864670' },
-            { name: 'Meenakshi Sharma', dept: 'IT', phone: '9830858204' },
-        ],
-        volunteers: ['Tiyasa Mohanty (ECE)', 'Debangshi Biswas (EE)', 'Tamal Majumdar (IT)', 'Rani Singh (CSE)', 'Suryanshu Paul (CSE)'],
-    },
-    {
-        id: 'fifa-console',
-        eventName: 'FIFA (Console)',
-        coordinators: [
-            { name: 'Rwiddhi Bagchi', dept: 'CSE', phone: '9733001475' },
-            { name: 'Arnesh Sen', dept: 'ECE', phone: '6295528792' },
-        ],
-        volunteers: ['Satadru Jana (EE)', 'Samyak Sen (CSE 3)'],
-    },
-    {
-        id: 'pes-mobile',
-        eventName: 'PES (Mobile)',
-        coordinators: [
-            { name: 'Debjit Paul', dept: 'CSE', phone: '9830448850' },
-            { name: 'Hrishikesh Kumar Chaudhary', dept: 'IT', phone: '8100448947' },
-        ],
-        volunteers: ['Krantish Sasmal (ECE 3)', 'Srutikana Das (CSE)'],
-    },
+
+    // ROVER EVENTS
     {
         id: 'ro-navigator',
-        eventName: 'RO - Navigator',
+        eventName: 'Ro-Navigator',
+        category: 'ROVER',
         coordinators: [
-            { name: 'Shivam Kumar Biswas', dept: 'ECE', phone: '7044947825' },
-            { name: 'Rachit Jaiswal', dept: 'CSE', phone: '7278069372' },
+            { name: 'Arushmita Sikder', dept: 'CSE3' },
+            { name: 'Amrita Ghosh', dept: 'CSE3' },
         ],
-        volunteers: ['Sougata Roy Chowdhury (EE)', 'Debparna Ghatak (ECE 3)'],
-    },
-    {
-        id: 'ro-soccer',
-        eventName: 'RO - Soccer',
-        coordinators: [
-            { name: 'Aditya Prasad', dept: 'CSE', phone: '9123373980' },
-            { name: 'Suroj Mete', dept: 'ECE', phone: '9547824460' },
+        volunteers: [
+            { name: 'Archita Hazra', dept: 'ECE2' },
+            { name: 'Rankan Das', dept: 'EE2' },
+            { name: 'Debjit Dhar', dept: 'ECE1' },
         ],
-        volunteers: ['Tanushka Joshi (EE)', 'Rohit Yadav (EE)'],
-    },
-    {
-        id: 'ro-terrance',
-        eventName: 'RO - Terrance',
-        coordinators: [
-            { name: 'Aditya Raj', dept: 'CSE', phone: '9334015381' },
-            { name: 'Amit Das', dept: 'ECE', phone: '8240321349' },
+        facultyCoordinators: [
+            'Mr. Ramesh Kumar',
+            'Mr. Debasis Sharma',
         ],
-        volunteers: ['Arindam Paul (EE 3)', 'Safalya Pan (ECE 3)'],
     },
     {
         id: 'ro-combat',
-        eventName: 'RO - Combat',
+        eventName: 'Ro-Combat (Light)',
+        category: 'ROVER',
         coordinators: [
-            { name: 'Priyanshu Mandal', dept: 'ECE', phone: '9330682757' },
+            { name: 'Soumyadeep Ghosh', dept: 'ECE3' },
+            { name: 'Sumit Ghosh', dept: 'ECE3' },
         ],
-        volunteers: ['Ayush Singh (ECE 2)', 'Subhajit Sarkar (EE 3)', 'Bappa Patra (EE 3)'],
+        volunteers: [
+            { name: 'Urba Das', dept: 'ECE2' },
+            { name: 'Sampurna Biswas', dept: 'CSE3' },
+        ],
+        facultyCoordinators: [
+            'Mr. Subhasish Das',
+            'Mr. Ranjit Kr. Pal',
+        ],
     },
     {
-        id: 'aqua-race',
-        eventName: 'Aqua Race',
+        id: 'ro-soccer',
+        eventName: 'Ro-Soccer',
+        category: 'ROVER',
         coordinators: [
-            { name: 'Sayan Patra', dept: 'EE', phone: '7439316236' },
-            { name: 'Mouboni Mukherjee', dept: 'ECE', phone: '8697789509' },
+            { name: 'Soumadeep Layek', dept: 'Core' },
+            { name: 'Samima Nasrin', dept: 'CSE3' },
         ],
-        volunteers: ['Koushambha Das (IT)', 'Ankit Narayan Prasad (CSE 3)'],
+        volunteers: [
+            { name: 'Sakchham Kapoor', dept: 'ECE2' },
+            { name: 'Aadipto Ghosh', dept: 'ECE2' },
+            { name: 'Yash Ghosh', dept: 'EE1' },
+        ],
+        facultyCoordinators: [
+            'Dr. Arghya Kamal Pal',
+            'Mr. Ranjit Kr. Pal',
+        ],
     },
+    {
+        id: 'ro-terrance',
+        eventName: 'Ro-Terrance',
+        category: 'ROVER',
+        coordinators: [
+            { name: 'Abhijit Mahato', dept: 'ECE3' },
+            { name: 'Aditya Saha', dept: 'ECE3' },
+        ],
+        volunteers: [
+            { name: 'Insha Hossain', dept: 'ECE2' },
+            { name: 'Indranil Maji', dept: 'EE2' },
+        ],
+        facultyCoordinators: [
+            'Mr. Arindrajit Chaudhury',
+            'Mr. Aritra Ghosh',
+        ],
+    },
+    {
+        id: 'ro-sumo',
+        eventName: 'Ro-Sumo',
+        category: 'ROVER',
+        coordinators: [
+            { name: 'D Samir Dora', dept: 'ECE3' },
+            { name: 'Sagnek Chowdhury', dept: 'ECE3' },
+        ],
+        volunteers: [
+            { name: 'Abdul Razzak', dept: 'ECE2' },
+            { name: 'Sumit Ghara', dept: 'EE2' },
+        ],
+        facultyCoordinators: [
+            'Dr. Binoy Krishna Biswas',
+            'Mr. Subhasish Das',
+        ],
+    },
+
+    // BRAIN TEASER EVENTS
+    {
+        id: 'tech-hunt',
+        eventName: 'Tech Hunt',
+        category: 'BRAIN TEASER',
+        coordinators: [
+            { name: 'Soumi Maji', dept: 'CSE3' },
+            { name: 'Chitradeep Das', dept: 'MCA' },
+            { name: 'Prerit Mishra', dept: 'IT3' },
+        ],
+        volunteers: [
+            { name: 'Satarupa Sarkar', dept: 'CSE2' },
+            { name: 'Anuradha Kumari', dept: 'IT3' },
+            { name: 'Soudeep Shaw', dept: 'BBA2' },
+            { name: 'Shrishti Banerjee', dept: 'IT1' },
+        ],
+        facultyCoordinators: [
+            'Ms. Sudipta Roy',
+            'Ms. Piu Upadhyay',
+        ],
+    },
+    {
+        id: 'omegatrix',
+        eventName: 'Omegatrix',
+        category: 'BRAIN TEASER',
+        coordinators: [
+            { name: 'Nandini Saboo', dept: 'CSE3' },
+            { name: 'Aditya Jaiswal', dept: 'ECE3' },
+            { name: 'Ayushi', dept: 'IT3' },
+        ],
+        volunteers: [
+            { name: 'Saikat Maity', dept: 'BBA3' },
+            { name: 'Biswajit Biswas', dept: 'IT2' },
+            { name: 'Kingshuk Adhikari', dept: 'CSE2' },
+            { name: 'Shreyan Dutta', dept: 'IT1' },
+            { name: 'Sania Parvin', dept: 'CSE1' },
+        ],
+        facultyCoordinators: [
+            'Dr. Kakali Karmakar Sur',
+            'Ms. Anushree Dutta',
+            'Ms. Pampa Ghosh (Saha)',
+            'Mr. Arup Ratan Bera',
+        ],
+    },
+
+    // CREATIVITY EVENTS
+    {
+        id: 'creative-canvas',
+        eventName: 'Creative Canvas',
+        category: 'CREATIVITY',
+        coordinators: [
+            { name: 'Rashmi Kumari', dept: 'IT3' },
+            { name: 'Madhurima Roy', dept: 'BCA3' },
+        ],
+        volunteers: [
+            { name: 'Riya Pathak', dept: 'CSE2' },
+            { name: 'Sucheta Maity', dept: 'IT2' },
+            { name: 'Larenza Roy', dept: 'CSE1' },
+        ],
+        facultyCoordinators: [
+            'Mr. Suvadeep Bhattacharjee',
+            'Ms. Debasmita Sengupta',
+        ],
+    },
+    {
+        id: 'passion-with-reels',
+        eventName: 'Passion with Reels',
+        category: 'CREATIVITY',
+        coordinators: [
+            { name: 'Soumili Mahindar', dept: 'CSE3' },
+            { name: 'Rishav Kumar', dept: 'IT3' },
+        ],
+        volunteers: [
+            { name: 'Shreyanka Satpathy', dept: 'CSE2' },
+            { name: 'Srijita Roy', dept: 'MCA' },
+            { name: 'Sristi Bandyopadhyay', dept: 'CSE1' },
+            { name: 'Parna Majhi', dept: 'IT1' },
+        ],
+        facultyCoordinators: [
+            'Dr. Susmita Biswas',
+            'Dr. Rikhiya Dhar',
+        ],
+    },
+
+    // GAMES EVENTS
     {
         id: 'khet',
-        eventName: 'Khet',
+        eventName: 'KHET',
+        category: 'GAMES',
         coordinators: [
-            { name: 'Susmita Das', dept: 'ECE', phone: '8584093033' },
-            { name: 'Tiasa Bhaumik', dept: 'ECE', phone: '8910900719' },
+            { name: 'Himobanta Dutta', dept: '' },
         ],
-        volunteers: ['Dibendu Paul (ECE)', 'Anushka Mukherjee (ECE 3)'],
+        volunteers: [
+            { name: 'Susnata Sarkar', dept: 'ECE2' },
+            { name: 'Prantik Ghosh', dept: 'Core' },
+        ],
+        facultyCoordinators: [
+            'Dr. Debarati Dey (Roy)',
+        ],
     },
     {
-        id: 'technomania-junior',
-        eventName: 'Technomania Junior',
+        id: 'forza-horizon',
+        eventName: 'Forza Horizon',
+        category: 'GAMES',
         coordinators: [
-            { name: 'Safalya Pan', dept: 'ECE', phone: '9051347625' },
-            { name: 'Apu Baidya', dept: 'IT', phone: '9051397106' },
+            { name: 'Snehasish Banerjee', dept: 'CSE3' },
+            { name: 'Sayan Das', dept: 'IT3' },
         ],
-        volunteers: ['Ankit Narayan Prasad (CSE 3)', 'Madhu Singh (IT 3)', 'Susmita Das (ECE 3)', 'Krantish Sasmal (ECE 3)', 'Samyak Sen (CSE 3)', 'Sayan Patra (EE 3)'],
+        volunteers: [
+            { name: 'Krittish Barman', dept: 'MCA' },
+            { name: 'Krish Agarwalla', dept: 'BCA2' },
+            { name: 'Banibrata Das', dept: 'CSE1' },
+        ],
+        facultyCoordinators: [
+            'Mr. Amartya Dutta',
+            'Mr. Joy Roy',
+        ],
+    },
+    {
+        id: 'fifa-mobile',
+        eventName: 'FIFA Mobile',
+        category: 'GAMES',
+        coordinators: [
+            { name: 'Adrish Basak', dept: 'CSE3' },
+            { name: 'Shubham Mallik', dept: 'CSE3' },
+        ],
+        volunteers: [
+            { name: 'Upashak Ghosal', dept: 'CSE3' },
+            { name: 'Souvik Kumar Mallik', dept: 'CSE1' },
+        ],
+        facultyCoordinators: [
+            'Mr. Proshanta Sarkar',
+            'Mr. Udayan Mishra',
+        ],
     },
 ];

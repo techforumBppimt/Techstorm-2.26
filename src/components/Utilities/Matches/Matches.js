@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { cloudinaryImages } from '../../../config/cloudinary';
 
 // Import pixelated event mascots
 import codeBee from '../../../assets/img/PIXELATED EVENT MASCOTS/CODE BEE.png';
@@ -99,23 +100,22 @@ const Matches = () => {
         }
     };
 
-    // Sample gallery images - you can replace these with actual event photos
+    // Use the same Cloudinary gallery images as the Gallery page
     const galleryImages = [
-        codeBee,
-        hackStorm,
-        technomania,
-        omegatrix,
-        techHunt,
-        roNavigator,
-        roCombat,
-        roSoccer,
-        roTerrance,
-        creativeCanvas,
-        passionWithReels,
-        forzaHorizon,
-        fifaMobile,
-        khet,
-        rosumo,
+        cloudinaryImages.gallery.c1,
+        cloudinaryImages.gallery.c2,
+        cloudinaryImages.gallery.c3,
+        cloudinaryImages.gallery.c4,
+        cloudinaryImages.gallery.c5,
+        cloudinaryImages.gallery.c6,
+        cloudinaryImages.gallery.c7,
+        cloudinaryImages.gallery.c8,
+        cloudinaryImages.gallery.c9,
+        cloudinaryImages.gallery.c10,
+        cloudinaryImages.gallery.c11,
+        cloudinaryImages.gallery.c12,
+        cloudinaryImages.gallery.c13,
+        cloudinaryImages.gallery.c14,
     ];
     
     const allEvents = [
@@ -311,17 +311,16 @@ const Matches = () => {
                                         background: '#1a0e22',
                                         display: 'flex',
                                         alignItems: 'center',
-                                        justifyContent: 'center',
-                                        padding: '20px'
+                                        justifyContent: 'center'
                                     }}
                                 >
                                     <img 
                                         src={image} 
                                         alt={`Gallery ${index + 1}`}
                                         style={{
-                                            maxWidth: '100%',
-                                            maxHeight: '100%',
-                                            objectFit: 'contain',
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover',
                                             imageRendering: 'pixelated',
                                             filter: 'drop-shadow(0 0 10px rgba(0, 255, 234, 0.5))'
                                         }}
