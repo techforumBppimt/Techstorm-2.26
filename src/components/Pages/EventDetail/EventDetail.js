@@ -382,7 +382,7 @@ const EventDetail = ({ eventData }) => {
                                                         return (
                                                             <h3 key={index} style={{
                                                                 color: '#ff2d2d',
-                                                                fontSize: 'clamp(14px, 4vw, 20px)',
+                                                                fontSize: 'clamp(14px, 3vw, 18px)',
                                                                 fontFamily: 'Press Start 2P',
                                                                 marginTop: '35px',
                                                                 marginBottom: '20px',
@@ -427,15 +427,34 @@ const EventDetail = ({ eventData }) => {
                                                         );
                                                     }
                                                     if (isHeader) {
+                                                        // Reduce space below Forza Horizon gold header
+                                                        const isForzaHorizonHeader = name === 'Forza Horizon' && rule.trim().toUpperCase().includes('FORZA HORIZON GAME RULES');
                                                         return (
                                                             <h3 key={index} style={{
                                                                 color: '#ffc010',
                                                                 fontSize: 'clamp(12px, 3vw, 16px)',
                                                                 fontFamily: 'Press Start 2P',
                                                                 marginTop: index === 0 ? '0' : '25px',
-                                                                marginBottom: '15px',
+                                                                marginBottom: isForzaHorizonHeader ? '2px' : '15px',
                                                                 lineHeight: '1.5',
                                                                 textTransform: 'uppercase'
+                                                            }}>
+                                                                {rule}
+                                                            </h3>
+                                                        );
+                                                    }
+                                                    // Highlight 'BASIC PARTICIPATION RULES:' and '⏱ RACE FORMAT RULES' for Forza Horizon in the same style as 'CAR & RACE RULES'
+                                                    if (name === 'Forza Horizon' && (rule.trim().toUpperCase() === 'BASIC PARTICIPATION RULES:' || rule.trim().toUpperCase() === '⏱ RACE FORMAT RULES')) {
+                                                        return (
+                                                            <h3 key={index} style={{
+                                                                color: '#ffc010',
+                                                                fontSize: 'clamp(14px, 4vw, 20px)',
+                                                                fontFamily: 'Press Start 2P',
+                                                                marginTop: '25px',
+                                                                marginBottom: '10px',
+                                                                lineHeight: '1.5',
+                                                                textTransform: 'uppercase',
+                                                                letterSpacing: '2px',
                                                             }}>
                                                                 {rule}
                                                             </h3>
@@ -462,23 +481,25 @@ const EventDetail = ({ eventData }) => {
                                                             </div>
                                                         );
                                                     }
-                                                    // Registration fee line: no bullet, subtle gold highlight
-                                                    if (isRegistrationFee) {
-                                                        return (
-                                                            <div key={index} style={{
-                                                                background: 'rgba(255, 192, 16, 0.07)',
-                                                                color: '#e6b800',
-                                                                fontWeight: 500,
-                                                                fontFamily: 'Silkscreen, sans-serif',
-                                                                fontSize: 'clamp(12px, 2.5vw, 15px)',
-                                                                padding: '3px 10px',
-                                                                borderRadius: '4px',
-                                                                margin: '6px 0',
-                                                                boxShadow: 'none'
-                                                            }}>
-                                                                {rule}
-                                                            </div>
-                                                        );
+                                                    // Render cyan bullet for specific lines, but remove for A/B/C points
+                                                    if (name === 'Forza Horizon') {
+                                                        const ruleText = rule.trim().toUpperCase();
+                                                        if (ruleText === 'DECIDE RACE TYPE BEFOREHAND:' || ruleText === 'FIXED NUMBER OF LAPS/TRACKS FOR EVERYONE.') {
+                                                            return (
+                                                                <div key={index} style={{ display: 'flex', alignItems: 'center', margin: '6px 0' }}>
+                                                                    <span style={{ color: '#00ffea', fontSize: '15px', marginRight: '8px', fontFamily: 'monospace' }}>▸</span>
+                                                                    <span style={{ color: '#00ffea', fontFamily: 'Silkscreen, sans-serif', fontSize: 'clamp(12px, 2.5vw, 15px)', textTransform: 'uppercase', letterSpacing: '1px' }}>{rule}</span>
+                                                                </div>
+                                                            );
+                                                        }
+                                                        // Remove cyan bullet for A/B/C points
+                                                        if (/^[A-C]\./.test(ruleText)) {
+                                                            return (
+                                                                <div key={index} style={{ marginBottom: '12px', gap: '12px' }}>
+                                                                    <span style={{ color: '#e0e0e0', fontSize: '13px', lineHeight: '1.6', fontFamily: 'Silkscreen, sans-serif' }}>{rule}</span>
+                                                                </div>
+                                                            );
+                                                        }
                                                     }
                                                     // FAQ question: bullet
                                                     if (isFaqQuestion) {
@@ -563,6 +584,7 @@ const EventDetail = ({ eventData }) => {
                                                         }
                                                         // For other lines, render as usual (section headers, registration, etc.)
                                                     }
+                                                    // Regular rule with bullet for other events (including Forza Horizon)
                                                     // Regular rule with bullet for other events
                                                     return (
                                                         <div key={index} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '12px', gap: '12px' }}>
