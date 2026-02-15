@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import './EventDetail.css';
 import { Button } from '../../ui/8bit/button';
-import { Dialog, DialogTrigger, DialogContent } from '../../ui/8bit/dialog';
+import { Dialog, DialogContent } from '../../ui/8bit/dialog';
 
 const EventDetail = ({ eventData }) => {
     const { 
