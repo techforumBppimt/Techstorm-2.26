@@ -366,6 +366,8 @@ const EventDetail = ({ eventData }) => {
                                                     const isRound2 = rule.trim().toLowerCase().startsWith('🎯 round 2:');
                                                     // FAQ question detection
                                                     const isFaqQuestion = /\?$/.test(rule.trim()) && rule.trim().length < 60;
+                                                    // Registration fee line detection (case-insensitive, contains 'registration fee' or starts with '₹')
+                                                    const isRegistrationFee = /registration fee|registration fees|^₹/i.test(rule.trim());
 
                                                     if (isEmpty) {
                                                         return <div key={index} style={{ height: '15px' }}></div>;
@@ -433,6 +435,24 @@ const EventDetail = ({ eventData }) => {
                                                             </h3>
                                                         );
                                                     }
+                                                    // Registration fee line: no bullet, subtle gold highlight
+                                                    if (isRegistrationFee) {
+                                                        return (
+                                                            <div key={index} style={{
+                                                                background: 'rgba(255, 192, 16, 0.07)',
+                                                                color: '#e6b800',
+                                                                fontWeight: 500,
+                                                                fontFamily: 'Silkscreen, sans-serif',
+                                                                fontSize: 'clamp(12px, 2.5vw, 15px)',
+                                                                padding: '3px 10px',
+                                                                borderRadius: '4px',
+                                                                margin: '6px 0',
+                                                                boxShadow: 'none'
+                                                            }}>
+                                                                {rule}
+                                                            </div>
+                                                        );
+                                                    }
                                                     // FAQ question: bullet
                                                     if (isFaqQuestion) {
                                                         return (
@@ -447,6 +467,22 @@ const EventDetail = ({ eventData }) => {
                                                         return (
                                                             <div key={index} style={{ marginLeft: '32px', marginBottom: '12px' }}>
                                                                 <span style={{ color: '#e0e0e0', fontSize: '13px', lineHeight: '1.6', fontFamily: 'Silkscreen, sans-serif', fontWeight: 'normal' }}>{rule}</span>
+                                                            </div>
+                                                        );
+                                                    }
+                                                    // Regular rule with bullet, with semi-bold and gold color for judging criteria line
+                                                    const judgingCriteriaText = 'PROJECTS WILL BE JUDGED BASED ON INNOVATION & CREATIVITY, TECHNICAL IMPLEMENTATION & FUNCTIONALITY, SUSTAINABILITY IMPACT, PRACTICAL FEASIBILITY, AND PRESENTATION & COMMUNICATION SKILLS.';
+                                                    if (rule.trim().toUpperCase() === judgingCriteriaText) {
+                                                        return (
+                                                            <div key={index} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '12px', gap: '12px' }}>
+                                                                <span style={{ color: '#00ffea', fontSize: '14px', flexShrink: 0, marginTop: '2px' }}>▸</span>
+                                                                <span style={{
+                                                                    color: '#fffacd',
+                                                                    fontSize: '13px',
+                                                                    lineHeight: '1.6',
+                                                                    fontFamily: 'Silkscreen, sans-serif',
+                                                                    fontWeight: 600
+                                                                }}>{rule}</span>
                                                             </div>
                                                         );
                                                     }
