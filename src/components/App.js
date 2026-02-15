@@ -37,6 +37,22 @@ import ForzaHorizonEvent from './Pages/EventDetail/ForzaHorizon/ForzaHorizonEven
 import FifaMobileEvent from './Pages/EventDetail/FifaMobile/FifaMobileEvent';
 import KhetEvent from './Pages/EventDetail/Khet/KhetEvent';
 
+// Import Registration Pages
+import CodeBeeRegistration from './Pages/Registration/CodeBeeRegistration';
+import HackStormRegistration from './Pages/Registration/HackStormRegistration';
+import TechnomaniaRegistration from './Pages/Registration/TechnomaniaRegistration';
+import OmegatrixRegistration from './Pages/Registration/OmegatrixRegistration';
+import TechHuntRegistration from './Pages/Registration/TechHuntRegistration';
+import RoNavigatorRegistration from './Pages/Registration/RoNavigatorRegistration';
+import RoCombatRegistration from './Pages/Registration/RoCombatRegistration';
+import RoSoccerRegistration from './Pages/Registration/RoSoccerRegistration';
+import RoTerranceRegistration from './Pages/Registration/RoTerranceRegistration';
+import CreativeCanvasRegistration from './Pages/Registration/CreativeCanvasRegistration';
+import PassionWithReelsRegistration from './Pages/Registration/PassionWithReelsRegistration';
+import ForzaHorizonRegistration from './Pages/Registration/ForzaHorizonRegistration';
+import FifaMobileRegistration from './Pages/Registration/FifaMobileRegistration';
+import KhetRegistration from './Pages/Registration/KhetRegistration';
+
 const navItems = [
     { label: 'Home', href: '/#home' },
     { label: 'About', href: '/#about' },
@@ -128,6 +144,22 @@ const AppContent = () => {
         <Route exact path="/events/forza-horizon" component={ForzaHorizonEvent} />
         <Route exact path="/events/fifa-mobile" component={FifaMobileEvent} />
         <Route exact path="/events/khet" component={KhetEvent} />
+        
+        {/* Registration Routes */}
+        <Route exact path="/register/code-bee" component={CodeBeeRegistration} />
+        <Route exact path="/register/hack-storm" component={HackStormRegistration} />
+        <Route exact path="/register/technomania" component={TechnomaniaRegistration} />
+        <Route exact path="/register/omegatrix" component={OmegatrixRegistration} />
+        <Route exact path="/register/tech-hunt" component={TechHuntRegistration} />
+        <Route exact path="/register/ro-navigator" component={RoNavigatorRegistration} />
+        <Route exact path="/register/ro-combat" component={RoCombatRegistration} />
+        <Route exact path="/register/ro-soccer" component={RoSoccerRegistration} />
+        <Route exact path="/register/ro-terrance" component={RoTerranceRegistration} />
+        <Route exact path="/register/creative-canvas" component={CreativeCanvasRegistration} />
+        <Route exact path="/register/passion-with-reels" component={PassionWithReelsRegistration} />
+        <Route exact path="/register/forza-horizon" component={ForzaHorizonRegistration} />
+        <Route exact path="/register/fifa-mobile" component={FifaMobileRegistration} />
+        <Route exact path="/register/khet" component={KhetRegistration} />
         
         <Route exact path="/gallery" component={Gallery} />
         <Route exact path="/schedule" component={Schedule} />

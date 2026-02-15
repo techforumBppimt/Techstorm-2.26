@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "TechStorm-2.26-Website Docs": {
+      "type": "sse",
+      "url": "https://gitmcp.io/aniket123de/TechStorm-2.26-Website"
+    }
+  }
+}

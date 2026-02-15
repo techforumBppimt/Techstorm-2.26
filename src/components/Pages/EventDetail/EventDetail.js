@@ -1,9 +1,11 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './EventDetail.css';
 import { Button } from '../../ui/8bit/button';
 import { Dialog, DialogContent } from '../../ui/8bit/dialog';
 
 const EventDetail = ({ eventData }) => {
+    const history = useHistory();
     const { 
         name, 
         description, 
@@ -21,6 +23,27 @@ const EventDetail = ({ eventData }) => {
     const autoScrollInterval = useRef(null);
     const pauseTimeout = useRef(null);
     const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
+
+    // Map event names to registration routes
+    const getRegistrationRoute = (eventName) => {
+        const routeMap = {
+            'Code-Bee': '/register/code-bee',
+            'Hack Storm': '/register/hack-storm',
+            'TechnoMania': '/register/technomania',
+            'Omegatrix': '/register/omegatrix',
+            'Tech Hunt': '/register/tech-hunt',
+            'Ro-Navigator': '/register/ro-navigator',
+            'Ro-Combat': '/register/ro-combat',
+            'Ro-Soccer': '/register/ro-soccer',
+            'Ro-Terrance': '/register/ro-terrance',
+            'Creative Canvas': '/register/creative-canvas',
+            'Passion with Reels': '/register/passion-with-reels',
+            'Forza Horizon': '/register/forza-horizon',
+            'FIFA Mobile': '/register/fifa-mobile',
+            'KHET': '/register/khet'
+        };
+        return routeMap[eventName] || '/events';
+    };
 
     // Dummy placeholder images - replace with actual event photos later
     const dummyImages = [
@@ -260,9 +283,8 @@ const EventDetail = ({ eventData }) => {
                                         <Button 
                                             variant="default"
                                             onClick={registerButton.onClick || (() => {
-                                                if (registerButton.link) {
-                                                    window.open(registerButton.link, '_blank');
-                                                }
+                                                // Navigate to specific event registration page
+                                                history.push(getRegistrationRoute(name));
                                             })}
                                             style={{ 
                                                 fontSize: '12px',

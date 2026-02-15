@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { cloudinaryImages } from '../../../config/cloudinary';
 import bgImg from '../../../assets/img/eventbg.png';
-import rosumoImg from '../../../assets/img/events/rosumo.png';
 import './WorkGallery.css';
 
 import SectionTitle from '../SectionTitle/SectionTitle';
@@ -33,6 +32,7 @@ const galleryItems = [
         label: 'Code-Bee',
         description: 'Speed coding competition',
         cat: 'Coding',
+        route: '/events/code-bee',
     },
     {
         id: '2',
@@ -41,6 +41,7 @@ const galleryItems = [
         label: 'Hack Storm',
         description: '24-hour innovation sprint',
         cat: 'Coding',
+        route: '/events/hack-storm',
     },
     {
         id: '3',
@@ -49,6 +50,7 @@ const galleryItems = [
         label: 'TechnoMania',
         description: 'Technical showcase event',
         cat: 'Coding',
+        route: '/events/technomania',
     },
     {
         id: '4',
@@ -57,6 +59,7 @@ const galleryItems = [
         label: 'Omegatrix',
         description: 'Mind-bending puzzles',
         cat: 'Brain',
+        route: '/events/omegatrix',
     },
     {
         id: '5',
@@ -65,6 +68,7 @@ const galleryItems = [
         label: 'Tech Hunt',
         description: 'Technical treasure hunt',
         cat: 'Brain',
+        route: '/events/tech-hunt',
     },
     {
         id: '6',
@@ -73,6 +77,7 @@ const galleryItems = [
         label: 'Ro-Navigator',
         description: 'Autonomous navigation challenge',
         cat: 'Robotics',
+        route: '/events/ro-navigator',
     },
     {
         id: '7',
@@ -81,6 +86,7 @@ const galleryItems = [
         label: 'Ro-Combat',
         description: 'Robot battle arena',
         cat: 'Robotics',
+        route: '/events/ro-combat',
     },
     {
         id: '8',
@@ -89,6 +95,7 @@ const galleryItems = [
         label: 'Ro-Soccer',
         description: 'Robotic football match',
         cat: 'Robotics',
+        route: '/events/ro-soccer',
     },
     {
         id: '9',
@@ -97,6 +104,7 @@ const galleryItems = [
         label: 'Ro-Terrance',
         description: 'All-terrain rover race',
         cat: 'Robotics',
+        route: '/events/ro-terrance',
     },
     {
         id: '10',
@@ -105,6 +113,7 @@ const galleryItems = [
         label: 'Creative Canvas',
         description: 'Digital art competition',
         cat: 'Creative',
+        route: '/events/creative-canvas',
     },
     {
         id: '11',
@@ -113,6 +122,7 @@ const galleryItems = [
         label: 'Passion with Reels',
         description: 'Short film showcase',
         cat: 'Creative',
+        route: '/events/passion-with-reels',
     },
     {
         id: '12',
@@ -121,6 +131,7 @@ const galleryItems = [
         label: 'Forza Horizon',
         description: 'Racing wheel setup',
         cat: 'Gaming',
+        route: '/events/forza-horizon',
     },
     {
         id: '13',
@@ -129,6 +140,7 @@ const galleryItems = [
         label: 'FIFA Mobile',
         description: 'Football tournament',
         cat: 'Gaming',
+        route: '/events/fifa-mobile',
     },
     {
         id: '14',
@@ -137,14 +149,7 @@ const galleryItems = [
         label: 'KHET',
         description: 'Laser chess competition',
         cat: 'Gaming',
-    },
-    {
-        id: '15',
-        img: rosumoImg,
-        tag: 'Robotics',
-        label: 'Rosumo',
-        description: 'Robot sumo wrestling',
-        cat: 'Robotics',
+        route: '/events/khet',
     },
 ]
 
@@ -347,7 +352,7 @@ const WorkGallery = () => {
                     >
                         {
                             items.map((item, index) => {
-                                const { id, img, tag, label, description } = item
+                                const { id, img, tag, label, description, route } = item
                                 const delay = (index % 6) * 100;
                                 return (
                                     <AnimateOnScroll 
@@ -378,7 +383,7 @@ const WorkGallery = () => {
                                             onMouseEnter={() => setHoveredIndex(index)}
                                             onMouseLeave={() => setHoveredIndex(null)}
                                         >
-                                            <Link to={img} className="popup-image" style={{ textDecoration: 'none', color: 'inherit', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                                            <Link to={route} className="popup-image" style={{ textDecoration: 'none', color: 'inherit', height: '100%', display: 'flex', flexDirection: 'column' }}>
                                                 <div className="gallery-image-container" style={{ 
                                                     width: '100%',
                                                     paddingBottom: '80%', 
