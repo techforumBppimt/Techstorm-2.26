@@ -443,8 +443,28 @@ const EventDetail = ({ eventData }) => {
                                                             </h3>
                                                         );
                                                     }
-                                                    // Highlight 'BASIC PARTICIPATION RULES:' and '⏱ RACE FORMAT RULES' for Forza Horizon in the same style as 'CAR & RACE RULES'
-                                                    if (name === 'Forza Horizon' && (rule.trim().toUpperCase() === 'BASIC PARTICIPATION RULES:' || rule.trim().toUpperCase() === '⏱ RACE FORMAT RULES')) {
+                                                    // Restore yellow background shade for 'BASIC PARTICIPATION RULES:'
+                                                    if (name === 'Forza Horizon' && rule.trim().toUpperCase() === 'BASIC PARTICIPATION RULES:') {
+                                                        return (
+                                                            <div key={index} style={{
+                                                                background: 'rgba(255, 192, 16, 0.07)',
+                                                                color: '#ffc010',
+                                                                fontWeight: 400,
+                                                                fontFamily: 'Press Start 2P',
+                                                                fontSize: 'clamp(14px, 4vw, 20px)',
+                                                                padding: '6px 12px',
+                                                                borderRadius: '4px',
+                                                                margin: '10px 0',
+                                                                letterSpacing: '2px',
+                                                                textTransform: 'uppercase',
+                                                                boxShadow: 'none'
+                                                            }}>
+                                                                {rule}
+                                                            </div>
+                                                        );
+                                                    }
+                                                    // Keep '⏱ RACE FORMAT RULES' as gold heading
+                                                    if (name === 'Forza Horizon' && rule.trim().toUpperCase() === '⏱ RACE FORMAT RULES') {
                                                         return (
                                                             <h3 key={index} style={{
                                                                 color: '#ffc010',
