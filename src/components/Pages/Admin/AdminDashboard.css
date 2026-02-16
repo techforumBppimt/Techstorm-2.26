@@ -1,0 +1,321 @@
+.admin-dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  padding: 40px 20px;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+}
+
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 25px 30px;
+  background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+  border: 2px solid var(--role-color);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.role-icon-small {
+  font-size: 48px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.dashboard-title {
+  font-size: 24px;
+  color: var(--role-color);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--role-color);
+}
+
+.dashboard-subtitle {
+  font-size: 10px;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.logout-button {
+  background: rgba(255, 68, 68, 0.2);
+  color: #ff4444;
+  border: 2px solid #ff4444;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Press Start 2P', monospace;
+  letter-spacing: 1px;
+}
+
+.logout-button:hover {
+  background: #ff4444;
+  color: #000;
+  transform: translateX(5px);
+}
+
+.welcome-card {
+  background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+  border: 2px solid var(--role-color);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.8s ease;
+}
+
+.welcome-card h2 {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+.user-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.info-item {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-label {
+  display: block;
+  font-size: 9px;
+  color: #888;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.info-value {
+  display: block;
+  font-size: 11px;
+  color: var(--role-color);
+  letter-spacing: 1px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.dashboard-card {
+  background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.8s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--role-color) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dashboard-card:hover::before {
+  opacity: 0.1;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--role-color);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6),
+              0 0 20px var(--role-color);
+}
+
+.card-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.dashboard-card h3 {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.dashboard-card p {
+  font-size: 9px;
+  color: #888;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+.card-button {
+  background: var(--role-color);
+  color: #000;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Press Start 2P', monospace;
+  letter-spacing: 1px;
+}
+
+.card-button:hover {
+  background: #fff;
+  transform: scale(1.05);
+}
+
+.permissions-info {
+  background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+  border: 2px solid var(--role-color);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.permissions-info h3 {
+  font-size: 16px;
+  color: var(--role-color);
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.permissions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.permission-badge {
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--role-color);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 10px;
+  border: 2px solid var(--role-color);
+  letter-spacing: 1px;
+}
+
+.loading {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.spinner-large {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--role-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 30px;
+}
+
+.loading p {
+  font-size: 12px;
+  color: #888;
+  letter-spacing: 2px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .header-left {
+    flex-direction: column;
+  }
+  
+  .dashboard-title {
+    font-size: 18px;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .user-info {
+    grid-template-columns: 1fr;
+  }
+}

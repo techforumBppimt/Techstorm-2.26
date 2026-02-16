@@ -53,6 +53,11 @@ import ForzaHorizonRegistration from './Pages/Registration/ForzaHorizonRegistrat
 import FifaMobileRegistration from './Pages/Registration/FifaMobileRegistration';
 import KhetRegistration from './Pages/Registration/KhetRegistration';
 
+// Import Admin Pages
+import AdminRoleSelection from './Pages/Admin/AdminRoleSelection';
+import AdminLogin from './Pages/Admin/AdminLogin';
+import AdminDashboard from './Pages/Admin/AdminDashboard';
+
 const navItems = [
     { label: 'Home', href: '/#home' },
     { label: 'About', href: '/#about' },
@@ -65,6 +70,9 @@ const navItems = [
 const AppContent = () => {
   const location = useLocation();
   const [activeSection, setActiveSection] = React.useState('');
+  
+  // Check if current route is an admin route
+  const isAdminRoute = location.pathname.startsWith('/admin');
   
   // Scroll to top on route change
   React.useEffect(() => {
@@ -118,10 +126,19 @@ const AppContent = () => {
   return (
     <div className="App">
 
-      {/* Integrated Header with PillNav */}
-      <Header navItems={navItems} activeHref={getActiveHref()} />
+      {/* Integrated Header with PillNav - Hide on admin routes */}
+      {!isAdminRoute && <Header navItems={navItems} activeHref={getActiveHref()} />}
 
       <Switch>
+
+        {/* Admin Routes */}
+        <Route exact path="/admin" component={AdminRoleSelection} />
+        <Route exact path="/admin/core" component={AdminLogin} />
+        <Route exact path="/admin/coordinator" component={AdminLogin} />
+        <Route exact path="/admin/volunteer" component={AdminLogin} />
+        <Route exact path="/admin/core/dashboard" component={AdminDashboard} />
+        <Route exact path="/admin/coordinator/dashboard" component={AdminDashboard} />
+        <Route exact path="/admin/volunteer/dashboard" component={AdminDashboard} />
 
         <Route exact path="/" component={Home} />
         <Route exact path="/home-two" component={HomeTwo} />
@@ -176,8 +193,8 @@ const AppContent = () => {
 
       </Switch>
       
-      {/* Footer */}
-      <Footer />
+      {/* Footer - Hide on admin routes */}
+      {!isAdminRoute && <Footer />}
     </div>
   );
 };

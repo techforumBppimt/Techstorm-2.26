@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const { User, ROLES } = require('../models/User');
 const { authenticate } = require('../middleware/auth');
 const { requireCore } = require('../middleware/rbac');
@@ -8,7 +9,126 @@ const { securityLogger } = require('../middleware/logger');
 const router = express.Router();
 
 /**
- * All admin routes require Core role
+ * Generate JWT token
+ */
+const generateToken = (userId) => {
+  return jwt.sign(
+    { userId },
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRES_IN || '24h' }
+  );
+};
+
+/**
+ * Admin Login (No authentication required for this endpoint)
+ * POST /api/admin/login
+ */
+router.post('/login',
+  securityLogger('ADMIN_LOGIN'),
+  asyncHandler(async (req, res) => {
+    const { email, password, role } = req.body;
+
+    if (!email || !password || !role) {
+      return res.status(400).json({
+        error: 'Validation error',
+        message: 'Email, password, and role are required'
+      });
+    }
+
+    // Find user with password field
+    const user = await User.findOne({ email }).select('+password');
+    
+    if (!user) {
+      return res.status(401).json({
+        error: 'Authentication failed',
+        message: 'Invalid credentials'
+      });
+    }
+
+    // Check if account is locked
+    if (user.lockUntil && user.lockUntil > new Date()) {
+      const minutesLeft = Math.ceil((user.lockUntil - new Date()) / 60000);
+      return res.status(423).json({
+        error: 'Account locked',
+        message: `Account is locked. Try again in ${minutesLeft} minutes.`
+      });
+    }
+
+    // Verify password
+    const isPasswordValid = await user.comparePassword(password);
+    
+    if (!isPasswordValid) {
+      // Increment failed login attempts
+      user.loginAttempts += 1;
+      
+      // Lock account after 5 failed attempts
+      if (user.loginAttempts >= 5) {
+        user.lockUntil = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes
+        await user.save();
+        return res.status(423).json({
+          error: 'Account locked',
+          message: 'Account locked due to too many failed login attempts. Try again in 30 minutes.'
+        });
+      }
+      
+      await user.save();
+      
+      return res.status(401).json({
+        error: 'Authentication failed',
+        message: 'Invalid credentials',
+        attemptsRemaining: 5 - user.loginAttempts
+      });
+    }
+
+    // Verify role matches
+    if (user.role !== role) {
+      return res.status(403).json({
+        error: 'Access denied',
+        message: 'Invalid role for this login'
+      });
+    }
+
+    // Check if user is active
+    if (!user.isActive) {
+      return res.status(403).json({
+        error: 'Account disabled',
+        message: 'Your account has been disabled. Please contact an administrator.'
+      });
+    }
+
+    // Reset login attempts on successful login
+    user.loginAttempts = 0;
+    user.lockUntil = undefined;
+    user.lastLogin = new Date();
+    await user.save();
+
+    // Generate token
+    const token = generateToken(user._id);
+
+    // Prepare user response
+    const userResponse = {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      eventName: user.eventName,
+      eventAbbr: user.eventAbbr,
+      isActive: user.isActive,
+      createdAt: user.createdAt,
+      permissions: user.getPermissions()
+    };
+
+    res.json({
+      message: 'Login successful',
+      user: userResponse,
+      token,
+      expiresIn: process.env.JWT_EXPIRES_IN || '24h'
+    });
+  })
+);
+
+/**
+ * All other admin routes require Core role
  */
 router.use(authenticate);
 router.use(requireCore);

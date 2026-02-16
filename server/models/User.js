@@ -53,6 +53,30 @@ const userSchema = new mongoose.Schema({
     default: ROLES.VOLUNTEER,
     required: true
   },
+  eventAbbr: {
+    type: String,
+    trim: true,
+    maxlength: 6,
+    default: null,
+    // Required for coordinator and volunteer roles
+    validate: {
+      validator: function(value) {
+        // Core users don't need eventAbbr
+        if (this.role === ROLES.CORE) {
+          return true;
+        }
+        // Coordinator and volunteer must have eventAbbr
+        return value && value.length > 0;
+      },
+      message: 'Event abbreviation is required for coordinator and volunteer roles'
+    }
+  },
+  eventName: {
+    type: String,
+    trim: true,
+    maxlength: 100,
+    default: null
+  },
   isActive: {
     type: Boolean,
     default: true
