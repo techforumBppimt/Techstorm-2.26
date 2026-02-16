@@ -366,8 +366,7 @@ const EventDetail = ({ eventData }) => {
                                                     const isRound2 = rule.trim().toLowerCase().startsWith('🎯 round 2:');
                                                     // FAQ question detection
                                                     const isFaqQuestion = /\?$/.test(rule.trim()) && rule.trim().length < 60;
-                                                    // Registration fee line detection (case-insensitive, contains 'registration fee' or starts with '₹')
-                                                    const isRegistrationFee = /registration fee|registration fees|^₹/i.test(rule.trim());
+                                                    // Registration fee header detection for Passion with Reels
                                                     const isRegistrationFeeHeader = name === 'Passion with Reels' && rule.trim().toLowerCase() === 'registration fees:';
 
                                                     // Reduce space after description (first empty line)
