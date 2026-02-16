@@ -533,17 +533,44 @@
         grid-template-columns: 1fr;
     }
     
+    .form-group {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .retro-input,
+    .retro-textarea,
+    .retro-select {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+    
     .retro-input,
     .retro-textarea,
     .retro-select,
     .mcq-option-label {
         font-size: 10px;
     }
+    
+    .mcq-group,
+    .mcq-option,
+    .file-upload,
+    .file-upload-wrapper {
+        width: 100%;
+        max-width: 100%;
+    }
 
     .file-upload-label {
         flex-direction: column;
         padding: 15px;
         min-height: 100px;
+        width: 100%;
+    }
+    
+    .checkbox-group {
+        width: 100%;
+        max-width: 100%;
     }
 
     .file-upload-icon {

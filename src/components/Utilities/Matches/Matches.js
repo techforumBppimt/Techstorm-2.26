@@ -19,6 +19,24 @@ import forzaHorizon from '../../../assets/img/PIXELATED EVENT MASCOTS/FORZA HORI
 import fifaMobile from '../../../assets/img/PIXELATED EVENT MASCOTS/FIFA Mobile.png';
 import rosumo from '../../../assets/img/PIXELATED EVENT MASCOTS/rosumo.png';
 
+// Import event card backgrounds
+import codeBeeBg from '../../../assets/img/event_specific_pictures/codebee/codebeefibg.gif';
+import hackStormBg from '../../../assets/img/event_specific_pictures/hackstorm/hstorm.png';
+import technomaniaBg from '../../../assets/img/event_specific_pictures/technomania/technomania.png';
+import roNavigatorBg from '../../../assets/img/event_specific_pictures/robotics/ro_navigator.png';
+import roCombatBg from '../../../assets/img/event_specific_pictures/robotics/ro_combat.png';
+import roSoccerBg from '../../../assets/img/event_specific_pictures/robotics/ro_soccer.png';
+import roTerranceBg from '../../../assets/img/event_specific_pictures/robotics/ro_terrance.png';
+import techHuntBg from '../../../assets/img/event_specific_pictures/techHunt/techhunt_banner.png';
+import omegatrixBg from '../../../assets/img/event_specific_pictures/omegatrix/OMEGATRIX_banner.png';
+import creativeCanvasBg from '../../../assets/img/event_specific_pictures/creative/creative_canvas.png';
+import passionWithReelsBg from '../../../assets/img/event_specific_pictures/creative/passion_with_reels.png';
+import khetBg from '../../../assets/img/event_specific_pictures/games/khet.png';
+import forzaHorizonBg from '../../../assets/img/event_specific_pictures/games/forza_horizon.png';
+import fifaMobileBg from '../../../assets/img/event_specific_pictures/games/fifa_mobile.png';
+// Note: rosumo doesn't have a specific background, using a robotics one as fallback
+import rosumoBg from '../../../assets/img/event_specific_pictures/robotics/ro_combat.png';
+
 import SectionTitle from '../SectionTitle/SectionTitle';
 import RetroCard from '../RetroCard/RetroCard';
 
@@ -119,21 +137,21 @@ const Matches = () => {
     ];
     
     const allEvents = [
-        { logo: codeBee, name: 'Code-Bee', category: 'Technical', url: '/events/code-bee' },
-        { logo: hackStorm, name: 'Hack Storm', category: 'Technical', url: '/events/hack-storm' },
-        { logo: technomania, name: 'TechnoMania', category: 'Technical', url: '/events/technomania' },
-        { logo: omegatrix, name: 'Omegatrix', category: 'Brain Teaser', url: '/events/omegatrix' },
-        { logo: techHunt, name: 'Tech Hunt', category: 'Brain Teaser', url: '/events/tech-hunt' },
-        { logo: roNavigator, name: 'Ro-Navigator', category: 'Rover', url: '/events/ro-navigator' },
-        { logo: rosumo, name: 'Ro-sumo', category: 'Rover', url: '/events/rosumo' },
-        { logo: roCombat, name: 'Ro-Combat', category: 'Rover', url: '/events/ro-combat' },
-        { logo: roSoccer, name: 'Ro-Soccer', category: 'Rover', url: '/events/ro-soccer' },
-        { logo: roTerrance, name: 'Ro-Terrance', category: 'Rover', url: '/events/ro-terrance' },
-        { logo: creativeCanvas, name: 'Creative Canvas', category: 'Creative', url: '/events/creative-canvas' },
-        { logo: passionWithReels, name: 'Passion with Reels', category: 'Creative', url: '/events/passion-with-reels' },
-        { logo: forzaHorizon, name: 'Forza Horizon', category: 'Games', url: '/events/forza-horizon' },
-        { logo: fifaMobile, name: 'FIFA Mobile', category: 'Games', url: '/events/fifa-mobile' },
-        { logo: khet, name: 'KHET', category: 'Games', url: '/events/khet' },
+        { logo: codeBee, cardBg: codeBeeBg, name: 'Code-Bee', category: 'Technical', url: '/events/code-bee' },
+        { logo: hackStorm, cardBg: hackStormBg, name: 'Hack Storm', category: 'Technical', url: '/events/hack-storm' },
+        { logo: technomania, cardBg: technomaniaBg, name: 'TechnoMania', category: 'Technical', url: '/events/technomania' },
+        { logo: omegatrix, cardBg: omegatrixBg, name: 'Omegatrix', category: 'Brain Teaser', url: '/events/omegatrix' },
+        { logo: techHunt, cardBg: techHuntBg, name: 'Tech Hunt', category: 'Brain Teaser', url: '/events/tech-hunt' },
+        { logo: roNavigator, cardBg: roNavigatorBg, name: 'Ro-Navigator', category: 'Rover', url: '/events/ro-navigator' },
+        { logo: rosumo, cardBg: rosumoBg, name: 'Ro-sumo', category: 'Rover', url: '/events/rosumo' },
+        { logo: roCombat, cardBg: roCombatBg, name: 'Ro-Combat', category: 'Rover', url: '/events/ro-combat' },
+        { logo: roSoccer, cardBg: roSoccerBg, name: 'Ro-Soccer', category: 'Rover', url: '/events/ro-soccer' },
+        { logo: roTerrance, cardBg: roTerranceBg, name: 'Ro-Terrance', category: 'Rover', url: '/events/ro-terrance' },
+        { logo: creativeCanvas, cardBg: creativeCanvasBg, name: 'Creative Canvas', category: 'Creative', url: '/events/creative-canvas' },
+        { logo: passionWithReels, cardBg: passionWithReelsBg, name: 'Passion with Reels', category: 'Creative', url: '/events/passion-with-reels' },
+        { logo: forzaHorizon, cardBg: forzaHorizonBg, name: 'Forza Horizon', category: 'Games', url: '/events/forza-horizon' },
+        { logo: fifaMobile, cardBg: fifaMobileBg, name: 'FIFA Mobile', category: 'Games', url: '/events/fifa-mobile' },
+        { logo: khet, cardBg: khetBg, name: 'KHET', category: 'Games', url: '/events/khet' },
         
     ];
 
@@ -352,7 +370,7 @@ const Matches = () => {
                 <div className="row" style={{ paddingTop: '20px', overflow: 'visible' }}>
                     {
                         events.map((event, index) => {
-                            const { logo, name, url } = event;
+                            const { logo, cardBg, name, url } = event;
                             return (
                                 <div key={index} className="col-lg-4 col-md-6 col-sm-6 mb-40 wow fadeInUp animated" data-animation="fadeInUp" data-delay={`${0.1 * index}s`} style={{ paddingTop: '10px' }}>
                                     <Link to={url} style={{ textDecoration: 'none' }}>
@@ -371,28 +389,58 @@ const Matches = () => {
                                             padding: '20px',
                                             cursor: 'pointer',
                                             transform: hoveredIndex === index ? 'translateY(-8px)' : 'translateY(0)',
+                                            position: 'relative',
+                                            overflow: 'hidden'
                                         }}
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         onMouseLeave={() => setHoveredIndex(null)}
                                     >
-                                        {/* Mascot image */}
-                                        <img src={logo} alt={name} style={{ 
-                                            maxWidth: '70%', 
-                                            maxHeight: '65%', 
-                                            objectFit: 'contain',
-                                            filter: hoveredIndex === index ? 'drop-shadow(0 0 20px rgba(0, 255, 234, 0.8))' : 'drop-shadow(0 0 15px rgba(255, 215, 0, 0.8))',
-                                            marginBottom: '15px',
-                                            imageRendering: 'pixelated'
+                                        {/* Background image with reduced brightness */}
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            left: 0,
+                                            width: '100%',
+                                            height: '100%',
+                                            backgroundImage: `url(${cardBg})`,
+                                            backgroundSize: 'cover',
+                                            backgroundPosition: 'center',
+                                            opacity: hoveredIndex === index ? 0.4 : 0.3,
+                                            filter: 'brightness(0.6)',
+                                            transition: 'all 0.3s ease',
+                                            zIndex: 0
                                         }} />
                                         
-                                        {/* Event name */}
-                                        <h4 style={{ 
-                                            fontSize: '16px', 
-                                            margin: 0,
-                                            textAlign: 'center',
-                                            fontFamily: '"Press Start 2P", system-ui',
-                                            lineHeight: '1.4'
-                                        }}>{name}</h4>
+                                        {/* Content overlay */}
+                                        <div style={{
+                                            position: 'relative',
+                                            zIndex: 1,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            width: '100%',
+                                            height: '100%'
+                                        }}>
+                                            {/* Mascot image */}
+                                            <img src={logo} alt={name} style={{ 
+                                                maxWidth: '70%', 
+                                                maxHeight: '65%', 
+                                                objectFit: 'contain',
+                                                filter: hoveredIndex === index ? 'drop-shadow(0 0 20px rgba(0, 255, 234, 0.8))' : 'drop-shadow(0 0 15px rgba(255, 215, 0, 0.8))',
+                                                marginBottom: '15px',
+                                                imageRendering: 'pixelated'
+                                            }} />
+                                            
+                                            {/* Event name */}
+                                            <h4 style={{ 
+                                                fontSize: '16px', 
+                                                margin: 0,
+                                                textAlign: 'center',
+                                                fontFamily: '"Press Start 2P", system-ui',
+                                                lineHeight: '1.4'
+                                            }}>{name}</h4>
+                                        </div>
                                     </RetroCard>
                                 </Link>
                                 </div>
