@@ -501,64 +501,51 @@ a,
 a:focus,
 .button:focus {
 	text-decoration: none;
-	outline        : none;
-}
+	.button-group {
+		padding-bottom: 15px;
+	}
 
-a:focus,
-a:hover,
-.portfolio-cat a:hover,
-.footer -menu li a:hover {
-	text-decoration: none;
-}
+	@media (max-width: 767px) {
+		.button-group {
+			display: flex !important;
+			flex-wrap: nowrap !important;
+			overflow-x: auto !important;
+			justify-content: flex-start !important;
+			gap: 0 !important;
+			padding-bottom: 10px !important;
+			scrollbar-width: none;
+			-ms-overflow-style: none;
+		}
+		.button-group::-webkit-scrollbar {
+			display: none;
+		}
+		.button-group button {
+			flex: 0 0 auto !important;
+			font-size: 12px !important;
+			padding-left: 12px !important;
+			padding-right: 12px !important;
+			margin: 0 2px !important;
+		}
+	}
 
-.btn.focus,
-.btn:focus {
-	outline   : 0;
-	box-shadow: none;
-}
-
-a,
-button {
-	color  : #010f2e;
-	outline: medium none;
-}
-
-a:hover {
-	color: #050208;
-}
-
-.box20 .title a {
-	color: #fff;
-}
-
-.box20 .title a:hover {
-	color: #444;
-}
-
-button:focus,
-input:focus,
-input:focus,
-textarea,
-textarea:focus {
-	outline   : none;
-	box-shadow: none;
-}
-
-.uppercase {
-	text-transform: uppercase;
-}
-
-.capitalize {
-	text-transform: capitalize;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family   : 'Press Start 2P', system-ui;
+	.button-group button {
+		border: none;
+		background: none;
+		-webkit-transition: .3s;
+		transition: .3s;
+		padding-bottom: 15px;
+		cursor: pointer;
+		outline: none;
+		color: #fff;
+		font-weight: 600;
+		text-transform: uppercase;
+		position: relative;
+		padding-top: 15px;
+		padding-left: 25px;
+		padding-right: 25px;
+		border-radius: 10px;
+		letter-spacing: 1.5px;
+	}
 	color         : #fff;
 	margin-top    : 0px;
 	font-style    : normal;
@@ -6925,6 +6912,28 @@ section:hover .section-title h2:before {
 	padding-bottom: 15px;
 }
 
+@media (max-width: 767px) {
+	.button-group {
+		display: flex !important;
+		flex-wrap: nowrap !important;
+		overflow-x: auto !important;
+		justify-content: flex-start !important;
+		gap: 0 !important;
+		padding-bottom: 10px !important;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+	.button-group::-webkit-scrollbar {
+		display: none;
+	}
+	.button-group button {
+		flex: 0 0 auto !important;
+		font-size: 12px !important;
+		padding-left: 12px !important;
+		padding-right: 12px !important;
+		margin: 0 2px !important;
+	}
+	}
 .button-group button {
 	border            : none;
 	background        : none;
@@ -6942,7 +6951,7 @@ section:hover .section-title h2:before {
 	padding-right     : 25px;
 	border-radius     : 10px;
 	letter-spacing    : 1.5px;
-}
+	}
 
 .button-group button:hover {
 	color: #ffc010;
