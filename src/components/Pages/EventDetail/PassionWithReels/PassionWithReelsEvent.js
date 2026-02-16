@@ -38,7 +38,7 @@ const PassionWithReelsEvent = () => {
         logo: passionWithReels,
         category: 'Creative',
         breadcrumbBg: passionWithReelsBanner,
-        description: `Are you a passionate storyteller who wants to showcase your creative storytelling skills? Join us for an exhilarating short movie making competition, ‘Passion with Reels.’ Imagine a canvas where imagination knows no bounds, and the art of storytelling comes alive through the magic of reels. “Passion with Reels” is where creativity meets innovation, and the passion for filmmaking ignites. This event promises a platform for participants to bring their cinematic vision to life. Let your passion for filmmaking shine through every frame, and get ready to mesmerize the world with your cinematic masterpiece!`,
+        description: `Join 'Passion with Reels'—an exciting short film competition where your creativity and storytelling come alive. Bring your cinematic ideas to life, connect with fellow filmmakers, and let your passion for film shine on screen! Whether you’re a director, writer, or actor, this is your chance to experiment, innovate, and share your vision. Impress the judges and audience with your unique perspective and storytelling flair!`,
         teamSize: '2-6 Members',
         duration: '10 Minutes (max)',
         venue: 'Media Lab & Campus',

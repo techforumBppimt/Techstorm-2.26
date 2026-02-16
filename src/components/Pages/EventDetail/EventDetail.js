@@ -509,7 +509,7 @@ const EventDetail = ({ eventData }) => {
                                                     }
                                                     // Highlight Ro-Navigator section headers with yellow background, remove bullet
                                                     // Highlight PRELIMS RULES: and FINALS RULES: with gold heading and diff icon
-                                                    if (name === 'Ro-Navigator' && ['PRELIMS RULES:', 'FINALS RULES:'].includes(rule.trim().toUpperCase())) {
+                                                    if ((name === 'Ro-Navigator' || name === 'Ro-Soccer' || name === 'Ro-Combat' || name === 'Ro-Terrance') && ['PRELIMS RULES:', 'FINALS RULES:', 'KNOCKOUT & FINALS RULES:'].includes(rule.trim().toUpperCase())) {
                                                         if (rule.trim().toUpperCase() === 'PRELIMS RULES:') {
                                                             return (
                                                                 <h3 key={index} style={{
@@ -528,7 +528,7 @@ const EventDetail = ({ eventData }) => {
                                                                     {rule}
                                                                 </h3>
                                                             );
-                                                        } else if (rule.trim().toUpperCase() === 'FINALS RULES:') {
+                                                        } else if (rule.trim().toUpperCase() === 'KNOCKOUT & FINALS RULES:' || rule.trim().toUpperCase() === 'FINALS RULES:') {
                                                             return (
                                                                 <h3 key={index} style={{
                                                                     display: 'flex',
@@ -549,7 +549,7 @@ const EventDetail = ({ eventData }) => {
                                                         }
                                                     }
                                                     // Highlight BOT SPECIFICATIONS and GENERAL RULES
-                                                    if (name === 'Ro-Navigator' && (
+                                                    if ((name === 'Ro-Navigator' || name === 'Ro-Soccer' || name === 'Ro-Combat' || name === 'Ro-Terrance') && (
                                                         rule.trim().toUpperCase() === 'BOT SPECIFICATIONS:' ||
                                                         rule.trim().toUpperCase() === 'GENERAL RULES (COMMON FOR PRELIMS & FINALS):'
                                                     )) {
@@ -592,11 +592,32 @@ const EventDetail = ({ eventData }) => {
                                                             );
                                                         }
                                                     }
-                                                    if (name === 'Ro-Navigator' && [
+                                                    // Highlight GENERAL GUIDELINES: for FIFA Mobile and Forza Horizon
+                                                    if ((name === 'FIFA Mobile' || name === 'Forza Horizon') && rule.trim().toUpperCase() === 'GENERAL GUIDELINES:') {
+                                                        return (
+                                                            <h3 key={index} style={{
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                color: '#ffc010',
+                                                                fontSize: 'clamp(14px, 4vw, 20px)',
+                                                                fontFamily: 'Press Start 2P',
+                                                                marginTop: '25px',
+                                                                marginBottom: '10px',
+                                                                lineHeight: '1.5',
+                                                                textTransform: 'uppercase',
+                                                                letterSpacing: '2px',
+                                                            }}>
+                                                                <span style={{ fontSize: '22px', marginRight: '10px', lineHeight: 1 }}>🎮</span>
+                                                                {rule}
+                                                            </h3>
+                                                        );
+                                                    }
+                                                    if ((name === 'Ro-Navigator' || name === 'Ro-Soccer' || name === 'Ro-Combat' || name === 'Ro-Terrance') && [
                                                         'FACULTY CO-ORDINATOR NAME:',
                                                         'STUDENT CO-ORDINATOR NAME:',
                                                         'VOLUNTEER NAME:',
-                                                        'TEAM STRENGTH:'
+                                                        'TEAM STRENGTH:',
+                                                        'REGISTRATION FEES:'
                                                     ].includes(rule.trim().toUpperCase())) {
                                                         return (
                                                             <div key={index} style={{
@@ -611,6 +632,21 @@ const EventDetail = ({ eventData }) => {
                                                                 letterSpacing: '2px',
                                                                 textTransform: 'uppercase',
                                                                 boxShadow: 'none'
+                                                            }}>
+                                                                {rule}
+                                                            </div>
+                                                        );
+                                                    }
+                                                    // Highlight REGISTRATION FEES value for Ro-Terrance
+                                                    if (name === 'Ro-Terrance' && rule.trim() === '400/- Per Team/Bot') {
+                                                        return (
+                                                            <div key={index} style={{
+                                                                color: '#fffacd', // yellowish white
+                                                                fontFamily: 'Press Start 2P',
+                                                                fontSize: 'clamp(13px, 3vw, 17px)',
+                                                                margin: '10px 0 10px 16px',
+                                                                letterSpacing: '2px',
+                                                                textTransform: 'uppercase',
                                                             }}>
                                                                 {rule}
                                                             </div>
@@ -660,7 +696,7 @@ const EventDetail = ({ eventData }) => {
                                                         // Render regular rule with original font style
                                                         return (
                                                             <div key={index} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '12px', gap: '12px' }}>
-                                                                <span style={{ color: '#00ffea', fontSize: '14px', flexShrink: 0, marginTop: '2px' }}>▸</span>
+                                                                <span style={{ color: '#00ffea', fontSize: '14px', flexShrink: 0, marginTop: '-2px' }}>▸</span>
                                                                 <span style={{
                                                                     color: '#e0e0e0', // off-white
                                                                     fontSize: '13px',
