@@ -61,6 +61,52 @@ const scheduleData = {
 const Schedule = () => {
     return (
         <Fragment>
+            <div
+                style={{
+                    minHeight: '100vh',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: `url(${heroBg}) center center / cover no-repeat fixed`,
+                    backgroundColor: '#0a0a0a',
+                    position: 'relative',
+                    overflow: 'hidden'
+                }}
+            >
+                <div
+                    style={{
+                        position: 'absolute',
+                        inset: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.75)'
+                    }}
+                />
+                <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', padding: '20px' }}>
+                    <h1
+                        style={{
+                            fontFamily: "'Press Start 2P', 'Silkscreen', monospace",
+                            color: '#ffc010',
+                            fontSize: 'clamp(2rem, 6vw, 5rem)',
+                            lineHeight: '1.3',
+                            margin: 0,
+                            textTransform: 'uppercase'
+                        }}
+                    >
+                        Coming Soon
+                    </h1>
+                    <p
+                        style={{
+                            color: '#fffacd',
+                            fontSize: 'clamp(14px, 2vw, 22px)',
+                            marginTop: '20px',
+                            marginBottom: 0
+                        }}
+                    >
+                        Schedule will be updated shortly.
+                    </p>
+                </div>
+            </div>
+
+            {/* Existing Schedule UI (temporarily hidden for later restore)
             <div style={{ 
                 position: 'relative', 
                 minHeight: '100vh', 
@@ -112,8 +158,7 @@ const Schedule = () => {
                         paddingTop: '20px',
                         paddingBottom: '80px'
                     }}>
-                        <div className="schedule-container">{/* Day 1 Schedule */}
-                    {/* Day 1 Schedule */}
+                        <div className="schedule-container">
                     <div className="row mb-5">
                         <div className="col-12">
                             <h3 className="schedule-day-title">
@@ -144,7 +189,7 @@ const Schedule = () => {
                         </div>
                     </div>
 
-                    {/* Day 2 Schedule */}
+                    
                     <div className="row mb-5">
                         <div className="col-12">
                             <h3 className="schedule-day-title">
@@ -175,7 +220,7 @@ const Schedule = () => {
                         </div>
                     </div>
 
-                    {/* Important Notes */}
+                    
                     <div className="row">
                         <div className="col-12">
                             <h3 className="schedule-day-title" style={{ marginBottom: '30px' }}>
@@ -201,6 +246,7 @@ const Schedule = () => {
             </div>
                 </div>
             </div>
+            */}
         </Fragment>
     );
 }
