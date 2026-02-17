@@ -143,7 +143,7 @@ const Matches = () => {
         { logo: omegatrix, cardBg: omegatrixBg, name: 'Omegatrix', category: 'Brain Teaser', url: '/events/omegatrix' },
         { logo: techHunt, cardBg: techHuntBg, name: 'Tech Hunt', category: 'Brain Teaser', url: '/events/tech-hunt' },
         { logo: roNavigator, cardBg: roNavigatorBg, name: 'Ro-Navigator', category: 'Rover', url: '/events/ro-navigator' },
-        { logo: rosumo, cardBg: rosumoBg, name: 'Ro-sumo', category: 'Rover', url: '/events/rosumo' },
+        { logo: rosumo, cardBg: rosumoBg, name: 'Ro-sumo', category: 'Rover', url: '/events/ro-sumo' },
         { logo: roCombat, cardBg: roCombatBg, name: 'Ro-Combat', category: 'Rover', url: '/events/ro-combat' },
         { logo: roSoccer, cardBg: roSoccerBg, name: 'Ro-Soccer', category: 'Rover', url: '/events/ro-soccer' },
         { logo: roTerrance, cardBg: roTerranceBg, name: 'Ro-Terrance', category: 'Rover', url: '/events/ro-terrance' },

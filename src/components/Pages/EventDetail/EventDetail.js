@@ -514,7 +514,7 @@ const EventDetail = ({ eventData }) => {
                                                     }
                                                     // Highlight Ro-Navigator section headers with yellow background, remove bullet
                                                     // Highlight PRELIMS RULES: and FINALS RULES: with gold heading and diff icon
-                                                    if ((name === 'Ro-Navigator' || name === 'Ro-Soccer' || name === 'Ro-Combat' || name === 'Ro-Terrance') && ['PRELIMS RULES:', 'FINALS RULES:', 'KNOCKOUT & FINALS RULES:'].includes(rule.trim().toUpperCase())) {
+                                                    if ((name === 'Ro-Navigator' || name === 'Ro-Soccer' || name === 'Ro-Combat' || name === 'Ro-Terrance' || name === 'Ro-Sumo') && ['PRELIMS RULES:', 'FINALS RULES:', 'KNOCKOUT & FINALS RULES:'].includes(rule.trim().toUpperCase())) {
                                                         if (rule.trim().toUpperCase() === 'PRELIMS RULES:') {
                                                             return (
                                                                 <h3 key={index} style={{
@@ -554,11 +554,12 @@ const EventDetail = ({ eventData }) => {
                                                         }
                                                     }
                                                     // Highlight BOT SPECIFICATIONS and GENERAL RULES
-                                                    if ((name === 'Ro-Navigator' || name === 'Ro-Soccer' || name === 'Ro-Combat' || name === 'Ro-Terrance') && (
+                                                    if ((name === 'Ro-Navigator' || name === 'Ro-Soccer' || name === 'Ro-Combat' || name === 'Ro-Terrance' || name === 'Ro-Sumo') && (
                                                         rule.trim().toUpperCase() === 'BOT SPECIFICATIONS:' ||
-                                                        rule.trim().toUpperCase() === 'GENERAL RULES (COMMON FOR PRELIMS & FINALS):'
+                                                        rule.trim().toUpperCase() === 'GENERAL RULES (COMMON FOR PRELIMS & FINALS):' ||
+                                                        rule.trim().toUpperCase() === 'FAQ:'
                                                     )) {
-                                                        // Restore previous icon for BOT SPECIFICATIONS, keep robot for GENERAL RULES
+                                                        // Restore previous icon for BOT SPECIFICATIONS, keep robot for GENERAL RULES, and add FAQ highlight
                                                         if (rule.trim().toUpperCase() === 'BOT SPECIFICATIONS:') {
                                                             return (
                                                                 <h3 key={index} style={{
@@ -595,6 +596,24 @@ const EventDetail = ({ eventData }) => {
                                                                     {rule}
                                                                 </h3>
                                                             );
+                                                        } else if (rule.trim().toUpperCase() === 'FAQ:') {
+                                                            return (
+                                                                <h3 key={index} style={{
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                    color: '#ffc010',
+                                                                    fontSize: 'clamp(14px, 4vw, 20px)',
+                                                                    fontFamily: 'Press Start 2P',
+                                                                    marginTop: '25px',
+                                                                    marginBottom: '10px',
+                                                                    lineHeight: '1.5',
+                                                                    textTransform: 'uppercase',
+                                                                    letterSpacing: '2px',
+                                                                }}>
+                                                                    <span style={{ fontSize: '22px', marginRight: '10px', lineHeight: 1 }}>❓</span>
+                                                                    {rule}
+                                                                </h3>
+                                                            );
                                                         }
                                                     }
                                                     // Highlight GENERAL GUIDELINES: for FIFA Mobile and Forza Horizon
@@ -617,7 +636,7 @@ const EventDetail = ({ eventData }) => {
                                                             </h3>
                                                         );
                                                     }
-                                                    if ((name === 'Ro-Navigator' || name === 'Ro-Soccer' || name === 'Ro-Combat' || name === 'Ro-Terrance') && [
+                                                    if ((name === 'Ro-Navigator' || name === 'Ro-Soccer' || name === 'Ro-Combat' || name === 'Ro-Terrance' || name === 'Ro-Sumo') && [
                                                         'FACULTY CO-ORDINATOR NAME:',
                                                         'STUDENT CO-ORDINATOR NAME:',
                                                         'VOLUNTEER NAME:',
