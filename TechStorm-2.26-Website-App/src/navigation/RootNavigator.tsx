@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet } from 'react-native';
+import { typography } from '../theme/typography';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../theme/colors';
 import HomeScreen from '../screens/HomeScreen';
@@ -78,5 +79,6 @@ const styles = StyleSheet.create({
   tabBarLabel: {
     fontSize: 11,
     fontWeight: '500',
+    fontFamily: typography.fontFamily.body,
   },
 });

@@ -1,12 +1,13 @@
 /**
- * Typography - Press Start 2P & Silkscreen fonts from website
+ * Typography - Press Start 2P & Silkscreen fonts (same as website)
+ * Font family names from @expo-google-fonts
  */
 
 export const typography = {
   fontFamily: {
-    pixel: 'PressStart2P-Regular',
-    body: 'Silkscreen-Regular',
-    bodyBold: 'Silkscreen-Bold',
+    pixel: 'PressStart2P_400Regular',
+    body: 'Silkscreen_400Regular',
+    bodyBold: 'Silkscreen_700Bold',
   },
   sizes: {
     xs: 9,

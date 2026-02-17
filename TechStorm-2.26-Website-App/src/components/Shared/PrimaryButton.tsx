@@ -8,6 +8,7 @@ import {
   Platform,
 } from 'react-native';
 import { colors } from '../../theme/colors';
+import { typography } from '../../theme/typography';
 import { spacing } from '../../theme/spacing';
 
 type PrimaryButtonProps = {
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     }),
   },
   text: {
-    fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace',
+    fontFamily: typography.fontFamily.bodyBold,
     fontWeight: '700',
     color: colors.buttonPrimaryBorder,
     textTransform: 'uppercase',
