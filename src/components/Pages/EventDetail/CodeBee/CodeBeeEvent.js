@@ -1,14 +1,16 @@
+
 import React from 'react';
 import EventDetail from '../EventDetail';
 import codeBee from '../../../../assets/img/PIXELATED EVENT MASCOTS/CODE BEE.png';
 import codeBeeGif from '../../../../assets/img/event_specific_pictures/codebee/codebeefibg.gif';
+import { getCloudinaryUrl } from '../../../../config/cloudinary';
 
 const CodeBeeEvent = () => {
     const galleryImages = [
-        process.env.PUBLIC_URL + '/pictures_of_gallery/Codebee/DSC03087.jpeg',
-        process.env.PUBLIC_URL + '/pictures_of_gallery/Codebee/DSC03090.jpeg',
-        process.env.PUBLIC_URL + '/pictures_of_gallery/Codebee/DSC03091.jpeg',
-        process.env.PUBLIC_URL + '/pictures_of_gallery/Codebee/DSC03092.jpeg',
+        getCloudinaryUrl('pictures_of_gallery/Codebee', 'DSC03087.jpeg', 'w_800,h_600,c_fill,q_auto:good,f_auto'),
+        getCloudinaryUrl('pictures_of_gallery/Codebee', 'DSC03090.jpeg', 'w_800,h_600,c_fill,q_auto:good,f_auto'),
+        getCloudinaryUrl('pictures_of_gallery/Codebee', 'DSC03091.jpeg', 'w_800,h_600,c_fill,q_auto:good,f_auto'),
+        getCloudinaryUrl('pictures_of_gallery/Codebee', 'DSC03092.jpeg', 'w_800,h_600,c_fill,q_auto:good,f_auto'),
     ];
     const eventData = {
         name: 'Code-Bee',

@@ -378,21 +378,27 @@ const EventDetail = ({ eventData }) => {
                                                     }
                                                     if (isJudgingCriteria) {
                                                         return (
-                                                            <h3 key={index} style={{
-                                                                color: '#ff2d2d',
-                                                                fontSize: 'clamp(14px, 3vw, 18px)',
-                                                                fontFamily: 'Press Start 2P',
-                                                                marginTop: '35px',
-                                                                marginBottom: '20px',
-                                                                lineHeight: '1.5',
-                                                                textTransform: 'uppercase',
-                                                                letterSpacing: '2px',
-                                                                background: 'rgba(255,45,45,0.12)',
-                                                                padding: '8px 0'
-                                                            }}>
-                                                                <span style={{ fontSize: '22px', marginRight: '10px', lineHeight: 1 }}>👨‍🏫</span>
-                                                                <span>{rule}</span>
-                                                            </h3>
+                                                            <div key={index} className="judging-criteria-header-wrapper">
+                                                                <h3
+                                                                    className="judging-criteria-header"
+                                                                    style={{
+                                                                        color: '#ff2d2d',
+                                                                        fontSize: 'clamp(14px, 3vw, 18px)',
+                                                                        fontFamily: 'Press Start 2P',
+                                                                        marginTop: '35px',
+                                                                        marginBottom: '8px',
+                                                                        lineHeight: '1.5',
+                                                                        textTransform: 'uppercase',
+                                                                        letterSpacing: '2px',
+                                                                        background: 'rgba(255,45,45,0.12)',
+                                                                        padding: '8px 0',
+                                                                        textAlign: 'left',
+                                                                    }}
+                                                                >
+                                                                    <span style={{ fontSize: '22px', marginRight: '10px', lineHeight: 1 }}>👨‍🏫</span>
+                                                                    <span>{rule}</span>
+                                                                </h3>
+                                                            </div>
                                                         );
                                                     }
                                                     if (isRound1) {

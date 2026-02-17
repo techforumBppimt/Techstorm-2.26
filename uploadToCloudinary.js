@@ -9,8 +9,30 @@ cloudinary.config({
   api_secret: '2bzTfHSjCxPpFgh5lOje_bzlIYM'
 });
 
-// Folders to upload
-const folders = ['gallery', 'carousel', 'events', 'logo'];
+// Helper to get all subfolders in a directory
+function getSubfolders(rootPath) {
+  if (!fs.existsSync(rootPath)) return [];
+  return fs.readdirSync(rootPath).filter(f => fs.statSync(path.join(rootPath, f)).isDirectory());
+}
+
+// Folders to upload from src/assets/img (all subfolders of gallery, carousel, events, logo)
+const assetImgRoot = path.join(__dirname, 'src', 'assets', 'img');
+const assetFolders = ['gallery', 'carousel', 'events', 'logo'];
+const assetSubfolders = assetFolders.flatMap(folder => {
+  const folderPath = path.join(assetImgRoot, folder);
+  return getSubfolders(folderPath).map(sub => ({
+    local: path.join(folderPath, sub),
+    cloud: `eoorox/${folder}/${sub}`
+  }))
+    .concat({ local: folderPath, cloud: `eoorox/${folder}` }); // include root folder
+});
+
+// Folders to upload from public/pictures_of_gallery (all subfolders)
+const picturesOfGalleryRoot = path.join(__dirname, 'public', 'pictures_of_gallery');
+const picturesOfGallerySubfolders = getSubfolders(picturesOfGalleryRoot).map(sub => ({
+  local: path.join(picturesOfGalleryRoot, sub),
+  cloud: `eoorox/pictures_of_gallery/${sub}`
+}));
 
 // Root images to upload (directly in img folder)
 const rootImages = [
@@ -24,31 +46,27 @@ const rootImages = [
   'cursor-click.png'
 ];
 
-async function uploadFolder(folderName) {
-  const folderPath = path.join(__dirname, 'src', 'assets', 'img', folderName);
-  
-  if (!fs.existsSync(folderPath)) {
-    console.log(`Folder ${folderName} does not exist`);
+async function uploadFolder(localFolder, cloudinaryTargetFolder) {
+  if (!fs.existsSync(localFolder)) {
+    console.log(`Folder ${localFolder} does not exist`);
     return;
   }
-
-  const files = fs.readdirSync(folderPath);
-  
-  console.log(`\nUploading ${folderName} folder...`);
-  
+  const files = fs.readdirSync(localFolder);
+  if (!files.length) {
+    console.log(`No files in ${localFolder}`);
+    return;
+  }
+  console.log(`\nUploading ${localFolder} to Cloudinary folder ${cloudinaryTargetFolder}...`);
   for (const file of files) {
-    if (file.includes('.TMP')) continue; // Skip temp files
-    
-    const filePath = path.join(folderPath, file);
-    
+    if (file.startsWith('.') || file.includes('.TMP')) continue; // Skip hidden/temp files
+    const filePath = path.join(localFolder, file);
     if (fs.statSync(filePath).isFile()) {
       try {
         const result = await cloudinary.uploader.upload(filePath, {
-          folder: `eoorox/${folderName}`,
+          folder: cloudinaryTargetFolder,
           public_id: path.parse(file).name,
           overwrite: true
         });
-        
         console.log(`✓ Uploaded: ${file} -> ${result.secure_url}`);
       } catch (error) {
         console.error(`✗ Failed to upload ${file}:`, error.message);
@@ -85,13 +103,15 @@ async function uploadRootImages() {
 
 async function uploadAll() {
   console.log('Starting Cloudinary upload...');
-  
-  for (const folder of folders) {
-    await uploadFolder(folder);
+  // Upload all asset subfolders and root folders
+  for (const { local, cloud } of assetSubfolders) {
+    await uploadFolder(local, cloud);
   }
-  
+  // Upload all pictures_of_gallery subfolders
+  for (const { local, cloud } of picturesOfGallerySubfolders) {
+    await uploadFolder(local, cloud);
+  }
   await uploadRootImages();
-  
   console.log('\\n✓ Upload complete!');
 }
 

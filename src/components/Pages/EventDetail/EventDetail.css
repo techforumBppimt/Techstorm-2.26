@@ -1,3 +1,15 @@
+/* Judging Criteria Header Underline */
+
+
+.judging-criteria-underline {
+    display: none !important;
+}
+
+@media (max-width: 575px) {
+    .judging-criteria-header {
+        text-align: center !important;
+    }
+}
 /* Event Detail Page Styles - Clean Modern Layout */
 
 /* Add proper horizontal spacing for all sections */
