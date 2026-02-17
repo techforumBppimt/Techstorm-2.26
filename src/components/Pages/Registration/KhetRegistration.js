@@ -1,47 +1,442 @@
-import React from 'react';
-import RegistrationForm from './RegistrationForm';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
+import './Registration.css';
 import khetBanner from '../../../assets/img/event_specific_pictures/games/khet.png';
 
-const KhetRegistration = () => {
-    const eventConfig = {
-        eventName: 'Khet',
-        breadcrumbBg: khetBanner,
-        entryFee: '₹100 per team',
-        minTeamSize: 1,
-        maxTeamSize: 2,
-        teamSizeOptions: [
-            { value: '1', label: 'Solo (1 Member)' },
-            { value: '2', label: 'Duo (2 Members)' }
-        ],
-        customFields: [
-            {
-                label: 'Board Game Experience',
-                type: 'select',
-                required: true,
-                options: ['Beginner', 'Intermediate', 'Advanced', 'Expert']
-            },
-            {
-                label: 'Have you played Khet before?',
-                type: 'select',
-                required: true,
-                options: ['Yes, multiple times', 'Yes, once or twice', 'No, but I know the rules', 'No, first time']
-            },
-            {
-                label: 'Strategy Game Experience',
-                type: 'textarea',
-                required: false,
-                placeholder: 'Tell us about your experience with Chess, Laser Chess, or similar strategy games'
-            },
-            {
-                label: 'How did you hear about Khet?',
-                type: 'select',
-                required: false,
-                options: ['From friends', 'Online', 'At events', 'This is my first time hearing about it']
-            }
-        ]
-    };
+const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
+const STREAM_OPTIONS = ['CSE', 'IT', 'ECE', 'EE', 'Others'];
 
-    return <RegistrationForm eventConfig={eventConfig} />;
+const KhetRegistration = () => {
+  const history = useHistory();
+  const [formData, setFormData] = useState({
+    teamName: '',
+    numberOfParticipants: '1',
+    fullName: '',
+    year: '',
+    streamBranch: '',
+    collegeName: '',
+    collegeIdProof: null,
+    contactNumber: '',
+    emailAddress: '',
+    joinWhatsappConfirmed: false,
+    paymentMode: '',
+    transactionId: '',
+    transactionDate: '',
+    paymentScreenshot: null,
+    cashReceipt: null,
+    declarationConfirmed: false
+  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+    let nextValue = value;
+
+    if (type === 'checkbox') {
+      nextValue = checked;
+    } else if (type === 'file') {
+      nextValue = files && files[0] ? files[0] : null;
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: nextValue }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const validateForm = () => {
+    const nextErrors = {};
+
+    if (!formData.teamName.trim()) nextErrors.teamName = 'Team Name is required';
+
+    if (!String(formData.numberOfParticipants).trim()) {
+      nextErrors.numberOfParticipants = 'Number of Participants is required';
+    } else if (Number(formData.numberOfParticipants) !== 1) {
+      nextErrors.numberOfParticipants = 'This is an individual event. Number of Participants must be 1';
+    }
+
+    if (!formData.fullName.trim()) nextErrors.fullName = 'Full Name is required';
+    if (!formData.year) nextErrors.year = 'Year is required';
+    if (!formData.streamBranch) nextErrors.streamBranch = 'Stream / Branch is required';
+    if (!formData.collegeName.trim()) nextErrors.collegeName = 'College Name is required';
+    if (!formData.collegeIdProof) nextErrors.collegeIdProof = 'College ID / Library Card upload is required';
+
+    if (!formData.contactNumber.trim()) {
+      nextErrors.contactNumber = 'Contact Number is required';
+    } else if (!/^\d{10,15}$/.test(formData.contactNumber.replace(/\D/g, ''))) {
+      nextErrors.contactNumber = 'Enter a valid contact number';
+    }
+
+    if (!formData.emailAddress.trim()) {
+      nextErrors.emailAddress = 'Email Address is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.emailAddress)) {
+      nextErrors.emailAddress = 'Invalid email format';
+    }
+
+    if (!formData.joinWhatsappConfirmed) {
+      nextErrors.joinWhatsappConfirmed = 'Please confirm you joined the official WhatsApp group';
+    }
+
+    if (!formData.paymentMode) nextErrors.paymentMode = 'Mode of Payment is required';
+
+    if (formData.paymentMode === 'online') {
+      if (!formData.transactionId.trim()) {
+        nextErrors.transactionId = 'Transaction ID is required for online payment';
+      }
+      if (!formData.paymentScreenshot) {
+        nextErrors.paymentScreenshot = 'Upload payment screenshot for online payment';
+      }
+    }
+
+    if (formData.paymentMode === 'cash') {
+      if (!formData.cashReceipt) {
+        nextErrors.cashReceipt = 'Upload cash receipt / slip for offline payment';
+      }
+    }
+
+    if (!formData.declarationConfirmed) {
+      nextErrors.declarationConfirmed = 'Please confirm the mandatory declaration';
+    }
+
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      console.log('Khet registration submitted:', formData);
+      setIsSubmitting(false);
+      setSubmitSuccess(true);
+
+      setTimeout(() => {
+        history.push('/events');
+      }, 2500);
+    }, 1200);
+  };
+
+  return (
+    <div className="registration-page">
+      <Breadcrumb
+        pageTitle="Register for Khet"
+        currentPage="Registration"
+        bgImage={khetBanner}
+      />
+
+      <div className="registration-container">
+        <div className="registration-content">
+          <div className="registration-header">
+            <h1 className="registration-title">Khet Registration Form</h1>
+            <p className="registration-subtitle">Note: "*" indicates Mandatory Fields</p>
+          </div>
+
+          {submitSuccess && (
+            <div className="success-message">
+              Registration Successful! Redirecting to events page...
+            </div>
+          )}
+
+          <form className="registration-form" onSubmit={handleSubmit}>
+
+            <div className="form-section">
+              <h2 className="form-section-title">&gt;&gt;&gt; Participant Details</h2>
+
+              <div className="form-group">
+                <label className="form-label required">Full Name</label>
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                  className="retro-input"
+                  placeholder="Full Name"
+                />
+                {errors.fullName && <div className="error-message">{errors.fullName}</div>}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label required">Year</label>
+                <div className="mcq-group">
+                  {YEAR_OPTIONS.map((option) => (
+                    <label className="mcq-option" key={option}>
+                      <input
+                        type="radio"
+                        name="year"
+                        value={option}
+                        checked={formData.year === option}
+                        onChange={handleInputChange}
+                      />
+                      <span className="mcq-option-label">{option}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.year && <div className="error-message">{errors.year}</div>}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label required">Stream / Branch</label>
+                <div className="mcq-group">
+                  {STREAM_OPTIONS.map((option) => (
+                    <label className="mcq-option" key={option}>
+                      <input
+                        type="radio"
+                        name="streamBranch"
+                        value={option}
+                        checked={formData.streamBranch === option}
+                        onChange={handleInputChange}
+                      />
+                      <span className="mcq-option-label">{option}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.streamBranch && <div className="error-message">{errors.streamBranch}</div>}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label required">College Name</label>
+                <input
+                  type="text"
+                  name="collegeName"
+                  value={formData.collegeName}
+                  onChange={handleInputChange}
+                  className="retro-input"
+                  placeholder="College Name"
+                />
+                {errors.collegeName && <div className="error-message">{errors.collegeName}</div>}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label required">College ID / Library Card Upload</label>
+                <div className="file-upload-wrapper">
+                  <div className="file-upload">
+                    <input
+                      type="file"
+                      name="collegeIdProof"
+                      id="collegeIdProof"
+                      className="file-upload-input"
+                      accept="image/*,.pdf"
+                      onChange={handleInputChange}
+                    />
+                    <label htmlFor="collegeIdProof" className="file-upload-label">
+                      <div className="file-upload-icon">FILE</div>
+                      <div className="file-upload-text">
+                        <span className="highlight">Click to upload</span>
+                        <br />
+                        PNG, JPG, PDF
+                      </div>
+                    </label>
+                  </div>
+                  {formData.collegeIdProof && <div className="file-name">{formData.collegeIdProof.name}</div>}
+                </div>
+                {errors.collegeIdProof && <div className="error-message">{errors.collegeIdProof}</div>}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label required">Contact Number (Preferably WhatsApp Number)</label>
+                <input
+                  type="text"
+                  name="contactNumber"
+                  value={formData.contactNumber}
+                  onChange={handleInputChange}
+                  className="retro-input"
+                  placeholder="Contact Number"
+                />
+                {errors.contactNumber && <div className="error-message">{errors.contactNumber}</div>}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label required">Email Address</label>
+                <input
+                  type="text"
+                  name="emailAddress"
+                  value={formData.emailAddress}
+                  onChange={handleInputChange}
+                  className="retro-input"
+                  placeholder="Email Address"
+                />
+                {errors.emailAddress && <div className="error-message">{errors.emailAddress}</div>}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label required">Join Official WhatsApp Group</label>
+                <p style={{ margin: 0 }}>
+                  <a
+                    href="https://chat.whatsapp.com/LeNZPNivID87ydepOLpAvY?mode=gi_t"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#ffc010' }}
+                  >
+                    https://chat.whatsapp.com/LeNZPNivID87ydepOLpAvY?mode=gi_t
+                  </a>
+                </p>
+                <label className="checkbox-group" style={{ marginTop: '12px' }}>
+                  <input
+                    type="checkbox"
+                    name="joinWhatsappConfirmed"
+                    checked={formData.joinWhatsappConfirmed}
+                    onChange={handleInputChange}
+                  />
+                  <span className="checkbox-custom"></span>
+                  <span className="checkbox-label">I have joined the official WhatsApp group</span>
+                </label>
+                {errors.joinWhatsappConfirmed && <div className="error-message">{errors.joinWhatsappConfirmed}</div>}
+              </div>
+            </div>
+
+            <div className="form-section">
+              <h2 className="form-section-title">&gt;&gt;&gt; Payment Section</h2>
+
+              <div className="form-group">
+                <label className="form-label required">Mode of Payment</label>
+                <div className="mcq-group">
+                  <label className="mcq-option">
+                    <input
+                      type="radio"
+                      name="paymentMode"
+                      value="cash"
+                      checked={formData.paymentMode === 'cash'}
+                      onChange={handleInputChange}
+                    />
+                    <span className="mcq-option-label">Cash</span>
+                  </label>
+                  <label className="mcq-option">
+                    <input
+                      type="radio"
+                      name="paymentMode"
+                      value="online"
+                      checked={formData.paymentMode === 'online'}
+                      onChange={handleInputChange}
+                    />
+                    <span className="mcq-option-label">Online</span>
+                  </label>
+                </div>
+                {errors.paymentMode && <div className="error-message">{errors.paymentMode}</div>}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Transaction ID (For Online Payment)</label>
+                <input
+                  type="text"
+                  name="transactionId"
+                  value={formData.transactionId}
+                  onChange={handleInputChange}
+                  className="retro-input"
+                  placeholder="Transaction ID"
+                />
+                {errors.transactionId && <div className="error-message">{errors.transactionId}</div>}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Date of Transaction</label>
+                <input
+                  type="date"
+                  name="transactionDate"
+                  value={formData.transactionDate}
+                  onChange={handleInputChange}
+                  className="retro-input"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label required">Upload Payment Screenshot (For Online Payment)</label>
+                <div className="file-upload-wrapper">
+                  <div className="file-upload">
+                    <input
+                      type="file"
+                      name="paymentScreenshot"
+                      id="paymentScreenshot"
+                      className="file-upload-input"
+                      accept="image/*,.pdf"
+                      onChange={handleInputChange}
+                    />
+                    <label htmlFor="paymentScreenshot" className="file-upload-label">
+                      <div className="file-upload-icon">FILE</div>
+                      <div className="file-upload-text">
+                        <span className="highlight">Click to upload</span>
+                        <br />
+                        PNG, JPG, PDF
+                      </div>
+                    </label>
+                  </div>
+                  {formData.paymentScreenshot && <div className="file-name">{formData.paymentScreenshot.name}</div>}
+                </div>
+                {errors.paymentScreenshot && <div className="error-message">{errors.paymentScreenshot}</div>}
+              </div>
+
+              <div className="form-group">
+                <label className="form-label required">Upload Cash Receipt / Slip (If Paid Offline)</label>
+                <div className="file-upload-wrapper">
+                  <div className="file-upload">
+                    <input
+                      type="file"
+                      name="cashReceipt"
+                      id="cashReceipt"
+                      className="file-upload-input"
+                      accept="image/*,.pdf"
+                      onChange={handleInputChange}
+                    />
+                    <label htmlFor="cashReceipt" className="file-upload-label">
+                      <div className="file-upload-icon">FILE</div>
+                      <div className="file-upload-text">
+                        <span className="highlight">Click to upload</span>
+                        <br />
+                        PNG, JPG, PDF
+                      </div>
+                    </label>
+                  </div>
+                  {formData.cashReceipt && <div className="file-name">{formData.cashReceipt.name}</div>}
+                </div>
+                {errors.cashReceipt && <div className="error-message">{errors.cashReceipt}</div>}
+              </div>
+            </div>
+
+            <div className="form-section">
+              <h2 className="form-section-title">&gt;&gt;&gt; Mandatory Declaration</h2>
+              <div className="form-group">
+                <label className="checkbox-group">
+                  <input
+                    type="checkbox"
+                    name="declarationConfirmed"
+                    checked={formData.declarationConfirmed}
+                    onChange={handleInputChange}
+                  />
+                  <span className="checkbox-custom"></span>
+                  <span className="checkbox-label">
+                    I have checked all the details carefully and have joined the WhatsApp group
+                  </span>
+                </label>
+                {errors.declarationConfirmed && <div className="error-message">{errors.declarationConfirmed}</div>}
+              </div>
+            </div>
+
+            <div className="submit-button-wrapper">
+              <button type="submit" className="retro-button" disabled={isSubmitting}>
+                {isSubmitting ? 'Submitting...' : 'Submit Registration'}
+              </button>
+              <button
+                type="button"
+                className="retro-button secondary"
+                onClick={() => history.goBack()}
+                disabled={isSubmitting}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default KhetRegistration;
