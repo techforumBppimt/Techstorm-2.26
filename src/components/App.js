@@ -48,6 +48,7 @@ import RoNavigatorRegistration from './Pages/Registration/RoNavigatorRegistratio
 import RoCombatRegistration from './Pages/Registration/RoCombatRegistration';
 import RoSoccerRegistration from './Pages/Registration/RoSoccerRegistration';
 import RoTerranceRegistration from './Pages/Registration/RoTerranceRegistration';
+import RoSumoRegistration from './Pages/Registration/RoSumoRegistration';
 import CreativeCanvasRegistration from './Pages/Registration/CreativeCanvasRegistration';
 import PassionWithReelsRegistration from './Pages/Registration/PassionWithReelsRegistration';
 import ForzaHorizonRegistration from './Pages/Registration/ForzaHorizonRegistration';
@@ -174,6 +175,7 @@ const AppContent = () => {
         <Route exact path="/register/ro-combat" component={RoCombatRegistration} />
         <Route exact path="/register/ro-soccer" component={RoSoccerRegistration} />
         <Route exact path="/register/ro-terrance" component={RoTerranceRegistration} />
+        <Route exact path="/register/ro-sumo" component={RoSumoRegistration} />
         <Route exact path="/register/creative-canvas" component={CreativeCanvasRegistration} />
         <Route exact path="/register/passion-with-reels" component={PassionWithReelsRegistration} />
         <Route exact path="/register/forza-horizon" component={ForzaHorizonRegistration} />

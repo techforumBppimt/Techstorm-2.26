@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { submitEventRegistration } from '../../../utils/eventRegistrationAPI';
 import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
 import './Registration.css';
 import omegatrixBanner from '../../../assets/img/event_specific_pictures/omegatrix/OMEGATRIX_banner.png';
@@ -74,6 +75,7 @@ const OmegatrixRegistration = () => {
     }
 
     if (!formData.paymentMode) nextErrors.paymentMode = 'Mode of Payment is required';
+    if (!formData.transactionDate) nextErrors.transactionDate = 'Payment date is required';
 
     if (formData.paymentMode === 'online') {
       if (!formData.transactionId.trim()) {
@@ -107,7 +109,7 @@ const OmegatrixRegistration = () => {
     return Object.keys(nextErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -116,15 +118,24 @@ const OmegatrixRegistration = () => {
 
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      console.log('Omegatrix registration submitted:', formData);
-      setIsSubmitting(false);
+    try {
+      const result = await submitEventRegistration('Omegatrix', formData);
+      console.log('Omegatrix registration successful:', result);
       setSubmitSuccess(true);
 
       setTimeout(() => {
         history.push('/events');
       }, 2500);
-    }, 1200);
+    } catch (error) {
+      console.error('Registration error:', error);
+      if (error.message.includes('duplicate')) {
+        setErrors({ submit: 'You have already registered for this event with this email or phone number.' });
+      } else {
+        setErrors({ submit: error.message || 'Registration failed. Please try again.' });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -145,6 +156,18 @@ const OmegatrixRegistration = () => {
           {submitSuccess && (
             <div className="success-message">
               Registration Successful! Redirecting to events page...
+            </div>
+          )}
+          {errors.submit && (
+            <div className="error-message" style={{ 
+              marginBottom: '20px', 
+              padding: '15px', 
+              backgroundColor: '#ff4444', 
+              color: 'white',
+              borderRadius: '5px',
+              textAlign: 'center'
+            }}>
+              {errors.submit}
             </div>
           )}
 
@@ -329,80 +352,88 @@ const OmegatrixRegistration = () => {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Transaction ID (For Online Payment)</label>
-                <input
-                  type="text"
-                  name="transactionId"
-                  value={formData.transactionId}
-                  onChange={handleInputChange}
-                  className="retro-input"
-                  placeholder="Transaction ID"
-                />
-                {errors.transactionId && <div className="error-message">{errors.transactionId}</div>}
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Date of Transaction</label>
+                <label className="form-label required">Payment Date</label>
                 <input
                   type="date"
                   name="transactionDate"
                   value={formData.transactionDate}
                   onChange={handleInputChange}
                   className="retro-input"
+                  max={new Date().toISOString().split('T')[0]}
                 />
+                {errors.transactionDate && <div className="error-message">{errors.transactionDate}</div>}
               </div>
 
-              <div className="form-group">
-                <label className="form-label required">Upload Payment Screenshot (For Online Payment)</label>
-                <div className="file-upload-wrapper">
-                  <div className="file-upload">
+              {formData.paymentMode === 'online' && (
+                <>
+                  <div className="form-group">
+                    <label className="form-label required">Transaction ID</label>
                     <input
-                      type="file"
-                      name="paymentScreenshot"
-                      id="paymentScreenshot"
-                      className="file-upload-input"
-                      accept="image/*,.pdf"
+                      type="text"
+                      name="transactionId"
+                      value={formData.transactionId}
                       onChange={handleInputChange}
+                      className="retro-input"
+                      placeholder="Transaction ID"
                     />
-                    <label htmlFor="paymentScreenshot" className="file-upload-label">
-                      <div className="file-upload-icon">FILE</div>
-                      <div className="file-upload-text">
-                        <span className="highlight">Click to upload</span>
-                        <br />
-                        PNG, JPG, PDF
-                      </div>
-                    </label>
+                    {errors.transactionId && <div className="error-message">{errors.transactionId}</div>}
                   </div>
-                  {formData.paymentScreenshot && <div className="file-name">{formData.paymentScreenshot.name}</div>}
-                </div>
-                {errors.paymentScreenshot && <div className="error-message">{errors.paymentScreenshot}</div>}
-              </div>
 
-              <div className="form-group">
-                <label className="form-label required">Upload Cash Receipt / Slip (If Paid Offline)</label>
-                <div className="file-upload-wrapper">
-                  <div className="file-upload">
-                    <input
-                      type="file"
-                      name="cashReceipt"
-                      id="cashReceipt"
-                      className="file-upload-input"
-                      accept="image/*,.pdf"
-                      onChange={handleInputChange}
-                    />
-                    <label htmlFor="cashReceipt" className="file-upload-label">
-                      <div className="file-upload-icon">FILE</div>
-                      <div className="file-upload-text">
-                        <span className="highlight">Click to upload</span>
-                        <br />
-                        PNG, JPG, PDF
+                  <div className="form-group">
+                    <label className="form-label required">Upload Payment Screenshot</label>
+                    <div className="file-upload-wrapper">
+                      <div className="file-upload">
+                        <input
+                          type="file"
+                          name="paymentScreenshot"
+                          id="paymentScreenshot"
+                          className="file-upload-input"
+                          accept="image/*,.pdf"
+                          onChange={handleInputChange}
+                        />
+                        <label htmlFor="paymentScreenshot" className="file-upload-label">
+                          <div className="file-upload-icon">FILE</div>
+                          <div className="file-upload-text">
+                            <span className="highlight">Click to upload</span>
+                            <br />
+                            PNG, JPG, PDF
+                          </div>
+                        </label>
                       </div>
-                    </label>
+                      {formData.paymentScreenshot && <div className="file-name">{formData.paymentScreenshot.name}</div>}
+                    </div>
+                    {errors.paymentScreenshot && <div className="error-message">{errors.paymentScreenshot}</div>}
                   </div>
-                  {formData.cashReceipt && <div className="file-name">{formData.cashReceipt.name}</div>}
+                </>
+              )}
+
+              {formData.paymentMode === 'cash' && (
+                <div className="form-group">
+                  <label className="form-label required">Upload Cash Receipt / Slip</label>
+                  <div className="file-upload-wrapper">
+                    <div className="file-upload">
+                      <input
+                        type="file"
+                        name="cashReceipt"
+                        id="cashReceipt"
+                        className="file-upload-input"
+                        accept="image/*,.pdf"
+                        onChange={handleInputChange}
+                      />
+                      <label htmlFor="cashReceipt" className="file-upload-label">
+                        <div className="file-upload-icon">FILE</div>
+                        <div className="file-upload-text">
+                          <span className="highlight">Click to upload</span>
+                          <br />
+                          PNG, JPG, PDF
+                        </div>
+                      </label>
+                    </div>
+                    {formData.cashReceipt && <div className="file-name">{formData.cashReceipt.name}</div>}
+                  </div>
+                  {errors.cashReceipt && <div className="error-message">{errors.cashReceipt}</div>}
                 </div>
-                {errors.cashReceipt && <div className="error-message">{errors.cashReceipt}</div>}
-              </div>
+              )}
             </div>
 
             <div className="form-section">

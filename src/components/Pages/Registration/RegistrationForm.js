@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { submitEventRegistration } from '../../../utils/eventRegistrationAPI';
 import './Registration.css';
 import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
 
@@ -25,10 +26,18 @@ const RegistrationForm = ({ eventConfig }) => {
         // Event Specific
         experienceLevel: '',
         
+        // Payment Information
+        paymentMode: '',
+        paymentDate: '',
+        paymentReceipt: null,
+        
         // Additional Information
         dietaryRestrictions: '',
         specialRequirements: '',
         howDidYouHear: '',
+        
+        // WhatsApp Group
+        whatsappConfirmed: false,
         
         // File Upload
         idProof: null,
@@ -76,7 +85,23 @@ const RegistrationForm = ({ eventConfig }) => {
         if (!formData.department.trim()) newErrors.department = 'Department is required';
         if (!formData.experienceLevel) newErrors.experienceLevel = 'Experience level is required';
         if (!formData.howDidYouHear) newErrors.howDidYouHear = 'Please select an option';
+        if (!formData.whatsappConfirmed) newErrors.whatsappConfirmed = 'Please confirm after joining the WhatsApp group';
         if (!formData.agreeToTerms) newErrors.agreeToTerms = 'You must agree to terms';
+        
+        // Payment validation (skip for CodeBee and HackStorm)
+        const skipPayment = eventConfig.eventName === 'Code-Bee' || eventConfig.eventName === 'HackStorm';
+        if (!skipPayment) {
+            if (!formData.paymentMode) newErrors.paymentMode = 'Payment mode is required';
+            if (!formData.paymentDate) newErrors.paymentDate = 'Payment date is required';
+            
+            // Receipt validation based on payment mode
+            if (formData.paymentMode === 'online' && !formData.paymentReceipt) {
+                newErrors.paymentReceipt = 'Payment screenshot is required for online payment';
+            }
+            if (formData.paymentMode === 'offline' && !formData.paymentReceipt) {
+                newErrors.paymentReceipt = 'Offline receipt is required for offline payment';
+            }
+        }
         
         // Team member validation if team size > 1
         if (parseInt(formData.teamSize) > 1) {
@@ -106,17 +131,24 @@ const RegistrationForm = ({ eventConfig }) => {
         
         setIsSubmitting(true);
         
-        // Simulate API call
-        setTimeout(() => {
-            console.log('Form submitted for:', eventConfig.eventName, formData);
-            setIsSubmitting(false);
+        try {
+            const result = await submitEventRegistration(eventConfig.eventName, formData);
+            console.log('Registration successful:', result);
             setSubmitSuccess(true);
             
-            // Reset form after 3 seconds and redirect
             setTimeout(() => {
                 history.push('/events');
             }, 3000);
-        }, 2000);
+        } catch (error) {
+            console.error('Registration error:', error);
+            if (error.message.includes('duplicate')) {
+                setErrors({ submit: 'You have already registered for this event with this email or phone number.' });
+            } else {
+                setErrors({ submit: error.message || 'Registration failed. Please try again.' });
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleCancel = () => {
@@ -147,6 +179,19 @@ const RegistrationForm = ({ eventConfig }) => {
                         <div className="success-message">
                             ✓ Registration Successful!<br/>
                             Redirecting to events page...
+                        </div>
+                    )}
+
+                    {errors.submit && (
+                        <div className="error-message" style={{ 
+                            marginBottom: '20px', 
+                            padding: '15px', 
+                            backgroundColor: '#ff4444', 
+                            color: 'white',
+                            borderRadius: '5px',
+                            textAlign: 'center'
+                        }}>
+                            {errors.submit}
                         </div>
                     )}
 
@@ -418,6 +463,92 @@ const RegistrationForm = ({ eventConfig }) => {
                             ))}
                         </div>
 
+                        {/* Payment Information Section - Skip for CodeBee and HackStorm */}
+                        {eventConfig.eventName !== 'Code-Bee' && eventConfig.eventName !== 'HackStorm' && (
+                            <div className="form-section">
+                                <h2 className="form-section-title">&gt;&gt;&gt; Payment Information</h2>
+                                
+                                <div className="form-group">
+                                    <label className="form-label required">Payment Mode</label>
+                                    <div className="mcq-group">
+                                        <label className="mcq-option">
+                                            <input
+                                                type="radio"
+                                                name="paymentMode"
+                                                value="online"
+                                                checked={formData.paymentMode === 'online'}
+                                                onChange={handleInputChange}
+                                            />
+                                            <span className="mcq-option-label">Online Payment (UPI/Card/Net Banking)</span>
+                                        </label>
+                                        
+                                        <label className="mcq-option">
+                                            <input
+                                                type="radio"
+                                                name="paymentMode"
+                                                value="offline"
+                                                checked={formData.paymentMode === 'offline'}
+                                                onChange={handleInputChange}
+                                            />
+                                            <span className="mcq-option-label">Offline Payment (Cash/Cheque)</span>
+                                        </label>
+                                    </div>
+                                    {errors.paymentMode && <div className="error-message">{errors.paymentMode}</div>}
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="form-label required">Payment Date</label>
+                                    <input
+                                        type="date"
+                                        name="paymentDate"
+                                        value={formData.paymentDate}
+                                        onChange={handleInputChange}
+                                        className="retro-input"
+                                        max={new Date().toISOString().split('T')[0]}
+                                    />
+                                    {errors.paymentDate && <div className="error-message">{errors.paymentDate}</div>}
+                                </div>
+
+                                {formData.paymentMode && (
+                                    <div className="form-group">
+                                        <label className="form-label required">
+                                            {formData.paymentMode === 'online' 
+                                                ? 'Upload Payment Screenshot' 
+                                                : 'Upload Offline Receipt'}
+                                        </label>
+                                        <div className="file-upload-wrapper">
+                                            <div className="file-upload">
+                                                <input
+                                                    type="file"
+                                                    name="paymentReceipt"
+                                                    id="paymentReceipt"
+                                                    onChange={handleInputChange}
+                                                    className="file-upload-input"
+                                                    accept="image/*,.pdf"
+                                                />
+                                                <label htmlFor="paymentReceipt" className="file-upload-label">
+                                                    <div className="file-upload-icon">💳</div>
+                                                    <div className="file-upload-text">
+                                                        <span className="highlight">Click to upload</span><br/>
+                                                        {formData.paymentMode === 'online' 
+                                                            ? 'Upload payment screenshot' 
+                                                            : 'Upload offline receipt'}<br/>
+                                                        (PNG, JPG, PDF - Max 5MB)
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            {formData.paymentReceipt && (
+                                                <div className="file-name">
+                                                    ✓ {formData.paymentReceipt.name}
+                                                </div>
+                                            )}
+                                        </div>
+                                        {errors.paymentReceipt && <div className="error-message">{errors.paymentReceipt}</div>}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
                         {/* Additional Information Section */}
                         <div className="form-section">
                             <h2 className="form-section-title">&gt;&gt;&gt; Additional Information</h2>
@@ -504,6 +635,34 @@ const RegistrationForm = ({ eventConfig }) => {
                                     </label>
                                 </div>
                                 {errors.howDidYouHear && <div className="error-message">{errors.howDidYouHear}</div>}
+                            </div>
+                        </div>
+
+                        {/* WhatsApp Group Section */}
+                        <div className="form-section">
+                            <h2 className="form-section-title">&gt;&gt;&gt; WhatsApp Group</h2>
+                            
+                            <div className="form-group">
+                                <label className="form-label">Official WhatsApp Group Link</label>
+                                <p style={{ margin: '10px 0', color: '#ffc010' }}>
+                                    Join our official WhatsApp group for event updates and announcements
+                                </p>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="checkbox-group">
+                                    <input
+                                        type="checkbox"
+                                        name="whatsappConfirmed"
+                                        checked={formData.whatsappConfirmed}
+                                        onChange={handleInputChange}
+                                    />
+                                    <span className="checkbox-custom"></span>
+                                    <span className="checkbox-label">
+                                        I confirm that I have joined the official WhatsApp group
+                                    </span>
+                                </label>
+                                {errors.whatsappConfirmed && <div className="error-message">{errors.whatsappConfirmed}</div>}
                             </div>
                         </div>
 

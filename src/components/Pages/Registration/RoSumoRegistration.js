@@ -3,24 +3,22 @@ import { useHistory } from 'react-router-dom';
 import { submitEventRegistration } from '../../../utils/eventRegistrationAPI';
 import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
 import './Registration.css';
-import techHuntBanner from '../../../assets/img/event_specific_pictures/techHunt/techhunt_banner.png';
+import roSumoBanner from '../../../assets/img/event_specific_pictures/robotics/ro_sumo.png';
 
 const MIN_PARTICIPANTS = 2;
 const MAX_PARTICIPANTS = 5;
-const COLLEGE_OPTIONS = [
-  'B.P. Poddar Institute of Management & Technology (BPPIMT)',
-  'Others'
-];
+const YEAR_OPTIONS = ['1st year', '2nd year', '3rd year', '4th year', 'Other'];
 
 const createParticipant = () => ({
   name: '',
+  year: '',
   contact: '',
   email: '',
   college: '',
   idFile: null
 });
 
-const TechHuntRegistration = () => {
+const RoSumoRegistration = () => {
   const history = useHistory();
 
   const [formData, setFormData] = useState({
@@ -29,11 +27,11 @@ const TechHuntRegistration = () => {
     participants: Array.from({ length: MAX_PARTICIPANTS }, createParticipant),
     paymentMode: '',
     transactionId: '',
-    paymentReceipt: null,
-    whatsappConfirmed: false,
-    declarationRulesRead: false,
-    declarationFairPlay: false,
-    declarationLogistics: false
+    paymentDate: '',
+    paymentScreenshot: null,
+    cashReceipt: null,
+    agreeToRules: false,
+    whatsappConfirmed: false
   });
 
   const [errors, setErrors] = useState({});
@@ -98,52 +96,70 @@ const TechHuntRegistration = () => {
 
     for (let i = 0; i < participantCount; i += 1) {
       const participant = formData.participants[i];
+      const isMandatoryParticipant = i < 2;
 
-      if (!participant.name.trim()) nextErrors[`participant_${i}_name`] = 'Name is required';
-
-      if (!participant.contact.trim()) {
-        nextErrors[`participant_${i}_contact`] = 'Contact Number is required';
-      } else if (!/^\d{10,15}$/.test(participant.contact.replace(/\D/g, ''))) {
-        nextErrors[`participant_${i}_contact`] = 'Enter a valid contact number';
+      if (isMandatoryParticipant || participant.name.trim()) {
+        if (!participant.name.trim()) nextErrors[`participant_${i}_name`] = 'Name is required';
       }
 
-      if (!participant.email.trim()) {
-        nextErrors[`participant_${i}_email`] = 'Email ID is required';
-      } else if (!/\S+@\S+\.\S+/.test(participant.email)) {
-        nextErrors[`participant_${i}_email`] = 'Invalid email format';
+      if (isMandatoryParticipant || participant.year) {
+        if (!participant.year) nextErrors[`participant_${i}_year`] = 'Year is required';
       }
 
-      if (!participant.idFile) nextErrors[`participant_${i}_idFile`] = 'ID card file is required';
-      if (!participant.college) nextErrors[`participant_${i}_college`] = 'College selection is required';
+      if (isMandatoryParticipant || participant.contact.trim()) {
+        if (!participant.contact.trim()) {
+          nextErrors[`participant_${i}_contact`] = 'Contact Number is required';
+        } else if (!/^\d{10,15}$/.test(participant.contact.replace(/\D/g, ''))) {
+          nextErrors[`participant_${i}_contact`] = 'Enter a valid contact number';
+        }
+      }
+
+      if (isMandatoryParticipant || participant.email.trim()) {
+        if (!participant.email.trim()) {
+          nextErrors[`participant_${i}_email`] = 'Email ID is required';
+        } else if (!/\S+@\S+\.\S+/.test(participant.email)) {
+          nextErrors[`participant_${i}_email`] = 'Invalid email format';
+        }
+      }
+
+      if (isMandatoryParticipant || participant.college.trim()) {
+        if (!participant.college.trim()) nextErrors[`participant_${i}_college`] = 'College Name is required';
+      }
+
+      if (isMandatoryParticipant || participant.idFile) {
+        if (!participant.idFile) nextErrors[`participant_${i}_idFile`] = 'Participant ID file is required';
+      }
     }
 
     if (!formData.paymentMode) {
       nextErrors.paymentMode = 'Mode of Payment is required';
     }
 
+    if (!formData.paymentDate) {
+      nextErrors.paymentDate = 'Payment date is required';
+    }
+
     if (formData.paymentMode === 'online') {
       if (!formData.transactionId.trim()) {
         nextErrors.transactionId = 'Transaction ID is required for online payment';
       }
-      if (!formData.paymentReceipt) {
-        nextErrors.paymentReceipt = 'Payment receipt is required for online payment';
+      if (!formData.paymentScreenshot) {
+        nextErrors.paymentScreenshot = 'Upload payment screenshot for online payment';
       }
+    }
+
+    if (formData.paymentMode === 'cash') {
+      if (!formData.cashReceipt) {
+        nextErrors.cashReceipt = 'Upload cash receipt for offline payment';
+      }
+    }
+
+    if (!formData.agreeToRules) {
+      nextErrors.agreeToRules = 'You must agree to the event rules and regulations';
     }
 
     if (!formData.whatsappConfirmed) {
       nextErrors.whatsappConfirmed = 'Please confirm after joining the WhatsApp group';
-    }
-
-    if (!formData.declarationRulesRead) {
-      nextErrors.declarationRulesRead = 'Please accept this declaration';
-    }
-
-    if (!formData.declarationFairPlay) {
-      nextErrors.declarationFairPlay = 'Please accept this declaration';
-    }
-
-    if (!formData.declarationLogistics) {
-      nextErrors.declarationLogistics = 'Please accept this declaration';
     }
 
     setErrors(nextErrors);
@@ -160,8 +176,8 @@ const TechHuntRegistration = () => {
     setIsSubmitting(true);
 
     try {
-      const result = await submitEventRegistration('Tech Hunt', formData);
-      console.log('Tech Hunt registration successful:', result);
+      const result = await submitEventRegistration('Ro-Sumo', formData);
+      console.log('Ro-Sumo registration successful:', result);
       setSubmitSuccess(true);
 
       setTimeout(() => {
@@ -182,16 +198,16 @@ const TechHuntRegistration = () => {
   return (
     <div className="registration-page">
       <Breadcrumb
-        pageTitle="Register for Tech Hunt"
+        pageTitle="Register for Ro-Sumo"
         currentPage="Registration"
-        bgImage={techHuntBanner}
+        bgImage={roSumoBanner}
       />
 
       <div className="registration-container">
         <div className="registration-content">
           <div className="registration-header">
-            <h1 className="registration-title">Tech Hunt Registration Form</h1>
-            <p className="registration-subtitle">Note: "*" Indicates Mandatory</p>
+            <h1 className="registration-title">Ro-Sumo Registration Form</h1>
+            <p className="registration-subtitle">Note: * = Mandatory fields</p>
           </div>
 
           {submitSuccess && (
@@ -250,15 +266,14 @@ const TechHuntRegistration = () => {
             {Array.from({ length: participantCount }).map((_, index) => {
               const participant = formData.participants[index];
               const number = index + 1;
-              const sectionTitle =
-                index === 0 ? '>>> Participant 1 (Team Leader)' : `>>> Participant ${number}`;
+              const requiredClass = index < 2 ? 'required' : '';
 
               return (
                 <div className="form-section" key={number}>
-                  <h2 className="form-section-title">{sectionTitle}</h2>
+                  <h2 className="form-section-title">&gt;&gt;&gt; Participant {number}</h2>
 
                   <div className="form-group">
-                    <label className="form-label required">Name</label>
+                    <label className={`form-label ${requiredClass}`}>Name</label>
                     <input
                       type="text"
                       value={participant.name}
@@ -272,7 +287,28 @@ const TechHuntRegistration = () => {
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label required">Contact Number</label>
+                    <label className={`form-label ${requiredClass}`}>Year</label>
+                    <div className="mcq-group">
+                      {YEAR_OPTIONS.map((yearOption) => (
+                        <label className="mcq-option" key={`${number}_${yearOption}`}>
+                          <input
+                            type="radio"
+                            name={`participantYear_${index}`}
+                            value={yearOption}
+                            checked={participant.year === yearOption}
+                            onChange={(e) => handleParticipantChange(index, 'year', e.target.value)}
+                          />
+                          <span className="mcq-option-label">{yearOption}</span>
+                        </label>
+                      ))}
+                    </div>
+                    {errors[`participant_${index}_year`] && (
+                      <div className="error-message">{errors[`participant_${index}_year`]}</div>
+                    )}
+                  </div>
+
+                  <div className="form-group">
+                    <label className={`form-label ${requiredClass}`}>Contact Number</label>
                     <input
                       type="text"
                       value={participant.contact}
@@ -286,7 +322,7 @@ const TechHuntRegistration = () => {
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label required">Email ID</label>
+                    <label className={`form-label ${requiredClass}`}>Email ID</label>
                     <input
                       type="text"
                       value={participant.email}
@@ -300,7 +336,23 @@ const TechHuntRegistration = () => {
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label required">Student ID card / Library Card</label>
+                    <label className={`form-label ${requiredClass}`}>College Name</label>
+                    <input
+                      type="text"
+                      value={participant.college}
+                      onChange={(e) => handleParticipantChange(index, 'college', e.target.value)}
+                      className="retro-input"
+                      placeholder={`Participant ${number} College Name`}
+                    />
+                    {errors[`participant_${index}_college`] && (
+                      <div className="error-message">{errors[`participant_${index}_college`]}</div>
+                    )}
+                  </div>
+
+                  <div className="form-group">
+                    <label className={`form-label ${requiredClass}`}>
+                      Participant ID (College ID / Library card)
+                    </label>
                     <div className="file-upload-wrapper">
                       <div className="file-upload">
                         <input
@@ -327,27 +379,6 @@ const TechHuntRegistration = () => {
                       <div className="error-message">{errors[`participant_${index}_idFile`]}</div>
                     )}
                   </div>
-
-                  <div className="form-group">
-                    <label className="form-label required">College</label>
-                    <div className="mcq-group">
-                      {COLLEGE_OPTIONS.map((option) => (
-                        <label className="mcq-option" key={`${number}_${option}`}>
-                          <input
-                            type="radio"
-                            name={`participantCollege_${index}`}
-                            value={option}
-                            checked={participant.college === option}
-                            onChange={(e) => handleParticipantChange(index, 'college', e.target.value)}
-                          />
-                          <span className="mcq-option-label">{option}</span>
-                        </label>
-                      ))}
-                    </div>
-                    {errors[`participant_${index}_college`] && (
-                      <div className="error-message">{errors[`participant_${index}_college`]}</div>
-                    )}
-                  </div>
                 </div>
               );
             })}
@@ -366,7 +397,7 @@ const TechHuntRegistration = () => {
                       checked={formData.paymentMode === 'cash'}
                       onChange={handleFieldChange}
                     />
-                    <span className="mcq-option-label">Offline (Cash)</span>
+                    <span className="mcq-option-label">Cash</span>
                   </label>
 
                   <label className="mcq-option">
@@ -384,42 +415,107 @@ const TechHuntRegistration = () => {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Transaction ID</label>
+                <label className="form-label required">Payment Date</label>
                 <input
-                  type="text"
-                  name="transactionId"
-                  value={formData.transactionId}
+                  type="date"
+                  name="paymentDate"
+                  value={formData.paymentDate}
                   onChange={handleFieldChange}
                   className="retro-input"
-                  placeholder="Transaction ID"
+                  max={new Date().toISOString().split('T')[0]}
                 />
-                {errors.transactionId && <div className="error-message">{errors.transactionId}</div>}
+                {errors.paymentDate && <div className="error-message">{errors.paymentDate}</div>}
               </div>
 
-              <div className="form-group">
-                <label className="form-label">Payment Receipt (Transaction Screenshot)</label>
-                <div className="file-upload-wrapper">
-                  <div className="file-upload">
+              {formData.paymentMode === 'online' && (
+                <>
+                  <div className="form-group">
+                    <label className="form-label required">Transaction ID</label>
                     <input
-                      type="file"
-                      name="paymentReceipt"
-                      id="paymentReceipt"
-                      className="file-upload-input"
-                      accept="image/*,.pdf"
+                      type="text"
+                      name="transactionId"
+                      value={formData.transactionId}
                       onChange={handleFieldChange}
+                      className="retro-input"
+                      placeholder="Transaction ID"
                     />
-                    <label htmlFor="paymentReceipt" className="file-upload-label">
-                      <div className="file-upload-icon">FILE</div>
-                      <div className="file-upload-text">
-                        <span className="highlight">Click to upload</span>
-                        <br />
-                        PNG, JPG, PDF
-                      </div>
-                    </label>
+                    {errors.transactionId && <div className="error-message">{errors.transactionId}</div>}
                   </div>
-                  {formData.paymentReceipt && <div className="file-name">{formData.paymentReceipt.name}</div>}
+
+                  <div className="form-group">
+                    <label className="form-label required">Upload Payment Screenshot</label>
+                    <div className="file-upload-wrapper">
+                      <div className="file-upload">
+                        <input
+                          type="file"
+                          name="paymentScreenshot"
+                          id="paymentScreenshot"
+                          className="file-upload-input"
+                          accept="image/*,.pdf"
+                          onChange={handleFieldChange}
+                        />
+                        <label htmlFor="paymentScreenshot" className="file-upload-label">
+                          <div className="file-upload-icon">FILE</div>
+                          <div className="file-upload-text">
+                            <span className="highlight">Click to upload</span>
+                            <br />
+                            PNG, JPG, PDF
+                          </div>
+                        </label>
+                      </div>
+                      {formData.paymentScreenshot && <div className="file-name">{formData.paymentScreenshot.name}</div>}
+                    </div>
+                    {errors.paymentScreenshot && <div className="error-message">{errors.paymentScreenshot}</div>}
+                  </div>
+                </>
+              )}
+
+              {formData.paymentMode === 'cash' && (
+                <div className="form-group">
+                  <label className="form-label required">Upload Cash Receipt</label>
+                  <div className="file-upload-wrapper">
+                    <div className="file-upload">
+                      <input
+                        type="file"
+                        name="cashReceipt"
+                        id="cashReceipt"
+                        className="file-upload-input"
+                        accept="image/*,.pdf"
+                        onChange={handleFieldChange}
+                      />
+                      <label htmlFor="cashReceipt" className="file-upload-label">
+                        <div className="file-upload-icon">FILE</div>
+                        <div className="file-upload-text">
+                          <span className="highlight">Click to upload</span>
+                          <br />
+                          PNG, JPG, PDF
+                        </div>
+                      </label>
+                    </div>
+                    {formData.cashReceipt && <div className="file-name">{formData.cashReceipt.name}</div>}
+                  </div>
+                  {errors.cashReceipt && <div className="error-message">{errors.cashReceipt}</div>}
                 </div>
-                {errors.paymentReceipt && <div className="error-message">{errors.paymentReceipt}</div>}
+              )}
+            </div>
+
+            <div className="form-section">
+              <h2 className="form-section-title">&gt;&gt;&gt; Rules & Regulations</h2>
+              
+              <div className="form-group">
+                <label className="checkbox-group">
+                  <input
+                    type="checkbox"
+                    name="agreeToRules"
+                    checked={formData.agreeToRules}
+                    onChange={handleFieldChange}
+                  />
+                  <span className="checkbox-custom"></span>
+                  <span className="checkbox-label">
+                    I agree to follow all event rules, regulations, and organizers' decisions. I understand the registration fee is non-refundable.
+                  </span>
+                </label>
+                {errors.agreeToRules && <div className="error-message">{errors.agreeToRules}</div>}
               </div>
             </div>
 
@@ -430,16 +526,13 @@ const TechHuntRegistration = () => {
                 <label className="form-label">Link</label>
                 <p style={{ margin: 0 }}>
                   <a
-                    href="https://chat.whatsapp.com/"
+                    href="https://chat.whatsapp.com/KOk8wb6I2Ww8KJwZBTU1sF"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: '#ffc010' }}
                   >
-                    https://chat.whatsapp.com/
+                    https://chat.whatsapp.com/KOk8wb6I2Ww8KJwZBTU1sF
                   </a>
-                </p>
-                <p style={{ margin: '8px 0 0', color: '#ffffff', fontSize: '11px', fontFamily: 'Press Start 2P, monospace' }}>
-                  Every participant must join.
                 </p>
               </div>
 
@@ -453,58 +546,10 @@ const TechHuntRegistration = () => {
                   />
                   <span className="checkbox-custom"></span>
                   <span className="checkbox-label">
-                    I have checked all the details carefully and have joined the WhatsApp group
+                    Yes, I have checked all the details carefully and have joined the WhatsApp group
                   </span>
                 </label>
                 {errors.whatsappConfirmed && <div className="error-message">{errors.whatsappConfirmed}</div>}
-              </div>
-
-              <div className="form-group">
-                <label className="checkbox-group">
-                  <input
-                    type="checkbox"
-                    name="declarationRulesRead"
-                    checked={formData.declarationRulesRead}
-                    onChange={handleFieldChange}
-                  />
-                  <span className="checkbox-custom"></span>
-                  <span className="checkbox-label">
-                    I have read all the above information carefully and will abide by the rules and regulations
-                  </span>
-                </label>
-                {errors.declarationRulesRead && <div className="error-message">{errors.declarationRulesRead}</div>}
-              </div>
-
-              <div className="form-group">
-                <label className="checkbox-group">
-                  <input
-                    type="checkbox"
-                    name="declarationFairPlay"
-                    checked={formData.declarationFairPlay}
-                    onChange={handleFieldChange}
-                  />
-                  <span className="checkbox-custom"></span>
-                  <span className="checkbox-label">
-                    I confirm that I will carry my College ID / Library Card. I understand that mobile phones, smart devices, AI tools, calculators, or any unfair means will lead to immediate disqualification.
-                  </span>
-                </label>
-                {errors.declarationFairPlay && <div className="error-message">{errors.declarationFairPlay}</div>}
-              </div>
-
-              <div className="form-group">
-                <label className="checkbox-group">
-                  <input
-                    type="checkbox"
-                    name="declarationLogistics"
-                    checked={formData.declarationLogistics}
-                    onChange={handleFieldChange}
-                  />
-                  <span className="checkbox-custom"></span>
-                  <span className="checkbox-label">
-                    I agree to follow all published logistics, scoring rules, tie-break criteria, and organizers&apos; decisions. I understand the registration fee is non-refundable.
-                  </span>
-                </label>
-                {errors.declarationLogistics && <div className="error-message">{errors.declarationLogistics}</div>}
               </div>
             </div>
 
@@ -528,4 +573,4 @@ const TechHuntRegistration = () => {
   );
 };
 
-export default TechHuntRegistration;
+export default RoSumoRegistration;
