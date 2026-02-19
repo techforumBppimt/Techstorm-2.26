@@ -647,14 +647,13 @@ function HeroOne() {
           }}
         >
           <div
+            className="hero-grid-floor"
             style={{
               position: "absolute",
               bottom: 0,
               left: "-30%",
               right: "-30%",
               height: "52%",
-              maxWidth: "none",
-              width: "160%",
               background: `
               linear-gradient(to bottom, transparent 0%, rgba(61,90,254,0.12) 100%),
               repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(61,90,254,0.28) 59px, rgba(61,90,254,0.28) 61px),
@@ -685,7 +684,7 @@ function HeroOne() {
             <div
               style={{
                 fontFamily: "'Press Start 2P', monospace",
-                fontSize: "clamp(28px, 7.5vw, 86px)",
+                fontSize: "clamp(18px, 5.2vw, 62px)",
                 color: glitching ? "var(--blue-electric)" : "var(--orange)",
                 textShadow: glitching
                   ? "6px 0 var(--purple-neon), -6px 0 var(--blue-electric), 0 0 70px var(--blue-electric)"
@@ -700,7 +699,7 @@ function HeroOne() {
                 userSelect: "none",
               }}
             >
-              TECHSTORM
+              TECHSTORM 2.26
             </div>
             {glitching && (
               <>
@@ -710,7 +709,7 @@ function HeroOne() {
                     top: 0,
                     left: "6px",
                     fontFamily: "'Press Start 2P', monospace",
-                    fontSize: "clamp(28px, 7.5vw, 86px)",
+                    fontSize: "clamp(18px, 5.2vw, 62px)",
                     color: "var(--purple-neon)",
                     opacity: 0.8,
                     letterSpacing: "6px",
@@ -718,7 +717,7 @@ function HeroOne() {
                     pointerEvents: "none",
                   }}
                 >
-                  TECHSTORM
+                  TECHSTORM 2.26
                 </div>
                 <div
                   style={{
@@ -726,7 +725,7 @@ function HeroOne() {
                     top: 0,
                     left: "-6px",
                     fontFamily: "'Press Start 2P', monospace",
-                    fontSize: "clamp(28px, 7.5vw, 86px)",
+                    fontSize: "clamp(18px, 5.2vw, 62px)",
                     color: "var(--blue-electric)",
                     opacity: 0.8,
                     letterSpacing: "6px",
@@ -734,7 +733,7 @@ function HeroOne() {
                     pointerEvents: "none",
                   }}
                 >
-                  TECHSTORM
+                  TECHSTORM 2.26
                 </div>
               </>
             )}

@@ -206,11 +206,24 @@ section#about * {
 }
 
 /* Allow hero background elements (retrowave grid, canvas) to exceed
-   100% width — prevents the global * { max-width: 100% } rule from
-   clipping the -30% offset grid on the right side. */
+   100% width — defeats the global div { max-width: 100% !important }
+   rule. A class selector (0,1,0) beats an element selector (0,0,1)
+   even when both carry !important, so .hero-grid-floor wins. */
 section#home > div,
 section#home canvas {
     max-width: none !important;
+}
+
+/* The retrowave perspective grid extends left:-30% right:-30% = 160%
+   wide. The global "div { max-width:100% !important }" in style.css
+   was capping it at 100vw and cutting off the right side.
+   Class specificity (0,1,0) > element specificity (0,0,1), so this
+   wins even though both rules carry !important. */
+.hero-grid-floor {
+    max-width: none !important;
+    width: auto !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
 }
 
 /* Restore h2 sizing — global style.css forces 18px !important */
