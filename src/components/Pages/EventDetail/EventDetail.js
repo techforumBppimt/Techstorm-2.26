@@ -115,13 +115,9 @@ const EventDetail = ({ eventData }) => {
     registerButton,
   } = eventData;
 
-<<<<<<< HEAD
-  const scrollContainerRef = useRef(null);
-  const autoScrollInterval = useRef(null);
-  const pauseTimeout = useRef(null);
-  const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
 
-=======
+
+
   // Refs for auto-scroll functionality
   const scrollContainerRef = useRef(null);
   const autoScrollInterval = useRef(null);
@@ -608,7 +604,7 @@ const EventDetail = ({ eventData }) => {
   const currentEventCoordinators =
     eventCoordinators[name] || coordinators || contact || [];
 
->>>>>>> 68d4231e8c9d848cbc757547cee76b5e49112da7
+
   // Map event names to registration routes
   const getRegistrationRoute = (eventName) => {
     const routeMap = {
@@ -992,7 +988,7 @@ const EventDetail = ({ eventData }) => {
                             // Check if it's an empty line
                             const isEmpty = rule.trim() === "";
                             // Highlight Judging Criteria header
-<<<<<<< HEAD
+
                             const isJudgingCriteria =
                               rule.includes("JUDGING CRITERIA");
                             // Highlight Round 1 and Round 2
@@ -1005,14 +1001,6 @@ const EventDetail = ({ eventData }) => {
                               .toLowerCase()
                               .startsWith("🎯 round 2:");
                             // FAQ question detection
-                            const isFaqQuestion =
-                              /\?$/.test(rule.trim()) &&
-                              rule.trim().length < 60;
-                            // Registration fee header detection for Passion with Reels
-                            const isRegistrationFeeHeader =
-                              name === "Passion with Reels" &&
-                              rule.trim().toLowerCase() ===
-                                "registration fees:";
 
                             // Reduce space after description (first empty line)
                             if (isEmpty) {
@@ -1136,7 +1124,6 @@ const EventDetail = ({ eventData }) => {
                                 </div>
                               );
                             }
-=======
 
                             // const isJudgingCriteria = false; // Remove or properly initialize if needed
                             // ...existing rule rendering logic...
@@ -1147,14 +1134,8 @@ const EventDetail = ({ eventData }) => {
 
                             // const isJudgingCriteria = false;
                             // Check if it's a registration fee header
-                            const isRegistrationFeeHeader =
-                              name === "Passion with Reels" &&
-                              rule.trim().toUpperCase() ===
-                                "REGISTRATION FEES:";
-                            // Check if it's a FAQ question (ends with ?)
-                            const isFaqQuestion = /\?$/.test(rule.trim());
 
->>>>>>> 68d4231e8c9d848cbc757547cee76b5e49112da7
+
                             if (isHeader) {
                               // Reduce space below Forza Horizon gold header
                               const isForzaHorizonHeader =
@@ -1255,7 +1236,7 @@ const EventDetail = ({ eventData }) => {
                                 </h3>
                               );
                             }
-                            // Registration fee header: larger font for Passion with Reels
+                            
                             if (isRegistrationFeeHeader) {
                               return (
                                 <div
@@ -1290,6 +1271,7 @@ const EventDetail = ({ eventData }) => {
                             }
                             // Highlight Ro-Navigator section headers with yellow background, remove bullet
                             // Highlight PRELIMS RULES: and FINALS RULES: with gold heading and diff icon
+                            
                             if (
                               name === "Ro-Navigator" &&
                               ["PRELIMS RULES:", "FINALS RULES:"].includes(
@@ -2006,26 +1988,26 @@ const EventDetail = ({ eventData }) => {
                     <h4
                       style={{
                         color: "#ffc010",
-<<<<<<< HEAD
+
                         fontSize: "14px",
-=======
+
                         fontSize: "16px",
                       }}
                     >
                       Team Size
-                    </p>
+                    </h4>
                     <p
                       style={{
                         fontSize: "18px",
                         margin: "0 0 10px 0",
->>>>>>> 68d4231e8c9d848cbc757547cee76b5e49112da7
+
                         fontFamily: "Press Start 2P",
                         marginBottom: "15px",
                         lineHeight: "1.5",
                       }}
                     >
                       For BPPIMT students
-                    </h4>
+                    </p>
                     <div
                       className="fee-amount"
                       style={{
