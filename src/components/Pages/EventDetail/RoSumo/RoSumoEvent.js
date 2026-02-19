@@ -30,8 +30,8 @@ const RoSumoEvent = () => {
     description:
       "Ro-Sumo is a thrilling robotics event where participants design and build autonomous or remote-controlled robots to compete in a sumo-style battle. The objective is to push the opponentâ€™s robot out of the ring while staying within the boundaries. This event tests your engineering, strategy, and control skills in a fast-paced, competitive environment.",
     teamSize: "2-5 Members",
-    entryFeeInternal: "â‚¹350 per team",
-    entryFeeExternal: "â‚¹400 per team",
+    entryFeeInternal: "₹350 per team",
+    entryFeeExternal: "₹400 per team",
     duration: "2 Hours",
     venue: "Robotics Arena",
     registerButton: {

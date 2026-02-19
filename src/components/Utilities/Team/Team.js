@@ -1,47 +1,42 @@
 import SectionTitle from "../SectionTitle/SectionTitle";
-import team1 from '../../../assets/img/team/team_img02.png';
-import team2 from '../../../assets/img/team/team_img03.png';
-import team3 from '../../../assets/img/team/team_img04.png';
-import team4 from '../../../assets/img/team/team_img05.png';
-import team5 from '../../../assets/img/team/team_img06.png';
-import team6 from '../../../assets/img/team/team_img07.png';
+import defaultAvatar from '../../../assets/img/team/IMG202602191108292-GouravPaul.png';
 import Member from "./Member";
 import AnimateOnScroll from '../ScrollAnimation/AnimateOnScroll';
 
 const teamData = [
     {
         id: '1',
-        avatar: team1,
+        avatar: defaultAvatar,
         name: '[Name]',
         deg: 'Convenor'
     },
     {
         id: '2',
-        avatar: team2,
+        avatar: defaultAvatar,
         name: '[Name]',
         deg: 'Co-Convenor'
     },
     {
         id: '3',
-        avatar: team3,
+        avatar: defaultAvatar,
         name: '[Name]',
         deg: 'Technical Head'
     },
     {
         id: '4',
-        avatar: team4,
+        avatar: defaultAvatar,
         name: '[Name]',
         deg: 'Creative Head'
     },
     {
         id: '5',
-        avatar: team5,
+        avatar: defaultAvatar,
         name: '[Name]',
         deg: 'Sponsorship Head'
     },
     {
         id: '6',
-        avatar: team6,
+        avatar: defaultAvatar,
         name: '[Name]',
         deg: 'PR Head'
     },

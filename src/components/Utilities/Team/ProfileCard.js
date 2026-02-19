@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import "./ProfileCard.css";
 
 const DEFAULT_INNER_GRADIENT =
-  "linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)";
+  "linear-gradient(145deg,rgba(255, 201, 136, 0.55) 0%,rgba(245, 180, 2, 0.35) 100%)";
 const ANIMATION_CONFIG = {
   INITIAL_DURATION: 1200,
   INITIAL_X_OFFSET: 70,
@@ -40,7 +40,7 @@ const ProfileCardComponent = ({
   behindGlowSize,
   className = "",
   enableTilt = true,
-  enableMobileTilt = false,
+  enableMobileTilt = true,
   mobileTiltSensitivity = 5,
   miniAvatarUrl,
   name = "Team Member",
@@ -326,7 +326,7 @@ const ProfileCardComponent = ({
       "--icon": effectiveIconUrl ? `url(${effectiveIconUrl})` : "none",
       "--grain": effectiveGrainUrl ? `url(${effectiveGrainUrl})` : "none",
       "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
-      "--behind-glow-color": behindGlowColor ?? "rgba(125, 190, 255, 0.67)",
+      "--behind-glow-color": behindGlowColor ?? "rgba(255, 165, 0, 0.75)",
       "--behind-glow-size": behindGlowSize ?? "50%",
       "--pointer-x": "50%",
       "--pointer-y": "50%",
@@ -339,12 +339,12 @@ const ProfileCardComponent = ({
       "--background-x": "50%",
       "--background-y": "50%",
       "--card-radius": cardRadius,
-      "--sunpillar-1": "hsl(2, 100%, 73%)",
-      "--sunpillar-2": "hsl(53, 100%, 69%)",
-      "--sunpillar-3": "hsl(93, 100%, 69%)",
-      "--sunpillar-4": "hsl(176, 100%, 76%)",
-      "--sunpillar-5": "hsl(228, 100%, 74%)",
-      "--sunpillar-6": "hsl(283, 100%, 73%)",
+      "--sunpillar-1": "hsl(30, 100%, 60%)",
+      "--sunpillar-2": "hsl(40, 100%, 55%)",
+      "--sunpillar-3": "hsl(50, 100%, 60%)",
+      "--sunpillar-4": "hsl(35, 100%, 65%)",
+      "--sunpillar-5": "hsl(45, 100%, 58%)",
+      "--sunpillar-6": "hsl(25, 100%, 62%)",
       "--sunpillar-clr-1": "var(--sunpillar-1)",
       "--sunpillar-clr-2": "var(--sunpillar-2)",
       "--sunpillar-clr-3": "var(--sunpillar-3)",
@@ -397,7 +397,7 @@ const ProfileCardComponent = ({
   const glareStyle = {
     transform: "translate3d(0, 0, 1.1px)",
     overflow: "hidden",
-    backgroundImage: `radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y),hsl(248, 25%, 80%) 12%,hsla(207, 40%, 30%, 0.8) 90%)`,
+    backgroundImage: `radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y),hsl(40, 80%, 70%) 12%,hsla(30, 60%, 30%, 0.8) 90%)`,
     mixBlendMode: "overlay",
     filter: "brightness(0.8) contrast(1.2)",
     zIndex: 4,
@@ -436,10 +436,10 @@ const ProfileCardComponent = ({
             borderRadius: cardRadius,
             backgroundBlendMode: "color-dodge, normal, normal, normal",
             boxShadow:
-              "rgba(0, 0, 0, 0.8) calc((var(--pointer-from-left) * 10px) - 3px) calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px",
+              "rgba(255, 140, 0, 0.4) calc((var(--pointer-from-left) * 10px) - 3px) calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px, rgba(0, 0, 0, 0.6) calc((var(--pointer-from-left) * 10px) - 3px) calc((var(--pointer-from-top) * 20px) - 6px) 25px -3px",
             transition: "transform 1s ease",
             transform: "translateZ(0) rotateX(0deg) rotateY(0deg)",
-            background: "rgba(20, 20, 42, 0.95)",
+            background: "rgba(40, 30, 15, 0.95)",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transition = "none";
@@ -461,7 +461,7 @@ const ProfileCardComponent = ({
             className="profile-card-inner"
             style={{
               backgroundImage: "var(--inner-gradient)",
-              backgroundColor: "rgba(20, 20, 42, 0.95)",
+              backgroundColor: "rgba(40, 30, 15, 0.95)",
               borderRadius: cardRadius,
             }}
           >
@@ -477,6 +477,7 @@ const ProfileCardComponent = ({
                   transform:
                     "translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px)) translateZ(0) scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02)) scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01))",
                   borderRadius: cardRadius,
+                  filter: "sepia(0.3) saturate(1.3) brightness(1.05) contrast(1.05)",
                 }}
                 onError={(e) => {
                   const t = e.target;

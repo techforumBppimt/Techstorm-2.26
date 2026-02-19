@@ -55,8 +55,8 @@ const RoSoccerEvent = () => {
     description:
       "Ro-Soccer brings the beautiful game to the robotics world! Control your custom-built robot to score goals against opponent teams. This event requires precise mechanical design, responsive controls, and strategic gameplay. Form your robotic team and compete in this thrilling tournament where engineering meets sports.",
     teamSize: "2-5 Members",
-    entryFeeInternal: "â‚¹350 per team",
-    entryFeeExternal: "â‚¹400 per team",
+    entryFeeInternal: "₹350 per team",
+    entryFeeExternal: "₹400 per team",
     duration: "4 Hours (League Format)",
     venue: "Robo Sports Arena",
     registerButton: {

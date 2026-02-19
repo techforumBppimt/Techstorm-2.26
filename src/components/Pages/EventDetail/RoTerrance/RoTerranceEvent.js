@@ -50,8 +50,8 @@ const RoTerranceEvent = () => {
     description:
       "Ro-Terrance is an all-terrain robot challenge that tests your bot's ability to traverse various obstacles and challenging terrains. From steep inclines to narrow bridges, sand pits to rocky paths, your robot must conquer it all. Design a versatile, robust robot with exceptional mobility to emerge victorious in this grueling test of mechanical engineering.",
     teamSize: "2-5 Members",
-    entryFeeInternal: "â‚¹350 per team",
-    entryFeeExternal: "â‚¹400 per team",
+    entryFeeInternal: "₹350 per team",
+    entryFeeExternal: "₹400 per team",
     duration: "3 Hours",
     venue: "Outdoor Arena",
     registerButton: {

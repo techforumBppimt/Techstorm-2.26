@@ -30,8 +30,8 @@ const RoNavigatorEvent = () => {
     description:
       "Ro-Navigator is an autonomous robot navigation challenge where your bot must navigate through a complex maze filled with obstacles. Using sensors and intelligent programming, guide your robot from start to finish in the shortest time possible. This event tests your skills in robotics, sensor integration, and algorithm implementation.",
     teamSize: "2-5 Members",
-    entryFeeInternal: "â‚¹350 per team",
-    entryFeeExternal: "â‚¹400 per team",
+    entryFeeInternal: "₹350 per team",
+    entryFeeExternal: "₹400 per team",
     duration: "2.5 Hours",
     venue: "Robotics Arena",
     registerButton: {

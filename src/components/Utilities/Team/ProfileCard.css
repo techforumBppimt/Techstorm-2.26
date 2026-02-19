@@ -54,6 +54,7 @@
   transform: translateZ(2px);
   grid-area: 1 / -1;
   pointer-events: none;
+  z-index: 10;
 }
 
 .profile-card-avatar img {
@@ -64,6 +65,7 @@
   backface-visibility: hidden;
   will-change: transform;
   transition: transform 120ms ease-out;
+  z-index: 10;
 }
 
 .profile-card-user-info {
@@ -187,7 +189,7 @@
 }
 
 .profile-card-name {
-  font-size: min(4.5svh, 2.2em);
+  font-size: 1.5em !important;
   font-weight: 700;
   margin: 0;
   background-image: linear-gradient(to bottom, #ffc010, #ff8c10);
@@ -198,6 +200,7 @@
   pointer-events: auto;
   text-shadow: 0 2px 8px rgba(255, 192, 16, 0.4);
   filter: drop-shadow(0 0 8px rgba(255, 192, 16, 0.3));
+  transform: translateY(-28px);
 }
 
 .profile-card-title {
@@ -215,6 +218,7 @@
   -webkit-background-clip: text;
   pointer-events: auto;
   filter: drop-shadow(0 0 6px rgba(255, 192, 16, 0.2));
+  transform: translateY(-24px);
 }
 
 /* Responsive adjustments */
@@ -228,7 +232,7 @@
   }
   
   .profile-card-name {
-    font-size: min(4svh, 1.8em);
+    font-size: 2.8em !important;
   }
   
   .profile-card-title {

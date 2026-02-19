@@ -3,54 +3,68 @@
  * Core members = Organizing Committee; eventTeams = event-wise coordinators & volunteers.
  */
 
-import team1 from '../../../assets/img/team/team_img02.png';
-import team2 from '../../../assets/img/team/team_img03.png';
-import team3 from '../../../assets/img/team/team_img04.png';
-import team4 from '../../../assets/img/team/team_img05.png';
-import team5 from '../../../assets/img/team/team_img06.png';
-import team6 from '../../../assets/img/team/team_img07.png';
-import team7 from '../../../assets/img/team/team_img01.png';
-import team8 from '../../../assets/img/team/team_img08.png';
+import defaultAvatar from '../../../assets/img/team/IMG202602191108292-GouravPaul.png';
+
+// Core Team Member Images
+import aniketDeImg from '../../../assets/img/team/1000507264~2 - Aniket De.png';
+import bapanBanikImg from '../../../assets/img/team/IMG_20260216_202234 - Bapan Banik.png';
+import anikPaulImg from '../../../assets/img/team/file_00000000fb6471faad0fa22d7155287b - Anik Paul.png';
+import pushkarShawImg from '../../../assets/img/team/photo__ - PUSHKAR IT3065.png';
+import srijitaDuttaImg from '../../../assets/img/team/IMG-20260218-WA0018(2) - SRIJITA ECE3086.png';
+import soumiliSahaImg from '../../../assets/img/team/IMG_20260218_203358 - Soumili Saha.png';
+import sohamSahaImg from '../../../assets/img/team/IMG-20251221-WA0027 - SohamSaha.png';
+import soumadeepLayekImg from '../../../assets/img/team/WhatsApp Image 2026-02-18 at 9.24.42 PM - Soumadeep Layek.png';
+import gouravPaulImg from '../../../assets/img/team/IMG202602191108292-GouravPaul.png';
+import saptarshiGhoshImg from '../../../assets/img/team/file_00000000d1fc71faa8882c412c66c7bd - Saptarshi Ghosh.png';
+import harshSinghImg from '../../../assets/img/team/IMG_7070 - Harsh Singh.png';
+import prantikGhoshImg from '../../../assets/img/team/WhatsApp Image 2026-02-19 at 10.17.06 AM - Prantik Ghosh.png';
+import gauravChaudharyImg from '../../../assets/img/team/IMG_20260218_204930 - Gaurav Kumar.png';
+import shreyaSahaImg from '../../../assets/img/team/IMG_20250702_221316 - SHREYA ECE3066.png';
+import saniaDharImg from '../../../assets/img/team/WhatsApp Image 2026-02-19 at 10.02.29 AM copy - Sania Dhar.png';
+import oliviaSikderImg from '../../../assets/img/team/IMG_20251221_232659 - OLIVIA CSE3084.png';
+import gourabDeyImg from '../../../assets/img/team/Goyurab Dey - MCA - GOURAB DEY MCA4039.png';
+import adityaChoubeyImg from '../../../assets/img/team/IMG_20260218_201846 - ADITYA CHOUBEY.png';
 
 export const coreMembers = [
     // FINANCE MANAGEMENT TEAM
-    { id: '1', avatar: team1, name: 'Aniket De', deg: 'Finance Coordinator' },
+    { id: '1', avatar: aniketDeImg, name: 'Aniket De', deg: 'Finance Coordinator' },
     
     // EVENT MANAGEMENT TEAM
-    { id: '2', avatar: team2, name: 'Protyoy Bhandary', deg: 'Event Coordinator' },
-    { id: '3', avatar: team3, name: 'Bapan Banik', deg: 'Event Joint Coordinator' },
-    { id: '4', avatar: team4, name: 'Debadrito Saha', deg: 'Event Joint Coordinator' },
+    { id: '2', avatar: defaultAvatar, name: 'Protyoy Bhandary', deg: 'Event Coordinator' },
+    { id: '3', avatar: bapanBanikImg, name: 'Bapan Banik', deg: 'Event Joint Coordinator' },
+    { id: '4', avatar: defaultAvatar, name: 'Debadrito Saha', deg: 'Event Joint Coordinator' },
     
     // PUBLIC RELATIONS MANAGEMENT TEAM
-    { id: '5', avatar: team5, name: 'Anik Paul', deg: 'PR Lead' },
-    { id: '6', avatar: team6, name: 'Pushkar Shaw', deg: 'PR Joint Lead' },
-    { id: '7', avatar: team7, name: 'Srijita Dutta', deg: 'PR Joint Lead' },
-    { id: '8', avatar: team8, name: 'Soumili Saha', deg: 'PR Team Member' },
-    { id: '9', avatar: team1, name: 'Soham Saha', deg: 'PR Team Member' },
-    { id: '10', avatar: team2, name: 'Soumadeep Layek', deg: 'PR Team Member' },
-    { id: '11', avatar: team3, name: 'Gourav Paul', deg: 'PR Team Member' },
+    { id: '5', avatar: anikPaulImg, name: 'Anik Paul', deg: 'PR Lead' },
+    { id: '6', avatar: pushkarShawImg, name: 'Pushkar Shaw', deg: 'PR Joint Lead' },
+    { id: '7', avatar: srijitaDuttaImg, name: 'Srijita Dutta', deg: 'PR Joint Lead' },
+    { id: '8', avatar: soumiliSahaImg, name: 'Soumili Saha', deg: 'PR Team Member' },
+    { id: '9', avatar: sohamSahaImg, name: 'Soham Saha', deg: 'PR Team Member' },
+    { id: '10', avatar: soumadeepLayekImg, name: 'Soumadeep Layek', deg: 'PR Team Member' },
+    { id: '11', avatar: gouravPaulImg, name: 'Gourav Paul', deg: 'PR Team Member' },
     
     // SPONSORSHIP MANAGEMENT TEAM
-    { id: '12', avatar: team4, name: 'Pranay Chatterjee', deg: 'Sponsorship Lead' },
-    { id: '13', avatar: team5, name: 'Saptarshi Ghosh', deg: 'Sponsorship Joint Lead' },
-    { id: '14', avatar: team6, name: 'Harsh Singh', deg: 'Sponsorship Joint Lead' },
-    { id: '15', avatar: team7, name: 'Prantik Ghosh', deg: 'Sponsorship Team Member' },
-    { id: '16', avatar: team8, name: 'Krishna Kali Sarkar', deg: 'Sponsorship Team Member' },
-    { id: '17', avatar: team1, name: 'Ankita Aman', deg: 'Sponsorship Team Member' },
+    { id: '12', avatar: defaultAvatar, name: 'Pranay Chatterjee', deg: 'Sponsorship Lead' },
+    { id: '13', avatar: saptarshiGhoshImg, name: 'Saptarshi Ghosh', deg: 'Sponsorship Joint Lead' },
+    { id: '14', avatar: harshSinghImg, name: 'Harsh Singh', deg: 'Sponsorship Joint Lead' },
+    { id: '15', avatar: prantikGhoshImg, name: 'Prantik Ghosh', deg: 'Sponsorship Team Member' },
+    { id: '16', avatar: defaultAvatar, name: 'Krishna Kali Sarkar', deg: 'Sponsorship Team Member' },
+    { id: '17', avatar: defaultAvatar, name: 'Ankita Aman', deg: 'Sponsorship Team Member' },
+    { id: '18', avatar: defaultAvatar, name: 'Abhishek Kumar', deg: 'Sponsorship Team Member' },
     
     // CREATIVE & SOCIAL MANAGEMENT TEAM
-    { id: '18', avatar: team2, name: 'Gaurav Chaudhary', deg: 'Social Lead' },
-    { id: '19', avatar: team3, name: 'Shreya Jha', deg: 'Creative Lead' },
-    { id: '20', avatar: team4, name: 'Sania Dhar', deg: 'Creative & Social Member' },
-    { id: '21', avatar: team5, name: 'Olivia Sikder', deg: 'Creative & Social Member' },
-    { id: '22', avatar: team6, name: 'Gourab Dey', deg: 'Creative & Social Member' },
+    { id: '19', avatar: gauravChaudharyImg, name: 'Gaurav Chaudhary', deg: 'Social Lead' },
+    { id: '20', avatar: defaultAvatar, name: 'Shreya Jha', deg: 'Creative Lead' },
+    { id: '21', avatar: saniaDharImg, name: 'Sania Dhar', deg: 'Creative & Social Member' },
+    { id: '22', avatar: oliviaSikderImg, name: 'Olivia Sikder', deg: 'Creative & Social Member' },
+    { id: '23', avatar: gourabDeyImg, name: 'Gourab Dey', deg: 'Creative & Social Member' },
     
     // DISCIPLINE & HOSPITALITY MANAGEMENT TEAM
-    { id: '23', avatar: team7, name: 'Souvik Dey', deg: 'Disc. & Hospitality Lead' },
-    { id: '24', avatar: team8, name: 'Shreya Saha', deg: 'Disc. & Hospitality Member'},
-    { id: '25', avatar: team1, name: 'Shivam Kumar', deg: 'Disc. & Hospitality Member' },
-    { id: '26', avatar: team2, name: 'Indrani Banik', deg: 'Disc. & Hospitality Member' },
-    { id: '27', avatar: team3, name: 'Aditya Choubey', deg: 'Disc. & Hospitality Member' },
+    { id: '24', avatar: defaultAvatar, name: 'Souvik Dey', deg: 'Disc. & Hospitality Lead' },
+    { id: '25', avatar: shreyaSahaImg, name: 'Shreya Saha', deg: 'Disc. & Hospitality Member'},
+    { id: '26', avatar: defaultAvatar, name: 'Shivam Kumar', deg: 'Disc. & Hospitality Member' },
+    { id: '27', avatar: defaultAvatar, name: 'Indrani Banik', deg: 'Disc. & Hospitality Member' },
+    { id: '28', avatar: adityaChoubeyImg, name: 'Aditya Choubey', deg: 'Disc. & Hospitality Member' },
 ];
 
 export const eventTeams = [

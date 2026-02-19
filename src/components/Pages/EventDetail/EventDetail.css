@@ -562,12 +562,37 @@ p.about-text {
     border-top: 1px solid rgba(255, 192, 16, 0.25);
 }
 
+.coord-phone-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 2px solid #ffc010;
+    border-radius: 6px;
+    background: rgba(255, 192, 16, 0.1);
+    box-shadow: 0 0 10px rgba(255, 192, 16, 0.2);
+    transition: all 0.3s ease;
+}
+
+.coord-phone-wrapper:hover {
+    background: rgba(255, 192, 16, 0.2);
+    box-shadow: 0 0 15px rgba(255, 192, 16, 0.4);
+    transform: translateY(-2px);
+}
+
+.phone-icon {
+    width: 14px;
+    height: 14px;
+    color: #ffc010;
+    flex-shrink: 0;
+}
+
 .coord-phone,
 .coord-email {
     font-family: "Press Start 2P", cursive;
-    font-size: 8px;
+    font-size: 11px;
     color: #ffffff;
-    margin: 6px 0;
+    margin: 0;
     line-height: 1.8;
     word-break: break-all;
 }
