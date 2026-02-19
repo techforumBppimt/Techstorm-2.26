@@ -107,7 +107,7 @@ function ArcadeMachine({ current, onPrev, onNext, onSelect }) {
   }, []);
 
   return (
-    <div style={{ width: '320px', flexShrink: 0 }}>
+    <div style={{ width: '290px', flexShrink: 0 }}>
       {/* Cabinet */}
       <div style={{
         background: 'linear-gradient(175deg, #1e0b00 0%, #0e0500 30%, #130700 70%, #090400 100%)',
@@ -139,9 +139,9 @@ function ArcadeMachine({ current, onPrev, onNext, onSelect }) {
 
         {/* SCREEN */}
         <div style={{
-          margin: '10px', position: 'relative',
-          background: '#000', border: '5px solid #1a1a1a',
-          borderRadius: '3px', overflow: 'hidden', aspectRatio: '4/3',
+          margin: '8px', position: 'relative',
+          background: '#000', border: '4px solid #1a1a1a',
+          borderRadius: '3px', overflow: 'hidden', aspectRatio: '4/2.8',
           boxShadow: 'inset 0 0 30px rgba(0,0,0,1)',
         }}>
           {/* BG gradient */}
@@ -227,10 +227,10 @@ function ArcadeMachine({ current, onPrev, onNext, onSelect }) {
         <div style={{
           background: 'linear-gradient(180deg, #100600, #080300)',
           borderTop: '3px solid #FF6B00',
-          padding: '12px 16px 14px',
+          padding: '8px 14px 10px',
         }}>
           {/* Dot nav */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginBottom: '14px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginBottom: '10px' }}>
             {EVENT_PHOTOS.map((p, i) => (
               <button key={i} onClick={() => onSelect(i)} style={{
                 width: i === current ? '22px' : '8px', height: '8px',
@@ -278,7 +278,7 @@ function ArcadeMachine({ current, onPrev, onNext, onSelect }) {
           </div>
 
           {/* Action buttons ABCD */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '14px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '10px' }}>
             {[['A','#FF4444'],['B','#FFD700'],['C','#44FF88'],['D','#4488FF']].map(([l, c]) => (
               <div key={l} style={{
                 width: '30px', height: '30px', borderRadius: '50%',
@@ -292,7 +292,7 @@ function ArcadeMachine({ current, onPrev, onNext, onSelect }) {
           </div>
 
           {/* Coin slot */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginTop: '12px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginTop: '8px' }}>
             <div style={{ flex: 1, height: '5px', background: '#0d0d0d', border: '1px solid #2a2a2a', borderRadius: '3px' }} />
             <div style={{ fontFamily: "'VT323', monospace", fontSize: '10px', color: '#383838', letterSpacing: '2px' }}>INSERT COIN</div>
             <div style={{ flex: 1, height: '5px', background: '#0d0d0d', border: '1px solid #2a2a2a', borderRadius: '3px' }} />
