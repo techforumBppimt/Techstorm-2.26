@@ -1275,6 +1275,66 @@ const EventDetail = ({ eventData }) => {
                               );
                             }
 
+                            // Highlight FIFA Mobile rule section headers
+                            const fifaSectionHeaders = [
+                              { label: "GENERAL GUIDELINES", icon: "📋" },
+                              { label: "DEVICE POLICY", icon: "📱" },
+                              { label: "INTERNET POLICY", icon: "🌐" },
+                              { label: "ACCOUNTS", icon: "👤" },
+                              { label: "FAIR PLAY POLICY", icon: "🤝" },
+                              { label: "⏰ REPORTING TIME", icon: "⏰" },
+                              { label: "EVENT AUTHORITY", icon: "🛡️" },
+                              { label: "EVENT TYPE", icon: "🏟️" },
+                              { label: "REGISTRATION POLICY", icon: "📝" },
+                              { label: "MATCH GUIDELINES", icon: "🎮" },
+                              { label: "CROSS SPAMMING RULE", icon: "❌" },
+                              { label: "DISCONNECTION RULE", icon: "🔌" },
+                              { label: "DRAW RULE", icon: "⚖️" },
+                              { label: "MATCH RECORDING", icon: "📹" },
+                              { label: "DEVICE MALFUNCTION", icon: "⚠️" },
+                              { label: "TOURNAMENT STRUCTURE", icon: "🏆" },
+                              { label: "3.1 LEAGUE STAGE (GROUP-BASED STRUCTURE)", icon: "👥" },
+                              { label: "3.2 KNOCKOUT ROUNDS", icon: "🥊" },
+                              { label: "FINAL MATCH RULES", icon: "🏁" },
+                              { label: "FINAL AUTHORITY CLAUSE", icon: "❗", color: "#ff2d2d", bg: "rgba(255,45,45,0.12)" },
+                            ];
+                            if (name === "FIFA Mobile") {
+                              const ruleText = rule.trim().replace(/:$/, "").toUpperCase();
+                              const match = fifaSectionHeaders.find(h => h.label === ruleText);
+                              if (match) {
+                                return (
+                                  <h3
+                                    key={index}
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      color: match.color || "#ffc010",
+                                      fontSize: "clamp(14px, 4vw, 20px)",
+                                      fontFamily: "Press Start 2P",
+                                      marginTop: "25px",
+                                      marginBottom: "10px",
+                                      lineHeight: "1.5",
+                                      textTransform: "uppercase",
+                                      letterSpacing: "2px",
+                                      background: match.bg,
+                                      padding: match.bg ? "8px 0" : undefined,
+                                    }}
+                                  >
+                                    <span
+                                      style={{
+                                        fontSize: "22px",
+                                        marginRight: "10px",
+                                        lineHeight: 1,
+                                      }}
+                                    >
+                                      {match.icon}
+                                    </span>
+                                    {rule}
+                                  </h3>
+                                );
+                              }
+                            }
+
                             // Highlight Creative Canvas rule section headers
                             const creativeCanvasSectionHeaders = [
                               "PRELIMS",
