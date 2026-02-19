@@ -189,7 +189,7 @@
 }
 
 .profile-card-name {
-  font-size: 1.5em !important;
+  font-size: 1.1em !important;
   font-weight: 700;
   margin: 0;
   background-image: linear-gradient(to bottom, #ffc010, #ff8c10);
@@ -210,7 +210,7 @@
   width: min-content;
   position: relative;
   top: -8px;
-  font-size: 14px;
+  font-size: 12px;
   background-image: linear-gradient(to bottom, #FFF4C7, #ffc010);
   background-size: 1em 1.5em;
   -webkit-text-fill-color: transparent;
@@ -218,7 +218,7 @@
   -webkit-background-clip: text;
   pointer-events: auto;
   filter: drop-shadow(0 0 6px rgba(255, 192, 16, 0.2));
-  transform: translateY(-24px);
+  transform: translateY(-20px);
 }
 
 /* Responsive adjustments */

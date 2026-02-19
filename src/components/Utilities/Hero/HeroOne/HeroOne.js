@@ -77,13 +77,13 @@ function GlitchOverlay({ active }) {
         ctx.font = `${fs}px 'Press Start 2P', monospace`;
         ctx.globalAlpha = Math.random() * 0.8 + 0.1;
         ctx.fillStyle = '#FF6B00';
-        ctx.fillText('TECHSTORM', canvas.width * 0.06 + (Math.random() - 0.5) * 24, canvas.height * 0.5 + (Math.random() - 0.5) * 24);
+        ctx.fillText('TECHSTORM 2.26', canvas.width * 0.06 + (Math.random() - 0.5) * 24, canvas.height * 0.5 + (Math.random() - 0.5) * 24);
         ctx.fillStyle = '#00B4FF';
         ctx.globalAlpha = 0.45;
-        ctx.fillText('TECHSTORM', canvas.width * 0.06 + 8, canvas.height * 0.5 - 6);
+        ctx.fillText('TECHSTORM 2.26', canvas.width * 0.06 + 8, canvas.height * 0.5 - 6);
         ctx.fillStyle = '#D946EF';
         ctx.globalAlpha = 0.35;
-        ctx.fillText('TECHSTORM', canvas.width * 0.06 - 6, canvas.height * 0.5 + 8);
+        ctx.fillText('TECHSTORM 2.26', canvas.width * 0.06 - 6, canvas.height * 0.5 + 8);
         ctx.globalAlpha = 1;
       }
       frame++;
@@ -175,7 +175,7 @@ function VideoPlayer({ onEnded }) {
 
       {/* TOP HUD */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '18px 28px', background: 'linear-gradient(180deg, rgba(0,0,0,0.92) 0%, transparent 100%)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
-        <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '11px', color: 'var(--orange)', textShadow: '0 0 12px var(--orange)', letterSpacing: '2px', animation: 'flicker 3s infinite' }}>⚡ TECHSTORM 2026</div>
+        <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '11px', color: 'var(--orange)', textShadow: '0 0 12px var(--orange)', letterSpacing: '2px', animation: 'flicker 3s infinite' }}>⚡ TECHSTORM 2.26</div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,0,0,0.15)', border: '1px solid #FF4444', padding: '6px 12px' }}>
             <div style={{ width: '8px', height: '8px', background: '#FF4444', borderRadius: '50%', animation: 'blink 0.8s infinite' }} />
@@ -343,14 +343,14 @@ function HeroOne() {
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
           <div style={{
             position: 'absolute',
-            bottom: 0, left: '-30%', right: '-30%',
-            height: '52%',
+            bottom: 0, left: 0, right: 0,
+            height: '70%',
             background: `
               linear-gradient(to bottom, transparent 0%, rgba(61,90,254,0.12) 100%),
               repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(61,90,254,0.28) 59px, rgba(61,90,254,0.28) 61px),
               repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(61,90,254,0.2) 38px, rgba(61,90,254,0.2) 40px)
             `,
-            transform: 'perspective(700px) rotateX(62deg)',
+            transform: 'perspective(500px) rotateX(60deg) scale(1.5)',
             transformOrigin: 'center bottom',
           }} />
         </div>
@@ -373,12 +373,12 @@ function HeroOne() {
               animation: 'flicker 5s infinite',
               userSelect: 'none',
             }}>
-              TECHSTORM
+              TECHSTORM 2.26
             </div>
             {glitching && (
               <>
-                <div style={{ position: 'absolute', top: 0, left: '6px', fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(28px, 7.5vw, 86px)', color: 'var(--purple-neon)', opacity: 0.8, letterSpacing: '6px', clipPath: 'polygon(0 20%, 100% 20%, 100% 48%, 0 48%)', pointerEvents: 'none' }}>TECHSTORM</div>
-                <div style={{ position: 'absolute', top: 0, left: '-6px', fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(28px, 7.5vw, 86px)', color: 'var(--blue-electric)', opacity: 0.8, letterSpacing: '6px', clipPath: 'polygon(0 54%, 100% 54%, 100% 82%, 0 82%)', pointerEvents: 'none' }}>TECHSTORM</div>
+                <div style={{ position: 'absolute', top: 0, left: '6px', fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(28px, 7.5vw, 86px)', color: 'var(--purple-neon)', opacity: 0.8, letterSpacing: '6px', clipPath: 'polygon(0 20%, 100% 20%, 100% 48%, 0 48%)', pointerEvents: 'none' }}>TECHSTORM 2.26</div>
+                <div style={{ position: 'absolute', top: 0, left: '-6px', fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(28px, 7.5vw, 86px)', color: 'var(--blue-electric)', opacity: 0.8, letterSpacing: '6px', clipPath: 'polygon(0 54%, 100% 54%, 100% 82%, 0 82%)', pointerEvents: 'none' }}>TECHSTORM 2.26</div>
               </>
             )}
           </div>

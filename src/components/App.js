@@ -62,7 +62,6 @@ import AdminDashboard from './Pages/Admin/AdminDashboard';
 
 const navItems = [
     { label: 'Home', href: '/#home' },
-    { label: 'About', href: '/#about' },
     { label: 'Events', href: '/events' },
     { label: 'Gallery', href: '/gallery' },
     { label: 'Schedule', href: '/schedule' },

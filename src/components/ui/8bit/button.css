@@ -52,7 +52,7 @@
         0 0 0 4px #ffc010,
         0 0 0 6px transparent,
         0 0 15px rgba(255, 192, 16, 0.4);
-    transform: translateY(-1px);
+    transform: translateY(0);
     border-bottom-color: #0f0819;
 }
 

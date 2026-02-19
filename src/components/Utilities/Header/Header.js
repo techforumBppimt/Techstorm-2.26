@@ -121,8 +121,8 @@ const Header = ({ navItems, activeHref }) => {
                         <PillNav
                             items={navItems}
                             activeHref={activeHref}
-                            baseColor="#ffc010"
-                            pillColor="#1a0e22"
+                            baseColor="#FF6B00"
+                            pillColor="#000000"
                             hoveredPillTextColor="#000000"
                             pillTextColor="#ffffff"
                             initialLoadAnimation={true}

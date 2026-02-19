@@ -29,6 +29,8 @@ import debaditoImg from '../../../assets/img/team/Debadrito.png';
 import shreyaJhaImg from '../../../assets/img/team/IMG_20251214_033807.jpg - Shreya Jha.png';
 import ankitaAmanImg from '../../../assets/img/team/IMG_20260219_151927 - Ankita Aman.png';
 import abhishekKumarImg from '../../../assets/img/team/ABHISHEK PHOTO - Abhishek Kumar.png';
+import protyoyBhandaryImg from '../../../assets/img/team/Protyoy.png';
+import pranayChatterjeeImg from '../../../assets/img/team/Pranay.png';
 import souvikDeyImg from '../../../assets/img/team/IMG_20260219_130801 - Souvik Dey.png';
 import shivamKumarImg from '../../../assets/img/team/1771488293669 - Shivam Kumar.png';
 
@@ -37,7 +39,7 @@ export const coreMembers = [
     { id: '1', avatar: aniketDeImg, name: 'Aniket De', deg: 'Finance Coordinator' },
     
     // EVENT MANAGEMENT TEAM
-    { id: '2', avatar: defaultAvatar, name: 'Protyoy Bhandary', deg: 'Event Coordinator' },
+    { id: '2', avatar: protyoyBhandaryImg, name: 'Protyoy Bhandary', deg: 'Event Coordinator' },
     { id: '3', avatar: bapanBanikImg, name: 'Bapan Banik', deg: 'Event Joint Coordinator' },
     { id: '4', avatar: debaditoImg, name: 'Debadrito Saha', deg: 'Event Joint Coordinator' },
     
@@ -51,7 +53,7 @@ export const coreMembers = [
     { id: '11', avatar: gouravPaulImg, name: 'Gourav Paul', deg: 'PR Team Member' },
     
     // SPONSORSHIP MANAGEMENT TEAM
-    { id: '12', avatar: defaultAvatar, name: 'Pranay Chatterjee', deg: 'Sponsorship Lead' },
+    { id: '12', avatar: pranayChatterjeeImg, name: 'Pranay Chatterjee', deg: 'Sponsorship Lead' },
     { id: '13', avatar: saptarshiGhoshImg, name: 'Saptarshi Ghosh', deg: 'Sponsorship Joint Lead' },
     { id: '14', avatar: harshSinghImg, name: 'Harsh Singh', deg: 'Sponsorship Joint Lead' },
     { id: '15', avatar: prantikGhoshImg, name: 'Prantik Ghosh', deg: 'Sponsorship Team Member' },
