@@ -82,40 +82,6 @@ const HackStormEvent = () => {
       text: "Register Now",
       link: "https://hack-storm.devfolio.co/overview",
     },
-    faqs: [
-              {
-                q: "Who can participate?",
-                a: `Participation is restricted to currently enrolled college or university students only.`
-              },
-              {
-                q: "Why should I participate?",
-                a: `HackStorm is a learning-driven, build-focused hackathon designed to help participants experiment, collaborate, and strengthen their technical and problem-solving skills through an intensive in-person development experience.`
-              },
-              {
-                q: "Is there an entry fee?",
-                a: `No. This is a completely free offline hackathon.`
-              },
-              {
-                q: "What is the team size? Can I participate without a team?",
-                a: `Teams must follow the size limits specified during registration. Solo participation is allowed only if permitted within those limits.`
-              },
-              {
-                q: "What should I bring to the event?",
-                a: `Participants must bring their own laptops, chargers, and any required hardware or accessories needed for development.`
-              },
-              {
-                q: "What will we build during the hackathon?",
-                a: `The hackathon is open-ended with a set of predefined tracks and problem areas shared in advance. Teams are free to build creative solutions within those tracks during the hacking period.`
-              },
-              {
-                q: "How is the judging process conducted?",
-                a: `Projects are evaluated based on technology, design, completion, and learning. A panel of judges will review each project through live demonstrations and technical evaluation to determine the winners.`
-              },
-              {
-                q: "I cannot travel. Is there any way I could participate?",
-                a: `No. This is an offline event and requires physical presence at the venue for participation.`
-              }
-            ],
     rules: [
       "HACKSTORM HACKATHON RULES",
       "",

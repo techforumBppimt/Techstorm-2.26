@@ -32,7 +32,7 @@ const Footer = () => {
                                 <div className="f-widget-title mb-20">
                                     <img src={logo} alt="TechStorm Logo" style={{ maxWidth: '350px', height: 'auto' }} />
                                 </div>
-                                <div className="footer-link">{'TechStorm 2026 - Play the Past, Build the Future. The flagship technical fest celebrating retro arcade culture and modern innovation.'}</div>
+                                <div className="footer-link" style={{ fontSize: '13px' }}>{'TechStorm 2026 - Play the Past, Build the Future. The flagship technical fest celebrating retro arcade culture and modern innovation.'}</div>
                                 <div className="f-contact mt-20">
                                     <ul>
                                         <li>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import EventDetail from "../EventDetail";
 import roNavigator from "../../../../assets/img/PIXELATED EVENT MASCOTS/RO-NAVIGATOR.png";
 import roNavigatorBanner from "../../../../assets/img/event_specific_pictures/robotics/ro_navigator.png";

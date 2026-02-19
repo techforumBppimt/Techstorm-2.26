@@ -2049,9 +2049,6 @@ const EventDetail = ({ eventData }) => {
                     <h4
                       style={{
                         color: "#ffc010",
-
-                        fontSize: "14px",
-
                         fontSize: "16px",
                       }}
                     >
