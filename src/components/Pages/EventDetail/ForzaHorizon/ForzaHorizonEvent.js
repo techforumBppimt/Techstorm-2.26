@@ -15,6 +15,84 @@ const ForzaHorizonEvent = () => {
     entryFeeInternal: "₹80 per participant",
     entryFeeExternal: "₹100 per participant",
     duration: "4 Hours",
+        faqs: [
+      {
+        q: "Who can participate in the event?",
+        a: `Anyone can participate, but registration is mandatory before the event starts.\nNo entry will be allowed without registration.`
+      },
+      {
+        q: "Is there any entry fee?",
+        a: `The rules mention registration is required. Please check with organizers if any fee applies. Entry without registration is not allowed.`
+      },
+      {
+        q: "Is the registration fee refundable?",
+        a: `No. All events are non-refundable.`
+      },
+      {
+        q: "Is this an online or offline event?",
+        a: `This is an offline fest event.`
+      },
+      {
+        q: "Can two players use the same controller or account?",
+        a: `No. One player per controller/account is strictly allowed.`
+      },
+      {
+        q: "What behavior is expected from participants?",
+        a: `Players must avoid:\n• Abusive language\n• Unsportsmanlike behavior\n• Distracting others\nGood sportsmanship is mandatory.`
+      },
+      {
+        q: "Will all players use the same difficulty settings?",
+        a: `Yes. Difficulty settings will be the same for all players to ensure fairness.`
+      },
+      {
+        q: "Can players change assists (braking, steering, traction)?",
+        a: `No. Assists will be fixed beforehand by organizers.`
+      },
+      {
+        q: "Can players choose different camera views?",
+        a: `Same camera view is recommended, but it is optional.`
+      },
+      {
+        q: "Can players use any car they want?",
+        a: `No. Only pre-selected allowed cars can be used. Overpowered cars are not allowed.`
+      },
+      {
+        q: "What car class will be used?",
+        a: `All players must use the same car class (for example: A800 or S1).`
+      },
+      {
+        q: "Is custom tuning allowed?",
+        a: `No custom tuning is allowed unless approved by organizers.`
+      },
+      {
+        q: "What is the race format?",
+        a: `The race format will be decided before the event:\n• Time Trial\n• Knockout Rounds\n• Points-Based Tournament`
+      },
+      {
+        q: "Will everyone race the same tracks?",
+        a: `Yes. The number of laps and tracks will be fixed and same for all players.`
+      },
+      {
+        q: "What counts as unfair play?",
+        a: `The following are not allowed:\n• Intentional crashing\n• Blocking opponents\n• Using game glitches or exploits\n• Controller tampering`
+      },
+      {
+        q: "How will the winner be decided?",
+        a: `Winner can be decided by:\n• Fastest total race time\n• Fastest lap\n• Highest points`
+      },
+      {
+        q: "What happens in case of a tie?",
+        a: `There will be one final tiebreaker race.`
+      },
+      {
+        q: "What if technical issues occur?",
+        a: `• Organizers’ decision will be final.\n• Restart allowed only for major glitches or system crash.\n• Players must report issues immediately.`
+      },
+      {
+        q: "Can spectators interact with players during race?",
+        a: `No. Spectators must not distract players and must maintain discipline.`
+      }
+        ],
     venue: "Gaming Zone A",
     rules: [
       "FORZA HORIZON GAME RULES",

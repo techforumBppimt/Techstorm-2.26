@@ -58,6 +58,48 @@ const FifaMobileEvent = () => {
     entryFeeInternal: "₹50 per participant",
     entryFeeExternal: "₹60 per participant",
     duration: "3 Hours",
+        faqs: [
+          {
+            q: "Which game will be used?",
+            a: `EA SPORTS FC Mobile (FIFA Mobile).`
+          },
+          {
+            q: "Which game mode will be played?",
+            a: `Head-to-Head (H2H) Friendly Match.`
+          },
+          {
+            q: "What is the match duration?",
+            a: `Each match will be 6 minutes.`
+          },
+          {
+            q: "Which team type is allowed?",
+            a: `Players must use their Ultimate Team.`
+          },
+          {
+            q: "What happens if a match disconnects?",
+            a: `A rematch will be conducted based on organizer decision.`
+          },
+          {
+            q: "What proof is required after the match?",
+            a: `Winner must submit a screenshot of the result screen.`
+          },
+          {
+            q: "Do players need to bring their own device?",
+            a: `Yes, players must use their own mobile device and internet.`
+          },
+          {
+            q: "Can players change accounts during the tournament?",
+            a: `No, players must use the same account throughout the tournament.`
+          },
+          {
+            q: "What happens in case of a draw?",
+            a: `A rematch will be played until a winner is decided.`
+          },
+          {
+            q: "Who makes the final decision in disputes?",
+            a: `The tournament organizer’s decision will be final.`
+          }
+        ],
     venue: "Gaming Zone B",
     registerButton: {
       text: "Register Now",

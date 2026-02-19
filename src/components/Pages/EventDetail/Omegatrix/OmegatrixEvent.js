@@ -49,6 +49,28 @@ const OmegatrixEvent = () => {
     entryFeeExternal: "₹60 per participant",
     duration: "2 Hours",
     venue: "Quiz Hall",
+    faqs: [
+      {
+        q: "Who can participate?",
+        a: `Students with a valid college ID or library card. Verification is mandatory at registration and entry.`,
+      },
+      {
+        q: "What is the event structure?",
+        a: `Two offline rounds:\nPrelims – Paper-based MCQ, no negative marking.\nMains – Screen-based round with declared marking scheme and progressive difficulty.`,
+      },
+      {
+        q: "How is qualification decided?",
+        a: `Top N scorers or predefined cutoff from Prelims will qualify for Mains. Criteria will be declared in advance.`,
+      },
+      {
+        q: "What leads to disqualification?",
+        a: `Late reporting, communication with participants, possession or use of electronic devices, calculators, AI tools, or any unfair means.`,
+      },
+      {
+        q: "Are fees refundable?",
+        a: `No. Registration fees are strictly non-refundable.`,
+      },
+    ],
     registerButton: {
       text: "Register Now",
     },

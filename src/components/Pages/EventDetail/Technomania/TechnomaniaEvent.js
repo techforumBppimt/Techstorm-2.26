@@ -131,6 +131,68 @@ const TechnomaniaEvent = () => {
       "Any further information regarding guidelines to be notified through events website.",
       "STAY TUNED!",
     ],
+    faqs: [
+      {
+        q: "Who can participate in TECHNO MANIA 2026?",
+        a: `The competition is open to students from BPPIMT as well as other institutions.`
+      },
+      {
+        q: "Can I participate individually?",
+        a: `Yes. Participation is open for both individuals and teams.`
+      },
+      {
+        q: "What is the maximum team size?",
+        a: `A team can have a maximum of 4 members.`
+      },
+      {
+        q: "Is the event online or offline?",
+        a: `The event will be conducted offline (on-campus) at VIP Campus, Kolkata.`
+      },
+      {
+        q: "What is the registration fee?",
+        a: `₹100 – For BPPIMT Students\n₹120 – For Students from Other Institutions\nRegistration fees are non-refundable.`
+      },
+      {
+        q: "What type of project is required?",
+        a: `Participants must develop a functional working model that integrates hardware components, software components, and Artificial Intelligence concepts aligned with the theme.`
+      },
+      {
+        q: "Is only software-based or only hardware-based project allowed?",
+        a: `No. The model must combine both hardware and software integration.`
+      },
+      {
+        q: "What should be included in the PowerPoint presentation?",
+        a: `• Problem Statement\n• Objectives\n• System Architecture (Hardware + Software Integration)\n• Working Methodology\n• Innovation Highlights\n• Sustainability Impact\n• Future Scope`
+      },
+      {
+        q: "Can someone else present the project on behalf of the team?",
+        a: `No. The project must be presented only by the registered participant(s).`
+      },
+      {
+        q: "How will the projects be judged?",
+        a: `Projects will be evaluated based on:\n• Innovation & Creativity\n• Technical Functionality\n• Sustainability Impact\n• Presentation & Communication Skills`
+      },
+      {
+        q: "What kind of topics can we choose?",
+        a: `Broad topic domains will be shared by the organizing committee. Projects must demonstrate real-world application, measurable sustainability impact, and scalability.`
+      },
+      {
+        q: "Do we need to bring our own hardware components?",
+        a: `Yes. Participants are responsible for arranging and bringing their own project components and setup materials.`
+      },
+      {
+        q: "Will certificates be provided?",
+        a: `Yes. Participation certificates will be provided. Details about winners’ awards will be shared by the organizing committee.`
+      },
+      {
+        q: "Why should I participate?",
+        a: `• Showcase your technical skills\n• Apply AI to solve real sustainability challenges\n• Compete with innovative minds\n• Gain recognition and exposure`
+      },
+      {
+        q: "Can 2 or 3 members participate as a group?",
+        a: `Yes. This event allows participation as an individual, a 2-member team, a 3-member team, or a maximum 4-member group.`
+      }
+    ],
     prizes: [
       { position: "1st Prize", amount: "To be announced" },
       { position: "2nd Prize", amount: "To be announced" },

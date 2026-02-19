@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import EventDetail from "../EventDetail";
 import roNavigator from "../../../../assets/img/PIXELATED EVENT MASCOTS/RO-NAVIGATOR.png";
 import roNavigatorBanner from "../../../../assets/img/event_specific_pictures/robotics/ro_navigator.png";
@@ -41,57 +41,57 @@ const RoNavigatorEvent = () => {
       "RO-NAVIGATOR EVENT RULES",
       "",
       "FACULTY CO-ORDINATOR NAME:",
-      "â€¢ Mr. Ramesh Kumar",
-      "â€¢ Mr. Debasis Sharma",
+      "Mr. Ramesh Kumar",
+      "Mr. Debasis Sharma",
       "",
       "STUDENT CO-ORDINATOR NAME:",
-      "â€¢ Arushmita Sikder (CSE3)",
-      "â€¢ Amrita Ghosh (CSE3)",
+      "Arushmita Sikder (CSE3)",
+      "Amrita Ghosh (CSE3)",
       "",
       "VOLUNTEER NAME:",
-      "â€¢ Archita Hazra (ECE2)",
-      "â€¢ Indranil Maji (EE2)",
-      "â€¢ Debjit dhar (ECE1)",
+      "Archita Hazra (ECE2)",
+      "Indranil Maji (EE2)",
+      "Debjit dhar (ECE1)",
       "",
       "TEAM STRENGTH:",
-      "â€¢ Minimum Members: 2",
-      "â€¢ Maximum Members: 5",
+      "Minimum Members: 2",
+      "Maximum Members: 5",
       "",
       "BOT SPECIFICATIONS:",
-      "â€¢ The robot must not exceed the dimensions of 20 Ã— 20 Ã— 20 cm (length Ã— width Ã— height).",
-      "â€¢ Only one robot is allowed per team for both rounds.",
-      "â€¢ A single robot cannot be used by multiple teams.",
-      "â€¢ Readymade bots, LegoCity bots, or Kakarobots are strictly prohibited.",
-      "â€¢ The robot must operate fully autonomously without any external control.",
-      "â€¢ The power supply must be limited to the onboard system and should not exceed 10â€“12V.",
-      "â€¢ The robot must be designed to move on a white flex sheet arena with a 2.5 cm wide black path and gaps.",
+      "The robot must not exceed the dimensions of 20 Ã— 20 Ã— 20 cm (length Ã— width Ã— height).",
+      "Only one robot is allowed per team for both rounds.",
+      "A single robot cannot be used by multiple teams.",
+      "Readymade bots, LegoCity bots, or Kakarobots are strictly prohibited.",
+      "The robot must operate fully autonomously without any external control.",
+      "The power supply must be limited to the onboard system and should not exceed 10â€“12V.",
+      "The robot must be designed to move on a white flex sheet arena with a 2.5 cm wide black path and gaps.",
       "",
       "GENERAL RULES (COMMON FOR PRELIMS & FINALS):",
-      "â€¢ The event will consist of two rounds: Preliminary and Final.",
-      "â€¢ Each team is responsible for the operation and management of their robot.",
-      "â€¢ Teams must carry valid ID cards during the event.",
-      "â€¢ In case of disqualification, no refund will be provided.",
-      "â€¢ In case of a tie, the event headsâ€™ decision will be final.",
+      "The event will consist of two rounds: Preliminary and Final.",
+      "Each team is responsible for the operation and management of their robot.",
+      "Teams must carry valid ID cards during the event.",
+      "In case of disqualification, no refund will be provided.",
+      "In case of a tie, the event headsâ€™ decision will be final.",
       "",
       "PRELIMS RULES:",
-      "â€¢ All teams will run their robots individually on the designated track.",
-      "â€¢ Teams must aim to complete the course in the shortest possible time.",
-      "â€¢ Only one hand touch is allowed during the run.",
-      "â€¢ For every additional touch, a 10-second penalty will be added.",
-      "â€¢ For prelims before the run, teams will be given 4 mins of calibration and track test time.",
-      "â€¢ Top-performing teams will qualify for the final round.",
+      "All teams will run their robots individually on the designated track.",
+      "Teams must aim to complete the course in the shortest possible time.",
+      "Only one hand touch is allowed during the run.",
+      "For every additional touch, a 10-second penalty will be added.",
+      "For prelims before the run, teams will be given 4 mins of calibration and track test time.",
+      "Top-performing teams will qualify for the final round.",
       "",
       "FINALS RULES:",
-      "â€¢ Only the top teams from the prelims will compete in the final round.",
-      "â€¢ The track may include additional challenges or variations.",
-      "â€¢ The track may contain angles, curves, junctions, checkpoints, circles, and gaps.",
-      "â€¢ Teams are allowed only one restart if the robot moves out of the arena.",
-      "â€¢ Any touch during the run will result in a 10-second penalty.",
-      "â€¢ The robot must indicate checkpoints by blinking an LED.",
-      "â€¢ The robot must provide an indication (LED or buzzer) when crossing inverted lines (white line on black background).",
-      "â€¢ The robot should successfully navigate gaps between lines.",
-      "â€¢ Extra credit is given if the robot reaches the endpoint and stops for at least 5 seconds.",
-      "â€¢ For finals, teams will have 30 mins calibration and track test time (can change on the day of event).",
+      "Only the top teams from the prelims will compete in the final round.",
+      "The track may include additional challenges or variations.",
+      "The track may contain angles, curves, junctions, checkpoints, circles, and gaps.",
+      "Teams are allowed only one restart if the robot moves out of the arena.",
+      "Any touch during the run will result in a 10-second penalty.",
+      "The robot must indicate checkpoints by blinking an LED.",
+      "The robot must provide an indication (LED or buzzer) when crossing inverted lines (white line on black background).",
+      "The robot should successfully navigate gaps between lines.",
+      "Extra credit is given if the robot reaches the endpoint and stops for at least 5 seconds.",
+      "For finals, teams will have 30 mins calibration and track test time (can change on the day of event).",
     ],
     prizes: [
       { position: "1st Prize", amount: "â‚¹20,000" },
@@ -110,7 +110,50 @@ const RoNavigatorEvent = () => {
         email: "robotics@techstorm.com",
       },
     ],
+    faqs : [
+    {
+      q: "How many members are allowed in a team?",
+      a: "Each team must have 2 to 5 members.",
+    },
+    {
+      q: "Are ready-made or Lego robots allowed?",
+      a:
+        "No. Readymade bots, LegoCity bots, or Kakarobots are strictly prohibited.",
+    },
+    {
+      q: "Is remote or Bluetooth control allowed?",
+      a:
+        "No. The robot must be fully autonomous without any external control.",
+    },
+    {
+      q: "What are the size and power limits of the robot?",
+      a:
+        "Maximum size: 20 × 20 × 20 cm (5% tolerance allowed). Power supply: 10–12V onboard only.",
+    },
+    {
+      q: "What type of track will the robot run on?",
+      a:
+        "A white surface with a 2.5 cm black line, including curves, junctions, gaps, and checkpoints. The final track may contain inversion (black surface with white line).",
+    },
+    {
+      q: "How is the competition structured?",
+      a:
+        "There are two rounds: Preliminary Round (fastest completion time) and Final Round (more complex track with additional tasks and challenges).",
+    },
+    {
+      q: "Where will the event take place?",
+      a:
+        "This is an offline event at B Block, B. P. Poddar Institute of Management and Technology, VIP Road Campus.",
+    },
+    {
+      q: "Is calibration time provided?",
+      a:
+        "Yes. Prelims: 4 minutes calibration time. Finals: 30 minutes calibration time (may change on event day).",
+    },
+  ]
+
   };
+
 
   return <EventDetail eventData={eventData} />;
 };

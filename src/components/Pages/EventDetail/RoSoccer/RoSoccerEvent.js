@@ -131,6 +131,52 @@ const RoSoccerEvent = () => {
       "In case of deadlock between bots for 10 seconds, the position will be reset and back to original and ball will be placed on the center.",
       "The ball can't be trapped in the main body, if trapped positions will be reset.",
     ],
+    faqs: [
+      {
+        q: "Is the robot autonomous or manually controlled?",
+        a: `Manual (remote-controlled) only.`
+      },
+      {
+        q: "How many members per team?",
+        a: `Minimum 2, maximum 4 members.`
+      },
+      {
+        q: "What are the basic robot specifications?",
+        a: `Max 30×30 cm, 3 kg (+10%), max 18V fixed supply.`
+      },
+      {
+        q: "What type of ball is used?",
+        a: `Lightweight plastic football (provided by organizers).`
+      },
+      {
+        q: "How many robots per team?",
+        a: `Only one robot per team.`
+      },
+      {
+        q: "What is the match duration?",
+        a: `Prelims: 4 min | Knockout: 6 min | Final: 8 min.`
+      },
+      {
+        q: "Can we lift or grab the ball?",
+        a: `No trapping, lifting, or locking allowed.`
+      },
+      {
+        q: "What if the robot stops working?",
+        a: `2-minute repair timeout allowed.`
+      },
+      {
+        q: "Are there penalties?",
+        a: `Yes – brick penalties and foul warnings apply.`
+      },
+      {
+        q: "What is the judging criteria?",
+        a: `Prelims: (Goals × 10) – Penalty seconds.\nKnockout: Higher goals win (Golden Goal for tie).`
+      },
+      {
+        q: "What is the arena size?",
+        a: `Will be announced before the event.`
+      }
+    ],
     prizes: [
       { position: "1st Prize", amount: "â‚¹25,000" },
       { position: "2nd Prize", amount: "â‚¹15,000" },

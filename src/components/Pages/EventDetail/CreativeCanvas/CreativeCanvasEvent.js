@@ -102,6 +102,44 @@ const CreativeCanvasEvent = () => {
       "2. If Plagiarism is found, then the participant/group will be eliminated.",
       "3. If anyone uses their Personal Device for Photoshop/Online Designing Platforms, then the participant/group will be eliminated.",
     ],
+    faqs: [
+      {
+        q: "What is Creative Canvas?",
+        a: `Creative Canvas is a poster-making competition where participants express ideas visually through artistic and design skills on a given theme.`
+      },
+      {
+        q: "Who can participate?",
+        a: `The competition is open to all registered students/participants of the event (as per organizer eligibility rules).`
+      },
+      {
+        q: "What is the theme of the competition?",
+        a: `The theme will be announced prior to the start of the competition (or on the spot, depending on event format).`
+      },
+      {
+        q: "What is the time limit?",
+        a: `Participants will have a fixed duration (e.g., 1–2 hours) to complete their poster.`
+      },
+      {
+        q: "What are the judging criteria?",
+        a: `Posters will be judged based on:\n- Creativity & originality\n- Relevance to theme\n- Visual impact\n- Presentation & neatness\n- Message clarity`
+      },
+      {
+        q: "Can participants work in teams?",
+        a: `Yes.`
+      },
+      {
+        q: "What happens if someone is late?",
+        a: `Late arrivals may receive reduced time or may not be allowed to participate (as per rules).`
+      },
+      {
+        q: "Will there be prizes?",
+        a: `Yes. Winners will receive prizes as decided by organizers.`
+      },
+      {
+        q: "Who should participants contact for queries?",
+        a: `Participants may contact the event coordinator/organizing committee for clarification.`
+      }
+    ],
     prizes: [
       { position: "1st Prize", amount: "₹12,000" },
       { position: "2nd Prize", amount: "₹8,000" },

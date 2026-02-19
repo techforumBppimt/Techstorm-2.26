@@ -126,6 +126,76 @@ const RoTerranceEvent = () => {
       "The arena will be subject to modifications in the final round.",
       "Teams should be attend in the time slot given by the organizers, Otherwise it will lead the team to disqualify.",
     ],
+    faqs: [
+      {
+        q: "What is the objective of the event?",
+        a: `Participants must design and operate a robot that can successfully cross different obstacles and reach the finish line in minimum time.`
+      },
+      {
+        q: "How many members can be in a team?",
+        a: `Each team must have at least 2 and at most 5 members.`
+      },
+      {
+        q: "Can one person control multiple robots?",
+        a: `No. One controller can operate only one bot during the event.`
+      },
+      {
+        q: "Is an autonomous robot allowed?",
+        a: `No. The robot must be manually controlled. Autonomous bots are strictly prohibited.`
+      },
+      {
+        q: "What are the size and weight limits?",
+        a: `Maximum dimensions: 30 × 30 cm\nMaximum weight: 3 kg\nThese limits must not be exceeded at any time.`
+      },
+      {
+        q: "What power supply is allowed?",
+        a: `The maximum allowed voltage is 18V. Bots can use onboard or offboard power (wires must remain slack if offboard).`
+      },
+      {
+        q: "Are LEGO kits allowed?",
+        a: `No. LEGO kits and their spare parts are not permitted.`
+      },
+      {
+        q: "Can we test our robot on the track before the run?",
+        a: `No. Trial runs are not provided.`
+      },
+      {
+        q: "What obstacles will the robot face?",
+        a: `Possible obstacles include:\nSand patches\nBumpers\nWater section (3–4 cm deep)\nNet bridge`
+      },
+      {
+        q: "Are hand touches allowed?",
+        a: `Yes. Each team gets 2 free hand touches. Additional touches will result in penalties.`
+      },
+      {
+        q: "Can we skip an obstacle?",
+        a: `Skipping an obstacle results in penalty points or added time.`
+      },
+      {
+        q: "What happens if the robot leaves the track?",
+        a: `Leaving the track leads to a penalty.`
+      },
+      {
+        q: "Is there a timeout if the robot stops working?",
+        a: `Yes. Each team is allowed one technical timeout of 2 minutes.`
+      },
+      {
+        q: "How is the winner decided?",
+        a: `The final score is based on:\nTotal completion time + penalty time\nThe team with the lowest final time wins.`
+      },
+      {
+        q: "What happens if teams tie?",
+        a: `The final decision will be made by the event coordinators.`
+      },
+      {
+        q: "Do prelims and finals have different rules?",
+        a: `No. Finals follow the same rules but with a modified arena. Only top teams qualify.`
+      },
+      {
+        q: "Can rules change during the event?",
+        a: `Yes. Organizers reserve the right to modify rules if necessary.`
+      }
+    ],
     prizes: [
       { position: "1st Prize", amount: "â‚¹18,000" },
       { position: "2nd Prize", amount: "â‚¹12,000" },

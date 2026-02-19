@@ -20,6 +20,52 @@ const KhetEvent = () => {
     entryFeeExternal: "FREE",
     duration: "2 Hours",
     venue: "Board Game Arena",
+        faqs: [
+          {
+            q: "Who is eligible to participate?",
+            a: `KHET 2.26 is an intra-college competition and is therefore open exclusively to currently enrolled students of the institution. Participants must comply with all event guidelines and eligibility criteria prescribed by the organizing committee.`
+          },
+          {
+            q: "Why should students participate in KHET 2.26?",
+            a: `The competition provides a platform to enhance strategic thinking, analytical reasoning, and decision-making under time constraints. By applying fundamental geometrical concepts in a competitive environment, participants develop problem-solving skills, precision, and composure—competencies that are valuable in both academic and professional domains.`
+          },
+          {
+            q: "What is the format of participation?",
+            a: `The event follows an individual participation format. Each participant competes independently through successive elimination rounds.`
+          },
+          {
+            q: "How is the competition structured?",
+            a: `The event comprises Prelims I, Prelims II, Quarter Final, Semi Final, and Final rounds, conducted in a progressive elimination format.`
+          },
+          {
+            q: "What is the duration of each round?",
+            a: `Prelims I, Prelims II, Quarter Final, and Semi Final rounds are allotted 15 minutes each. The Final round is allotted 20 minutes.`
+          },
+          {
+            q: "How is the judging process conducted?",
+            a: `Judging is carried out based on:\nAdherence to official game rules and regulations\nStrategic execution and valid elimination of opponent pieces\nScore allocation as per prescribed marking criteria\nTime management within stipulated limits\nIn case of a tie, marks obtained will be considered first. If equality persists, the total time taken will determine the winner.`
+          },
+          {
+            q: "Are there penalties for rule violations?",
+            a: `Yes. Violations of the prescribed rules will result in warnings and mark deductions. Accumulation of three warnings will lead to immediate disqualification.`
+          },
+          {
+            q: "How are time violations handled?",
+            a: `Participants must make their moves within the allocated time per turn. Exceeding the permitted duration will attract penalties, and failure to act within the stipulated time may result in elimination.`
+          },
+          {
+            q: "What configurations will be used during the competition?",
+            a: `The Prelims will follow the Classic setup, the Quarter and Semi Finals will use the Imhotep setup, and the Final will be conducted under the Dynasty setup.`
+          },
+          {
+            q: "Is the event refundable?",
+            a: `The event will be conducted in offline mode, and all registrations are strictly non-refundable.`
+          },
+          {
+            q: "Is the decision of the judges final?",
+            a: `Yes. The decision of the judges shall be final and binding. Participants are expected to maintain discipline and uphold the integrity of the competition at all times.`
+          }
+        ],
     registerButton: {
       text: "Register Now",
     },

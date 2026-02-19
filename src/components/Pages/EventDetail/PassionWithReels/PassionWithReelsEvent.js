@@ -1,3 +1,4 @@
+   
 import React from "react";
 import EventDetail from "../EventDetail";
 import passionWithReels from "../../../../assets/img/PIXELATED EVENT MASCOTS/PASSION WITH REELS.png";
@@ -98,6 +99,57 @@ const PassionWithReelsEvent = () => {
         email: "passion@techstorm.com",
       },
     ],
+     faqs: [
+      {
+        q: "What is the maximum duration allowed for the short film?",
+        a: `The short film should not exceed 10 minutes, including credits.`
+      },
+      {
+        q: "Is there any specific theme for the competition?",
+        a: `Yes, there is a specific theme, which will be revealed as per the event guidelines.`
+      },
+      {
+        q: "What is the minimum and maximum team size?",
+        a: `The team size should be a minimum of 1 member and a maximum of 5 members.`
+      },
+      {
+        q: "Who can participate in the competition?",
+        a: `The competition is open to all students currently enrolled in recognized colleges or universities.`
+      },
+      {
+        q: "Are participants from different colleges allowed in the same team?",
+        a: `Yes, participants from different colleges are allowed to form a team (if not restricted by organizers).`
+      },
+      {
+        q: "Are participants from different departments allowed in the same team?",
+        a: `Yes, students from different departments can be in the same team.`
+      },
+      {
+        q: "Are films in languages other than English allowed?",
+        a: `Yes, films in languages other than English are allowed, but English subtitles are mandatory.`
+      },
+      {
+        q: "Can we submit animation, documentary, or experimental films?",
+        a: `Yes, animation, documentary, and experimental films are allowed as long as they follow the theme and guidelines.`
+      },
+      {
+        q: "Can we submit any autobiography-based film?",
+        a: `Yes, autobiography-based films are allowed if they follow the theme and competition rules.`
+      },
+      {
+        q: "Can a team submit more than one film or withdraw after submission?",
+        a: `A team can submit only one film. Once submitted, it cannot be withdrawn or replaced.`
+      },
+      {
+        q: "What is the judging criteria?",
+        a: `Films will be judged based on creativity and originality, storytelling and script, technical quality, relevance to the theme, and overall impact.`
+      },
+      {
+        q: "Will participants receive certificates and who gets the prize?",
+        a: `All participants will receive participation certificates. Winners and runner-ups will receive certificates along with prizes as announced by the organizers.`
+      }
+    ],
+
   };
 
   return <EventDetail eventData={eventData} />;

@@ -3,6 +3,101 @@ import { useHistory } from "react-router-dom";
 import "./EventDetail.css";
 import { Button } from "../../ui/8bit/button";
 import { Dialog, DialogContent } from "../../ui/8bit/dialog";
+// Reusable FAQ Accordion component
+function FAQAccordion({ faqs }) {
+  const [openIndex, setOpenIndex] = React.useState(null);
+  return (
+    <div
+      style={{
+        maxWidth: 900,
+        margin: "32px 32px 0 32px", // 32px left/right margin
+        padding: "24px 40px",
+        
+        background: "#1a0e22", // deep purple background (theme)
+        boxShadow: "0 4px 32px 0 rgba(0,0,0,0.18)",
+        fontFamily: "Press Start 2P, monospace",
+        color: "#ffc010", // gold text (theme)
+        border: "3px solid #ffc010",
+      }}
+    >
+      {faqs.map((faq, idx) => (
+        <div key={idx}>
+          <button
+            onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+            aria-expanded={openIndex === idx}
+            style={{
+              width: "100%",
+              textAlign: "left",
+              background: "none",
+              border: "none",
+              color: "#ffc010",
+              fontFamily: "Press Start 2P, monospace",
+              fontSize: 15,
+              padding: "18px 5px 8px 0",
+              cursor: "pointer",
+              outline: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              letterSpacing: "1px",
+              transition: "background 0.2s, color 0.2s",
+            }}
+          >
+            <span>{faq.q}</span>
+            <span style={{ fontSize: 18,fontWeight: "bold", marginLeft: 12 }}>
+              {openIndex === idx ? "\u02C4" : "\u02C5"}
+            </span>
+          </button>
+          {openIndex === idx && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "stretch",
+              }}
+            >
+              <div
+                style={{
+                  width: "4px",
+                  minWidth: "px",
+                  background: "#22c9e2",
+                  marginRight: "12px",
+                  boxShadow: "0 0 8px 0 #18122B55",
+                }}
+              />
+              <div
+                style={{
+                  flex: 1,
+                  padding: "8px 0 18px 0",
+                  color: "#ffffff",
+
+                  fontSize: 12,
+                  lineHeight: 1.7,
+                  fontFamily: "Silkscreen, monospace",
+                  marginLeft: 0,
+                  marginBottom: 0,
+                  whiteSpace: "pre-line",
+                  borderRadius: "0 6px 6px 0",
+
+                  borderLeft: "none",
+                }}
+              >
+                {faq.a}
+              </div>
+            </div>
+          )}
+          <div
+            aria-hidden="true"
+            style={{
+              borderBottom: "2px dotted #ffc010",
+              margin: "0 0 0 0",
+              width: "100%",
+            }}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 const EventDetail = ({ eventData }) => {
   const history = useHistory();
@@ -17,12 +112,12 @@ const EventDetail = ({ eventData }) => {
     coordinators,
     breadcrumbBg,
     registerButton,
-    entryFeeInternal,
-    entryFeeExternal,
-    entryFee,
-    isFree,
-    teamSize,
   } = eventData;
+
+  const scrollContainerRef = useRef(null);
+  const autoScrollInterval = useRef(null);
+  const pauseTimeout = useRef(null);
+  const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
 
   // Map event names to registration routes
   const getRegistrationRoute = (eventName) => {
@@ -36,7 +131,6 @@ const EventDetail = ({ eventData }) => {
       "Ro-Combat": "/register/ro-combat",
       "Ro-Soccer": "/register/ro-soccer",
       "Ro-Terrance": "/register/ro-terrance",
-      "Ro-Sumo": "/register/ro-sumo",
       "Creative Canvas": "/register/creative-canvas",
       "Passion with Reels": "/register/passion-with-reels",
       "Forza Horizon": "/register/forza-horizon",
@@ -72,12 +166,13 @@ const EventDetail = ({ eventData }) => {
     autoScrollInterval.current = setInterval(() => {
       const maxScroll =
         scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
       if (scrollContainer.scrollLeft >= maxScroll) {
         scrollContainer.scrollLeft = 0;
       } else {
-        scrollContainer.scrollLeft += 4; // Increased speed (was 1)
+        scrollContainer.scrollLeft += 1;
       }
-    }, 16); // Faster interval (was 30)
+    }, 30);
   };
 
   // Stop auto-scroll
@@ -212,7 +307,7 @@ const EventDetail = ({ eventData }) => {
                     e.target.style.transform = "translateY(-50%) scale(1)";
                   }}
                 >
-                  â€¹
+                  ‹
                 </button>
 
                 {/* Next Button */}
@@ -249,7 +344,7 @@ const EventDetail = ({ eventData }) => {
                     e.target.style.transform = "translateY(-50%) scale(1)";
                   }}
                 >
-                  â€º
+                  ›
                 </button>
 
                 <div
@@ -307,17 +402,8 @@ const EventDetail = ({ eventData }) => {
                       onClick={
                         registerButton.onClick ||
                         (() => {
-                          // If external link is provided, open in new tab
-                          if (registerButton.link) {
-                            window.open(
-                              registerButton.link,
-                              "_blank",
-                              "noopener,noreferrer",
-                            );
-                          } else {
-                            // Navigate to specific event registration page
-                            history.push(getRegistrationRoute(name));
-                          }
+                          // Navigate to specific event registration page
+                          history.push(getRegistrationRoute(name));
                         })
                       }
                       style={{
@@ -410,26 +496,155 @@ const EventDetail = ({ eventData }) => {
                           rules.map((rule, index) => {
                             // Check if it's a section header (starts with emoji)
                             const isHeader =
-                              /^[\u{1F300}-\u{1F9FF}]|^[\u{2600}-\u{26FF}]|^[\u{2700}-\u{27BF}]/u.test(rule);
+                              /^[\u{1F300}-\u{1F9FF}]|^[\u{2600}-\u{26FF}]|^[\u{2700}-\u{27BF}]/u.test(
+                                rule,
+                              );
                             // Check if it's an empty line
-                            // const isEmpty = rule.trim() === "";
+                            const isEmpty = rule.trim() === "";
                             // Highlight Judging Criteria header
-
-                            // const isJudgingCriteria = false; // Remove or properly initialize if needed
-                            // ...existing rule rendering logic...
-                            // (Move misplaced EventDetail definition out of map)
-                            // ...existing code...
-                            // All rule rendering logic should be inside this callback
-                            // Remove unreachable code after map
-
-                            // const isJudgingCriteria = false;
-                            // Check if it's a registration fee header
-                            const isRegistrationFeeHeader = 
+                            const isJudgingCriteria =
+                              rule.includes("JUDGING CRITERIA");
+                            // Highlight Round 1 and Round 2
+                            const isRound1 = rule
+                              .trim()
+                              .toLowerCase()
+                              .startsWith("🎯 round 1:");
+                            const isRound2 = rule
+                              .trim()
+                              .toLowerCase()
+                              .startsWith("🎯 round 2:");
+                            // FAQ question detection
+                            const isFaqQuestion =
+                              /\?$/.test(rule.trim()) &&
+                              rule.trim().length < 60;
+                            // Registration fee header detection for Passion with Reels
+                            const isRegistrationFeeHeader =
                               name === "Passion with Reels" &&
-                              rule.trim().toUpperCase() === "REGISTRATION FEES:";
-                            // Check if it's a FAQ question (ends with ?)
-                            const isFaqQuestion = /\?$/.test(rule.trim());
-                            
+                              rule.trim().toLowerCase() ===
+                                "registration fees:";
+
+                            // Reduce space after description (first empty line)
+                            if (isEmpty) {
+                              // If this is the first empty line after the description, use minimum height
+                              if (
+                                index === 1 &&
+                                rules[0] &&
+                                rules[0]
+                                  .toLowerCase()
+                                  .includes("creative canvas")
+                              ) {
+                                return (
+                                  <div
+                                    key={index}
+                                    style={{ height: "1px" }}
+                                  ></div>
+                                );
+                              }
+                              return (
+                                <div
+                                  key={index}
+                                  style={{ height: "15px" }}
+                                ></div>
+                              );
+                            }
+                            if (isJudgingCriteria) {
+                              return (
+                                <h3
+                                  key={index}
+                                  style={{
+                                    color: "#ff2d2d",
+                                    fontSize: "clamp(14px, 3vw, 18px)",
+                                    fontFamily: "Press Start 2P",
+                                    marginTop: "35px",
+                                    marginBottom: "20px",
+                                    lineHeight: "1.5",
+                                    textTransform: "uppercase",
+                                    letterSpacing: "2px",
+                                    background: "rgba(255,45,45,0.12)",
+                                    padding: "8px 0",
+                                  }}
+                                >
+                                  <span
+                                    style={{
+                                      fontSize: "22px",
+                                      marginRight: "10px",
+                                      lineHeight: 1,
+                                    }}
+                                  >
+                                    👨‍🏫
+                                  </span>
+                                  <span>{rule}</span>
+                                </h3>
+                              );
+                            }
+                            if (isRound1) {
+                              return (
+                                <div
+                                  key={index}
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    marginTop: "25px",
+                                    marginBottom: "10px",
+                                  }}
+                                >
+                                  <span
+                                    style={{
+                                      fontSize: "22px",
+                                      marginRight: "10px",
+                                    }}
+                                  >
+                                    🎯
+                                  </span>
+                                  <span
+                                    style={{
+                                      color: "#ffc010",
+                                      fontFamily: "Press Start 2P",
+                                      fontSize: "clamp(16px, 4vw, 24px)",
+                                      fontWeight: "bold",
+                                      textTransform: "uppercase",
+                                      letterSpacing: "2px",
+                                    }}
+                                  >
+                                    {rule.replace("🎯 ", "")}
+                                  </span>
+                                </div>
+                              );
+                            }
+                            if (isRound2) {
+                              return (
+                                <div
+                                  key={index}
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    marginTop: "25px",
+                                    marginBottom: "10px",
+                                  }}
+                                >
+                                  <span
+                                    style={{
+                                      fontSize: "22px",
+                                      marginRight: "10px",
+                                    }}
+                                  >
+                                    🏁
+                                  </span>
+                                  <span
+                                    style={{
+                                      color: "#ffc010",
+                                      fontFamily: "Press Start 2P",
+                                      fontSize: "clamp(16px, 4vw, 24px)",
+                                      fontWeight: "bold",
+                                      textTransform: "uppercase",
+                                      letterSpacing: "2px",
+                                    }}
+                                  >
+                                    {rule.replace("🎯 ", "")}
+                                  </span>
+                                </div>
+                              );
+                            }
                             if (isHeader) {
                               // Reduce space below Forza Horizon gold header
                               const isForzaHorizonHeader =
@@ -488,16 +703,18 @@ const EventDetail = ({ eventData }) => {
                                       marginRight: "10px",
                                       lineHeight: 1,
                                     }}
-                                  ></span>
+                                  >
+                                    👨‍🏫
+                                  </span>
                                   {rule}
                                 </div>
                               );
                             }
-                            // Keep 'â± RACE FORMAT RULES' as gold heading
+                            // Keep '⏱ RACE FORMAT RULES' as gold heading
                             if (
                               name === "Forza Horizon" &&
                               rule.trim().toUpperCase() ===
-                                "â± RACE FORMAT RULES"
+                                "⏱ RACE FORMAT RULES"
                             ) {
                               return (
                                 <h3
@@ -521,7 +738,9 @@ const EventDetail = ({ eventData }) => {
                                       marginRight: "10px",
                                       lineHeight: 1,
                                     }}
-                                  ></span>
+                                  >
+                                    🤖
+                                  </span>
                                   {rule}
                                 </h3>
                               );
@@ -552,7 +771,9 @@ const EventDetail = ({ eventData }) => {
                                       color: "#ffc010",
                                       lineHeight: 1,
                                     }}
-                                  ></span>
+                                  >
+                                    💰
+                                  </span>
                                   {rule}
                                 </div>
                               );
@@ -560,16 +781,10 @@ const EventDetail = ({ eventData }) => {
                             // Highlight Ro-Navigator section headers with yellow background, remove bullet
                             // Highlight PRELIMS RULES: and FINALS RULES: with gold heading and diff icon
                             if (
-                              (name === "Ro-Navigator" ||
-                                name === "Ro-Soccer" ||
-                                name === "Ro-Combat" ||
-                                name === "Ro-Terrance" ||
-                                name === "Ro-Sumo") &&
-                              [
-                                "PRELIMS RULES:",
-                                "FINALS RULES:",
-                                "KNOCKOUT & FINALS RULES:",
-                              ].includes(rule.trim().toUpperCase())
+                              name === "Ro-Navigator" &&
+                              ["PRELIMS RULES:", "FINALS RULES:"].includes(
+                                rule.trim().toUpperCase(),
+                              )
                             ) {
                               if (
                                 rule.trim().toUpperCase() === "PRELIMS RULES:"
@@ -596,13 +811,13 @@ const EventDetail = ({ eventData }) => {
                                         marginRight: "10px",
                                         lineHeight: 1,
                                       }}
-                                    ></span>
+                                    >
+                                      🎯
+                                    </span>
                                     {rule}
                                   </h3>
                                 );
                               } else if (
-                                rule.trim().toUpperCase() ===
-                                  "KNOCKOUT & FINALS RULES:" ||
                                 rule.trim().toUpperCase() === "FINALS RULES:"
                               ) {
                                 return (
@@ -627,7 +842,9 @@ const EventDetail = ({ eventData }) => {
                                         marginRight: "10px",
                                         lineHeight: 1,
                                       }}
-                                    ></span>
+                                    >
+                                      ⚡
+                                    </span>
                                     {rule}
                                   </h3>
                                 );
@@ -635,18 +852,13 @@ const EventDetail = ({ eventData }) => {
                             }
                             // Highlight BOT SPECIFICATIONS and GENERAL RULES
                             if (
-                              (name === "Ro-Navigator" ||
-                                name === "Ro-Soccer" ||
-                                name === "Ro-Combat" ||
-                                name === "Ro-Terrance" ||
-                                name === "Ro-Sumo") &&
+                              name === "Ro-Navigator" &&
                               (rule.trim().toUpperCase() ===
                                 "BOT SPECIFICATIONS:" ||
                                 rule.trim().toUpperCase() ===
-                                  "GENERAL RULES (COMMON FOR PRELIMS & FINALS):" ||
-                                rule.trim().toUpperCase() === "FAQ:")
+                                  "GENERAL RULES (COMMON FOR PRELIMS & FINALS):")
                             ) {
-                              // Restore previous icon for BOT SPECIFICATIONS, keep robot for GENERAL RULES, and add FAQ highlight
+                              // Restore previous icon for BOT SPECIFICATIONS, keep robot for GENERAL RULES
                               if (
                                 rule.trim().toUpperCase() ===
                                 "BOT SPECIFICATIONS:"
@@ -673,7 +885,9 @@ const EventDetail = ({ eventData }) => {
                                         marginRight: "10px",
                                         lineHeight: 1,
                                       }}
-                                    ></span>
+                                    >
+                                      🔧
+                                    </span>
                                     {rule}
                                   </h3>
                                 );
@@ -703,85 +917,21 @@ const EventDetail = ({ eventData }) => {
                                         marginRight: "10px",
                                         lineHeight: 1,
                                       }}
-                                    ></span>
-                                    {rule}
-                                  </h3>
-                                );
-                              } else if (rule.trim().toUpperCase() === "FAQ:") {
-                                return (
-                                  <h3
-                                    key={index}
-                                    style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      color: "#ffc010",
-                                      fontSize: "clamp(14px, 4vw, 20px)",
-                                      fontFamily: "Press Start 2P",
-                                      marginTop: "25px",
-                                      marginBottom: "10px",
-                                      lineHeight: "1.5",
-                                      textTransform: "uppercase",
-                                      letterSpacing: "2px",
-                                    }}
-                                  >
-                                    <span
-                                      style={{
-                                        fontSize: "22px",
-                                        marginRight: "10px",
-                                        lineHeight: 1,
-                                      }}
-                                    ></span>
+                                    >
+                                      👨‍🏫
+                                    </span>
                                     {rule}
                                   </h3>
                                 );
                               }
                             }
-                            // Highlight GENERAL GUIDELINES: for FIFA Mobile and Forza Horizon
                             if (
-                              (name === "FIFA Mobile" ||
-                                name === "Forza Horizon") &&
-                              rule.trim().toUpperCase() ===
-                                "GENERAL GUIDELINES:"
-                            ) {
-                              return (
-                                <h3
-                                  key={index}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    color: "#ffc010",
-                                    fontSize: "clamp(14px, 4vw, 20px)",
-                                    fontFamily: "Press Start 2P",
-                                    marginTop: "25px",
-                                    marginBottom: "10px",
-                                    lineHeight: "1.5",
-                                    textTransform: "uppercase",
-                                    letterSpacing: "2px",
-                                  }}
-                                >
-                                  <span
-                                    style={{
-                                      fontSize: "22px",
-                                      marginRight: "10px",
-                                      lineHeight: 1,
-                                    }}
-                                  ></span>
-                                  {rule}
-                                </h3>
-                              );
-                            }
-                            if (
-                              (name === "Ro-Navigator" ||
-                                name === "Ro-Soccer" ||
-                                name === "Ro-Combat" ||
-                                name === "Ro-Terrance" ||
-                                name === "Ro-Sumo") &&
+                              name === "Ro-Navigator" &&
                               [
                                 "FACULTY CO-ORDINATOR NAME:",
                                 "STUDENT CO-ORDINATOR NAME:",
                                 "VOLUNTEER NAME:",
                                 "TEAM STRENGTH:",
-                                "REGISTRATION FEES:",
                               ].includes(rule.trim().toUpperCase())
                             ) {
                               return (
@@ -799,27 +949,6 @@ const EventDetail = ({ eventData }) => {
                                     letterSpacing: "2px",
                                     textTransform: "uppercase",
                                     boxShadow: "none",
-                                  }}
-                                >
-                                  {rule}
-                                </div>
-                              );
-                            }
-                            // Highlight REGISTRATION FEES value for Ro-Terrance
-                            if (
-                              name === "Ro-Terrance" &&
-                              rule.trim() === "400/- Per Team/Bot"
-                            ) {
-                              return (
-                                <div
-                                  key={index}
-                                  style={{
-                                    color: "#fffacd", // yellowish white
-                                    fontFamily: "Press Start 2P",
-                                    fontSize: "clamp(13px, 3vw, 17px)",
-                                    margin: "10px 0 10px 16px",
-                                    letterSpacing: "2px",
-                                    textTransform: "uppercase",
                                   }}
                                 >
                                   {rule}
@@ -846,7 +975,7 @@ const EventDetail = ({ eventData }) => {
                                       marginTop: "2px",
                                     }}
                                   >
-                                    â–¸
+                                    ▸
                                   </span>
                                   <span
                                     style={{
@@ -914,7 +1043,7 @@ const EventDetail = ({ eventData }) => {
                                       marginTop: "2px",
                                     }}
                                   >
-                                    â–¸
+                                    ▸
                                   </span>
                                   <span
                                     style={{
@@ -933,9 +1062,9 @@ const EventDetail = ({ eventData }) => {
                             // Remove leading bullet dots for Ro-Navigator regular rules (keep font style unchanged)
                             if (name === "Ro-Navigator") {
                               // Section headers and special lines are handled above
-                              // Remove leading 'â€¢ ' from all rules except section headers
+                              // Remove leading '• ' from all rules except section headers
                               let displayRule = rule;
-                              if (rule.startsWith("â€¢ ")) {
+                              if (rule.startsWith("• ")) {
                                 displayRule = rule.slice(2);
                               }
                               // Render regular rule with original font style
@@ -954,10 +1083,10 @@ const EventDetail = ({ eventData }) => {
                                       color: "#00ffea",
                                       fontSize: "14px",
                                       flexShrink: 0,
-                                      marginTop: "-2px",
+                                      marginTop: "2px",
                                     }}
                                   >
-                                    â–¸
+                                    ▸
                                   </span>
                                   <span
                                     style={{
@@ -975,8 +1104,8 @@ const EventDetail = ({ eventData }) => {
                             // Remove only white bullets for Passion with Reels regular rules
                             if (name === "Passion with Reels") {
                               // Section headers and special lines (blue/cyan/gold bullets) are handled above
-                              // Only remove bullets for regular rules (those starting with 'â€¢ ')
-                              if (rule.startsWith("â€¢ ")) {
+                              // Only remove bullets for regular rules (those starting with '• ')
+                              if (rule.startsWith("• ")) {
                                 // Highlight the 'ONLY short films allowed...' rule for Passion with Reels
                                 if (
                                   name === "Passion with Reels" &&
@@ -1005,7 +1134,7 @@ const EventDetail = ({ eventData }) => {
                                           fontFamily: "monospace",
                                         }}
                                       >
-                                        â–¶
+                                        ▶
                                       </span>
                                       <span
                                         style={{
@@ -1050,7 +1179,7 @@ const EventDetail = ({ eventData }) => {
                                           fontFamily: "monospace",
                                         }}
                                       >
-                                        â–¶
+                                        ▶
                                       </span>
                                       <span
                                         style={{
@@ -1086,7 +1215,7 @@ const EventDetail = ({ eventData }) => {
                                         fontFamily: "monospace",
                                       }}
                                     >
-                                      â–¶
+                                      ▶
                                     </span>
                                     <span
                                       style={{
@@ -1122,7 +1251,9 @@ const EventDetail = ({ eventData }) => {
                                         color: "#ffc010",
                                         lineHeight: 1,
                                       }}
-                                    ></span>
+                                    >
+                                      🎥
+                                    </span>
                                     <h3
                                       style={{
                                         color: "#ffc010",
@@ -1162,7 +1293,7 @@ const EventDetail = ({ eventData }) => {
                                     marginTop: "2px",
                                   }}
                                 >
-                                  â–¸
+                                  ▸
                                 </span>
                                 <span
                                   style={{
@@ -1176,7 +1307,6 @@ const EventDetail = ({ eventData }) => {
                                 </span>
                               </div>
                             );
-
                           })}
                       </div>
                       <div style={{ textAlign: "center", marginTop: "25px" }}>
@@ -1207,7 +1337,7 @@ const EventDetail = ({ eventData }) => {
                     style={{ borderStyle: "dashed", flex: 1 }}
                   >
                     <p style={{ fontSize: "16px" }}>
-                      <span style={{ color: "#00ffea" }}>Event Dates: </span>{" "}
+                      📅 <span style={{ color: "#00ffea" }}>Event Dates: </span>{" "}
                       9-10th April
                     </p>
                   </div>
@@ -1228,7 +1358,7 @@ const EventDetail = ({ eventData }) => {
                                         .message.-right .nes-bcrikko {
                                             margin-bottom: 10px;
                                         }
-
+                                        
                                         .about-heading {
                                             text-align: center;
                                             display: flex;
@@ -1237,7 +1367,7 @@ const EventDetail = ({ eventData }) => {
                                             position: relative;
                                             width: 100%;
                                         }
-
+                                        
                                         .about-heading .heading-white,
                                         .about-heading .heading-gold {
                                             display: block;
@@ -1245,7 +1375,7 @@ const EventDetail = ({ eventData }) => {
                                             margin: 0;
                                             font-size: 20px !important;
                                         }
-
+                                        
                                         .about-heading .heading-brush {
                                             position: relative;
                                             bottom: auto;
@@ -1253,11 +1383,11 @@ const EventDetail = ({ eventData }) => {
                                             margin: 10px auto 20px;
                                             width: 80px;
                                         }
-
+                                        
                                         .about-content p {
                                             text-align: center !important;
                                         }
-
+                                        
                                         .entry-heading {
                                             text-align: center;
                                             display: flex;
@@ -1266,7 +1396,7 @@ const EventDetail = ({ eventData }) => {
                                             position: relative;
                                             width: 100%;
                                         }
-
+                                        
                                         .entry-heading .heading-white,
                                         .entry-heading .heading-gold {
                                             display: block;
@@ -1274,7 +1404,7 @@ const EventDetail = ({ eventData }) => {
                                             margin: 0;
                                             font-size: 20px !important;
                                         }
-
+                                        
                                         .entry-heading .heading-brush {
                                             position: relative;
                                             bottom: auto;
@@ -1282,7 +1412,7 @@ const EventDetail = ({ eventData }) => {
                                             margin: 10px auto 20px;
                                             width: 80px;
                                         }
-
+                                        
                                         .coordinator-heading {
                                             text-align: center;
                                             display: flex;
@@ -1291,7 +1421,7 @@ const EventDetail = ({ eventData }) => {
                                             position: relative;
                                             width: 100%;
                                         }
-
+                                        
                                         .coordinator-heading .heading-white,
                                         .coordinator-heading .heading-gold {
                                             display: block;
@@ -1299,7 +1429,7 @@ const EventDetail = ({ eventData }) => {
                                             margin: 0;
                                             font-size: 20px !important;
                                         }
-
+                                        
                                         .coordinator-heading .heading-brush {
                                             position: relative !important;
                                             margin: 10px auto 15px !important;
@@ -1309,11 +1439,11 @@ const EventDetail = ({ eventData }) => {
                                             bottom: auto !important;
                                             display: block !important;
                                         }
-
+                                        
                                         .entry-content {
                                             padding: 0 15px;
                                         }
-
+                                        
                                         .fee-category {
                                             width: 100% !important;
                                             min-width: unset !important;
@@ -1341,245 +1471,146 @@ const EventDetail = ({ eventData }) => {
                 ></div>
               </div>
               <div className="entry-content">
-                {/* Fee Display â€” FREE */}
-                {isFree && (
-                  <div style={{ textAlign: "center", marginBottom: "40px" }}>
-                    <div
-                      style={{
-                        display: "inline-block",
-                        padding: "20px 40px",
-                        backgroundColor: "rgba(0, 255, 100, 0.08)",
-                        border: "3px solid #00ff64",
-                        borderRadius: "4px",
-                      }}
-                    >
-                      <span style={{ fontSize: "32px" }}></span>
-                      <p
-                        style={{
-                          color: "#00ff64",
-                          fontSize: "22px",
-                          fontFamily: "Press Start 2P",
-                          margin: "10px 0 0 0",
-                          lineHeight: "1.5",
-                        }}
-                      >
-                        FREE ENTRY
-                      </p>
-                      <p
-                        style={{
-                          color: "#aaa",
-                          fontSize: "11px",
-                          fontFamily: "Press Start 2P",
-                          marginTop: "10px",
-                          lineHeight: "1.6",
-                        }}
-                      >
-                        No registration fee required
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Fee Display â€” INTERNAL + EXTERNAL */}
-                {!isFree && entryFeeInternal && entryFeeExternal && (
+                {/* Horizontal Fee Layout */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "30px",
+                    flexWrap: "wrap",
+                    marginBottom: "40px",
+                  }}
+                >
                   <div
+                    className="fee-category"
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: "30px",
-                      flexWrap: "wrap",
-                      marginBottom: "40px",
+                      flex: "1",
+                      minWidth: "280px",
+                      maxWidth: "400px",
+                      padding: "25px",
+                      backgroundColor: "rgba(255, 192, 16, 0.05)",
+                      border: "3px solid #ffc010",
+                      textAlign: "center",
                     }}
                   >
-                    <div
-                      className="fee-category"
+                    <h4
                       style={{
-                        flex: "1",
-                        minWidth: "280px",
-                        maxWidth: "400px",
-                        padding: "25px",
-                        backgroundColor: "rgba(255, 192, 16, 0.05)",
-                        border: "3px solid #ffc010",
-                        textAlign: "center",
-                      }}
-                    >
-                      <h4
-                        style={{
-                          color: "#ffc010",
-                          fontSize: "14px",
-                          fontFamily: "Press Start 2P",
-                          marginBottom: "15px",
-                          lineHeight: "1.5",
-                        }}
-                      >
-                        For BPPIMT Students
-                      </h4>
-                      <div
-                        className="fee-amount"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "12px",
-                        }}
-                      >
-                        <span
-                          className="fee-icon"
-                          style={{ fontSize: "28px" }}
-                        ></span>
-                        <span
-                          className="fee-text"
-                          style={{
-                            color: "#fff",
-                            fontSize: "18px",
-                            fontFamily: "Press Start 2P",
-                          }}
-                        >
-                          {entryFeeInternal}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div
-                      className="fee-category"
-                      style={{
-                        flex: "1",
-                        minWidth: "280px",
-                        maxWidth: "400px",
-                        padding: "25px",
-                        backgroundColor: "rgba(0, 255, 234, 0.05)",
-                        border: "3px solid #00ffea",
-                        textAlign: "center",
-                      }}
-                    >
-                      <h4
-                        style={{
-                          color: "#00ffea",
-                          fontSize: "14px",
-                          fontFamily: "Press Start 2P",
-                          marginBottom: "15px",
-                          lineHeight: "1.5",
-                        }}
-                      >
-                        For Outside Students
-                      </h4>
-                      <div
-                        className="fee-amount"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "12px",
-                        }}
-                      >
-                        <span
-                          className="fee-icon"
-                          style={{ fontSize: "28px" }}
-                        ></span>
-                        <span
-                          className="fee-text"
-                          style={{
-                            color: "#fff",
-                            fontSize: "18px",
-                            fontFamily: "Press Start 2P",
-                          }}
-                        >
-                          {entryFeeExternal}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Fee Display â€” SINGLE FEE */}
-                {!isFree && !entryFeeInternal && !entryFeeExternal && (
-                  <div style={{ textAlign: "center", marginBottom: "40px" }}>
-                    <div
-                      className="fee-category"
-                      style={{
-                        display: "inline-block",
-                        minWidth: "280px",
-                        maxWidth: "420px",
-                        padding: "25px 40px",
-                        backgroundColor: "rgba(255, 192, 16, 0.05)",
-                        border: "3px solid #ffc010",
-                        textAlign: "center",
-                      }}
-                    >
-                      <h4
-                        style={{
-                          color: "#ffc010",
-                          fontSize: "14px",
-                          fontFamily: "Press Start 2P",
-                          marginBottom: "15px",
-                          lineHeight: "1.5",
-                        }}
-                      >
-                        Registration Fee
-                      </h4>
-                      <div
-                        className="fee-amount"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "12px",
-                        }}
-                      >
-                        <span
-                          className="fee-icon"
-                          style={{ fontSize: "28px" }}
-                        ></span>
-                        <span
-                          className="fee-text"
-                          style={{
-                            color: "#fff",
-                            fontSize: "18px",
-                            fontFamily: "Press Start 2P",
-                          }}
-                        >
-                          {entryFee || "To be announced"}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Team Size */}
-                {teamSize && (
-                  <div
-                    className="nes-container with-title"
-                    style={{
-                      maxWidth: "500px",
-                      margin: "0 auto",
-                      backgroundColor: "rgba(255, 192, 16, 0.08)",
-                      borderColor: "#ffc010",
-                    }}
-                  >
-                    <p
-                      className="title"
-                      style={{
-                        margin: 0,
-                        padding: "3px 3px 3px 3px",
                         color: "#ffc010",
-                      }}
-                    >
-                      Team Size
-                    </p>
-                    <p
-                      style={{
                         fontSize: "14px",
-                        margin: "0 0 10px 0",
                         fontFamily: "Press Start 2P",
-                        lineHeight: "1.6",
-                        color: "#d0d0d0",
-                        textAlign: "center",
+                        marginBottom: "15px",
+                        lineHeight: "1.5",
                       }}
                     >
-                      {teamSize}
-                    </p>
+                      For BPPIMT students
+                    </h4>
+                    <div
+                      className="fee-amount"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "12px",
+                      }}
+                    >
+                      <span className="fee-icon" style={{ fontSize: "28px" }}>
+                        💰
+                      </span>
+                      <span
+                        className="fee-text"
+                        style={{
+                          color: "#fff",
+                          fontSize: "18px",
+                          fontFamily: "Press Start 2P",
+                        }}
+                      >
+                        ₹80 per team
+                      </span>
+                    </div>
                   </div>
-                )}
+
+                  <div
+                    className="fee-category"
+                    style={{
+                      flex: "1",
+                      minWidth: "280px",
+                      maxWidth: "400px",
+                      padding: "25px",
+                      backgroundColor: "rgba(0, 255, 234, 0.05)",
+                      border: "3px solid #00ffea",
+                      textAlign: "center",
+                    }}
+                  >
+                    <h4
+                      style={{
+                        color: "#00ffea",
+                        fontSize: "14px",
+                        fontFamily: "Press Start 2P",
+                        marginBottom: "15px",
+                        lineHeight: "1.5",
+                      }}
+                    >
+                      For outside students
+                    </h4>
+                    <div
+                      className="fee-amount"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "12px",
+                      }}
+                    >
+                      <span className="fee-icon" style={{ fontSize: "28px" }}>
+                        💰
+                      </span>
+                      <span
+                        className="fee-text"
+                        style={{
+                          color: "#fff",
+                          fontSize: "18px",
+                          fontFamily: "Press Start 2P",
+                        }}
+                      >
+                        ₹100 per team
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Team Size Options */}
+                <div
+                  className="nes-container with-title"
+                  style={{
+                    maxWidth: "500px",
+                    margin: "0 auto",
+                    backgroundColor: "rgba(255, 192, 16, 0.08)",
+                    borderColor: "#ffc010",
+                  }}
+                >
+                  <p
+                    className="title"
+                    style={{
+                      margin: 0,
+                      padding: "3px 3px 3px 3px",
+                      color: "#ffc010",
+                    }}
+                  >
+                    Team Options
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      margin: "0 0 10px 0",
+                      fontFamily: "Press Start 2P",
+                      lineHeight: "1.6",
+                      color: "#d0d0d0",
+                      textAlign: "center",
+                    }}
+                  >
+                    Solo / Duo / Thrice
+                  </p>
+                </div>
 
                 {/* Payment Options */}
                 <div
@@ -1640,6 +1671,24 @@ const EventDetail = ({ eventData }) => {
           </div>
         </div>
       </section>
+
+      {/* FAQ Accordion Section (before Coordinators) */}
+      {eventData.faqs && eventData.faqs.length > 0 && (
+        <section className="faq-accordion-section pt-30 pb-60">
+          <div className="container">
+            <div className="row">
+              <div className="col-12">
+                <div className="about-heading" style={{ textAlign: "center" }}>
+                  <h2 className="heading-white">{name.toUpperCase()}</h2>
+                  <h2 className="heading-gold">FAQ</h2>
+                  <div className="heading-brush"></div>
+                </div>
+                <FAQAccordion faqs={eventData.faqs} />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Coordinators Section */}
       <section className="coordinators-section pt-30 pb-90">

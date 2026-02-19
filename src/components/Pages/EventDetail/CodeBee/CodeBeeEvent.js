@@ -114,6 +114,76 @@ const CodeBeeEvent = () => {
       "Progression: Only participants who clear the previous round will proceed to the next",
       "Disputes: The decision of the Event Coordinators and Faculty In-charge will be final and binding",
     ],
+    faqs: [
+      {
+        q: "Can I participate alone?",
+        a: `Yes! You can participate as a Solo participant or form a team of 2 members (Duo).`
+      },
+      {
+        q: "Who is eligible to participate?",
+        a: `CodeBee 2.26 is open to students from all streams and years (B.Tech, BCA, MCA, etc.). Whether you are a fresher or a final-year student, you are welcome to compete. Cross College is accepted.`
+      },
+      {
+        q: "Is this an online or offline event?",
+        a: `It is a offline event.\nRound 1 (Prelims): Conducted on the Unstop platform, but you must be physically present on the BPPIMT campus for verification.\nRounds 2 & 3: Completely offline in our computer labs.`
+      },
+      {
+        q: "What is the registration fee?",
+        a: `BPPIMT Students: ₹80, External Students: ₹100\nMixed Teams (1 BPPIMT + 1 External): ₹80 (Discounted rate!)`
+      },
+      {
+        q: "I am from BPPIMT, but my teammate is from another college. Which category do we fall under?",
+        a: `Your team will be categorized as an Internal Team, but you will enjoy the discounted registration fee of ₹80.`
+      },
+      {
+        q: "Is the registration fee refundable?",
+        a: `No, the registration fee is strictly non-refundable.`
+      },
+      {
+        q: "What do I need to carry?",
+        a: `You must carry a valid College ID Card or Library Card for verification and a pen.`
+      },
+      {
+        q: "Do I need to bring my own laptop?",
+        a: `It is not mandatory. We will provide college lab computers with LAN/Wi-Fi access. However, you are permitted to bring your own laptop only for prelims and you must arrange your own stable mobile hotspot. No extra time will be given for connectivity issues on personal devices.`
+      },
+      {
+        q: "What programming languages are allowed?",
+        a: `You can submit solutions in C, C++, Java, or Python.`
+      },
+      {
+        q: "What is the round duration?",
+        a: `For 1st round the duration will be 45 mins, 2nd will be 1hr mins and final round will be of 2 hrs.`
+      },
+      {
+        q: "Is this event beneficial in enhancing my DSA skills?",
+        a: `A good question. Definitely, DSA is an important part of your interviews and having a practice of it within a time limit will definitely enhance your skills.`
+      },
+      {
+        q: "Can I use ChatGPT or GitHub Copilot?",
+        a: `Absolutely NOT. The use of Generative AI tools (ChatGPT, Gemini, Blackbox AI, etc.) is strictly prohibited. If caught, your team will be immediately disqualified.`
+      },
+      {
+        q: "What if I am an Internal student in a Mixed Team? When is my Prelims?",
+        a: `You have a special option!\nYou can choose to attempt Round 1 solo during the Internal Slot (April 7, 1:00 PM).\nNote: The score you get in this solo attempt will be final for your team. You cannot re-attempt it with your partner on the External day.`
+      },
+      {
+        q: "What happens if I switch tabs during the test?",
+        a: `Our platform tracks window activity.\nWarning 1 & 2: You will receive a system warning.\n3rd Strike: The test will auto-submit, and you will be disqualified.\nAdvice: Do not switch tabs, minimize the browser, or open other applications.`
+      },
+      {
+        q: "What will happen in case of a tie breaker?",
+        a: `In case of a tie breaker between teams based on marks obtained, the team with the minimum submission time will rank higher.`
+      },
+      {
+        q: "Will I get a participation certificate even if I don’t qualify 1st round?",
+        a: `Yes, you will definitely get an e-certificate for participation and the winners will get a special hard copy certificate.`
+      },
+      {
+        q: "Who should I contact if I face issues during registration?",
+        a: `Please reach out to our Event Coordinators:\nSaikat Mondal (CSE3): 6291341212\nAdarsh Kumar (IT3): 8271238822\nMedhansh Arora (CSE3): 7003962640`
+      }
+    ],
     prizes: [
       { position: "1st Prize", amount: "₹15,000" },
       { position: "2nd Prize", amount: "₹10,000" },

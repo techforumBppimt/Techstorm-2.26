@@ -170,6 +170,64 @@ const RoCombatEvent = () => {
         email: "safety@techstorm.com",
       },
     ],
+    faqs: [
+      {
+        q: "Is this an online or offline event?",
+        a: `This is a completely offline event. All teams must be physically present at the venue to participate.`
+      },
+      {
+        q: "Is the registration fee refundable?",
+        a: `No. Registration fees are strictly non-refundable and non-transferable under any circumstances.`
+      },
+      {
+        q: "Can a participant be part of more than one team?",
+        a: `No. A participant cannot be a member of multiple teams.`
+      },
+      {
+        q: "Can teams from different colleges participate together?",
+        a: `Yes. A team may comprise members from different colleges.`
+      },
+      {
+        q: "What is the maximum allowed weight of the bot?",
+        a: `The bot must not exceed 8 kg (wireless) with no weight tolerance.`
+      },
+      {
+        q: "Is there any weight bonus?",
+        a: `Yes. A 200 grams weight bonus is allowed.`
+      },
+      {
+        q: "Are active weapons allowed?",
+        a: `Yes. Both active and non-active weapons are allowed, provided they follow safety rules and restrictions.`
+      },
+      {
+        q: "Are pneumatics, projectiles, or flame weapons allowed?",
+        a: `No. Pneumatics, hydraulics, projectiles, flame-based weapons, explosives, high-power magnets, EMP devices, and similar systems are strictly prohibited.`
+      },
+      {
+        q: "Is a kill switch mandatory?",
+        a: `Yes. An external kill switch is mandatory and will be tested before the match.`
+      },
+      {
+        q: "Is a weapon lock required?",
+        a: `Yes. A proper weapon lock mechanism is mandatory and must remain engaged outside the arena.`
+      },
+      {
+        q: "Can we modify our robot during the event?",
+        a: `Teams cannot change more than 30% of their robot design during the event.`
+      },
+      {
+        q: "What happens if a bot becomes immobile during a match?",
+        a: `Immobility during a fight will be considered a defeat.`
+      },
+      {
+        q: "Can we touch the robot during the match?",
+        a: `No. Touching the robot during the competition is strictly prohibited.`
+      },
+      {
+        q: "What happens if there is an arena fault during the match?",
+        a: `In case of an arena fault, the match will be paused and bots will be reset to their last position before the issue occurred.`
+      }
+    ],
   };
 
   return <EventDetail eventData={eventData} />;

@@ -1,3 +1,4 @@
+
 import React from "react";
 import EventDetail from "../EventDetail";
 import roSumo from "../../../../assets/img/PIXELATED EVENT MASCOTS/rosumo.png";
@@ -124,6 +125,80 @@ const RoSumoEvent = () => {
         email: "arena@techstorm.com",
       },
     ],
+    faqs : [
+  {
+    q: "What is the maximum allowed weight of the robot?",
+    a: `The total weight of the bot must not exceed 3 kg, including onboard batteries, pneumatic tanks, hydraulic systems, and weapons.\nA maximum margin of 100 grams is allowed.\nRemote controller weight is not included.`
+  },
+  {
+    q: "Are there any size restrictions for the robot?",
+    a: `There are no dimension restrictions. However:\n- In case of cluster bots, total combined weight must be within 3 kg.\n- Each individual bot must comply with all competition rules.\n- No part of the bot may exceed 6 ft height during motion.`
+  },
+  {
+    q: "What type of weapons or mechanisms are allowed?",
+    a: `Allowed mechanisms include:\n- Pneumatic systems\n- Hydraulic systems\n- Electric lifters\n- Wedges\n- Manual jumping/hopping mechanisms\n\u274C Flying mechanisms (airfoils, helium balloons, ornithopters) are strictly prohibited.\n\u274C Sticky/suction mechanisms (glue, suction cups, sticky treads) are not allowed.`
+  },
+  {
+    q: "What type of mobility system is required?",
+    a: `Robots must have clearly visible and controllable mobility using:\n- Wheels\n- Tracks\n- Rolling bodies\n- Approved non-wheeled continuous drive systems.`
+  },
+  {
+    q: "Is autonomous mode allowed?",
+    a: `Yes, autonomous features are allowed only if they can be overridden remotely at any time.`
+  },
+  {
+    q: "What type of control system is required?",
+    a: `The robot must be controlled through a wireless remote only.\nAll power supply must be onboard.\nA manual Kill Switch and a radio-controlled Emergency Stop (E-Stop) are mandatory.`
+  },
+  {
+    q: "What are the remote frequency requirements?",
+    a: `- Minimum four-frequency remote OR\n- Dual interchangeable control circuits\n- Proper signal binding must work through polycarbonate and metal barriers.\n\u26A0 No rematch will be given due to signal interference.`
+  },
+  {
+    q: "What is the maximum operating voltage allowed?",
+    a: `The robot must be electrically powered only.\n\u274C IC engines are not allowed.\nMaximum operating voltage must not exceed 36V DC at any point.`
+  },
+  {
+    q: "What batteries are allowed?",
+    a: `Only sealed, leak-proof batteries such as:\n- Li-ion\n- NiMH\n- NiCad\n- Gel batteries\n- Dry cells\nBattery terminals must be properly insulated.\nBattery change during match is not allowed.\nImproper battery protection may lead to disqualification.`
+  },
+  {
+    q: "How long is each match?",
+    a: `Each match consists of 3 minutes of active fight time (excluding time-outs).\nBots must be designed to sustain combat for at least 3 minutes.`
+  },
+  {
+    q: "What are the match formats?",
+    a: `Matches may be conducted as:\n- 1 vs 1 (Match)\n- Multi-robot combat (Rumble)\nFormat depends on the round.`
+  },
+  {
+    q: "How is a winner decided?",
+    a: `A robot wins by:\n- Immobilizing the opponent (no 1 inch linear movement within 10 seconds)\nIf no immobilization:\nJudges decide based on:\n- Aggression\n- Control\n- Damage.`
+  },
+  {
+    q: "What are the pinning rules?",
+    a: `Pinning/lifting allowed for maximum 20 seconds per attempt.\nMust release after referee instruction.\nFailure to comply may result in disqualification.`
+  },
+  {
+    q: "What happens if a robot gets stuck in the arena?",
+    a: `If stuck due to arena conditions:\n- The fight continues\n- Winner is decided based on points\n- The bot with higher points can still win even if immobilized due to arena condition.`
+  },
+  {
+    q: "Can a team consist of members from different institutes?",
+    a: `Yes. Teams must have:\n- Minimum 2 members\n- Maximum 5 members\nMembers can be from the same or different institutes.`
+  },
+  {
+    q: "Can we change our team name after registration?",
+    a: `Yes, but:\n- The name must be unique\n- Must be approved by organizers\n- Organizers must be informed officially.`
+  },
+  {
+    q: "Is participation fee refundable?",
+    a: `No. Participation fees are non-refundable under any circumstances after registration.`
+  },
+  {
+    q: "What leads to immediate disqualification?",
+    a: `- Unsafe robot design\n- Throwing opponent out of arena (if unsafe)\n- Voltage exceeding 36V`
+  }
+]
   };
 
   return <EventDetail eventData={eventData} />;

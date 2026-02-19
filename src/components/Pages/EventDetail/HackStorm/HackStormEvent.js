@@ -44,10 +44,78 @@ const HackStormEvent = () => {
     duration:
       "10:00-(6:30 – 7:00) Coding | (6:30 – 7:00) – 8:00 Judging & Prize Declaration",
     venue: "Main Auditorium",
+        faqs: [
+          {
+            q: "Who can participate?",
+            a: `Participation is restricted to currently enrolled college or university students only.`
+          },
+          {
+            q: "Why should I participate?",
+            a: `HackStorm is a learning-driven, build-focused hackathon designed to help participants experiment, collaborate, and strengthen their technical and problem-solving skills through an intensive in-person development experience.`
+          },
+          {
+            q: "Is there an entry fee?",
+            a: `No. This is a completely free offline hackathon.`
+          },
+          {
+            q: "What is the team size? Can I participate without a team?",
+            a: `Teams must follow the size limits specified during registration. Solo participation is allowed only if permitted within those limits.`
+          },
+          {
+            q: "What should I bring to the event?",
+            a: `Participants must bring their own laptops, chargers, and any required hardware or accessories needed for development.`
+          },
+          {
+            q: "What will we build during the hackathon?",
+            a: `The hackathon is open-ended with a set of predefined tracks and problem areas shared in advance. Teams are free to build creative solutions within those tracks during the hacking period.`
+          },
+          {
+            q: "How is the judging process conducted?",
+            a: `Projects are evaluated based on technology, design, completion, and learning. A panel of judges will review each project through live demonstrations and technical evaluation to determine the winners.`
+          },
+          {
+            q: "I cannot travel. Is there any way I could participate?",
+            a: `No. This is an offline event and requires physical presence at the venue for participation.`
+          }
+        ],
     registerButton: {
       text: "Register Now",
       link: "https://hack-storm.devfolio.co/overview",
     },
+    faqs: [
+              {
+                q: "Who can participate?",
+                a: `Participation is restricted to currently enrolled college or university students only.`
+              },
+              {
+                q: "Why should I participate?",
+                a: `HackStorm is a learning-driven, build-focused hackathon designed to help participants experiment, collaborate, and strengthen their technical and problem-solving skills through an intensive in-person development experience.`
+              },
+              {
+                q: "Is there an entry fee?",
+                a: `No. This is a completely free offline hackathon.`
+              },
+              {
+                q: "What is the team size? Can I participate without a team?",
+                a: `Teams must follow the size limits specified during registration. Solo participation is allowed only if permitted within those limits.`
+              },
+              {
+                q: "What should I bring to the event?",
+                a: `Participants must bring their own laptops, chargers, and any required hardware or accessories needed for development.`
+              },
+              {
+                q: "What will we build during the hackathon?",
+                a: `The hackathon is open-ended with a set of predefined tracks and problem areas shared in advance. Teams are free to build creative solutions within those tracks during the hacking period.`
+              },
+              {
+                q: "How is the judging process conducted?",
+                a: `Projects are evaluated based on technology, design, completion, and learning. A panel of judges will review each project through live demonstrations and technical evaluation to determine the winners.`
+              },
+              {
+                q: "I cannot travel. Is there any way I could participate?",
+                a: `No. This is an offline event and requires physical presence at the venue for participation.`
+              }
+            ],
     rules: [
       "Coding Time: 10:00-(6:30 – 7:00)",
       "Judging and Prize declaration : (6:30 – 7:00) – 8:00",
@@ -123,34 +191,8 @@ const HackStormEvent = () => {
       "Providing false information regarding AI tool usage or project development.",
       "Any unsportsmanlike conduct or rule violations at organizer discretion.",
       "Organizer decisions on disqualification are final.",
-      "",
-      "HackStorm – FAQ",
-      "",
-      "Who can participate?",
-      "Participation is restricted to currently enrolled college or university students only.",
-      "",
-      "Why should I participate?",
-      "HackStorm is a learning-driven, build-focused hackathon designed to help participants experiment, collaborate, and strengthen their technical and problem-solving skills through an intensive in-person development experience.",
-      "",
-      "Is there an entry fee?",
-      "No. This is a completely free offline hackathon.",
-      "",
-      "What is the team size? Can I participate without a team?",
-      "Teams must follow the size limits specified during registration. Solo participation is allowed only if permitted within those limits.",
-      "",
-      "What should I bring to the event?",
-      "Participants must bring their own laptops, chargers, and any required hardware or accessories needed for development.",
-      "",
-      "What will we build during the hackathon?",
-      "The hackathon is open-ended with a set of predefined tracks and problem areas shared in advance. Teams are free to build creative solutions within those tracks during the hacking period.",
-      "",
-      "How is the judging process conducted?",
-      "Projects are evaluated based on technology, design, completion, and learning. A panel of judges will review each project through live demonstrations and technical evaluation to determine the winners.",
-      "",
-      "I cannot travel. Is there any way I could participate?",
-      "No. This is an offline event and requires physical presence at the venue for participation.",
-    ],
-    prizes: [],
+      
+     ],
     contact: [
       {
         name: "Hack Coordinator",
