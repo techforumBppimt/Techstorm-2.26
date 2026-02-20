@@ -916,8 +916,17 @@ const EventDetail = ({ eventData }) => {
                       onClick={
                         registerButton.onClick ||
                         (() => {
-                          // Navigate to specific event registration page
-                          history.push(getRegistrationRoute(name));
+                          // Check if it's an external link (starts with http:// or https://)
+                          if (registerButton.link && (registerButton.link.startsWith('http://') || registerButton.link.startsWith('https://'))) {
+                            // Open external link in new tab
+                            window.open(registerButton.link, '_blank', 'noopener,noreferrer');
+                          } else if (registerButton.link) {
+                            // Internal route
+                            history.push(registerButton.link);
+                          } else {
+                            // Default: Navigate to specific event registration page
+                            history.push(getRegistrationRoute(name));
+                          }
                         })
                       }
                       style={{
