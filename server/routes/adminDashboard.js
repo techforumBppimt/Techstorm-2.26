@@ -2,7 +2,7 @@ const express = require('express');
 const { authenticateAdmin } = require('../middleware/adminAuth');
 const { asyncHandler } = require('../middleware/errorHandler');
 const EventRegistrationFactory = require('../models/EventRegistration');
-const adminCredentials = require('../config/adminCredentials.json');
+const roleCredentials = require('../config/roleCredentials.json');
 
 const router = express.Router();
 
@@ -19,13 +19,20 @@ router.get('/stats',
   asyncHandler(async (req, res) => {
     const admin = req.admin;
     
-    // Get all events from credentials
-    const allEvents = adminCredentials.events;
+    // Get all events from role credentials
+    const allEvents = [
+      ...roleCredentials.coordinator.map(c => ({ name: c.event, abbreviation: c.eventAbbr }))
+    ];
+    
+    // Remove duplicates
+    const uniqueEvents = allEvents.filter((event, index, self) =>
+      index === self.findIndex((e) => e.name === event.name)
+    );
     
     // Filter events based on role
-    let eventsToQuery = allEvents;
-    if (admin.role !== 'core' && admin.eventAbbr) {
-      eventsToQuery = allEvents.filter(e => e.abbreviation === admin.eventAbbr);
+    let eventsToQuery = uniqueEvents;
+    if (admin.role !== 'core' && admin.eventName) {
+      eventsToQuery = uniqueEvents.filter(e => e.name === admin.eventName);
     }
     
     // Fetch statistics for each event
@@ -51,7 +58,6 @@ router.get('/stats',
           return {
             eventName: event.name,
             eventAbbr: event.abbreviation,
-            category: event.category,
             totalRegistrations,
             confirmedRegistrations,
             pendingRegistrations,
@@ -63,7 +69,6 @@ router.get('/stats',
           return {
             eventName: event.name,
             eventAbbr: event.abbreviation,
-            category: event.category,
             totalRegistrations: 0,
             confirmedRegistrations: 0,
             pendingRegistrations: 0,
@@ -121,13 +126,24 @@ router.get('/registrations',
       limit = 50
     } = req.query;
     
-    // Get all events from credentials
-    const allEvents = adminCredentials.events;
+    // Get all events from role credentials
+    const allEvents = [
+      ...roleCredentials.coordinator.map(c => ({ name: c.event, abbreviation: c.eventAbbr }))
+    ];
+    
+    // Remove duplicates
+    const uniqueEvents = allEvents.filter((event, index, self) =>
+      index === self.findIndex((e) => e.name === event.name)
+    );
     
     // Filter events based on role
-    let eventsToQuery = allEvents;
-    if (admin.role !== 'core' && admin.eventAbbr) {
-      eventsToQuery = allEvents.filter(e => e.abbreviation === admin.eventAbbr);
+    let eventsToQuery = uniqueEvents;
+    if (admin.role !== 'core' && admin.eventName) {
+      eventsToQuery = uniqueEvents.filter(e => e.name === admin.eventName);
+      console.log(`🔍 [COORDINATOR FILTER] Admin: ${admin.email}`);
+      console.log(`🔍 [COORDINATOR FILTER] Admin Event Name: "${admin.eventName}"`);
+      console.log(`🔍 [COORDINATOR FILTER] All Events:`, uniqueEvents.map(e => `"${e.name}"`));
+      console.log(`🔍 [COORDINATOR FILTER] Filtered Events:`, eventsToQuery.map(e => `"${e.name}"`));
     }
     
     // Further filter by specific event if requested
@@ -140,7 +156,9 @@ router.get('/registrations',
     
     for (const event of eventsToQuery) {
       try {
+        console.log(`📊 [QUERY] Attempting to query event: "${event.name}"`);
         const model = EventRegistrationFactory.getModel(event.name);
+        console.log(`📊 [QUERY] Model created for: "${event.name}"`);
         
         // Build query
         const query = {};
@@ -169,6 +187,11 @@ router.get('/registrations',
           .sort({ submittedAt: -1 })
           .select('-paymentReceiptData -paymentScreenshotData -cashReceiptData -idProofData -idFileData')
           .lean();
+        
+        console.log(`📊 [QUERY] Found ${registrations.length} registrations for "${event.name}"`);
+        if (registrations.length > 0) {
+          console.log(`📊 [QUERY] Sample registration eventName: "${registrations[0].eventName}"`);
+        }
         
         // Add event name to each registration
         registrations.forEach(reg => {
@@ -464,6 +487,49 @@ router.post('/registrations/:eventName',
 );
 
 /**
+ * Debug endpoint - Get all collection names
+ * GET /api/admin-dashboard/debug/collections
+ */
+router.get('/debug/collections',
+  asyncHandler(async (req, res) => {
+    const mongoose = require('mongoose');
+    const collections = await mongoose.connection.db.listCollections().toArray();
+    
+    res.json({
+      collections: collections.map(c => c.name),
+      registrationCollections: collections
+        .map(c => c.name)
+        .filter(n => n.startsWith('registrations_'))
+    });
+  })
+);
+
+/**
+ * Debug endpoint - Check event name in registration
+ * GET /api/admin-dashboard/debug/check-event/:collectionName
+ */
+router.get('/debug/check-event/:collectionName',
+  asyncHandler(async (req, res) => {
+    const { collectionName } = req.params;
+    const mongoose = require('mongoose');
+    
+    const collection = mongoose.connection.db.collection(collectionName);
+    const sample = await collection.findOne({});
+    
+    res.json({
+      collectionName,
+      sampleEventName: sample ? sample.eventName : null,
+      sampleData: sample ? {
+        _id: sample._id,
+        eventName: sample.eventName,
+        email: sample.email || sample.emailAddress,
+        registrationNumber: sample.registrationNumber
+      } : null
+    });
+  })
+);
+
+/**
  * Get events list
  * GET /api/admin-dashboard/events
  */
@@ -471,19 +537,29 @@ router.get('/events',
   asyncHandler(async (req, res) => {
     const admin = req.admin;
     
-    let events = adminCredentials.events;
+    // Get all events from role credentials
+    let events = [
+      ...roleCredentials.coordinator.map(c => ({ 
+        name: c.event, 
+        abbreviation: c.eventAbbr 
+      }))
+    ];
+    
+    // Remove duplicates
+    events = events.filter((event, index, self) =>
+      index === self.findIndex((e) => e.name === event.name)
+    );
     
     // Filter for event-specific admins
-    if (admin.role !== 'core' && admin.eventAbbr) {
-      events = events.filter(e => e.abbreviation === admin.eventAbbr);
+    if (admin.role !== 'core' && admin.eventName) {
+      events = events.filter(e => e.name === admin.eventName);
     }
     
     res.json({
       message: 'Events retrieved successfully',
       events: events.map(e => ({
         name: e.name,
-        abbreviation: e.abbreviation,
-        category: e.category
+        abbreviation: e.abbreviation
       }))
     });
   })

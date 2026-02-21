@@ -147,6 +147,14 @@ router.post('/login',
       await user.save();
       console.log(`✅ New admin user created: ${normalizedEmail} (${role})`);
     } else {
+      // Update user's event name if it doesn't match (fix for old data)
+      if (eventInfo && user.eventName !== eventInfo.name) {
+        console.log(`🔄 Updating user event name from "${user.eventName}" to "${eventInfo.name}"`);
+        user.eventName = eventInfo.name;
+        user.eventAbbr = eventInfo.abbr;
+        await user.save();
+      }
+      
       // Verify user is not locked
       if (user.isLocked) {
         return res.status(423).json({
