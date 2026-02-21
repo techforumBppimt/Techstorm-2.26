@@ -1284,29 +1284,65 @@ const EventDetail = ({ eventData }) => {
                             // const isJudgingCriteria = false;
                             // Check if it's a registration fee header
 
-                            if (isHeader) {
-                              // Reduce space below Forza Horizon gold header
-                              const isForzaHorizonHeader =
-                                name === "Forza Horizon" &&
-                                rule
-                                  .trim()
-                                  .toUpperCase()
-                                  .includes("FORZA HORIZON GAME RULES");
+                            // Highlight KHET section headings with gold background and border (apply to any matching rule, not just emoji)
+                            const khetHeadingsToHighlight = [
+                              'GENERAL RULES',
+                              'RULES AND REGULATIONS',
+                              'PRELIMS-I',
+                              'PRELIMS-II',
+                              'QUARTER FINAL, SEMIFINAL & FINAL',
+                              'POINTS TO BE NOTED',
+                              'SETUPS',
+                              'NOTE'
+                            ];
+                            function normalizeRuleText(text) {
+                              return text.replace(/[^A-Z0-9 ]/gi, '').trim().toUpperCase();
+                            }
+                            const normalizedRule = normalizeRuleText(rule);
+                            const isKhetSectionHeader =
+                              name === "KHET" && (
+                                khetHeadingsToHighlight.some(h => normalizedRule.includes(normalizeRuleText(h))) ||
+                                /RULES$/i.test(rule.trim())
+                              );
+                            const isForzaHorizonHeader =
+                              name === "Forza Horizon" &&
+                              rule
+                                .trim()
+                                .toUpperCase()
+                                .includes("FORZA HORIZON GAME RULES");
+                            if (isKhetSectionHeader || isHeader) {
+                              // Choose emoji based on heading
+                              let emoji = '⭐';
+                              if (normalizedRule.includes('GENERAL RULES')) emoji = '📋';
+                              else if (normalizedRule.includes('RULES AND REGULATIONS')) emoji = '📜';
+                              else if (normalizedRule.includes('PRELIMS-I')) emoji = '🟢';
+                              else if (normalizedRule.includes('PRELIMS-II')) emoji = '🟡';
+                              else if (normalizedRule.includes('QUARTER FINAL')) emoji = '🏁';
+                              else if (normalizedRule.includes('SEMIFINAL')) emoji = '🏁';
+                              else if (normalizedRule.includes('FINAL')) emoji = '🏆';
+                              else if (normalizedRule.includes('POINTS TO BE NOTED')) emoji = '📝';
+                              else if (normalizedRule.includes('SETUPS')) emoji = '🛠️';
+                              else if (normalizedRule.includes('NOTE')) emoji = '⚠️';
                               return (
                                 <h3
                                   key={index}
                                   style={{
-                                    color: "#ffc010",
-                                    fontSize: "clamp(12px, 3vw, 16px)",
-                                    fontFamily: "Press Start 2P",
-                                    marginTop: index === 0 ? "0" : "25px",
-                                    marginBottom: isForzaHorizonHeader
-                                      ? "2px"
-                                      : "15px",
-                                    lineHeight: "1.5",
-                                    textTransform: "uppercase",
+                                    color: isKhetSectionHeader ? '#ffc010' : '#ffc010',
+                                    fontSize: 'clamp(15px, 3.5vw, 22px)',
+                                    fontFamily: 'Press Start 2P',
+                                    fontWeight: isKhetSectionHeader ? 'bold' : 'normal',
+                                    marginTop: index === 0 ? '0' : '28px',
+                                    marginBottom: isForzaHorizonHeader ? '2px' : '18px',
+                                    lineHeight: '1.5',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: isKhetSectionHeader ? '2.5px' : undefined,
+                                    textAlign: isKhetSectionHeader ? 'left' : undefined,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
                                   }}
                                 >
+                                  <span style={{fontSize: '1.2em'}}>{emoji}</span>
                                   {rule}
                                 </h3>
                               );
