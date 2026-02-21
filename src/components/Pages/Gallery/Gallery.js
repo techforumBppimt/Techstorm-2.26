@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cloudinaryImages } from '../../../config/cloudinary';
 import galleryBg from '../../../assets/img/eventroute.png';
+import galleryBgMobile from '../../../assets/img/1.png';
 import SectionTitle from '../../Utilities/SectionTitle/SectionTitle';
 import {
   Pagination,
@@ -74,9 +75,19 @@ const getPageNumbers = (currentPage, totalPages) => {
 
 const TOAST_AUTO_DISMISS_MS = 5000;
 
+const MOBILE_BREAKPOINT = 768;
+
 const Gallery = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [toastImage, setToastImage] = useState(null);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth <= MOBILE_BREAKPOINT);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    window.addEventListener('resize', check);
+    check();
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const totalPages = Math.ceil(galleryImgs.length / ITEMS_PER_PAGE);
   const paginatedItems = useMemo(() => {
@@ -106,7 +117,7 @@ const Gallery = () => {
       <div className="gallery-hero-wrap">
         <div
           className="gallery-hero-video"
-          style={{ backgroundImage: `url(${galleryBg})` }}
+          style={{ backgroundImage: `url(${isMobile ? galleryBgMobile : galleryBg})` }}
           aria-hidden="true"
         />
         <div className="gallery-hero-overlay">

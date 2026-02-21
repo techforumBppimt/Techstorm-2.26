@@ -1,7 +1,9 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import coordinatorCardBg from "../../../assets/img/coordinatorcardbg.png";
 import entryFeeBg from "../../../assets/img/event-1.png";
+import entryFeeBgMobile from "../../../assets/img/4.png";
 import coordinatorsBg from "../../../assets/img/event-2.png";
+import coordinatorsBgMobile from "../../../assets/img/5.png";
 import { useHistory } from "react-router-dom";
 import "./EventDetail.css";
 import { Button } from "../../ui/8bit/button";
@@ -137,6 +139,20 @@ const EventDetail = ({ eventData }) => {
   // State for fee card hover
   const [hoveredFee, setHoveredFee] = useState(null);
   const [hoveredTeam, setHoveredTeam] = useState(false);
+  // Mobile breakpoint for background images
+  const [isMobile, setIsMobile] = useState(typeof window !== "undefined" && window.innerWidth <= 768);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", check);
+    check();
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  const entryFeeImg = isMobile ? entryFeeBgMobile : entryFeeBg;
+  const coordinatorsImg = isMobile ? coordinatorsBgMobile : coordinatorsBg;
+  // Lighter overlay on mobile so background images are more visible
+  const sectionOverlay = isMobile
+    ? "linear-gradient(to bottom, rgba(10,4,20,0.42) 0%, rgba(10,4,20,0.02) 22%, rgba(10,4,20,0.02) 78%, rgba(10,4,20,0.42) 100%)"
+    : "linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,0.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%)";
 
   // Event-specific coordinators data
   const eventCoordinators = {
@@ -823,7 +839,7 @@ const EventDetail = ({ eventData }) => {
         style={
           breadcrumbBg
             ? {
-              backgroundImage: `linear-gradient(rgba(26, 14, 34, 0.7), rgba(26, 14, 34, 0.7)), url(${breadcrumbBg})`,
+              backgroundImage: `linear-gradient(${isMobile ? "rgba(26, 14, 34, 0.28)" : "rgba(26, 14, 34, 0.7)"}, ${isMobile ? "rgba(26, 14, 34, 0.28)" : "rgba(26, 14, 34, 0.7)"}), url(${breadcrumbBg})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }
@@ -835,13 +851,14 @@ const EventDetail = ({ eventData }) => {
             <div className="col-12">
 
                 <div className="event-name-heading">
-                  <h1 className="event-title-white">{name.split(" ")[0]}</h1>
-                  {name.split(" ").slice(1).join(" ") && (
-                    <h1 className="event-title-gold">
-                      {name.split(" ").slice(1).join(" ")}
-                    </h1>
-                  )}
-                  <div className="heading-brush"></div>
+                  <div className="event-name-title-row">
+                    <h1 className="event-title-white">{name.split(" ")[0]}</h1>
+                    {name.split(" ").slice(1).join(" ") && (
+                      <h1 className="event-title-gold">
+                        {name.split(" ").slice(1).join(" ")}
+                      </h1>
+                    )}
+                  </div>
                   {name === "KHET" && khetGalleryImages.length === 0 && (
                     <div style={{color: '#ffc010', marginTop: 10, fontSize: 14}}>
                       KHET gallery images failed to load. Please check your network or contact admin.
@@ -854,24 +871,6 @@ const EventDetail = ({ eventData }) => {
                   )}
                 </div>
 
-              <div className="event-name-heading">
-                <h1 className="event-title-white">{name.split(" ")[0]}</h1>
-                {name.split(" ").slice(1).join(" ") && (
-                  <h1 className="event-title-gold">
-                    {name.split(" ").slice(1).join(" ")}
-                  </h1>
-                )}
-                <div className="heading-brush"></div>
-                {name === "KHET" && khetGalleryImages.length === 0 && (
-                  <div
-                    style={{ color: "#ffc010", marginTop: 10, fontSize: 14 }}
-                  >
-                    KHET gallery images failed to load. Please check your
-                    network or contact admin.
-                  </div>
-                )}
-              </div>
-
             </div>
           </div>
         </div>
@@ -881,7 +880,7 @@ const EventDetail = ({ eventData }) => {
       <section
         className="about-event-section pt-60 pb-60"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,0.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%), url(${entryFeeBg})`,
+          backgroundImage: `${sectionOverlay}, url(${entryFeeImg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -2449,7 +2448,7 @@ const EventDetail = ({ eventData }) => {
       <section
         className="entry-fee-section pt-30 pb-60"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,0.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%), url(${entryFeeBg})`,
+          backgroundImage: `${sectionOverlay}, url(${entryFeeImg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -3034,7 +3033,7 @@ const EventDetail = ({ eventData }) => {
         <section
           className="faq-accordion-section pt-30 pb-60"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,0.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%), url(${coordinatorsBg})`,
+            backgroundImage: `${sectionOverlay}, url(${coordinatorsImg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -3062,7 +3061,7 @@ const EventDetail = ({ eventData }) => {
       <section
         className="coordinators-section pt-30 pb-90"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,0.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%), url(${coordinatorsBg})`,
+          backgroundImage: `${sectionOverlay}, url(${coordinatorsImg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

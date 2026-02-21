@@ -1,20 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import teamBg from '../../../assets/img/teamsbg.png'; // replace file with team-bg.jpg once saved
+import teamBgMobile from '../../../assets/img/2.png';
 import SectionTitle from '../../Utilities/SectionTitle/SectionTitle';
 import ProfileCardMember from '../../Utilities/Team/ProfileCardMember';
 import { coreMembers } from './teamData';
 import TeamEventCards from './TeamEventCards';
 import './Team.css';
 
+const MOBILE_BREAKPOINT = 768;
+
 const Teams = () => {
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth <= MOBILE_BREAKPOINT);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    window.addEventListener('resize', check);
+    check();
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  const bg = isMobile ? teamBgMobile : teamBg;
+
   return (
     <React.Fragment>
       {/* Image background for Organizing Committee section */}
       <div
         className="team-org-hero"
         style={{
-          backgroundImage: `url(${teamBg})`,
+          backgroundImage: `url(${bg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
@@ -64,7 +78,7 @@ const Teams = () => {
       <section
         className="team-events-section"
         style={{
-          backgroundImage: `url(${teamBg})`,
+          backgroundImage: `url(${bg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',

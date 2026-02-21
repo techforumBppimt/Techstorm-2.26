@@ -6,6 +6,7 @@ import {
   useLayoutEffect,
 } from "react";
 import aboutBg from "../../../assets/img/aboutandform.png";
+import aboutBgMobile from "../../../assets/img/3.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -964,7 +965,7 @@ export default function About() {
         position: "relative",
         height: SECTION_H,
         minHeight: isMobile ? "auto" : "auto",
-        backgroundImage: `linear-gradient(180deg, rgba(10,10,10,0.65) 0%, rgba(10,14,46,0.62) 40%, rgba(13,5,32,0.62) 70%, rgba(10,10,10,0.70) 100%), url(${aboutBg})`,
+        backgroundImage: `linear-gradient(180deg, rgba(10,10,10,0.65) 0%, rgba(10,14,46,0.62) 40%, rgba(13,5,32,0.62) 70%, rgba(10,10,10,0.70) 100%), url(${isMobile ? aboutBgMobile : aboutBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center center",
         backgroundAttachment: isMobile ? "scroll" : "fixed",

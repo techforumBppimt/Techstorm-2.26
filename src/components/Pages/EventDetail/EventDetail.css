@@ -78,6 +78,11 @@
     text-align: center;
 }
 
+.event-name-title-row {
+    display: block;
+    margin-bottom: 0;
+}
+
 .event-title-white,
 .event-title-gold {
     font-family: "Press Start 2P", cursive;
@@ -94,8 +99,13 @@
     color: #ffffff;
     margin-right: 20px;
     text-shadow:
-        4px 4px 0 rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(255, 255, 255, 0.3);
+        2px 2px 0 #000,
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        0 0 0 3px rgba(0, 0, 0, 0.8),
+        4px 4px 0 rgba(0, 0, 0, 0.5),
+        0 0 24px rgba(255, 255, 255, 0.25);
 }
 
 .event-title-gold {
@@ -103,15 +113,23 @@
     letter-spacing: 3px;
     color: #ffc010;
     text-shadow:
-        4px 4px 0 rgba(0, 0, 0, 0.3),
+        2px 2px 0 #000,
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        0 0 0 3px rgba(0, 0, 0, 0.8),
+        4px 4px 0 rgba(0, 0, 0, 0.5),
         0 0 30px rgba(255, 192, 16, 0.7);
 }
 
+/* Brush sits below title with clear gap so it never overlaps text */
 .event-name-heading .heading-brush {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin: 18px auto 0;
+    display: block;
     width: 200px;
     height: 12px;
     background: linear-gradient(90deg, #ffc010 0%, #ffb000 50%, #ffc010 100%);
@@ -144,16 +162,39 @@
 
 /* ── Mobile: ensure bg images render with cover and scroll attachment ── */
 @media (max-width: 767px) {
+    /* Stronger blend at bottom of event-name section into next section */
+    .event-name-section::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 160px;
+        background: linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(10, 4, 20, 0.75) 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+    }
+
     .about-event-section,
     .faq-accordion-section,
-    .entry-fee-section,
-    .coordinators-section {
+    .entry-fee-section {
         background-size: cover !important;
         background-position: center 30% !important;
         background-attachment: scroll !important;
     }
 
-    /* Extra dimming layer on mobile so stretched/zoomed bg image looks atmospheric */
+    /* Coordinators section: bg image fits better on mobile (centered, cover) */
+    .coordinators-section {
+        background-size: cover !important;
+        background-position: center center !important;
+        background-attachment: scroll !important;
+    }
+
+    /* Stronger dimming + blend between sections on mobile */
     .about-event-section::after,
     .faq-accordion-section::after,
     .entry-fee-section::after,
@@ -161,7 +202,13 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: rgba(10, 4, 20, 0.52);
+        background: linear-gradient(
+            to bottom,
+            rgba(10, 4, 20, 0.62) 0%,
+            rgba(10, 4, 20, 0.12) 18%,
+            rgba(10, 4, 20, 0.12) 82%,
+            rgba(10, 4, 20, 0.62) 100%
+        );
         z-index: 1;
         pointer-events: none;
     }
@@ -693,6 +740,12 @@ p.about-text {
         font-size: 42px;
     }
 
+    .event-name-heading .heading-brush {
+        width: 140px;
+        height: 8px;
+        margin-top: 14px;
+    }
+
     .heading-white,
     .heading-gold {
         font-size: 36px;
@@ -718,6 +771,12 @@ p.about-text {
         font-size: 28px;
         display: block;
         margin-right: 0;
+    }
+
+    .event-name-heading .heading-brush {
+        width: 100px;
+        height: 6px;
+        margin-top: 12px;
     }
 
     .heading-white,
@@ -753,6 +812,12 @@ p.about-text {
     .event-title-white,
     .event-title-gold {
         font-size: 20px;
+    }
+
+    .event-name-heading .heading-brush {
+        width: 80px;
+        height: 5px;
+        margin-top: 10px;
     }
 
     .heading-white,
