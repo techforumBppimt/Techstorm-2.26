@@ -14,6 +14,7 @@ const eventRegistrationRoutes = require('./routes/eventRegistration');
 const adminRoutes = require('./routes/admin');
 const adminAuthRoutes = require('./routes/adminAuth');
 const adminProtectedRoutes = require('./routes/adminRoutes');
+const adminDashboardRoutes = require('./routes/adminDashboard');
 
 // Import middleware
 const { errorHandler } = require('./middleware/errorHandler');
@@ -106,6 +107,9 @@ app.use('/api/event-registration', eventRegistrationRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin-auth', adminAuthRoutes);
 app.use('/api/admin-panel', adminProtectedRoutes);
+app.use('/api/admin-dashboard', adminDashboardRoutes);
+
+console.log('✅ All routes registered successfully');
 
 // Handle 404 errors
 app.use('*', (req, res) => {

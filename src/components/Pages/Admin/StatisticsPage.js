@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { getDashboardStats } from '../../../utils/adminDashboardAPI';
 import './RoleDashboard.css';
 
 const StatisticsPage = () => {
   const history = useHistory();
   const location = useLocation();
   const role = location.pathname.split('/')[2];
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const fetchStats = async () => {
+    try {
+      setLoading(true);
+      const result = await getDashboardStats();
+      setStats(result);
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching stats:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleBack = () => {
     history.push(`/admin/${role}/dashboard`);
@@ -18,6 +40,27 @@ const StatisticsPage = () => {
   };
 
   const config = roleConfig[role] || roleConfig.core;
+
+  if (loading) {
+    return (
+      <div className={`role-dashboard ${role}-dashboard`}>
+        <div className="dashboard-wrapper">
+          <div className="loading">Loading statistics...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={`role-dashboard ${role}-dashboard`}>
+        <div className="dashboard-wrapper">
+          <div className="error-message">Error: {error}</div>
+          <button onClick={fetchStats}>Retry</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`role-dashboard ${role}-dashboard`}>
@@ -34,19 +77,19 @@ const StatisticsPage = () => {
         <div className="stats-grid">
           <div className="stat-card">
             <p className="stat-label">Total Events</p>
-            <p className="stat-value">15</p>
+            <p className="stat-value">{stats?.totalEvents || 0}</p>
           </div>
           <div className="stat-card">
             <p className="stat-label">Total Registrations</p>
-            <p className="stat-value">342</p>
+            <p className="stat-value">{stats?.totals?.totalRegistrations || 0}</p>
           </div>
           <div className="stat-card">
-            <p className="stat-label">Revenue Generated</p>
-            <p className="stat-value">₹1.2L</p>
+            <p className="stat-label">Confirmed</p>
+            <p className="stat-value">{stats?.totals?.confirmedRegistrations || 0}</p>
           </div>
           <div className="stat-card">
-            <p className="stat-label">Active Users</p>
-            <p className="stat-value">289</p>
+            <p className="stat-label">Pending Payments</p>
+            <p className="stat-value">{stats?.totals?.pendingPayments || 0}</p>
           </div>
         </div>
 
@@ -64,41 +107,21 @@ const StatisticsPage = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><span className="event-badge">FIFA Mobile</span></td>
-                  <td>45</td>
-                  <td>42</td>
-                  <td>3</td>
-                  <td>₹13,500</td>
-                </tr>
-                <tr>
-                  <td><span className="event-badge">Khet</span></td>
-                  <td>38</td>
-                  <td>35</td>
-                  <td>3</td>
-                  <td>₹11,400</td>
-                </tr>
-                <tr>
-                  <td><span className="event-badge">Combat</span></td>
-                  <td>52</td>
-                  <td>50</td>
-                  <td>2</td>
-                  <td>₹15,600</td>
-                </tr>
-                <tr>
-                  <td><span className="event-badge">Hackstrom</span></td>
-                  <td>67</td>
-                  <td>65</td>
-                  <td>2</td>
-                  <td>₹20,100</td>
-                </tr>
-                <tr>
-                  <td><span className="event-badge">Codebee</span></td>
-                  <td>89</td>
-                  <td>85</td>
-                  <td>4</td>
-                  <td>₹26,700</td>
-                </tr>
+                {stats?.eventStats && stats.eventStats.length > 0 ? (
+                  stats.eventStats.map((event, index) => (
+                    <tr key={index}>
+                      <td><span className="event-badge">{event.eventName}</span></td>
+                      <td>{event.totalRegistrations}</td>
+                      <td>{event.confirmedRegistrations}</td>
+                      <td>{event.pendingRegistrations}</td>
+                      <td>-</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: 'center' }}>No event data available</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

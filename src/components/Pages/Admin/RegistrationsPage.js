@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { getRegistrations, updateRegistrationStatus, deleteRegistration, getEvents, createRegistration } from '../../../utils/adminDashboardAPI';
 import './RoleDashboard.css';
 import ViewRegistrationModal from './ViewRegistrationModal';
 import EditRegistrationModal from './EditRegistrationModal';
@@ -14,6 +15,15 @@ const RegistrationsPage = () => {
   const [editingRegistration, setEditingRegistration] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [user, setUser] = useState(null);
+  const [registrations, setRegistrations] = useState([]);
+  const [events, setEvents] = useState(['all']);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [stats, setStats] = useState({
+    total: 0,
+    pendingPayments: 0,
+    confirmed: 0
+  });
 
   // Extract role from pathname
   const role = location.pathname.split('/')[2];
@@ -23,65 +33,62 @@ const RegistrationsPage = () => {
     if (userData) {
       setUser(JSON.parse(userData));
     }
+    
+    // Fetch initial data
+    fetchEvents();
+    fetchRegistrations();
   }, []);
 
-  // Dummy registration data
-  const [registrations, setRegistrations] = useState([
-    {
-      _id: '6996adc9805fef4756d00974',
-      fullName: 'Adrish Basak',
-      emailAddress: 'adrishbasak003@gmail.com',
-      contactNumber: '07003940421',
-      collegeName: 'B. P. Poddar Institute of Management and Technology',
-      year: '3rd Year',
-      streamBranch: 'CSE',
-      teamName: '',
-      numberOfParticipants: '1',
-      eventName: 'Khet',
-      paymentMode: 'online',
-      transactionId: 'tfgmjgvh,jcfg,',
-      paymentStatus: 'pending',
-      registrationStatus: 'confirmed',
-      registrationNumber: 'KHE-MLT2ZEYC-VJG',
-      submittedAt: '2026-02-19T06:29:29.841Z'
-    },
-    {
-      _id: '6996ac2a805fef4756d0095e',
-      fullName: 'Rahul Sharma',
-      emailAddress: 'rahul.sharma@example.com',
-      contactNumber: '09876543210',
-      collegeName: 'Heritage Institute of Technology',
-      yearOfStudy: '2025',
-      department: 'ece',
-      fifaUsername: 'rahul_fifa',
-      teamOvr: '125',
-      deviceModel: 'iPhone 13',
-      eventName: 'FIFA Mobile',
-      paymentMode: 'online',
-      transactionId: 'dfzdsgzfg45646',
-      paymentStatus: 'confirmed',
-      registrationStatus: 'confirmed',
-      registrationNumber: 'FIF-MLT2QI7O-5GE',
-      submittedAt: '2026-02-19T06:22:34.161Z'
-    },
-    {
-      _id: '6996b504805fef4756d00998',
-      fullName: 'Priya Das',
-      emailAddress: 'priya.das@example.com',
-      contactNumber: '08765432109',
-      collegeName: 'Jadavpur University',
-      yearOfStudy: '2024',
-      department: 'it',
-      eventName: 'Combat',
-      paymentMode: 'offline',
-      paymentStatus: 'confirmed',
-      registrationStatus: 'confirmed',
-      registrationNumber: 'COM-MLT433AY-NFX',
-      submittedAt: '2026-02-18T10:15:20.985Z'
-    }
-  ]);
+  useEffect(() => {
+    // Refetch when filters change
+    fetchRegistrations();
+  }, [selectedEvent, searchTerm]);
 
-  const events = ['all', 'Khet', 'FIFA Mobile', 'Combat', 'Hackstrom', 'Codebee'];
+  const fetchEvents = async () => {
+    try {
+      const result = await getEvents();
+      const eventNames = ['all', ...result.events.map(e => e.name)];
+      setEvents(eventNames);
+    } catch (err) {
+      console.error('Error fetching events:', err);
+    }
+  };
+
+  const fetchRegistrations = async () => {
+    try {
+      setLoading(true);
+      const params = {};
+      
+      if (selectedEvent !== 'all') {
+        params.eventName = selectedEvent;
+      }
+      
+      if (searchTerm) {
+        params.search = searchTerm;
+      }
+      
+      const result = await getRegistrations(params);
+      setRegistrations(result.registrations || []);
+      
+      // Calculate stats
+      const total = result.registrations?.length || 0;
+      const pendingPayments = result.registrations?.filter(r => r.paymentStatus === 'pending').length || 0;
+      const confirmed = result.registrations?.filter(r => r.registrationStatus === 'confirmed').length || 0;
+      
+      setStats({ total, pendingPayments, confirmed });
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching registrations:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Dummy registration data - REMOVED, now fetching from API
+  // const [registrations, setRegistrations] = useState([...]);
+
+  // const events = ['all', 'Khet', 'FIFA Mobile', 'Combat', 'Hackstrom', 'Codebee'];
 
   const roleConfig = {
     core: { name: 'Core', color: '#0f766e', canEdit: true, canDelete: true, canAdd: true },
@@ -95,9 +102,14 @@ const RegistrationsPage = () => {
     history.push(`/admin/${role}/dashboard`);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (eventName, id) => {
     if (window.confirm('Are you sure you want to delete this registration?')) {
-      setRegistrations(prev => prev.filter(reg => reg._id !== id));
+      try {
+        await deleteRegistration(eventName, id);
+        await fetchRegistrations(); // Refresh the list
+      } catch (err) {
+        alert('Error deleting registration: ' + err.message);
+      }
     }
   };
 
@@ -115,30 +127,56 @@ const RegistrationsPage = () => {
     ));
   };
 
-  const handleAddRegistration = (newRegistration) => {
-    setRegistrations(prev => [newRegistration, ...prev]);
+  const handleAddRegistration = async (newRegistration) => {
+    try {
+      await createRegistration(newRegistration.eventName, newRegistration);
+      await fetchRegistrations(); // Refresh the list
+      alert('Registration added successfully!');
+    } catch (err) {
+      alert('Error adding registration: ' + err.message);
+    }
   };
 
-  const handleStatusChange = (id, field, value) => {
-    setRegistrations(prev => prev.map(reg => 
-      reg._id === id ? { ...reg, [field]: value } : reg
-    ));
+  const handleStatusChange = async (eventName, id, field, value) => {
+    try {
+      const updates = { [field]: value };
+      await updateRegistrationStatus(eventName, id, updates);
+      
+      // Update local state
+      setRegistrations(prev => prev.map(reg => 
+        reg._id === id ? { ...reg, [field]: value } : reg
+      ));
+    } catch (err) {
+      alert('Error updating status: ' + err.message);
+    }
   };
 
-  // Filter by event for coordinator/volunteer
+  // Filter by event for coordinator/volunteer - now handled by API
   let filteredRegistrations = registrations;
-  if (role !== 'core' && user?.eventName) {
-    filteredRegistrations = registrations.filter(reg => reg.eventName === user.eventName);
+
+  // Apply search and event filter - now handled by API, just display what we have
+  // filteredRegistrations = filteredRegistrations.filter(reg => {...});
+
+  if (loading) {
+    return (
+      <div className={`role-dashboard ${role}-dashboard`}>
+        <div className="dashboard-wrapper">
+          <div className="loading">Loading registrations...</div>
+        </div>
+      </div>
+    );
   }
 
-  // Apply search and event filter
-  filteredRegistrations = filteredRegistrations.filter(reg => {
-    const matchesEvent = selectedEvent === 'all' || reg.eventName === selectedEvent;
-    const matchesSearch = reg.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         reg.emailAddress.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         reg.registrationNumber.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesEvent && matchesSearch;
-  });
+  if (error) {
+    return (
+      <div className={`role-dashboard ${role}-dashboard`}>
+        <div className="dashboard-wrapper">
+          <div className="error-message">Error: {error}</div>
+          <button onClick={fetchRegistrations}>Retry</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`role-dashboard ${role}-dashboard`}>
@@ -155,15 +193,15 @@ const RegistrationsPage = () => {
         <div className="stats-grid">
           <div className="stat-card">
             <p className="stat-label">Total Registrations</p>
-            <p className="stat-value">{filteredRegistrations.length}</p>
+            <p className="stat-value">{stats.total}</p>
           </div>
           <div className="stat-card">
             <p className="stat-label">Pending Payments</p>
-            <p className="stat-value">{filteredRegistrations.filter(r => r.paymentStatus === 'pending').length}</p>
+            <p className="stat-value">{stats.pendingPayments}</p>
           </div>
           <div className="stat-card">
             <p className="stat-label">Confirmed</p>
-            <p className="stat-value">{filteredRegistrations.filter(r => r.registrationStatus === 'confirmed').length}</p>
+            <p className="stat-value">{stats.confirmed}</p>
           </div>
           <div className="stat-card">
             <p className="stat-label">Events</p>
@@ -218,61 +256,70 @@ const RegistrationsPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {filteredRegistrations.map(reg => (
-                  <tr key={reg._id}>
-                    <td className="reg-number">{reg.registrationNumber}</td>
-                    <td>{reg.fullName}</td>
-                    <td className="email-cell">{reg.emailAddress}</td>
-                    <td>{reg.contactNumber}</td>
-                    <td className="college-cell">{reg.collegeName}</td>
-                    {role === 'core' && <td><span className="event-badge">{reg.eventName}</span></td>}
-                    <td>
-                      {config.canEdit ? (
-                        <select
-                          className={`status-select payment-${reg.paymentStatus}`}
-                          value={reg.paymentStatus}
-                          onChange={(e) => handleStatusChange(reg._id, 'paymentStatus', e.target.value)}
-                        >
-                          <option value="pending">Pending</option>
-                          <option value="confirmed">Confirmed</option>
-                          <option value="failed">Failed</option>
-                        </select>
-                      ) : (
-                        <span className={`status-pill payment-${reg.paymentStatus}`}>
-                          {reg.paymentStatus}
-                        </span>
-                      )}
-                    </td>
-                    <td>
-                      {config.canEdit ? (
-                        <select
-                          className={`status-select reg-${reg.registrationStatus}`}
-                          value={reg.registrationStatus}
-                          onChange={(e) => handleStatusChange(reg._id, 'registrationStatus', e.target.value)}
-                        >
-                          <option value="confirmed">Confirmed</option>
-                          <option value="pending">Pending</option>
-                          <option value="cancelled">Cancelled</option>
-                        </select>
-                      ) : (
-                        <span className={`status-pill reg-${reg.registrationStatus}`}>
-                          {reg.registrationStatus}
-                        </span>
-                      )}
-                    </td>
-                    <td>
-                      <div className="action-buttons">
-                        <button className="action-btn view-btn" onClick={() => handleView(reg)} title="View Details">👁️</button>
-                        {config.canEdit && (
-                          <button className="action-btn edit-btn" onClick={() => handleEdit(reg)} title="Edit">✏️</button>
+                {filteredRegistrations.length > 0 ? (
+                  filteredRegistrations.map(reg => (
+                    <tr key={reg._id}>
+                      <td className="reg-number">{reg.registrationNumber}</td>
+                      <td>{reg.fullName}</td>
+                      <td className="email-cell">{reg.emailAddress || reg.email}</td>
+                      <td>{reg.contactNumber || reg.phone}</td>
+                      <td className="college-cell">{reg.collegeName || reg.college}</td>
+                      {role === 'core' && <td><span className="event-badge">{reg.eventName}</span></td>}
+                      <td>
+                        {config.canEdit ? (
+                          <select
+                            className={`status-select payment-${reg.paymentStatus}`}
+                            value={reg.paymentStatus}
+                            onChange={(e) => handleStatusChange(reg.eventName, reg._id, 'paymentStatus', e.target.value)}
+                          >
+                            <option value="pending">Pending</option>
+                            <option value="verified">Verified</option>
+                            <option value="failed">Failed</option>
+                          </select>
+                        ) : (
+                          <span className={`status-pill payment-${reg.paymentStatus}`}>
+                            {reg.paymentStatus}
+                          </span>
                         )}
-                        {config.canDelete && (
-                          <button className="action-btn delete-btn" onClick={() => handleDelete(reg._id)} title="Delete">🗑️</button>
+                      </td>
+                      <td>
+                        {config.canEdit ? (
+                          <select
+                            className={`status-select reg-${reg.registrationStatus}`}
+                            value={reg.registrationStatus}
+                            onChange={(e) => handleStatusChange(reg.eventName, reg._id, 'registrationStatus', e.target.value)}
+                          >
+                            <option value="confirmed">Confirmed</option>
+                            <option value="pending">Pending</option>
+                            <option value="cancelled">Cancelled</option>
+                            <option value="waitlist">Waitlist</option>
+                          </select>
+                        ) : (
+                          <span className={`status-pill reg-${reg.registrationStatus}`}>
+                            {reg.registrationStatus}
+                          </span>
                         )}
-                      </div>
+                      </td>
+                      <td>
+                        <div className="action-buttons">
+                          <button className="action-btn view-btn" onClick={() => handleView(reg)} title="View Details">👁️</button>
+                          {config.canEdit && (
+                            <button className="action-btn edit-btn" onClick={() => handleEdit(reg)} title="Edit">✏️</button>
+                          )}
+                          {config.canDelete && (
+                            <button className="action-btn delete-btn" onClick={() => handleDelete(reg.eventName, reg._id)} title="Delete">🗑️</button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={role === 'core' ? 9 : 8} style={{ textAlign: 'center', padding: '2rem' }}>
+                      No registrations found
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
