@@ -650,6 +650,7 @@ const EventDetail = ({ eventData }) => {
   // Use provided images or fall back to dummy images
   const [khetGalleryImages, setKhetGalleryImages] = useState([]);
   const [creativeCanvasGalleryImages, setCreativeCanvasGalleryImages] = useState([]);
+  const [forzaGalleryImages, setForzaGalleryImages] = useState([]);
   useEffect(() => {
     if (name === "KHET") {
       fetch("/khet-cloudinary-urls.json")
@@ -698,6 +699,21 @@ const EventDetail = ({ eventData }) => {
           console.error("Passion with Reels gallery fetch error:", err);
           setKhetGalleryImages([]);
         });
+    } else if (name === "Forza Horizon") {
+      fetch("/forza-horizon-cloudinary-urls.json")
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Failed to fetch Forza Horizon images");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setForzaGalleryImages(Object.values(data));
+        })
+        .catch((err) => {
+          console.error("Forza Horizon gallery fetch error:", err);
+          setForzaGalleryImages([]);
+        });
     }
   }, [name]);
 
@@ -706,6 +722,8 @@ const EventDetail = ({ eventData }) => {
       ? khetGalleryImages
       : name === "Creative Canvas" && creativeCanvasGalleryImages.length > 0
       ? creativeCanvasGalleryImages
+      : name === "Forza Horizon" && forzaGalleryImages.length > 0
+      ? forzaGalleryImages
       : name === "Passion with Reels" && khetGalleryImages.length > 0
       ? khetGalleryImages
       : previousYearImages && previousYearImages.length > 0
@@ -714,6 +732,9 @@ const EventDetail = ({ eventData }) => {
 
   if (name === "Creative Canvas") {
     console.log("galleryImages for Creative Canvas:", galleryImages);
+  }
+  if (name === "Forza Horizon") {
+    console.log("galleryImages for Forza Horizon:", galleryImages);
   }
 
   // Start auto-scroll

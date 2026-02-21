@@ -42,6 +42,12 @@ const picturesOfGallerySubfolders = getSubfolders(picturesOfGalleryRoot).map(sub
       cloud: `eoorox/pictures_of_gallery/${sub}/Passion with reels`
     };
   }
+  if (sub === 'ForzaHorizon') {
+    return {
+      local: path.join(picturesOfGalleryRoot, sub, 'compressed'),
+      cloud: `eoorox/pictures_of_gallery/${sub}`
+    };
+  }
   return {
     local: path.join(picturesOfGalleryRoot, sub),
     cloud: `eoorox/pictures_of_gallery/${sub}`
