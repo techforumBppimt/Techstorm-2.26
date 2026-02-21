@@ -1085,7 +1085,11 @@ const EventDetail = ({ eventData }) => {
                   open={isRulesDialogOpen}
                   onOpenChange={setIsRulesDialogOpen}
                 >
-                  <DialogContent>
+                  <DialogContent
+                    style={{
+                      zIndex: 9999999,
+                    }}
+                  >
                     <div
                       style={{
                         backgroundColor: "#1a0e22",
@@ -1096,6 +1100,7 @@ const EventDetail = ({ eventData }) => {
                         border: "4px solid #ffc010",
                         boxShadow: "0 0 30px rgba(255, 192, 16, 0.3)",
                         margin: "20px",
+                        position: "relative",
                       }}
                     >
                       <div
@@ -2554,6 +2559,7 @@ const EventDetail = ({ eventData }) => {
                           height: "20px",
                           background: "#00ffea",
                           clipPath: "polygon(100% 0, 0 100%, 100% 100%)",
+                          zIndex: 1,
                         }}
                       />
                       {/* Trophy */}
@@ -2666,6 +2672,7 @@ const EventDetail = ({ eventData }) => {
                             height: "16px",
                             background: "#ffc010",
                             clipPath: "polygon(100% 0, 0 100%, 100% 100%)",
+                            zIndex: 1,
                           }}
                         />
 
@@ -2812,6 +2819,7 @@ const EventDetail = ({ eventData }) => {
                             height: "16px",
                             background: "#00ffea",
                             clipPath: "polygon(100% 0, 0 100%, 100% 100%)",
+                            zIndex: 1,
                           }}
                         />
 
@@ -2961,6 +2969,7 @@ const EventDetail = ({ eventData }) => {
                       height: "16px",
                       background: "#b400ff",
                       clipPath: "polygon(100% 0, 0 100%, 100% 100%)",
+                      zIndex: 1,
                     }}
                   />
                   <div

@@ -92,7 +92,7 @@ export const DialogContent = ({ children, isOpen, onClose }) => {
           right: 0,
           bottom: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.85)',
-          zIndex: 9998,
+          zIndex: 9999998,
           animation: isClosing ? 'fadeOut 0.3s ease-in-out' : 'fadeIn 0.3s ease-in-out',
         }}
       />
@@ -105,7 +105,7 @@ export const DialogContent = ({ children, isOpen, onClose }) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          zIndex: 9999,
+          zIndex: 9999999,
           width: '60%',
           maxWidth: '700px',
           animation: isClosing ? 'scaleOut 0.3s ease-in-out' : 'scaleIn 0.3s ease-in-out',
@@ -138,7 +138,7 @@ export const DialogContent = ({ children, isOpen, onClose }) => {
               width: '35px',
               height: '35px',
               cursor: 'pointer',
-              zIndex: 10000,
+              zIndex: 10000000,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

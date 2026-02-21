@@ -38,6 +38,19 @@
   }
 }
 
+/* High z-index for dialog overlay and content */
+[data-radix-dialog-overlay],
+.dialog-overlay,
+.dialog-backdrop {
+  z-index: 9999998 !important;
+}
+
+[data-radix-dialog-content],
+.dialog-content,
+.dialog-container {
+  z-index: 9999999 !important;
+}
+
 /* Pixelated corners */
 .dialog-8bit {
   clip-path: polygon(
