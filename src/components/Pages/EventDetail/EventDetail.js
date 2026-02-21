@@ -1320,7 +1320,8 @@ const EventDetail = ({ eventData }) => {
                               );
                             const isRoTerranceSectionHeader =
                               name === "Ro-Terrance" && (
-                                roTerranceHeadingsToHighlight.some(h => normalizedRule.includes(normalizeRuleText(h)))
+                                roTerranceHeadingsToHighlight.some(h => normalizedRule.includes(normalizeRuleText(h))) &&
+                                normalizeRuleText(rule) !== normalizeRuleText("All the prelims rules will be continued in the finals as well")
                               );
                             // Ro-Soccer, Ro-Sumo, and Ro-Combat headings and highlight logic
                             const roSoccerHeadingsToHighlight = [
