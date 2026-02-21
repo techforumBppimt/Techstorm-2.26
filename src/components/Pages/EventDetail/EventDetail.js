@@ -1284,7 +1284,7 @@ const EventDetail = ({ eventData }) => {
                             // const isJudgingCriteria = false;
                             // Check if it's a registration fee header
 
-                            // Highlight KHET section headings with gold background and border (apply to any matching rule, not just emoji)
+                            // Highlight KHET and Ro-Terrance section headings with gold color and emoji
                             const khetHeadingsToHighlight = [
                               'GENERAL RULES',
                               'RULES AND REGULATIONS',
@@ -1295,6 +1295,13 @@ const EventDetail = ({ eventData }) => {
                               'SETUPS',
                               'NOTE'
                             ];
+                            const roTerranceHeadingsToHighlight = [
+                              'REGISTRATION FEES:',
+                              'BOT SPECIFICATIONS:',
+                              'GENERAL RULES (COMMON FOR PRELIMS & FINALS):',
+                              'FINALS RULES:',
+                              'PRELIMS RULES:'
+                            ];
                             function normalizeRuleText(text) {
                               return text.replace(/[^A-Z0-9 ]/gi, '').trim().toUpperCase();
                             }
@@ -1304,13 +1311,17 @@ const EventDetail = ({ eventData }) => {
                                 khetHeadingsToHighlight.some(h => normalizedRule.includes(normalizeRuleText(h))) ||
                                 /RULES$/i.test(rule.trim())
                               );
+                            const isRoTerranceSectionHeader =
+                              name === "Ro-Terrance" && (
+                                roTerranceHeadingsToHighlight.some(h => normalizedRule.includes(normalizeRuleText(h)))
+                              );
                             const isForzaHorizonHeader =
                               name === "Forza Horizon" &&
                               rule
                                 .trim()
                                 .toUpperCase()
                                 .includes("FORZA HORIZON GAME RULES");
-                            if (isKhetSectionHeader || isHeader) {
+                            if (isKhetSectionHeader || isRoTerranceSectionHeader || isHeader) {
                               // Choose emoji based on heading
                               let emoji = '⭐';
                               if (normalizedRule.includes('GENERAL RULES')) emoji = '📋';
@@ -1323,20 +1334,26 @@ const EventDetail = ({ eventData }) => {
                               else if (normalizedRule.includes('POINTS TO BE NOTED')) emoji = '📝';
                               else if (normalizedRule.includes('SETUPS')) emoji = '🛠️';
                               else if (normalizedRule.includes('NOTE')) emoji = '⚠️';
+                              // Ro-Terrance specific
+                              else if (normalizedRule.includes('REGISTRATION FEES')) emoji = '💰';
+                              else if (normalizedRule.includes('BOT SPECIFICATIONS')) emoji = '🤖';
+                              else if (normalizedRule.includes('COMMON FOR PRELIMS')) emoji = '📋';
+                              else if (normalizedRule.includes('FINALS RULES')) emoji = '🏆';
+                              else if (normalizedRule.includes('PRELIMS RULES')) emoji = '🟢';
                               return (
                                 <h3
                                   key={index}
                                   style={{
-                                    color: isKhetSectionHeader ? '#ffc010' : '#ffc010',
+                                    color: (isKhetSectionHeader || isRoTerranceSectionHeader) ? '#ffc010' : '#ffc010',
                                     fontSize: 'clamp(15px, 3.5vw, 22px)',
                                     fontFamily: 'Press Start 2P',
-                                    fontWeight: isKhetSectionHeader ? 'bold' : 'normal',
+                                    fontWeight: (isKhetSectionHeader || isRoTerranceSectionHeader) ? 'bold' : 'normal',
                                     marginTop: index === 0 ? '0' : '28px',
                                     marginBottom: isForzaHorizonHeader ? '2px' : '18px',
                                     lineHeight: '1.5',
                                     textTransform: 'uppercase',
-                                    letterSpacing: isKhetSectionHeader ? '2.5px' : undefined,
-                                    textAlign: isKhetSectionHeader ? 'left' : undefined,
+                                    letterSpacing: (isKhetSectionHeader || isRoTerranceSectionHeader) ? '2.5px' : undefined,
+                                    textAlign: (isKhetSectionHeader || isRoTerranceSectionHeader) ? 'left' : undefined,
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '10px',
