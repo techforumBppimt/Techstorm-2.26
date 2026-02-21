@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { getRegistrations, updateRegistrationStatus, deleteRegistration, getEvents, createRegistration } from '../../../utils/adminDashboardAPI';
+import { getRegistrations, updateRegistration, updateRegistrationStatus, deleteRegistration, getEvents, createRegistration } from '../../../utils/adminDashboardAPI';
 import './RoleDashboard.css';
 import ViewRegistrationModal from './ViewRegistrationModal';
 import EditRegistrationModal from './EditRegistrationModal';
@@ -121,10 +121,21 @@ const RegistrationsPage = () => {
     setEditingRegistration(registration);
   };
 
-  const handleSaveEdit = (id, updatedData) => {
-    setRegistrations(prev => prev.map(reg => 
-      reg._id === id ? { ...reg, ...updatedData } : reg
-    ));
+  const handleSaveEdit = async (id, updatedData) => {
+    try {
+      // Find the registration to get the event name
+      const registration = registrations.find(r => r._id === id);
+      if (!registration) {
+        alert('Registration not found');
+        return;
+      }
+      
+      await updateRegistration(registration.eventName, id, updatedData);
+      await fetchRegistrations(); // Refresh the list
+      alert('Registration updated successfully!');
+    } catch (err) {
+      alert('Error updating registration: ' + err.message);
+    }
   };
 
   const handleAddRegistration = async (newRegistration) => {

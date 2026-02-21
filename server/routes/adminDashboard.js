@@ -240,7 +240,70 @@ router.get('/registrations/:eventName/:id',
 );
 
 /**
- * Update registration status
+ * Update registration (full update)
+ * PUT /api/admin-dashboard/registrations/:eventName/:id
+ */
+router.put('/registrations/:eventName/:id',
+  asyncHandler(async (req, res) => {
+    const { eventName, id } = req.params;
+    const admin = req.admin;
+    
+    // Check permissions
+    if (!admin.canUpdate()) {
+      return res.status(403).json({
+        error: 'Permission denied',
+        message: 'You do not have permission to update registrations'
+      });
+    }
+    
+    // Check if admin has access to this event
+    if (admin.role !== 'core') {
+      const event = adminCredentials.events.find(e => e.name === eventName);
+      if (!event || event.abbreviation !== admin.eventAbbr) {
+        return res.status(403).json({
+          error: 'Access forbidden',
+          message: 'You do not have access to this event'
+        });
+      }
+    }
+    
+    const model = EventRegistrationFactory.getModel(eventName);
+    
+    // Update with all provided fields
+    const updateData = {
+      ...req.body,
+      updatedAt: new Date()
+    };
+    
+    // Remove fields that shouldn't be updated
+    delete updateData._id;
+    delete updateData.registrationNumber;
+    delete updateData.submittedAt;
+    delete updateData.createdAt;
+    delete updateData.__v;
+    
+    const registration = await model.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    ).lean();
+    
+    if (!registration) {
+      return res.status(404).json({
+        error: 'Not found',
+        message: 'Registration not found'
+      });
+    }
+    
+    res.json({
+      message: 'Registration updated successfully',
+      registration
+    });
+  })
+);
+
+/**
+ * Update registration status (partial update)
  * PATCH /api/admin-dashboard/registrations/:eventName/:id
  */
 router.patch('/registrations/:eventName/:id',

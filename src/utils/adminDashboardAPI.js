@@ -104,7 +104,38 @@ export const getRegistrationById = async (eventName, id) => {
 };
 
 /**
- * Update registration status
+ * Update registration (full update)
+ * @param {string} eventName - Event name
+ * @param {string} id - Registration ID
+ * @param {object} updates - All fields to update
+ * @returns {Promise<object>} Updated registration
+ */
+export const updateRegistration = async (eventName, id, updates) => {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/admin-dashboard/registrations/${eventName}/${id}`,
+      {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(updates)
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to update registration');
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error('Error updating registration:', error);
+    throw error;
+  }
+};
+
+/**
+ * Update registration status (partial update)
  * @param {string} eventName - Event name
  * @param {string} id - Registration ID
  * @param {object} updates - Fields to update
@@ -220,6 +251,7 @@ export default {
   getDashboardStats,
   getRegistrations,
   getRegistrationById,
+  updateRegistration,
   updateRegistrationStatus,
   deleteRegistration,
   createRegistration,

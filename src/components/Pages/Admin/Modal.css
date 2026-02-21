@@ -38,6 +38,7 @@
 
 .modal-content.large-modal {
   max-width: 900px;
+  max-height: 90vh;
 }
 
 @keyframes slideUp {
@@ -89,7 +90,9 @@
 .modal-body {
   padding: 24px;
   overflow-y: auto;
+  overflow-x: hidden;
   flex: 1;
+  max-height: calc(90vh - 200px); /* Ensure scrolling works */
 }
 
 .detail-section,
