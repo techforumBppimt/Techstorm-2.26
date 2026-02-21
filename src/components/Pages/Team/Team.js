@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import heroVideo from '../../../assets/img/HERO.mp4';
-import aboutBg from '../../../assets/img/aboutbg.png';
+import teamBg from '../../../assets/img/teamsbg.png'; // replace file with team-bg.jpg once saved
 import SectionTitle from '../../Utilities/SectionTitle/SectionTitle';
 import ProfileCardMember from '../../Utilities/Team/ProfileCardMember';
 import { coreMembers } from './teamData';
@@ -11,17 +10,16 @@ import './Team.css';
 const Teams = () => {
   return (
     <React.Fragment>
-      {/* Video background only for Organizing Committee section */}
-      <div className="team-org-hero">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="team-hero-video"
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+      {/* Image background for Organizing Committee section */}
+      <div
+        className="team-org-hero"
+        style={{
+          backgroundImage: `url(${teamBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      >
         <div className="team-hero-overlay">
           <section className="breadcrumb-area d-flex align-items-center team-breadcrumb">
             <div className="container">
@@ -62,13 +60,14 @@ const Teams = () => {
         <div className="team-hero-bottom-accent" aria-hidden="true" />
       </div>
 
-      {/* Co-ordinators & Volunteers: preserve layout — EVENT TEAMS badge, aboutbg, headings, yellow underline */}
+      {/* Co-ordinators & Volunteers: arcade bg, dark overlay via CSS */}
       <section
         className="team-events-section"
         style={{
-          backgroundImage: `url(${aboutBg})`,
-          backgroundRepeat: 'repeat',
+          backgroundImage: `url(${teamBg})`,
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
         }}
       >
         <div className="container">

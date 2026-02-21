@@ -4,31 +4,20 @@
    - Event Co-ordinators: RetroCard grid, theme-appropriate
    ================================================================ */
 
-/* ----- Organizing Committee: video only for this block ----- */
+/* ----- Organizing Committee: image background for this block ----- */
 .team-org-hero {
   position: relative;
   overflow: hidden;
   min-height: 100vh;
-}
-
-.team-hero-video {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100vw;
-  min-height: 100vh;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .team-hero-overlay {
   position: relative;
   z-index: 1;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.65);
   padding-bottom: 3rem;
 }
 
