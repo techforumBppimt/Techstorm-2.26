@@ -68,6 +68,9 @@ import RegistrationsPage from "./Pages/Admin/RegistrationsPage";
 import EventsPage from "./Pages/Admin/EventsPage";
 import StatisticsPage from "./Pages/Admin/StatisticsPage";
 
+// Import Verify Registration Page
+import VerifyRegistration from "./Pages/VerifyRegistration/VerifyRegistration";
+
 const navItems = [
   { label: "Home", href: "/#home" },
   { label: "Events", href: "/events" },
@@ -292,6 +295,9 @@ const AppContent = () => {
             component={FifaMobileRegistration}
           />
           <Route exact path="/register/khet" component={KhetRegistration} />
+
+          {/* Verify Registration Route */}
+          <Route exact path="/verify-registration" component={VerifyRegistration} />
 
           <Route exact path="/gallery" component={Gallery} />
           <Route exact path="/schedule" component={Schedule} />

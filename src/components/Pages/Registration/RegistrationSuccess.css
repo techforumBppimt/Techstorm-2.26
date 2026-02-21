@@ -1,0 +1,314 @@
+.registration-success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.registration-success-container {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border: 2px solid #ffc010;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(255, 192, 16, 0.3);
+  animation: slideUp 0.4s ease-out;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.success-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+  animation: scaleIn 0.5s ease-out 0.2s both;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.success-title {
+  color: #ffc010;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 10px 0;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.success-subtitle {
+  color: #ccc;
+  font-size: 16px;
+  text-align: center;
+  margin: 0 0 30px 0;
+  line-height: 1.5;
+}
+
+.registration-number-section {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.reg-number-label {
+  display: block;
+  color: #ffc010;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.reg-number-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #000;
+  border: 2px solid #ffc010;
+  border-radius: 6px;
+  padding: 15px 20px;
+  gap: 15px;
+}
+
+.reg-number-text {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  flex: 1;
+  text-align: center;
+}
+
+.copy-button {
+  background: #ffc010;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  font-family: 'Courier New', monospace;
+}
+
+.copy-button:hover {
+  background: #ffcd3c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 192, 16, 0.4);
+}
+
+.copy-button:active {
+  transform: translateY(0);
+}
+
+.important-note {
+  background: rgba(255, 192, 16, 0.1);
+  border: 2px solid #ffc010;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.note-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.note-icon {
+  font-size: 24px;
+}
+
+.note-title {
+  color: #ffc010;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.note-content {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.success-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-button {
+  padding: 14px 30px;
+  border: 2px solid;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 180px;
+}
+
+.action-button.primary {
+  background: #ffc010;
+  color: #000;
+  border-color: #ffc010;
+}
+
+.action-button.primary:hover {
+  background: #ffcd3c;
+  border-color: #ffcd3c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 192, 16, 0.4);
+}
+
+.action-button.secondary {
+  background: transparent;
+  color: #ffc010;
+  border-color: #ffc010;
+}
+
+.action-button.secondary:hover {
+  background: rgba(255, 192, 16, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 192, 16, 0.2);
+}
+
+.action-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .registration-success-container {
+    padding: 30px 20px;
+  }
+
+  .success-title {
+    font-size: 24px;
+  }
+
+  .success-subtitle {
+    font-size: 14px;
+  }
+
+  .reg-number-text {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  .reg-number-display {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .copy-button {
+    width: 100%;
+  }
+
+  .success-actions {
+    flex-direction: column;
+  }
+
+  .action-button {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 480px) {
+  .registration-success-overlay {
+    padding: 10px;
+  }
+
+  .registration-success-container {
+    padding: 25px 15px;
+  }
+
+  .success-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 36px;
+  }
+
+  .success-title {
+    font-size: 20px;
+  }
+
+  .reg-number-text {
+    font-size: 14px;
+  }
+
+  .note-content {
+    font-size: 13px;
+  }
+
+  .action-button {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+}

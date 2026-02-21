@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { submitEventRegistration } from '../../../utils/eventRegistrationAPI';
 import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
 import Stepper, { Step } from '../../Utilities/Stepper/Stepper';
+import RegistrationSuccess from './RegistrationSuccess';
 import './Registration.css';
 import khetBanner from '../../../assets/img/event_specific_pictures/games/khet.png';
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
@@ -37,6 +38,7 @@ const KhetRegistration = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [registrationNumber, setRegistrationNumber] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -128,11 +130,17 @@ const KhetRegistration = () => {
     try {
       const result = await submitEventRegistration('Khet', formData);
       console.log('Khet registration successful:', result);
-      setSubmitSuccess(true);
-
-      setTimeout(() => {
-        history.push('/events');
-      }, 2500);
+      
+      // Extract registration number directly from response
+      const regNumber = result.data?.registrationNumber;
+      
+      if (regNumber) {
+        setRegistrationNumber(regNumber);
+        setSubmitSuccess(true);
+      } else {
+        console.error('Registration number not found in response:', result);
+        throw new Error('Registration number not received from server. Please contact support.');
+      }
     } catch (error) {
       console.error('Registration error:', error);
       if (error.message.includes('duplicate')) {
@@ -542,13 +550,6 @@ const KhetRegistration = () => {
             </Step>
           </Stepper>
 
-          {submitSuccess && (
-            <div className="success-message" style={{ marginTop: '20px', textAlign: 'center', padding: '20px', background: '#1a1a1a', borderRadius: '8px' }}>
-              <h3 style={{ color: '#ffc010' }}>✓ Registration Successful!</h3>
-              <p style={{ color: '#999' }}>Redirecting to events page...</p>
-            </div>
-          )}
-
           <div style={{ marginTop: '20px', textAlign: 'center' }}>
             <button 
               type="button" 
@@ -561,6 +562,14 @@ const KhetRegistration = () => {
           </div>
         </div>
       </div>
+
+      {submitSuccess && registrationNumber && (
+        <RegistrationSuccess 
+          registrationNumber={registrationNumber}
+          eventName="Khet"
+          onClose={() => setSubmitSuccess(false)}
+        />
+      )}
     </div>
   );
 };

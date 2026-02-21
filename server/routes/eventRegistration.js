@@ -259,12 +259,85 @@ router.post('/:eventName',
       message: 'Registration successful',
       data: {
         registrationId: registration._id,
+        registrationNumber: registration.registrationNumber, // ADD THIS LINE
         eventName: eventName,
         email: registration.email,
         phone: registration.phone,
         registrationStatus: registration.registrationStatus,
         submittedAt: registration.submittedAt
       }
+    });
+  })
+);
+
+/**
+ * Verify registration by registration number
+ * GET /api/event-registration/verify/:registrationNumber
+ * Public endpoint - no authentication required
+ * IMPORTANT: This route must come BEFORE /:eventName to avoid conflicts
+ */
+router.get('/verify/:registrationNumber',
+  asyncHandler(async (req, res) => {
+    const { registrationNumber } = req.params;
+
+    console.log('🔍 Verifying registration number:', registrationNumber);
+
+    if (!registrationNumber || registrationNumber.trim().length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Registration number is required'
+      });
+    }
+
+    // Try to find the registration across all event models
+    // We need to search through different event collections
+    const eventNames = [
+      'Technomania', 'Omegatrix', 'Khet', 'Tech Hunt',
+      'Ro-Combat', 'Ro-Navigator', 'Ro-Soccer', 'Ro-Sumo', 'Ro-Terrance',
+      'FIFA Mobile', 'Forza Horizon', 'Creative Canvas', 'Passion With Reels'
+    ];
+
+    for (const eventName of eventNames) {
+      try {
+        const RegistrationModel = EventRegistrationFactory.getModel(eventName);
+        const registration = await RegistrationModel.findOne({ 
+          registrationNumber: registrationNumber.trim() 
+        });
+
+        if (registration) {
+          // Found the registration
+          console.log('✅ Registration found in event:', eventName);
+          
+          // Extract participant name (handle different field structures)
+          let participantName = registration.fullName || 
+                               registration.name || 
+                               registration.teamName ||
+                               (registration.participants && registration.participants[0]?.name) ||
+                               'N/A';
+
+          return res.json({
+            success: true,
+            data: {
+              registrationNumber: registration.registrationNumber,
+              eventName: registration.eventName || eventName,
+              participantName: participantName,
+              paymentStatus: registration.paymentStatus || 'pending',
+              registrationStatus: registration.registrationStatus || 'confirmed',
+              submittedAt: registration.submittedAt
+            }
+          });
+        }
+      } catch (error) {
+        console.error(`Error searching in ${eventName}:`, error.message);
+        // Continue to next event
+      }
+    }
+
+    // Registration not found
+    console.log('❌ Registration not found');
+    return res.status(404).json({
+      success: false,
+      message: 'Registration not found. Please check your registration number and try again.'
     });
   })
 );

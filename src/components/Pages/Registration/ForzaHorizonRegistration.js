@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { submitEventRegistration } from '../../../utils/eventRegistrationAPI';
 import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
 import Stepper, { Step } from '../../Utilities/Stepper/Stepper';
+import RegistrationSuccess from './RegistrationSuccess';
 import './Registration.css';
 import forzaHorizonBanner from '../../../assets/img/event_specific_pictures/games/forza_horizon.png';
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
@@ -32,6 +33,7 @@ const ForzaHorizonRegistration = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [registrationNumber, setRegistrationNumber] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -115,11 +117,15 @@ const ForzaHorizonRegistration = () => {
     try {
       const result = await submitEventRegistration('Forza Horizon', formData);
       console.log('Forza Horizon registration successful:', result);
-      setSubmitSuccess(true);
-
-      setTimeout(() => {
-        history.push('/events');
-      }, 2500);
+      
+      const regNumber = result.data?.registrationNumber || result.registrationNumber;
+      
+      if (regNumber) {
+        setRegistrationNumber(regNumber);
+        setSubmitSuccess(true);
+      } else {
+        throw new Error('Registration number not received from server');
+      }
     } catch (error) {
       console.error('Registration error:', error);
       if (error.message.includes('duplicate')) {
@@ -489,13 +495,6 @@ const ForzaHorizonRegistration = () => {
             </Step>
           </Stepper>
 
-          {submitSuccess && (
-            <div className="success-message" style={{ marginTop: '20px', textAlign: 'center', padding: '20px', background: '#1a1a1a', borderRadius: '8px' }}>
-              <h3 style={{ color: '#ffc010' }}>✓ Registration Successful!</h3>
-              <p style={{ color: '#999' }}>Redirecting to events page...</p>
-            </div>
-          )}
-
           <div style={{ marginTop: '20px', textAlign: 'center' }}>
             <button 
               type="button" 
@@ -508,6 +507,14 @@ const ForzaHorizonRegistration = () => {
           </div>
         </div>
       </div>
+
+      {submitSuccess && registrationNumber && (
+        <RegistrationSuccess 
+          registrationNumber={registrationNumber}
+          eventName="Forza Horizon"
+          onClose={() => setSubmitSuccess(false)}
+        />
+      )}
     </div>
   );
 };

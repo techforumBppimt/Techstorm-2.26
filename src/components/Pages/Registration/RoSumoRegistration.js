@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { submitEventRegistration } from '../../../utils/eventRegistrationAPI';
 import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
 import Stepper, { Step } from '../../Utilities/Stepper/Stepper';
+import RegistrationSuccess from './RegistrationSuccess';
 import './Registration.css';
 import roSumoBanner from '../../../assets/img/event_specific_pictures/robotics/ro_sumo.png';
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
@@ -43,6 +44,7 @@ const RoSumoRegistration = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [registrationNumber, setRegistrationNumber] = useState(null);
 
   const participantCount = useMemo(() => {
     const parsed = Number(formData.numberOfParticipants);
@@ -195,11 +197,15 @@ const RoSumoRegistration = () => {
     try {
       const result = await submitEventRegistration('Ro-Sumo', formData);
       console.log('Ro-Sumo registration successful:', result);
-      setSubmitSuccess(true);
-
-      setTimeout(() => {
-        history.push('/events');
-      }, 2500);
+      
+      const regNumber = result.data?.registrationNumber || result.registrationNumber;
+      
+      if (regNumber) {
+        setRegistrationNumber(regNumber);
+        setSubmitSuccess(true);
+      } else {
+        throw new Error('Registration number not received from server');
+      }
     } catch (error) {
       console.error('Registration error:', error);
       if (error.message.includes('duplicate')) {
@@ -647,12 +653,6 @@ const RoSumoRegistration = () => {
               </Step>
             </Stepper>
 
-            {submitSuccess && (
-              <div className="success-message" style={{ marginTop: '20px' }}>
-                ✓ Registration Successful! Redirecting to events page...
-              </div>
-            )}
-
             <div className="submit-button-wrapper" style={{ marginTop: '20px' }}>
               <button
                 type="button"
@@ -666,6 +666,14 @@ const RoSumoRegistration = () => {
           </form>
         </div>
       </div>
+
+      {submitSuccess && registrationNumber && (
+        <RegistrationSuccess 
+          registrationNumber={registrationNumber}
+          eventName="Ro-Sumo"
+          onClose={() => setSubmitSuccess(false)}
+        />
+      )}
     </div>
   );
 };
