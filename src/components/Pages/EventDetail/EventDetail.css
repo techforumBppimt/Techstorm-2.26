@@ -1,3 +1,17 @@
+/* Entry Heading Brush - centered underline */
+.entry-heading .heading-brush {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+}
+
+/* FAQ Heading Brush - centered underline */
+.faq-heading .heading-brush {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+}
+
 /* Judging Criteria Header Underline */
 
 .judging-criteria-underline {
@@ -106,8 +120,38 @@
 
 /* About Event Section */
 .about-event-section {
-    background: linear-gradient(135deg, #0f0a1a 0%, #1a0e22 100%);
     position: relative;
+}
+
+/* FAQ Accordion Section */
+.faq-accordion-section {
+    position: relative;
+}
+
+/* Entry Fee Section */
+.entry-fee-section {
+    position: relative;
+}
+
+/* ── All content inside bg-image sections sits above any pseudo layers ── */
+.about-event-section > *,
+.faq-accordion-section > *,
+.entry-fee-section > *,
+.coordinators-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Mobile: ensure bg images render with cover and scroll attachment ── */
+@media (max-width: 767px) {
+    .about-event-section,
+    .faq-accordion-section,
+    .entry-fee-section,
+    .coordinators-section {
+        background-size: cover !important;
+        background-position: center center !important;
+        background-attachment: scroll !important;
+    }
 }
 
 .pictures-scroll-container {
@@ -440,8 +484,13 @@ p.about-text {
 
 /* Coordinators Section */
 .coordinators-section {
-    background: linear-gradient(135deg, #0f0a1a 0%, #1a0e22 100%);
     position: relative;
+}
+
+/* ── FAQ Accordion overrides: remove blue left bar, transparent bg ── */
+.faq-accordion-section .faq-accordion-wrapper {
+    background: transparent !important;
+    border-color: rgba(255, 192, 16, 0.35) !important;
 }
 
 .coordinator-heading {
@@ -458,25 +507,39 @@ p.about-text {
 .coord-group-label {
     font-family: "Press Start 2P", cursive;
     font-size: 11px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    margin: 0 auto 6px;
-    padding: 8px 18px;
-    display: block;
-    text-align: center;
-    border-left: none;
-    border-bottom: 3px solid currentColor;
-    width: fit-content;
+    margin: 0 auto 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 18px;
+    background: transparent;
+    border: none;
+}
+
+.coord-group-label::before,
+.coord-group-label::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.3;
 }
 
 .coord-group-label--coordinator {
     color: #ffc010;
-    background: rgba(255, 192, 16, 0.07);
+    text-shadow:
+        0 0 12px rgba(255, 192, 16, 0.7),
+        0 0 24px rgba(255, 192, 16, 0.35);
 }
 
 .coord-group-label--volunteer {
     color: #00ffea;
-    background: rgba(0, 255, 234, 0.06);
+    text-shadow:
+        0 0 12px rgba(0, 255, 234, 0.7),
+        0 0 24px rgba(0, 255, 234, 0.35);
 }
 
 /* ── Card shell ── */

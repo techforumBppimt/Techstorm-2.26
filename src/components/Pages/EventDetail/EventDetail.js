@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import coordinatorCardBg from "../../../assets/img/coordinatorcardbg.png";
+import entryFeeBg from "../../../assets/img/event-1.png";
+import coordinatorsBg from "../../../assets/img/event-2.png";
 import { useHistory } from "react-router-dom";
 import "./EventDetail.css";
 import { Button } from "../../ui/8bit/button";
@@ -9,23 +11,23 @@ const omegatrixHeadings = [
   "omegatrix 2.26 rules",
   "general rules",
   "prelims rules",
-  "mains rules"
+  "mains rules",
 ];
 // Reusable FAQ Accordion component
 function FAQAccordion({ faqs }) {
   const [openIndex, setOpenIndex] = React.useState(null);
   return (
     <div
+      className="faq-accordion-wrapper"
       style={{
         maxWidth: 900,
         margin: "16px",
         padding: "clamp(12px, 3vw, 24px) clamp(12px, 3vw, 40px)",
-        
-        background: "#1a0e22", // deep purple background (theme)
-        boxShadow: "0 4px 32px 0 rgba(0,0,0,0.18)",
+        background: "rgba(10, 4, 20, 0.35)",
+        boxShadow: "0 4px 32px 0 rgba(0,0,0,0.28)",
         fontFamily: "Press Start 2P, monospace",
-        color: "#ffc010", // gold text (theme)
-        border: "3px solid #ffc010",
+        color: "#ffc010",
+        border: "2px solid rgba(255, 192, 16, 0.35)",
         boxSizing: "border-box",
       }}
     >
@@ -55,63 +57,45 @@ function FAQAccordion({ faqs }) {
               boxSizing: "border-box",
             }}
           >
-            <span style={{ 
-              flex: 1, 
-              wordBreak: "break-word",
-              overflowWrap: "anywhere",
-              hyphens: "auto",
-              minWidth: 0,
-              whiteSpace: "normal",
-            }}>
+            <span
+              style={{
+                flex: 1,
+                wordBreak: "break-word",
+                overflowWrap: "anywhere",
+                hyphens: "auto",
+                minWidth: 0,
+                whiteSpace: "normal",
+              }}
+            >
               {faq.q}
             </span>
-            <span style={{ 
-              fontSize: "clamp(12px, 2.5vw, 18px)", 
-              fontWeight: "bold", 
-              flexShrink: 0,
-              minWidth: "clamp(16px, 4vw, 20px)",
-              textAlign: "center",
-            }}>
+            <span
+              style={{
+                fontSize: "clamp(12px, 2.5vw, 18px)",
+                fontWeight: "bold",
+                flexShrink: 0,
+                minWidth: "clamp(16px, 4vw, 20px)",
+                textAlign: "center",
+              }}
+            >
               {openIndex === idx ? "\u02C4" : "\u02C5"}
             </span>
           </button>
           {openIndex === idx && (
             <div
               style={{
-                display: "flex",
-                alignItems: "stretch",
-                gap: "clamp(6px, 1.5vw, 12px)",
+                padding: "8px 0 clamp(12px, 3vw, 18px) 0",
+                color: "#ffffff",
+                fontSize: "clamp(8px, 1.8vw, 12px)",
+                lineHeight: 1.6,
+                fontFamily: "Silkscreen, monospace",
+                whiteSpace: "pre-wrap",
+                wordBreak: "break-word",
+                overflowWrap: "anywhere",
+                minWidth: 0,
               }}
             >
-              <div
-                style={{
-                  width: "clamp(3px, 1vw, 4px)",
-                  minWidth: "3px",
-                  background: "#22c9e2",
-                  boxShadow: "0 0 8px 0 #18122B55",
-                  flexShrink: 0,
-                }}
-              />
-              <div
-                style={{
-                  flex: 1,
-                  padding: "8px 0 clamp(12px, 3vw, 18px) 0",
-                  color: "#ffffff",
-                  fontSize: "clamp(8px, 1.8vw, 12px)",
-                  lineHeight: 1.6,
-                  fontFamily: "Silkscreen, monospace",
-                  marginLeft: 0,
-                  marginBottom: 0,
-                  whiteSpace: "pre-wrap",
-                  wordBreak: "break-word",
-                  overflowWrap: "anywhere",
-                  borderRadius: "0 6px 6px 0",
-                  borderLeft: "none",
-                  minWidth: 0,
-                }}
-              >
-                {faq.a}
-              </div>
+              {faq.a}
             </div>
           )}
           <div
@@ -143,9 +127,6 @@ const EventDetail = ({ eventData }) => {
     registerButton,
   } = eventData;
 
-
-
-
   // Refs for auto-scroll functionality
   const scrollContainerRef = useRef(null);
   const autoScrollInterval = useRef(null);
@@ -153,6 +134,9 @@ const EventDetail = ({ eventData }) => {
 
   // State for rules dialog
   const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
+  // State for fee card hover
+  const [hoveredFee, setHoveredFee] = useState(null);
+  const [hoveredTeam, setHoveredTeam] = useState(false);
 
   // Event-specific coordinators data
   const eventCoordinators = {
@@ -632,7 +616,6 @@ const EventDetail = ({ eventData }) => {
   const currentEventCoordinators =
     eventCoordinators[name] || coordinators || contact || [];
 
-
   // Map event names to registration routes
   const getRegistrationRoute = (eventName) => {
     const routeMap = {
@@ -689,8 +672,8 @@ const EventDetail = ({ eventData }) => {
     name === "KHET" && khetGalleryImages.length > 0
       ? khetGalleryImages
       : previousYearImages && previousYearImages.length > 0
-      ? previousYearImages
-      : dummyImages;
+        ? previousYearImages
+        : dummyImages;
 
   // Start auto-scroll
   const startAutoScroll = () => {
@@ -797,8 +780,11 @@ const EventDetail = ({ eventData }) => {
                 )}
                 <div className="heading-brush"></div>
                 {name === "KHET" && khetGalleryImages.length === 0 && (
-                  <div style={{color: '#ffc010', marginTop: 10, fontSize: 14}}>
-                    KHET gallery images failed to load. Please check your network or contact admin.
+                  <div
+                    style={{ color: "#ffc010", marginTop: 10, fontSize: 14 }}
+                  >
+                    KHET gallery images failed to load. Please check your
+                    network or contact admin.
                   </div>
                 )}
               </div>
@@ -808,7 +794,15 @@ const EventDetail = ({ eventData }) => {
       </section>
 
       {/* About Event Section */}
-      <section className="about-event-section pt-60 pb-60">
+      <section
+        className="about-event-section pt-60 pb-60"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,0.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%), url(${entryFeeBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="container">
           <div className="row">
             {/* Left: Scrollable Pictures */}
@@ -944,9 +938,17 @@ const EventDetail = ({ eventData }) => {
                         registerButton.onClick ||
                         (() => {
                           // Check if it's an external link (starts with http:// or https://)
-                          if (registerButton.link && (registerButton.link.startsWith('http://') || registerButton.link.startsWith('https://'))) {
+                          if (
+                            registerButton.link &&
+                            (registerButton.link.startsWith("http://") ||
+                              registerButton.link.startsWith("https://"))
+                          ) {
                             // Open external link in new tab
-                            window.open(registerButton.link, '_blank', 'noopener,noreferrer');
+                            window.open(
+                              registerButton.link,
+                              "_blank",
+                              "noopener,noreferrer",
+                            );
                           } else if (registerButton.link) {
                             // Internal route
                             history.push(registerButton.link);
@@ -1199,7 +1201,6 @@ const EventDetail = ({ eventData }) => {
                             // const isJudgingCriteria = false;
                             // Check if it's a registration fee header
 
-
                             if (isHeader) {
                               // Reduce space below Forza Horizon gold header
                               const isForzaHorizonHeader =
@@ -1272,11 +1273,13 @@ const EventDetail = ({ eventData }) => {
                               "FAIR PLAY RULES",
                               "TECHNICAL RULES",
                               "AUDIENCE & CONDUCT RULES",
-                              "⏱ RACE FORMAT RULES"
+                              "⏱ RACE FORMAT RULES",
                             ];
                             if (
                               name === "Forza Horizon" &&
-                              forzaSectionHeaders.includes(rule.trim().toUpperCase())
+                              forzaSectionHeaders.includes(
+                                rule.trim().toUpperCase(),
+                              )
                             ) {
                               // Icon selection
                               let icon = "";
@@ -1350,14 +1353,28 @@ const EventDetail = ({ eventData }) => {
                               { label: "MATCH RECORDING", icon: "📹" },
                               { label: "DEVICE MALFUNCTION", icon: "⚠️" },
                               { label: "TOURNAMENT STRUCTURE", icon: "🏆" },
-                              { label: "3.1 LEAGUE STAGE (GROUP-BASED STRUCTURE)", icon: "👥" },
+                              {
+                                label:
+                                  "3.1 LEAGUE STAGE (GROUP-BASED STRUCTURE)",
+                                icon: "👥",
+                              },
                               { label: "3.2 KNOCKOUT ROUNDS", icon: "🥊" },
                               { label: "FINAL MATCH RULES", icon: "🏁" },
-                              { label: "FINAL AUTHORITY CLAUSE", icon: "❗", color: "#ff2d2d", bg: "rgba(255,45,45,0.12)" },
+                              {
+                                label: "FINAL AUTHORITY CLAUSE",
+                                icon: "❗",
+                                color: "#ff2d2d",
+                                bg: "rgba(255,45,45,0.12)",
+                              },
                             ];
                             if (name === "FIFA Mobile") {
-                              const ruleText = rule.trim().replace(/:$/, "").toUpperCase();
-                              const match = fifaSectionHeaders.find(h => h.label === ruleText);
+                              const ruleText = rule
+                                .trim()
+                                .replace(/:$/, "")
+                                .toUpperCase();
+                              const match = fifaSectionHeaders.find(
+                                (h) => h.label === ruleText,
+                              );
                               if (match) {
                                 return (
                                   <h3
@@ -1400,11 +1417,13 @@ const EventDetail = ({ eventData }) => {
                               "FINAL ROUND",
                               "SUBMISSION (FINALS)",
                               "ELIMINATION CRITERIA (FINALS)",
-                              "# BRING YOUR OWN DATA TRANSFER CABLE"
+                              "# BRING YOUR OWN DATA TRANSFER CABLE",
                             ];
                             if (
                               name === "Creative Canvas" &&
-                              creativeCanvasSectionHeaders.includes(rule.trim().toUpperCase())
+                              creativeCanvasSectionHeaders.includes(
+                                rule.trim().toUpperCase(),
+                              )
                             ) {
                               let icon = "";
                               switch (rule.trim().toUpperCase()) {
@@ -1498,19 +1517,27 @@ const EventDetail = ({ eventData }) => {
                                 </h3>
                               );
                             }
-                             // FAQ question detection
+                            // FAQ question detection
                             const isFaqQuestion = /\?$/.test(rule.trim());
                             // Registration fee header detection for Passion with Reels
                             const isRegistrationFeeHeader =
                               name === "Passion with Reels" &&
-                              rule.trim().toLowerCase() === "registration fees:";
+                              rule.trim().toLowerCase() ===
+                                "registration fees:";
 
                             // Tech Hunt: highlight special headings
                             const isTechHuntSpecialHeading =
                               name === "Tech Hunt" &&
-                              ["preliminary round", "the footage may represent:", "discipline :"].includes(rule.trim().toLowerCase());
+                              [
+                                "preliminary round",
+                                "the footage may represent:",
+                                "discipline :",
+                              ].includes(rule.trim().toLowerCase());
 
-                            if (isRegistrationFeeHeader || isTechHuntSpecialHeading) {
+                            if (
+                              isRegistrationFeeHeader ||
+                              isTechHuntSpecialHeading
+                            ) {
                               return (
                                 <div
                                   key={index}
@@ -1536,7 +1563,7 @@ const EventDetail = ({ eventData }) => {
                             }
                             // Highlight Ro-Navigator section headers with yellow background, remove bullet
                             // Highlight PRELIMS RULES: and FINALS RULES: with gold heading and diff icon
-                            
+
                             if (
                               name === "Ro-Navigator" &&
                               ["PRELIMS RULES:", "FINALS RULES:"].includes(
@@ -1617,7 +1644,7 @@ const EventDetail = ({ eventData }) => {
                               "round 3: elite code clash (finals)",
                               "device & network policy",
                               "strict anti-cheating policy",
-                              "scoring & tie-breakers"
+                              "scoring & tie-breakers",
                             ];
                             const hackstormHeadings = [
                               "hackstorm hackathon rules",
@@ -1629,7 +1656,7 @@ const EventDetail = ({ eventData }) => {
                               "mentoring reviews",
                               "demo requirements",
                               "judging criteria ———————————",
-                              "disqualification rules"
+                              "disqualification rules",
                             ];
                             const technomaniaHeadings = [
                               "theme: role of artificial intelligence in sustainable development",
@@ -1637,71 +1664,140 @@ const EventDetail = ({ eventData }) => {
                               "basic rules",
                               "project and model guidelines",
                               "presentation rules",
-                              "code of conduct"
+                              "code of conduct",
                             ];
                             if (
                               (name === "Ro-Navigator" &&
-                                (rule.trim().toUpperCase() === "BOT SPECIFICATIONS:" ||
-                                  rule.trim().toUpperCase() === "GENERAL RULES (COMMON FOR PRELIMS & FINALS):")) ||
+                                (rule.trim().toUpperCase() ===
+                                  "BOT SPECIFICATIONS:" ||
+                                  rule.trim().toUpperCase() ===
+                                    "GENERAL RULES (COMMON FOR PRELIMS & FINALS):")) ||
                               (name === "Tech Hunt" &&
                                 [
                                   "round 1 (time warp trials)",
                                   "round 2 (visual vault)",
-                                  "treasure round (retro run)"
+                                  "treasure round (retro run)",
                                 ].includes(rule.trim().toLowerCase())) ||
                               (name === "Code-Bee" &&
-                                codebeeHeadings.includes(rule.trim().toLowerCase())) ||
+                                codebeeHeadings.includes(
+                                  rule.trim().toLowerCase(),
+                                )) ||
                               (name === "Hack Storm" &&
-                                hackstormHeadings.includes(rule.trim().toLowerCase())) ||
+                                hackstormHeadings.includes(
+                                  rule.trim().toLowerCase(),
+                                )) ||
                               (name === "TechnoMania" &&
-                                technomaniaHeadings.includes(rule.trim().toLowerCase())) ||
+                                technomaniaHeadings.includes(
+                                  rule.trim().toLowerCase(),
+                                )) ||
                               (name === "Omegatrix" &&
-                                omegatrixHeadings.includes(rule.trim().toLowerCase()))
+                                omegatrixHeadings.includes(
+                                  rule.trim().toLowerCase(),
+                                ))
                             ) {
                               // Icon selection
                               let icon = "";
                               if (name === "Ro-Navigator") {
-                                icon = rule.trim().toUpperCase() === "BOT SPECIFICATIONS:" ? "🔧" : "🤖";
+                                icon =
+                                  rule.trim().toUpperCase() ===
+                                  "BOT SPECIFICATIONS:"
+                                    ? "🔧"
+                                    : "🤖";
                               } else if (name === "Tech Hunt") {
-                                if (rule.trim().toLowerCase() === "round 1 (time warp trials)") icon = "📝";
-                                else if (rule.trim().toLowerCase() === "round 2 (visual vault)") icon = "🖼️";
-                                else if (rule.trim().toLowerCase() === "treasure round (retro run)") icon = "🏆";
+                                if (
+                                  rule.trim().toLowerCase() ===
+                                  "round 1 (time warp trials)"
+                                )
+                                  icon = "📝";
+                                else if (
+                                  rule.trim().toLowerCase() ===
+                                  "round 2 (visual vault)"
+                                )
+                                  icon = "🖼️";
+                                else if (
+                                  rule.trim().toLowerCase() ===
+                                  "treasure round (retro run)"
+                                )
+                                  icon = "🏆";
                               } else if (name === "Code-Bee") {
                                 const heading = rule.trim().toLowerCase();
-                                if (heading === "general information") icon = "ℹ️";
-                                else if (heading === "registration fees & refund policy") icon = "💰";
-                                else if (heading === "event schedule & rounds") icon = "📅";
-                                else if (heading === "round 1: mindmaze (prelims)") icon = "🧠";
-                                else if (heading === "round 2: code sprint") icon = "🏃‍♂️";
-                                else if (heading === "round 3: elite code clash (finals)") icon = "⚔️";
-                                else if (heading === "device & network policy") icon = "💻";
-                                else if (heading === "strict anti-cheating policy") icon = "🚫";
-                                else if (heading === "scoring & tie-breakers") icon = "🎯";
+                                if (heading === "general information")
+                                  icon = "ℹ️";
+                                else if (
+                                  heading ===
+                                  "registration fees & refund policy"
+                                )
+                                  icon = "💰";
+                                else if (heading === "event schedule & rounds")
+                                  icon = "📅";
+                                else if (
+                                  heading === "round 1: mindmaze (prelims)"
+                                )
+                                  icon = "🧠";
+                                else if (heading === "round 2: code sprint")
+                                  icon = "🏃‍♂️";
+                                else if (
+                                  heading ===
+                                  "round 3: elite code clash (finals)"
+                                )
+                                  icon = "⚔️";
+                                else if (heading === "device & network policy")
+                                  icon = "💻";
+                                else if (
+                                  heading === "strict anti-cheating policy"
+                                )
+                                  icon = "🚫";
+                                else if (heading === "scoring & tie-breakers")
+                                  icon = "🎯";
                               } else if (name === "Hack Storm") {
                                 const heading = rule.trim().toLowerCase();
-                                if (heading === "hackstorm hackathon rules") icon = "⚡";
-                                else if (heading === "spirit of the competition") icon = "🤝";
+                                if (heading === "hackstorm hackathon rules")
+                                  icon = "⚡";
+                                else if (
+                                  heading === "spirit of the competition"
+                                )
+                                  icon = "🤝";
                                 else if (heading === "eligibility") icon = "🧑‍🎓";
-                                else if (heading === "team participation") icon = "👥";
-                                else if (heading === "project development rules") icon = "💡";
-                                else if (heading === "ai tools and code generation") icon = "🤖";
-                                else if (heading === "mentoring reviews") icon = "🧑‍🏫";
-                                else if (heading === "demo requirements") icon = "🎬";
-                                else if (heading.startsWith("judging criteria")) icon = "🏅";
-                                else if (heading === "disqualification rules") icon = "🚫";
+                                else if (heading === "team participation")
+                                  icon = "👥";
+                                else if (
+                                  heading === "project development rules"
+                                )
+                                  icon = "💡";
+                                else if (
+                                  heading === "ai tools and code generation"
+                                )
+                                  icon = "🤖";
+                                else if (heading === "mentoring reviews")
+                                  icon = "🧑‍🏫";
+                                else if (heading === "demo requirements")
+                                  icon = "🎬";
+                                else if (heading.startsWith("judging criteria"))
+                                  icon = "🏅";
+                                else if (heading === "disqualification rules")
+                                  icon = "🚫";
                               } else if (name === "TechnoMania") {
                                 const heading = rule.trim().toLowerCase();
                                 if (heading.startsWith("theme:")) icon = "🌱";
-                                else if (heading.startsWith("venue:")) icon = "📍";
+                                else if (heading.startsWith("venue:"))
+                                  icon = "📍";
                                 else if (heading === "basic rules") icon = "📜";
-                                else if (heading === "project and model guidelines") icon = "🛠️";
-                                else if (heading === "presentation rules") icon = "📊";
-                                else if (heading === "code of conduct") icon = "⚖️";
+                                else if (
+                                  heading === "project and model guidelines"
+                                )
+                                  icon = "🛠️";
+                                else if (heading === "presentation rules")
+                                  icon = "📊";
+                                else if (heading === "code of conduct")
+                                  icon = "⚖️";
                               } else if (name === "Omegatrix") {
                                 const heading = rule.trim().toLowerCase();
-                                if (heading === "omegatrix 2.26 rules") icon = "🧩";
-                                else if (heading === "general rules") icon = "📋";
-                                else if (heading === "prelims rules") icon = "✏️";
+                                if (heading === "omegatrix 2.26 rules")
+                                  icon = "🧩";
+                                else if (heading === "general rules")
+                                  icon = "📋";
+                                else if (heading === "prelims rules")
+                                  icon = "✏️";
                                 else if (heading === "mains rules") icon = "🎯";
                               }
                               return (
@@ -2166,7 +2262,7 @@ const EventDetail = ({ eventData }) => {
                                         .message.-right .nes-bcrikko {
                                             margin-bottom: 10px;
                                         }
-                                        
+
                                         .about-heading {
                                             text-align: center;
                                             display: flex;
@@ -2175,7 +2271,7 @@ const EventDetail = ({ eventData }) => {
                                             position: relative;
                                             width: 100%;
                                         }
-                                        
+
                                         .about-heading .heading-white,
                                         .about-heading .heading-gold {
                                             display: block;
@@ -2183,7 +2279,7 @@ const EventDetail = ({ eventData }) => {
                                             margin: 0;
                                             font-size: 20px !important;
                                         }
-                                        
+
                                         .about-heading .heading-brush {
                                             position: relative;
                                             bottom: auto;
@@ -2191,11 +2287,11 @@ const EventDetail = ({ eventData }) => {
                                             margin: 10px auto 20px;
                                             width: 80px;
                                         }
-                                        
+
                                         .about-content p {
                                             text-align: center !important;
                                         }
-                                        
+
                                         .entry-heading {
                                             text-align: center;
                                             display: flex;
@@ -2204,7 +2300,7 @@ const EventDetail = ({ eventData }) => {
                                             position: relative;
                                             width: 100%;
                                         }
-                                        
+
                                         .entry-heading .heading-white,
                                         .entry-heading .heading-gold {
                                             display: block;
@@ -2212,7 +2308,7 @@ const EventDetail = ({ eventData }) => {
                                             margin: 0;
                                             font-size: 20px !important;
                                         }
-                                        
+
                                         .entry-heading .heading-brush {
                                             position: relative;
                                             bottom: auto;
@@ -2220,7 +2316,7 @@ const EventDetail = ({ eventData }) => {
                                             margin: 10px auto 20px;
                                             width: 80px;
                                         }
-                                        
+
                                         .coordinator-heading {
                                             text-align: center;
                                             display: flex;
@@ -2229,7 +2325,7 @@ const EventDetail = ({ eventData }) => {
                                             position: relative;
                                             width: 100%;
                                         }
-                                        
+
                                         .coordinator-heading .heading-white,
                                         .coordinator-heading .heading-gold {
                                             display: block;
@@ -2237,7 +2333,7 @@ const EventDetail = ({ eventData }) => {
                                             margin: 0;
                                             font-size: 20px !important;
                                         }
-                                        
+
                                         .coordinator-heading .heading-brush {
                                             position: relative !important;
                                             margin: 10px auto 15px !important;
@@ -2247,11 +2343,11 @@ const EventDetail = ({ eventData }) => {
                                             bottom: auto !important;
                                             display: block !important;
                                         }
-                                        
+
                                         .entry-content {
                                             padding: 0 15px;
                                         }
-                                        
+
                                         .fee-category {
                                             width: 100% !important;
                                             min-width: unset !important;
@@ -2266,17 +2362,22 @@ const EventDetail = ({ eventData }) => {
       </section>
 
       {/* Entry Fee Section */}
-      <section className="entry-fee-section pt-30 pb-60">
+      <section
+        className="entry-fee-section pt-30 pb-60"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,0.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%), url(${entryFeeBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-12">
               <div className="entry-heading" style={{ textAlign: "center" }}>
                 <h2 className="heading-white">ENTRY</h2>
-                <h2 className="heading-white">FEE</h2>
-                <div
-                  className="heading-brush"
-                  style={{ margin: "10px auto 30px" }}
-                ></div>
+                <h2 className="heading-gold">FEE</h2>
+                <div className="heading-brush"></div>
               </div>
               <div className="entry-content">
                 {/* Check if event is free */}
@@ -2292,21 +2393,29 @@ const EventDetail = ({ eventData }) => {
                         borderColor: "#00ffea",
                       }}
                     >
+                      <i
+                        className="nes-icon trophy is-large"
+                        style={{
+                          filter: "drop-shadow(0 0 8px #00ffea)",
+                          marginBottom: "16px",
+                          display: "block",
+                        }}
+                      ></i>
                       <h3
                         style={{
                           color: "#00ffea",
-                          fontSize: "clamp(18px, 4vw, 28px)",
+                          fontSize: "clamp(14px, 3vw, 22px)",
                           fontFamily: "Press Start 2P",
                           marginBottom: "15px",
                           lineHeight: "1.5",
                         }}
                       >
-                        🎉 FREE EVENT 🎉
+                        FREE EVENT
                       </h3>
                       <p
                         style={{
-                          color: "#fff",
-                          fontSize: "14px",
+                          color: "#aaa",
+                          fontSize: "13px",
                           fontFamily: "Silkscreen, sans-serif",
                           lineHeight: "1.6",
                         }}
@@ -2317,156 +2426,408 @@ const EventDetail = ({ eventData }) => {
                   </div>
                 ) : (
                   <>
-                    {/* Horizontal Fee Layout */}
+                    {/* Pixel-Art Fee Cards Row */}
                     <div
                       style={{
                         display: "flex",
                         justifyContent: "center",
-                        gap: "30px",
+                        gap: "24px",
                         flexWrap: "wrap",
-                        marginBottom: "40px",
+                        marginBottom: "24px",
                       }}
                     >
+                      {/* BPPIMT Students Card */}
                       <div
-                        className="fee-category"
+                        onMouseEnter={() => setHoveredFee("bppimt")}
+                        onMouseLeave={() => setHoveredFee(null)}
                         style={{
                           flex: "1",
-                          minWidth: "280px",
+                          minWidth: "260px",
                           maxWidth: "400px",
-                          padding: "25px",
-                          backgroundColor: "rgba(255, 192, 16, 0.05)",
-                          border: "3px solid #ffc010",
-                          textAlign: "center",
+                          background:
+                            hoveredFee === "bppimt"
+                              ? "rgba(10,6,0,0.97)"
+                              : "rgba(10,6,0,0.82)",
+                          border: `2px solid ${hoveredFee === "bppimt" ? "#ffc010" : "rgba(255,192,16,0.18)"}`,
+                          padding: "28px",
+                          cursor: "pointer",
+                          transition: "all 0.3s",
+                          transform:
+                            hoveredFee === "bppimt"
+                              ? "translateY(-5px) scale(1.01)"
+                              : "none",
+                          boxShadow:
+                            hoveredFee === "bppimt"
+                              ? "0 0 40px rgba(255,192,16,0.2), 0 8px 24px rgba(0,0,0,0.9)"
+                              : "none",
+                          clipPath:
+                            "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))",
+                          position: "relative",
                         }}
                       >
-                        <h4
-                          style={{
-                            color: "#ffc010",
-                            fontSize: "16px",
-                          }}
-                        >
-                          Team Size
-                        </h4>
-                        <p
-                          style={{
-                            fontSize: "18px",
-                            margin: "0 0 10px 0",
-
-                            fontFamily: "Press Start 2P",
-                            marginBottom: "15px",
-                            lineHeight: "1.5",
-                          }}
-                        >
-                          For BPPIMT students
-                        </p>
+                        {/* Corner pixel accent */}
                         <div
-                          className="fee-amount"
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            right: 16,
+                            width: "16px",
+                            height: "16px",
+                            background: "#ffc010",
+                            clipPath: "polygon(100% 0, 0 100%, 100% 100%)",
+                          }}
+                        />
+
+                        {/* Header row: icon + label */}
+                        <div
                           style={{
                             display: "flex",
-                            justifyContent: "center",
                             alignItems: "center",
-                            gap: "12px",
+                            gap: "16px",
+                            marginBottom: "22px",
                           }}
                         >
-                          <span className="fee-icon" style={{ fontSize: "28px" }}>
-                            💰
-                          </span>
-                          <span
-                            className="fee-text"
+                          <div
                             style={{
-                              color: "#fff",
-                              fontSize: "18px",
-                              fontFamily: "Press Start 2P",
+                              background: "rgba(255,192,16,0.08)",
+                              border: "2px solid #ffc010",
+                              padding: "14px 18px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              flexShrink: 0,
+                              minWidth: "54px",
+                              minHeight: "54px",
                             }}
                           >
-                            {eventData.entryFeeInternal || eventData.entryFee || "₹80 per team"}
-                          </span>
+                            <i
+                              className="nes-icon star is-small"
+                              style={{
+                                filter:
+                                  "brightness(0) saturate(100%) invert(78%) sepia(86%) saturate(600%) hue-rotate(5deg) brightness(103%)",
+                              }}
+                            ></i>
+                          </div>
+                          <div>
+                            <div
+                              style={{
+                                fontFamily: "'Press Start 2P', monospace",
+                                fontSize: "8px",
+                                color: "#ffc010",
+                                textShadow:
+                                  hoveredFee === "bppimt"
+                                    ? "0 0 8px #ffc010"
+                                    : "none",
+                                marginBottom: "8px",
+                                lineHeight: 1.9,
+                                letterSpacing: "0.5px",
+                                transition: "text-shadow 0.3s",
+                              }}
+                            >
+                              FOR BPPIMT STUDENTS
+                            </div>
+                            <div
+                              style={{
+                                fontFamily: "'Press Start 2P', monospace",
+                                fontSize: "6px",
+                                color: "rgba(255,192,16,0.45)",
+                                letterSpacing: "3px",
+                                textTransform: "uppercase",
+                              }}
+                            >
+                              TEAM SIZE
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Fee amount box */}
+                        <div
+                          style={{
+                            background: "rgba(255,192,16,0.06)",
+                            border: "2px solid rgba(255,192,16,0.4)",
+                            borderLeft: "4px solid #ffc010",
+                            padding: "18px 20px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "16px",
+                            boxShadow:
+                              hoveredFee === "bppimt"
+                                ? "0 0 16px rgba(255,192,16,0.15), inset 0 0 20px rgba(255,192,16,0.04)"
+                                : "none",
+                            transition: "box-shadow 0.3s",
+                          }}
+                        >
+                          <i
+                            className="nes-icon coin is-small"
+                            style={{ flexShrink: 0 }}
+                          ></i>
+                          <div
+                            style={{
+                              fontFamily: "'Press Start 2P', monospace",
+                              fontSize: "clamp(10px, 2vw, 14px)",
+                              color: "#ffc010",
+                              textShadow:
+                                hoveredFee === "bppimt"
+                                  ? "0 0 10px rgba(255,192,16,0.7)"
+                                  : "none",
+                              letterSpacing: "1px",
+                              lineHeight: 1.5,
+                              transition: "text-shadow 0.3s",
+                            }}
+                          >
+                            {eventData.entryFeeInternal ||
+                              eventData.entryFee ||
+                              "₹80 per team"}
+                          </div>
                         </div>
                       </div>
 
+                      {/* Outside Students Card */}
                       <div
-                        className="fee-category"
+                        onMouseEnter={() => setHoveredFee("outside")}
+                        onMouseLeave={() => setHoveredFee(null)}
                         style={{
                           flex: "1",
-                          minWidth: "280px",
+                          minWidth: "260px",
                           maxWidth: "400px",
-                          padding: "25px",
-                          backgroundColor: "rgba(0, 255, 234, 0.05)",
-                          border: "3px solid #00ffea",
-                          textAlign: "center",
+                          background:
+                            hoveredFee === "outside"
+                              ? "rgba(0,8,8,0.97)"
+                              : "rgba(0,8,8,0.82)",
+                          border: `2px solid ${hoveredFee === "outside" ? "#00ffea" : "rgba(0,255,234,0.18)"}`,
+                          padding: "28px",
+                          cursor: "pointer",
+                          transition: "all 0.3s",
+                          transform:
+                            hoveredFee === "outside"
+                              ? "translateY(-5px) scale(1.01)"
+                              : "none",
+                          boxShadow:
+                            hoveredFee === "outside"
+                              ? "0 0 40px rgba(0,255,234,0.15), 0 8px 24px rgba(0,0,0,0.9)"
+                              : "none",
+                          clipPath:
+                            "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))",
+                          position: "relative",
                         }}
                       >
-                        <h4
-                          style={{
-                            color: "#00ffea",
-                            fontSize: "14px",
-                            fontFamily: "Press Start 2P",
-                            marginBottom: "15px",
-                            lineHeight: "1.5",
-                          }}
-                        >
-                          For outside students
-                        </h4>
+                        {/* Corner pixel accent */}
                         <div
-                          className="fee-amount"
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            right: 16,
+                            width: "16px",
+                            height: "16px",
+                            background: "#00ffea",
+                            clipPath: "polygon(100% 0, 0 100%, 100% 100%)",
+                          }}
+                        />
+
+                        {/* Header row: icon + label */}
+                        <div
                           style={{
                             display: "flex",
-                            justifyContent: "center",
                             alignItems: "center",
-                            gap: "12px",
+                            gap: "16px",
+                            marginBottom: "22px",
                           }}
                         >
-                          <span className="fee-icon" style={{ fontSize: "28px" }}>
-                            💰
-                          </span>
-                          <span
-                            className="fee-text"
+                          <div
                             style={{
-                              color: "#fff",
-                              fontSize: "18px",
-                              fontFamily: "Press Start 2P",
+                              background: "rgba(0,255,234,0.08)",
+                              border: "2px solid #00ffea",
+                              padding: "14px 18px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              flexShrink: 0,
+                              minWidth: "54px",
+                              minHeight: "54px",
                             }}
                           >
-                            {eventData.entryFeeExternal || eventData.entryFee || "₹100 per team"}
-                          </span>
+                            <i
+                              className="nes-icon heart is-small"
+                              style={{
+                                filter:
+                                  "brightness(0) saturate(100%) invert(94%) sepia(97%) saturate(200%) hue-rotate(130deg) brightness(105%)",
+                              }}
+                            ></i>
+                          </div>
+                          <div>
+                            <div
+                              style={{
+                                fontFamily: "'Press Start 2P', monospace",
+                                fontSize: "8px",
+                                color: "#00ffea",
+                                textShadow:
+                                  hoveredFee === "outside"
+                                    ? "0 0 8px #00ffea"
+                                    : "none",
+                                marginBottom: "8px",
+                                lineHeight: 1.9,
+                                letterSpacing: "0.5px",
+                                transition: "text-shadow 0.3s",
+                              }}
+                            >
+                              FOR OUTSIDE STUDENTS
+                            </div>
+                            <div
+                              style={{
+                                fontFamily: "'Press Start 2P', monospace",
+                                fontSize: "6px",
+                                color: "rgba(0,255,234,0.4)",
+                                letterSpacing: "3px",
+                                textTransform: "uppercase",
+                              }}
+                            >
+                              TEAM SIZE
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Fee amount box */}
+                        <div
+                          style={{
+                            background: "rgba(0,255,234,0.04)",
+                            border: "2px solid rgba(0,255,234,0.35)",
+                            borderLeft: "4px solid #00ffea",
+                            padding: "18px 20px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "16px",
+                            boxShadow:
+                              hoveredFee === "outside"
+                                ? "0 0 16px rgba(0,255,234,0.12), inset 0 0 20px rgba(0,255,234,0.03)"
+                                : "none",
+                            transition: "box-shadow 0.3s",
+                          }}
+                        >
+                          <i
+                            className="nes-icon coin is-small"
+                            style={{
+                              flexShrink: 0,
+                              filter:
+                                "brightness(0) saturate(100%) invert(94%) sepia(97%) saturate(200%) hue-rotate(130deg) brightness(105%)",
+                            }}
+                          ></i>
+                          <div
+                            style={{
+                              fontFamily: "'Press Start 2P', monospace",
+                              fontSize: "clamp(10px, 2vw, 14px)",
+                              color: "#00ffea",
+                              textShadow:
+                                hoveredFee === "outside"
+                                  ? "0 0 10px rgba(0,255,234,0.7)"
+                                  : "none",
+                              letterSpacing: "1px",
+                              lineHeight: 1.5,
+                              transition: "text-shadow 0.3s",
+                            }}
+                          >
+                            {eventData.entryFeeExternal ||
+                              eventData.entryFee ||
+                              "₹100 per team"}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </>
                 )}
 
-                {/* Team Size Options */}
+                {/* Team Size Options — Pixel-Art Card */}
                 <div
-                  className="nes-container with-title"
+                  onMouseEnter={() => setHoveredTeam(true)}
+                  onMouseLeave={() => setHoveredTeam(false)}
                   style={{
-                    maxWidth: "500px",
+                    maxWidth: "700px",
                     margin: "0 auto",
-                    backgroundColor: "rgba(255, 192, 16, 0.08)",
-                    borderColor: "#ffc010",
+                    background: hoveredTeam
+                      ? "rgba(5,0,12,0.97)"
+                      : "rgba(5,0,12,0.82)",
+                    border: `2px solid ${hoveredTeam ? "#b400ff" : "rgba(180,0,255,0.2)"}`,
+                    padding: "20px 28px",
+                    cursor: "pointer",
+                    transition: "all 0.3s",
+                    transform: hoveredTeam
+                      ? "translateY(-4px) scale(1.005)"
+                      : "none",
+                    boxShadow: hoveredTeam
+                      ? "0 0 35px rgba(180,0,255,0.18), 0 8px 24px rgba(0,0,0,0.9)"
+                      : "none",
+                    clipPath:
+                      "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))",
+                    position: "relative",
                   }}
                 >
-                  <p
-                    className="title"
+                  {/* Corner accent */}
+                  <div
                     style={{
-                      margin: 0,
-                      padding: "3px 3px 3px 3px",
-                      color: "#ffc010",
+                      position: "absolute",
+                      top: 0,
+                      right: 16,
+                      width: "16px",
+                      height: "16px",
+                      background: "#b400ff",
+                      clipPath: "polygon(100% 0, 0 100%, 100% 100%)",
+                    }}
+                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
+                      gap: "16px",
                     }}
                   >
-                    Team Options
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "16px",
-                      margin: "0 0 10px 0",
-                      fontFamily: "Press Start 2P",
-                      lineHeight: "1.6",
-                      color: "#d0d0d0",
-                      textAlign: "center",
-                    }}
-                  >
-                    {eventData.teamSize || "Solo / Duo / Thrice"}
-                  </p>
+                    {/* Left: icon + label */}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                      }}
+                    >
+                      <i
+                        className="nes-icon trophy is-small"
+                        style={{
+                          filter:
+                            "brightness(0) saturate(100%) invert(25%) sepia(90%) saturate(800%) hue-rotate(260deg) brightness(110%)",
+                          flexShrink: 0,
+                        }}
+                      ></i>
+                      <div
+                        style={{
+                          fontFamily: "'Press Start 2P', monospace",
+                          fontSize: "8px",
+                          color: "#b400ff",
+                          textShadow: hoveredTeam ? "0 0 8px #b400ff" : "none",
+                          letterSpacing: "1px",
+                          lineHeight: 1.7,
+                          transition: "text-shadow 0.3s",
+                        }}
+                      >
+                        TEAM OPTIONS
+                      </div>
+                    </div>
+                    {/* Right: team size value */}
+                    <div
+                      style={{
+                        fontFamily: "'Press Start 2P', monospace",
+                        fontSize: "clamp(9px, 1.5vw, 12px)",
+                        color: "#ffc010",
+                        textShadow: hoveredTeam
+                          ? "0 0 10px rgba(255,192,16,0.7)"
+                          : "none",
+                        letterSpacing: "2px",
+                        lineHeight: 1.7,
+                        transition: "text-shadow 0.3s",
+                      }}
+                    >
+                      {eventData.teamSize || "Solo / Duo / Thrice"}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Payment Options */}
@@ -2531,11 +2892,22 @@ const EventDetail = ({ eventData }) => {
 
       {/* FAQ Accordion Section (before Coordinators) */}
       {eventData.faqs && eventData.faqs.length > 0 && (
-        <section className="faq-accordion-section pt-30 pb-60">
+        <section
+          className="faq-accordion-section pt-30 pb-60"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,0.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%), url(${coordinatorsBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
           <div className="container">
             <div className="row">
               <div className="col-12">
-                <div className="about-heading" style={{ textAlign: "center" }}>
+                <div
+                  className="faq-heading about-heading"
+                  style={{ textAlign: "center" }}
+                >
                   <h2 className="heading-white">{name.toUpperCase()}</h2>
                   <h2 className="heading-gold">FAQ</h2>
                   <div className="heading-brush"></div>
@@ -2548,7 +2920,15 @@ const EventDetail = ({ eventData }) => {
       )}
 
       {/* Coordinators Section */}
-      <section className="coordinators-section pt-30 pb-90">
+      <section
+        className="coordinators-section pt-30 pb-90"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,0.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%), url(${coordinatorsBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -2614,8 +2994,13 @@ const EventDetail = ({ eventData }) => {
                           <div className="coordinator-contacts">
                             {person.phone && (
                               <div className="coord-phone-wrapper">
-                                <svg className="phone-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                <svg
+                                  className="phone-icon"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                >
+                                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
                                 </svg>
                                 <p className="coord-phone">{person.phone}</p>
                               </div>
