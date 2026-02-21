@@ -133,7 +133,7 @@ const RoCombatEvent = () => {
       "Final matches will follow the same safety and bot specifications rules.",
       "Match duration will remain the same unless specified by coordinators.",
       "Immobility of any bot during the match will be considered defeated.",
-      "Refereeâ€™s decision will be final.",
+      "Referee's decision will be final.",
     ],
     prizes: [
       { position: "1st Prize", amount: "â‚¹30,000" },

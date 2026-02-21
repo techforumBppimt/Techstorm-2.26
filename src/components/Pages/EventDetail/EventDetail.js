@@ -1352,7 +1352,8 @@ const EventDetail = ({ eventData }) => {
                               );
                             const isRoCombatSectionHeader =
                               name === "Ro-Combat" && (
-                                roCombatHeadingsToHighlight.some(h => normalizedRule.includes(normalizeRuleText(h)))
+                                roCombatHeadingsToHighlight.some(h => normalizedRule.includes(normalizeRuleText(h))) &&
+                                normalizeRuleText(rule) !== normalizeRuleText("Final matches will follow the same safety and bot specifications rules")
                               );
                             const isForzaHorizonHeader =
                               name === "Forza Horizon" &&
