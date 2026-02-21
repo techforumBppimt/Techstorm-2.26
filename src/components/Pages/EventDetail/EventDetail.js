@@ -665,8 +665,21 @@ const EventDetail = ({ eventData }) => {
   ];
 
   // Use provided images or fall back to dummy images
+  const [khetGalleryImages, setKhetGalleryImages] = useState([]);
+  useEffect(() => {
+    if (name === "KHET") {
+      fetch("/khet-cloudinary-urls.json")
+        .then((res) => res.json())
+        .then((data) => {
+          setKhetGalleryImages(Object.values(data));
+        });
+    }
+  }, [name]);
+
   const galleryImages =
-    previousYearImages && previousYearImages.length > 0
+    name === "KHET" && khetGalleryImages.length > 0
+      ? khetGalleryImages
+      : previousYearImages && previousYearImages.length > 0
       ? previousYearImages
       : dummyImages;
 
