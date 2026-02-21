@@ -66,6 +66,7 @@ export const cloudinaryImages = {
     rocombat: `${CLOUDINARY_BASE_URL}/w_600,h_400,c_fit,q_auto:good,f_auto/eoorox/events/rocombat`,
     ronavigator: `${CLOUDINARY_BASE_URL}/w_600,h_400,c_fit,q_auto:good,f_auto/eoorox/events/ronavigator`,
     rosoccer: `${CLOUDINARY_BASE_URL}/w_600,h_400,c_fit,q_auto:good,f_auto/eoorox/events/rosoccer`,
+    rosumo: `${CLOUDINARY_BASE_URL}/w_600,h_400,c_fit,q_auto:good,f_auto/eoorox/events/rosumo`,
     roterrance: `${CLOUDINARY_BASE_URL}/w_600,h_400,c_fit,q_auto:good,f_auto/eoorox/events/roterrance`,
     techhunt: `${CLOUDINARY_BASE_URL}/w_600,h_400,c_fit,q_auto:good,f_auto/eoorox/events/techhunt`,
     technomania: `${CLOUDINARY_BASE_URL}/w_600,h_400,c_fit,q_auto:good,f_auto/eoorox/events/technomania`,

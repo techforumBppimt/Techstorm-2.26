@@ -17,7 +17,7 @@ const KhetEvent = () => {
       "The Laser Game KHET 2.0: Mind-blowing laser fun for players ages 9-99. Using simple rules that can be learned in minutes, players alternate turns moving Egyptian-themed mirrored pieces, then fire their REAL (eye-safe) laser with the goal of blasting their opponent's PHARAOH to win. BASIC GEOMETRICAL CONCEPT IS THE KEY FACTOR IN THIS GAME.",
     teamSize: "Solo Participation",
     entryFeeInternal: "₹50 per participant",
-    entryFeeExternal: "FREE",
+    entryFeeExternal: "Not applicable",
     duration: "2 Hours",
     venue: "Board Game Arena",
         faqs: [

@@ -17,6 +17,7 @@ const techhuntImg = cloudinaryImages.events.techhunt;
 const ronavigatorImg = cloudinaryImages.events.ronavigator;
 const rocombatImg = cloudinaryImages.events.rocombat;
 const rosoccerImg = cloudinaryImages.events.rosoccer;
+const rosumoImg = cloudinaryImages.events.rosumo;
 const roterranceImg = cloudinaryImages.events.roterrance;
 const creativecanvasImg = cloudinaryImages.events.crreativecanvas;
 const passionwithreelsImg = cloudinaryImages.events.passionwithreels;
@@ -99,6 +100,15 @@ const galleryItems = [
     },
     {
         id: '9',
+        img: rosumoImg,
+        tag: 'Robotics',
+        label: 'Ro-Sumo',
+        description: 'Robot sumo wrestling',
+        cat: 'Robotics',
+        route: '/events/ro-sumo',
+    },
+    {
+        id: '10',
         img: roterranceImg,
         tag: 'Robotics',
         label: 'Ro-Terrance',
@@ -107,7 +117,7 @@ const galleryItems = [
         route: '/events/ro-terrance',
     },
     {
-        id: '10',
+        id: '11',
         img: creativecanvasImg,
         tag: 'Creative',
         label: 'Creative Canvas',
@@ -116,7 +126,7 @@ const galleryItems = [
         route: '/events/creative-canvas',
     },
     {
-        id: '11',
+        id: '12',
         img: passionwithreelsImg,
         tag: 'Creative',
         label: 'Passion with Reels',
@@ -125,7 +135,7 @@ const galleryItems = [
         route: '/events/passion-with-reels',
     },
     {
-        id: '12',
+        id: '13',
         img: forzahorizonImg,
         tag: 'Gaming',
         label: 'Forza Horizon',
@@ -134,7 +144,7 @@ const galleryItems = [
         route: '/events/forza-horizon',
     },
     {
-        id: '13',
+        id: '14',
         img: fifamobileImg,
         tag: 'Gaming',
         label: 'FIFA Mobile',
@@ -143,7 +153,7 @@ const galleryItems = [
         route: '/events/fifa-mobile',
     },
     {
-        id: '14',
+        id: '15',
         img: khetImg,
         tag: 'Gaming',
         label: 'KHET',

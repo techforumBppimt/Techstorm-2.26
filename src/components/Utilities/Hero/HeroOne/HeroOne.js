@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import ReactDOM from "react-dom";
 import arcadeVideo from "../../../../assets/arcade.mp4";
 
 /* ─── Pixel Coin SVG ─── */
@@ -191,12 +192,17 @@ function VideoPlayer({ onEnded }) {
   const fmt = (s) =>
     `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 
-  return (
+  const videoPlayerContent = (
     <div
       style={{
         position: "fixed",
-        inset: 0,
-        zIndex: 9000,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: "100vw",
+        height: "100vh",
+        zIndex: 99999999,
         background: "#000",
         display: "flex",
         flexDirection: "column",
@@ -481,6 +487,9 @@ function VideoPlayer({ onEnded }) {
       </div>
     </div>
   );
+
+  // Render to document.body using portal to ensure it's above everything
+  return ReactDOM.createPortal(videoPlayerContent, document.body);
 }
 
 /* ════════════════════════════════════════

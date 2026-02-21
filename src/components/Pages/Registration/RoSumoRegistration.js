@@ -2,12 +2,18 @@ import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { submitEventRegistration } from '../../../utils/eventRegistrationAPI';
 import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
+import Stepper, { Step } from '../../Utilities/Stepper/Stepper';
 import './Registration.css';
 import roSumoBanner from '../../../assets/img/event_specific_pictures/robotics/ro_sumo.png';
+import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const MIN_PARTICIPANTS = 2;
 const MAX_PARTICIPANTS = 5;
 const YEAR_OPTIONS = ['1st year', '2nd year', '3rd year', '4th year', 'Other'];
+const COLLEGE_OPTIONS = [
+  'B. P. Poddar Institute of Management & Technology',
+  'Others'
+];
 
 const createParticipant = () => ({
   name: '',
@@ -15,6 +21,7 @@ const createParticipant = () => ({
   contact: '',
   email: '',
   college: '',
+  collegeOther: '',
   idFile: null
 });
 
@@ -29,7 +36,6 @@ const RoSumoRegistration = () => {
     transactionId: '',
     paymentDate: '',
     paymentScreenshot: null,
-    cashReceipt: null,
     agreeToRules: false,
     whatsappConfirmed: false
   });
@@ -80,7 +86,7 @@ const RoSumoRegistration = () => {
     }
   };
 
-  const validateForm = () => {
+  const validateStep1 = () => {
     const nextErrors = {};
     const numericCount = Number(formData.numberOfParticipants);
 
@@ -122,8 +128,11 @@ const RoSumoRegistration = () => {
         }
       }
 
-      if (isMandatoryParticipant || participant.college.trim()) {
-        if (!participant.college.trim()) nextErrors[`participant_${i}_college`] = 'College Name is required';
+      if (isMandatoryParticipant || participant.college) {
+        if (!participant.college) nextErrors[`participant_${i}_college`] = 'College selection is required';
+        if (participant.college === 'Others' && !participant.collegeOther.trim()) {
+          nextErrors[`participant_${i}_collegeOther`] = 'Please specify your college name';
+        }
       }
 
       if (isMandatoryParticipant || participant.idFile) {
@@ -131,15 +140,21 @@ const RoSumoRegistration = () => {
       }
     }
 
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const validateStep2 = () => {
+    const nextErrors = {};
+
     if (!formData.paymentMode) {
       nextErrors.paymentMode = 'Mode of Payment is required';
     }
 
-    if (!formData.paymentDate) {
-      nextErrors.paymentDate = 'Payment date is required';
-    }
-
     if (formData.paymentMode === 'online') {
+      if (!formData.paymentDate) {
+        nextErrors.paymentDate = 'Payment date is required';
+      }
       if (!formData.transactionId.trim()) {
         nextErrors.transactionId = 'Transaction ID is required for online payment';
       }
@@ -148,11 +163,12 @@ const RoSumoRegistration = () => {
       }
     }
 
-    if (formData.paymentMode === 'cash') {
-      if (!formData.cashReceipt) {
-        nextErrors.cashReceipt = 'Upload cash receipt for offline payment';
-      }
-    }
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const validateStep3 = () => {
+    const nextErrors = {};
 
     if (!formData.agreeToRules) {
       nextErrors.agreeToRules = 'You must agree to the event rules and regulations';
@@ -166,13 +182,14 @@ const RoSumoRegistration = () => {
     return Object.keys(nextErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleStepValidation = (step) => {
+    if (step === 0) return validateStep1();
+    if (step === 1) return validateStep2();
+    if (step === 2) return validateStep3();
+    return false;
+  };
 
-    if (!validateForm()) {
-      return;
-    }
-
+  const handleComplete = async () => {
     setIsSubmitting(true);
 
     try {
@@ -223,335 +240,420 @@ const RoSumoRegistration = () => {
             </div>
           )}
 
-          <form className="registration-form" onSubmit={handleSubmit}>
-            <div className="form-section">
-              <h2 className="form-section-title">&gt;&gt;&gt; Team Details</h2>
-
-              <div className="form-group">
-                <label className="form-label required">Team Name</label>
-                <input
-                  type="text"
-                  name="teamName"
-                  value={formData.teamName}
-                  onChange={handleFieldChange}
-                  className="retro-input"
-                  placeholder="Team Name"
-                />
-                {errors.teamName && <div className="error-message">{errors.teamName}</div>}
-              </div>
-
-              <div className="form-group">
-                <label className="form-label required">Number of Participants</label>
-                <select
-                  name="numberOfParticipants"
-                  value={formData.numberOfParticipants}
-                  onChange={handleFieldChange}
-                  className="retro-input"
-                >
-                  {Array.from({ length: MAX_PARTICIPANTS - MIN_PARTICIPANTS + 1 }, (_, i) => MIN_PARTICIPANTS + i).map(num => (
-                    <option key={num} value={num}>{num} Participant{num > 1 ? 's' : ''}</option>
-                  ))}
-                </select>
-                {errors.numberOfParticipants && (
-                  <div className="error-message">{errors.numberOfParticipants}</div>
-                )}
-              </div>
-            </div>
-
-            {Array.from({ length: participantCount }).map((_, index) => {
-              const participant = formData.participants[index];
-              const number = index + 1;
-              const requiredClass = index < 2 ? 'required' : '';
-
-              return (
-                <div className="form-section" key={number}>
-                  <h2 className="form-section-title">&gt;&gt;&gt; Participant {number}</h2>
+          <form className="registration-form">
+            <Stepper onStepValidation={handleStepValidation} onComplete={handleComplete}>
+              <Step label="Team Details">
+                <div className="form-section">
+                  <h2 className="form-section-title">&gt;&gt;&gt; Team Details</h2>
 
                   <div className="form-group">
-                    <label className={`form-label ${requiredClass}`}>Name</label>
+                    <label className="form-label required">Team Name</label>
                     <input
                       type="text"
-                      value={participant.name}
-                      onChange={(e) => handleParticipantChange(index, 'name', e.target.value)}
+                      name="teamName"
+                      value={formData.teamName}
+                      onChange={handleFieldChange}
                       className="retro-input"
-                      placeholder={`Participant ${number} Name`}
+                      placeholder="Team Name"
                     />
-                    {errors[`participant_${index}_name`] && (
-                      <div className="error-message">{errors[`participant_${index}_name`]}</div>
-                    )}
+                    {errors.teamName && <div className="error-message">{errors.teamName}</div>}
                   </div>
 
                   <div className="form-group">
-                    <label className={`form-label ${requiredClass}`}>Year</label>
-                    <div className="mcq-group">
-                      {YEAR_OPTIONS.map((yearOption) => (
-                        <label className="mcq-option" key={`${number}_${yearOption}`}>
-                          <input
-                            type="radio"
-                            name={`participantYear_${index}`}
-                            value={yearOption}
-                            checked={participant.year === yearOption}
-                            onChange={(e) => handleParticipantChange(index, 'year', e.target.value)}
-                          />
-                          <span className="mcq-option-label">{yearOption}</span>
-                        </label>
+                    <label className="form-label required">Number of Participants</label>
+                    <select
+                      name="numberOfParticipants"
+                      value={formData.numberOfParticipants}
+                      onChange={handleFieldChange}
+                      className="retro-input"
+                    >
+                      {Array.from({ length: MAX_PARTICIPANTS - MIN_PARTICIPANTS + 1 }, (_, i) => MIN_PARTICIPANTS + i).map(num => (
+                        <option key={num} value={num}>{num} Participant{num > 1 ? 's' : ''}</option>
                       ))}
-                    </div>
-                    {errors[`participant_${index}_year`] && (
-                      <div className="error-message">{errors[`participant_${index}_year`]}</div>
+                    </select>
+                    {errors.numberOfParticipants && (
+                      <div className="error-message">{errors.numberOfParticipants}</div>
                     )}
                   </div>
+                </div>
 
-                  <div className="form-group">
-                    <label className={`form-label ${requiredClass}`}>Contact Number</label>
-                    <input
-                      type="text"
-                      value={participant.contact}
-                      onChange={(e) => handleParticipantChange(index, 'contact', e.target.value)}
-                      className="retro-input"
-                      placeholder={`Participant ${number} Contact Number`}
-                    />
-                    {errors[`participant_${index}_contact`] && (
-                      <div className="error-message">{errors[`participant_${index}_contact`]}</div>
-                    )}
-                  </div>
+                {Array.from({ length: participantCount }).map((_, index) => {
+                  const participant = formData.participants[index];
+                  const number = index + 1;
+                  const requiredClass = index < 2 ? 'required' : '';
 
-                  <div className="form-group">
-                    <label className={`form-label ${requiredClass}`}>Email ID</label>
-                    <input
-                      type="text"
-                      value={participant.email}
-                      onChange={(e) => handleParticipantChange(index, 'email', e.target.value)}
-                      className="retro-input"
-                      placeholder={`Participant ${number} Email ID`}
-                    />
-                    {errors[`participant_${index}_email`] && (
-                      <div className="error-message">{errors[`participant_${index}_email`]}</div>
-                    )}
-                  </div>
+                  return (
+                    <div className="form-section" key={number}>
+                      <h2 className="form-section-title">&gt;&gt;&gt; Participant {number}</h2>
 
-                  <div className="form-group">
-                    <label className={`form-label ${requiredClass}`}>College Name</label>
-                    <input
-                      type="text"
-                      value={participant.college}
-                      onChange={(e) => handleParticipantChange(index, 'college', e.target.value)}
-                      className="retro-input"
-                      placeholder={`Participant ${number} College Name`}
-                    />
-                    {errors[`participant_${index}_college`] && (
-                      <div className="error-message">{errors[`participant_${index}_college`]}</div>
-                    )}
-                  </div>
-
-                  <div className="form-group">
-                    <label className={`form-label ${requiredClass}`}>
-                      Participant ID (College ID / Library card)
-                    </label>
-                    <div className="file-upload-wrapper">
-                      <div className="file-upload">
+                      <div className="form-group">
+                        <label className={`form-label ${requiredClass}`}>Name</label>
                         <input
-                          type="file"
-                          id={`participantId_${index}`}
-                          className="file-upload-input"
-                          accept="image/jpeg,image/jpg,image/png,.jpg,.jpeg,.png"
-                          onChange={(e) =>
-                            handleParticipantChange(index, 'idFile', e.target.files && e.target.files[0] ? e.target.files[0] : null)
-                          }
+                          type="text"
+                          value={participant.name}
+                          onChange={(e) => handleParticipantChange(index, 'name', e.target.value)}
+                          className="retro-input"
+                          placeholder={`Participant ${number} Name`}
                         />
-                        <label htmlFor={`participantId_${index}`} className="file-upload-label">
-                          <div className="file-upload-icon"></div>
-                          <div className="file-upload-text">
-                            <span className="highlight">Click to upload</span>
-                            <br />
-                            PNG, JPG, JPEG
-                          </div>
-                        </label>
+                        {errors[`participant_${index}_name`] && (
+                          <div className="error-message">{errors[`participant_${index}_name`]}</div>
+                        )}
                       </div>
-                      {participant.idFile && <div className="file-name">{participant.idFile.name}</div>}
-                    </div>
-                    {errors[`participant_${index}_idFile`] && (
-                      <div className="error-message">{errors[`participant_${index}_idFile`]}</div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
 
-            <div className="form-section">
-              <h2 className="form-section-title">&gt;&gt;&gt; Payment</h2>
+                      <div className="form-group">
+                        <label className={`form-label ${requiredClass}`}>Year</label>
+                        <div className="mcq-group">
+                          {YEAR_OPTIONS.map((yearOption) => (
+                            <label className="mcq-option" key={`${number}_${yearOption}`}>
+                              <input
+                                type="radio"
+                                name={`participantYear_${index}`}
+                                value={yearOption}
+                                checked={participant.year === yearOption}
+                                onChange={(e) => handleParticipantChange(index, 'year', e.target.value)}
+                              />
+                              <span className="mcq-option-label">{yearOption}</span>
+                            </label>
+                          ))}
+                        </div>
+                        {errors[`participant_${index}_year`] && (
+                          <div className="error-message">{errors[`participant_${index}_year`]}</div>
+                        )}
+                      </div>
 
-              <div className="form-group">
-                <label className="form-label required">Mode of Payment</label>
-                <div className="mcq-group">
-                  <label className="mcq-option">
-                    <input
-                      type="radio"
-                      name="paymentMode"
-                      value="cash"
-                      checked={formData.paymentMode === 'cash'}
-                      onChange={handleFieldChange}
-                    />
-                    <span className="mcq-option-label">Cash</span>
-                  </label>
-
-                  <label className="mcq-option">
-                    <input
-                      type="radio"
-                      name="paymentMode"
-                      value="online"
-                      checked={formData.paymentMode === 'online'}
-                      onChange={handleFieldChange}
-                    />
-                    <span className="mcq-option-label">Online</span>
-                  </label>
-                </div>
-                {errors.paymentMode && <div className="error-message">{errors.paymentMode}</div>}
-              </div>
-
-              <div className="form-group">
-                <label className="form-label required">Payment Date</label>
-                <input
-                  type="date"
-                  name="paymentDate"
-                  value={formData.paymentDate}
-                  onChange={handleFieldChange}
-                  className="retro-input"
-                  max={new Date().toISOString().split('T')[0]}
-                />
-                {errors.paymentDate && <div className="error-message">{errors.paymentDate}</div>}
-              </div>
-
-              {formData.paymentMode === 'online' && (
-                <>
-                  <div className="form-group">
-                    <label className="form-label required">Transaction ID</label>
-                    <input
-                      type="text"
-                      name="transactionId"
-                      value={formData.transactionId}
-                      onChange={handleFieldChange}
-                      className="retro-input"
-                      placeholder="Transaction ID"
-                    />
-                    {errors.transactionId && <div className="error-message">{errors.transactionId}</div>}
-                  </div>
-
-                  <div className="form-group">
-                    <label className="form-label required">Upload Payment Screenshot</label>
-                    <div className="file-upload-wrapper">
-                      <div className="file-upload">
+                      <div className="form-group">
+                        <label className={`form-label ${requiredClass}`}>Contact Number</label>
                         <input
-                          type="file"
-                          name="paymentScreenshot"
-                          id="paymentScreenshot"
-                          className="file-upload-input"
-                          accept="image/jpeg,image/jpg,image/png,.jpg,.jpeg,.png"
+                          type="text"
+                          value={participant.contact}
+                          onChange={(e) => handleParticipantChange(index, 'contact', e.target.value)}
+                          className="retro-input"
+                          placeholder={`Participant ${number} Contact Number`}
+                        />
+                        {errors[`participant_${index}_contact`] && (
+                          <div className="error-message">{errors[`participant_${index}_contact`]}</div>
+                        )}
+                      </div>
+
+                      <div className="form-group">
+                        <label className={`form-label ${requiredClass}`}>Email ID</label>
+                        <input
+                          type="text"
+                          value={participant.email}
+                          onChange={(e) => handleParticipantChange(index, 'email', e.target.value)}
+                          className="retro-input"
+                          placeholder={`Participant ${number} Email ID`}
+                        />
+                        {errors[`participant_${index}_email`] && (
+                          <div className="error-message">{errors[`participant_${index}_email`]}</div>
+                        )}
+                      </div>
+
+                      <div className="form-group">
+                        <label className={`form-label ${requiredClass}`}>College Name</label>
+                        <div className="mcq-group">
+                          {COLLEGE_OPTIONS.map((collegeOption) => (
+                            <label className="mcq-option" key={`${number}_${collegeOption}`}>
+                              <input
+                                type="radio"
+                                name={`participantCollege_${index}`}
+                                value={collegeOption}
+                                checked={participant.college === collegeOption}
+                                onChange={(e) => handleParticipantChange(index, 'college', e.target.value)}
+                              />
+                              <span className="mcq-option-label">{collegeOption}</span>
+                            </label>
+                          ))}
+                        </div>
+                        {errors[`participant_${index}_college`] && (
+                          <div className="error-message">{errors[`participant_${index}_college`]}</div>
+                        )}
+                      </div>
+
+                      {participant.college === 'Others' && (
+                        <div className="form-group">
+                          <label className={`form-label ${requiredClass}`}>Specify College Name</label>
+                          <input
+                            type="text"
+                            value={participant.collegeOther}
+                            onChange={(e) => handleParticipantChange(index, 'collegeOther', e.target.value)}
+                            className="retro-input"
+                            placeholder={`Participant ${number} College Name`}
+                          />
+                          {errors[`participant_${index}_collegeOther`] && (
+                            <div className="error-message">{errors[`participant_${index}_collegeOther`]}</div>
+                          )}
+                        </div>
+                      )}
+
+                      <div className="form-group">
+                        <label className={`form-label ${requiredClass}`}>
+                          Participant ID (College ID / Library card)
+                        </label>
+                        <div className="file-upload-wrapper">
+                          <div className="file-upload">
+                            <input
+                              type="file"
+                              id={`participantId_${index}`}
+                              className="file-upload-input"
+                              accept="image/jpeg,image/jpg,image/png,.jpg,.jpeg,.png"
+                              onChange={(e) =>
+                                handleParticipantChange(index, 'idFile', e.target.files && e.target.files[0] ? e.target.files[0] : null)
+                              }
+                            />
+                            <label htmlFor={`participantId_${index}`} className="file-upload-label">
+                              <div className="file-upload-icon">📁</div>
+                              <div className="file-upload-text">
+                                <span className="highlight">Click to upload</span>
+                                <br />
+                                PNG, JPG, JPEG
+                              </div>
+                            </label>
+                          </div>
+                          {participant.idFile && <div className="file-name">✓ {participant.idFile.name}</div>}
+                        </div>
+                        {errors[`participant_${index}_idFile`] && (
+                          <div className="error-message">{errors[`participant_${index}_idFile`]}</div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </Step>
+
+              <Step label="Payment">
+                <div className="form-section">
+                  <h2 className="form-section-title">&gt;&gt;&gt; Payment</h2>
+
+                  <div style={{
+                    backgroundColor: 'rgba(255, 192, 16, 0.1)',
+                    border: '2px solid #ffc010',
+                    padding: '20px',
+                    borderRadius: '5px',
+                    marginBottom: '25px'
+                  }}>
+                    <h4 style={{ color: '#ffc010', marginTop: 0, marginBottom: '15px', fontSize: '14px' }}>
+                      💰 Registration Fee
+                    </h4>
+                    <p style={{ color: '#fff', lineHeight: '1.8', margin: 0, fontSize: '16px' }}>
+                      <strong style={{ color: '#ffc010' }}>In-house (BPPIMT):</strong> ₹350 per team
+                      <br />
+                      <strong style={{ color: '#ffc010' }}>Outside College:</strong> ₹400 per team
+                    </p>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label required">Mode of Payment</label>
+                    <div className="mcq-group">
+                      <label className="mcq-option">
+                        <input
+                          type="radio"
+                          name="paymentMode"
+                          value="cash"
+                          checked={formData.paymentMode === 'cash'}
                           onChange={handleFieldChange}
                         />
-                        <label htmlFor="paymentScreenshot" className="file-upload-label">
-                          <div className="file-upload-icon"></div>
-                          <div className="file-upload-text">
-                            <span className="highlight">Click to upload</span>
-                            <br />
-                            PNG, JPG, JPEG
-                          </div>
-                        </label>
-                      </div>
-                      {formData.paymentScreenshot && <div className="file-name">{formData.paymentScreenshot.name}</div>}
-                    </div>
-                    {errors.paymentScreenshot && <div className="error-message">{errors.paymentScreenshot}</div>}
-                  </div>
-                </>
-              )}
+                        <span className="mcq-option-label">Cash</span>
+                      </label>
 
-              {formData.paymentMode === 'cash' && (
-                <div className="form-group">
-                  <label className="form-label required">Upload Cash Receipt</label>
-                  <div className="file-upload-wrapper">
-                    <div className="file-upload">
-                      <input
-                        type="file"
-                        name="cashReceipt"
-                        id="cashReceipt"
-                        className="file-upload-input"
-                        accept="image/jpeg,image/jpg,image/png,.jpg,.jpeg,.png"
-                        onChange={handleFieldChange}
-                      />
-                      <label htmlFor="cashReceipt" className="file-upload-label">
-                        <div className="file-upload-icon"></div>
-                        <div className="file-upload-text">
-                          <span className="highlight">Click to upload</span>
-                          <br />
-                          PNG, JPG, JPEG
-                        </div>
+                      <label className="mcq-option">
+                        <input
+                          type="radio"
+                          name="paymentMode"
+                          value="online"
+                          checked={formData.paymentMode === 'online'}
+                          onChange={handleFieldChange}
+                        />
+                        <span className="mcq-option-label">Online</span>
                       </label>
                     </div>
-                    {formData.cashReceipt && <div className="file-name">{formData.cashReceipt.name}</div>}
+                    {errors.paymentMode && <div className="error-message">{errors.paymentMode}</div>}
                   </div>
-                  {errors.cashReceipt && <div className="error-message">{errors.cashReceipt}</div>}
+
+                  {formData.paymentMode === 'online' && (
+                    <>
+                      {/* QR Code and UPI ID Section */}
+                      <div className="payment-qr-section">
+                        <div className="payment-qr-title">SCAN QR CODE TO PAY</div>
+                        <div className="payment-qr-container">
+                          <div className="qr-code-wrapper">
+                            <img 
+                              src={qrCodeImage} 
+                              alt="Payment QR Code" 
+                              className="qr-code-image"
+                            />
+                          </div>
+                          <div className="upi-id-container">
+                            <div className="upi-id-label">UPI ID</div>
+                            <div className="upi-id-value">bppoddar@iob</div>
+                          </div>
+                          <div className="payment-instruction-note">
+                            Scan the QR code or use the UPI ID to make payment
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <label className="form-label required">Payment Date</label>
+                        <input
+                          type="date"
+                          name="paymentDate"
+                          value={formData.paymentDate}
+                          onChange={handleFieldChange}
+                          className="retro-input"
+                          max={new Date().toISOString().split('T')[0]}
+                        />
+                        {errors.paymentDate && <div className="error-message">{errors.paymentDate}</div>}
+                      </div>
+
+                      <div className="form-group">
+                        <label className="form-label required">Transaction ID</label>
+                        <input
+                          type="text"
+                          name="transactionId"
+                          value={formData.transactionId}
+                          onChange={handleFieldChange}
+                          className="retro-input"
+                          placeholder="Transaction ID"
+                        />
+                        {errors.transactionId && <div className="error-message">{errors.transactionId}</div>}
+                      </div>
+
+                      <div className="form-group">
+                        <label className="form-label required">Upload Payment Screenshot</label>
+                        <div className="file-upload-wrapper">
+                          <div className="file-upload">
+                            <input
+                              type="file"
+                              name="paymentScreenshot"
+                              id="paymentScreenshot"
+                              className="file-upload-input"
+                              accept="image/jpeg,image/jpg,image/png,.jpg,.jpeg,.png"
+                              onChange={handleFieldChange}
+                            />
+                            <label htmlFor="paymentScreenshot" className="file-upload-label">
+                              <div className="file-upload-icon">💳</div>
+                              <div className="file-upload-text">
+                                <span className="highlight">Click to upload</span>
+                                <br />
+                                PNG, JPG, JPEG
+                              </div>
+                            </label>
+                          </div>
+                          {formData.paymentScreenshot && <div className="file-name">✓ {formData.paymentScreenshot.name}</div>}
+                        </div>
+                        {errors.paymentScreenshot && <div className="error-message">{errors.paymentScreenshot}</div>}
+                      </div>
+                    </>
+                  )}
+
+                  {formData.paymentMode === 'cash' && (
+                    <div className="form-group">
+                      <div style={{
+                        backgroundColor: 'rgba(255, 192, 16, 0.1)',
+                        border: '2px solid #ffc010',
+                        padding: '20px',
+                        borderRadius: '5px',
+                        marginTop: '20px'
+                      }}>
+                        <h4 style={{ color: '#ffc010', marginTop: 0, marginBottom: '15px' }}>
+                          📌 Important: Cash Payment Instructions
+                        </h4>
+                        <p style={{ color: '#fff', lineHeight: '1.8', margin: 0 }}>
+                          You must pay the registration fee in cash within <strong style={{ color: '#ffc010' }}>7 days of registration</strong> at the <strong style={{ color: '#ffc010' }}>Alumni Room</strong> of the college. 
+                          <br /><br />
+                          Please collect the paper receipt during payment and <strong style={{ color: '#ffc010' }}>keep it safe for event day verification</strong>.
+                          <br /><br />
+                          <span style={{ color: '#ff6b6b' }}>⚠️ No receipt upload is required during registration.</span>
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </Step>
 
-            <div className="form-section">
-              <h2 className="form-section-title">&gt;&gt;&gt; Rules & Regulations</h2>
-              
-              <div className="form-group">
-                <label className="checkbox-group">
-                  <input
-                    type="checkbox"
-                    name="agreeToRules"
-                    checked={formData.agreeToRules}
-                    onChange={handleFieldChange}
-                  />
-                  <span className="checkbox-custom"></span>
-                  <span className="checkbox-label">
-                    I agree to follow all event rules, regulations, and organizers' decisions. I understand the registration fee is non-refundable.
-                  </span>
-                </label>
-                {errors.agreeToRules && <div className="error-message">{errors.agreeToRules}</div>}
+              <Step label="Rules & Agreement">
+                <div className="form-section">
+                  <h2 className="form-section-title">&gt;&gt;&gt; Event Rules</h2>
+                  
+                  <div className="rules-box" style={{
+                    backgroundColor: 'rgba(255, 192, 16, 0.1)',
+                    border: '2px solid #ffc010',
+                    padding: '20px',
+                    marginBottom: '20px',
+                    borderRadius: '5px'
+                  }}>
+                    <h3 style={{ color: '#ffc010', marginTop: 0 }}>Ro-Sumo Rules:</h3>
+                    <ul style={{ color: '#fff', lineHeight: '1.8' }}>
+                      <li>Teams must consist of 2-5 members</li>
+                      <li>Robots must comply with size and weight restrictions</li>
+                      <li>No remote-controlled robots allowed</li>
+                      <li>Autonomous robots only</li>
+                      <li>Follow all safety guidelines during the competition</li>
+                      <li>Organizers' decisions are final</li>
+                    </ul>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="checkbox-group">
+                      <input
+                        type="checkbox"
+                        name="agreeToRules"
+                        checked={formData.agreeToRules}
+                        onChange={handleFieldChange}
+                      />
+                      <span className="checkbox-custom"></span>
+                      <span className="checkbox-label">
+                        I agree to follow all event rules, regulations, and organizers' decisions. I understand the registration fee is non-refundable.
+                      </span>
+                    </label>
+                    {errors.agreeToRules && <div className="error-message">{errors.agreeToRules}</div>}
+                  </div>
+                </div>
+
+                <div className="form-section">
+                  <h2 className="form-section-title">&gt;&gt;&gt; WhatsApp Group</h2>
+
+                  <div className="form-group">
+                    <label className="form-label">Link</label>
+                    <p style={{ margin: 0 }}>
+                      <a
+                        href="https://chat.whatsapp.com/KOk8wb6I2Ww8KJwZBTU1sF"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: '#ffc010' }}
+                      >
+                        https://chat.whatsapp.com/KOk8wb6I2Ww8KJwZBTU1sF
+                      </a>
+                    </p>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="checkbox-group">
+                      <input
+                        type="checkbox"
+                        name="whatsappConfirmed"
+                        checked={formData.whatsappConfirmed}
+                        onChange={handleFieldChange}
+                      />
+                      <span className="checkbox-custom"></span>
+                      <span className="checkbox-label">
+                        Yes, I have checked all the details carefully and have joined the WhatsApp group
+                      </span>
+                    </label>
+                    {errors.whatsappConfirmed && <div className="error-message">{errors.whatsappConfirmed}</div>}
+                  </div>
+                </div>
+              </Step>
+            </Stepper>
+
+            {submitSuccess && (
+              <div className="success-message" style={{ marginTop: '20px' }}>
+                ✓ Registration Successful! Redirecting to events page...
               </div>
-            </div>
+            )}
 
-            <div className="form-section">
-              <h2 className="form-section-title">&gt;&gt;&gt; WhatsApp Group</h2>
-
-              <div className="form-group">
-                <label className="form-label">Link</label>
-                <p style={{ margin: 0 }}>
-                  <a
-                    href="https://chat.whatsapp.com/KOk8wb6I2Ww8KJwZBTU1sF"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: '#ffc010' }}
-                  >
-                    https://chat.whatsapp.com/KOk8wb6I2Ww8KJwZBTU1sF
-                  </a>
-                </p>
-              </div>
-
-              <div className="form-group">
-                <label className="checkbox-group">
-                  <input
-                    type="checkbox"
-                    name="whatsappConfirmed"
-                    checked={formData.whatsappConfirmed}
-                    onChange={handleFieldChange}
-                  />
-                  <span className="checkbox-custom"></span>
-                  <span className="checkbox-label">
-                    Yes, I have checked all the details carefully and have joined the WhatsApp group
-                  </span>
-                </label>
-                {errors.whatsappConfirmed && <div className="error-message">{errors.whatsappConfirmed}</div>}
-              </div>
-            </div>
-
-            <div className="submit-button-wrapper">
-              <button type="submit" className="retro-button" disabled={isSubmitting}>
-                {isSubmitting ? 'Submitting...' : 'Submit Registration'}
-              </button>
+            <div className="submit-button-wrapper" style={{ marginTop: '20px' }}>
               <button
                 type="button"
                 className="retro-button secondary"
@@ -561,12 +663,6 @@ const RoSumoRegistration = () => {
                 Cancel
               </button>
             </div>
-
-            {submitSuccess && (
-              <div className="success-message" style={{ marginTop: '20px' }}>
-                ✓ Registration Successful! Redirecting to events page...
-              </div>
-            )}
           </form>
         </div>
       </div>
