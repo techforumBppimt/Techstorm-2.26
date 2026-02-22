@@ -16,13 +16,17 @@ router.post('/:eventName',
   uploadRegistrationFiles,
   handleMulterError,
   asyncHandler(async (req, res) => {
+    const startTime = Date.now();
+    console.log('⏱️ Registration started at:', new Date().toISOString());
+    
     try {
       const { eventName } = req.params;
       let registrationData = { ...req.body };
 
       console.log('📥 Received registration for:', eventName);
-      console.log('📝 Body data:', req.body);
-      console.log('📎 Files:', req.files && Array.isArray(req.files) ? req.files.map(f => f.fieldname).join(', ') : 'No files');
+      console.log('📝 Body data keys:', Object.keys(req.body).join(', '));
+      console.log('📎 Files:', req.files && Array.isArray(req.files) ? req.files.map(f => `${f.fieldname}(${(f.size/1024).toFixed(1)}KB)`).join(', ') : 'No files');
+      console.log('📊 Total files:', req.files?.length || 0);
 
     // Validate event name
     if (!eventName || eventName.trim().length === 0) {
@@ -62,17 +66,20 @@ router.post('/:eventName',
     // Handle file uploads based on type
     // Note: upload.any() provides req.files as an array, not an object
     if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+      const uploadStartTime = Date.now();
       console.log('📁 Processing uploaded files...');
       console.log(`📎 Total files: ${req.files.length}`);
       
       try {
-        const uploadPromises = req.files.map(async (file) => {
-          const fieldName = file.fieldname; // Get field name from file object
+        // Process files sequentially to avoid timeout issues
+        for (const file of req.files) {
+          const fileStartTime = Date.now();
+          const fieldName = file.fieldname;
           const fileExtension = file.originalname.split('.').pop().toLowerCase();
           const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(fileExtension);
           const isPDF = fileExtension === 'pdf';
           
-          console.log(`📄 Processing file: ${fieldName} (${file.originalname})`);
+          console.log(`📄 Processing file: ${fieldName} (${file.originalname}) - ${(file.size/1024).toFixed(1)}KB`);
           
           // Check if this is a participant ID file (format: participants[0].idFile)
           const participantMatch = fieldName.match(/participants\[(\d+)\]\.idFile/);
@@ -96,7 +103,8 @@ router.post('/:eventName',
               `techstorm/${subfolder}/${eventName}`,
               {
                 tags: [eventName, fieldName, 'registration', 'techstorm'],
-                context: `event=${eventName}|field=${fieldName}|type=image`
+                context: `event=${eventName}|field=${fieldName}|type=image`,
+                timeout: 30000 // 30 second timeout per file
               }
             );
             
@@ -120,15 +128,14 @@ router.post('/:eventName',
               registrationData.participants[participantIndex].idFileUrl = uploadResult.secure_url;
               registrationData.participants[participantIndex].idFileCloudinaryId = uploadResult.public_id;
               
-              console.log(`✅ Participant ${participantIndex} ID uploaded: ${uploadResult.secure_url}`);
+              console.log(`✅ Participant ${participantIndex} ID uploaded: ${uploadResult.secure_url} (${Date.now() - fileStartTime}ms)`);
             } else {
               // Store Cloudinary data in registration (top-level fields)
-              registrationData[fieldName] = file.originalname;
               registrationData[fieldName] = file.originalname;
               registrationData[`${fieldName}Url`] = uploadResult.secure_url;
               registrationData[`${fieldName}CloudinaryId`] = uploadResult.public_id;
               
-              console.log(`✅ Image uploaded to Cloudinary: ${uploadResult.secure_url}`);
+              console.log(`✅ Image uploaded to Cloudinary: ${uploadResult.secure_url} (${Date.now() - fileStartTime}ms)`);
             }
             
           } else if (isPDF) {
@@ -156,7 +163,7 @@ router.post('/:eventName',
               registrationData.participants[participantIndex].idFileMimeType = file.mimetype;
               registrationData.participants[participantIndex].idFileSize = file.size;
               
-              console.log(`✅ Participant ${participantIndex} ID (PDF) stored: ${file.originalname}`);
+              console.log(`✅ Participant ${participantIndex} ID (PDF) stored: ${file.originalname} (${Date.now() - fileStartTime}ms)`);
             } else {
               // Top-level PDF fields
               registrationData[fieldName] = file.originalname;
@@ -164,7 +171,7 @@ router.post('/:eventName',
               registrationData[`${fieldName}MimeType`] = file.mimetype;
               registrationData[`${fieldName}Size`] = file.size;
               
-              console.log(`✅ PDF stored in MongoDB: ${file.originalname} (${(file.size / 1024).toFixed(2)}KB)`);
+              console.log(`✅ PDF stored in MongoDB: ${file.originalname} (${(file.size / 1024).toFixed(2)}KB) (${Date.now() - fileStartTime}ms)`);
             }
             
           } else {
@@ -174,15 +181,14 @@ router.post('/:eventName',
             registrationData[`${fieldName}Data`] = file.buffer.toString('base64');
             registrationData[`${fieldName}MimeType`] = file.mimetype;
           }
-          
-          return { fieldName, type: isImage ? 'cloudinary' : 'mongodb' };
-        });
+        }
         
-        await Promise.all(uploadPromises);
-        console.log('✅ All files processed successfully');
+        const uploadDuration = Date.now() - uploadStartTime;
+        console.log(`✅ All files processed successfully in ${uploadDuration}ms`);
         
       } catch (uploadError) {
         console.error('❌ File processing failed:', uploadError);
+        console.error('❌ Error stack:', uploadError.stack);
         return res.status(500).json({
           error: 'File Upload Failed',
           message: 'Failed to process uploaded files. Please try again.',
@@ -279,6 +285,9 @@ router.post('/:eventName',
     // Save to database
     await registration.save();
 
+    const totalDuration = Date.now() - startTime;
+    console.log(`⏱️ Registration completed in ${totalDuration}ms`);
+
     res.status(201).json({
       success: true,
       message: 'Registration successful',
@@ -296,6 +305,8 @@ router.post('/:eventName',
     } catch (error) {
       console.error('❌ Registration error:', error);
       console.error('❌ Error stack:', error.stack);
+      console.error('❌ Error name:', error.name);
+      console.error('❌ Error message:', error.message);
       
       // Return proper JSON error
       return res.status(500).json({
