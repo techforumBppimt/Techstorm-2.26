@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import AdminLoading from './AdminLoading';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -71,8 +72,8 @@ const AdminDashboard = () => {
   if (loading) {
     return (
       <div className="admin-dashboard" style={{ '--role-color': config.color }}>
-        <div className="dashboard-container">
-          <div className="loading">Loading dashboard...</div>
+        <div className="dashboard-container dashboard-container--loading">
+          <AdminLoading message="Loading dashboard..." roleColor={config.color} />
         </div>
       </div>
     );
@@ -112,27 +113,27 @@ const AdminDashboard = () => {
         </div>
 
         <div className="dashboard-grid">
-          <div className="dashboard-card">
+          <div className="dashboard-card dashboard-card--statistics">
             <p className="card-kicker">Overview</p>
             <h3>Statistics</h3>
-            <p>View key event and system metrics.</p>
-            <button className="card-button" onClick={() => handleNavigate('statistics')}>Open</button>
+            <p className="card-desc">View key event and system metrics.</p>
+            <button type="button" className="card-button" onClick={() => handleNavigate('statistics')}>Open</button>
           </div>
 
           {user.permissions?.includes('delete') && (
-            <div className="dashboard-card">
+            <div className="dashboard-card dashboard-card--users">
               <p className="card-kicker">Admin</p>
               <h3>Manage Users</h3>
-              <p>Access user administration controls.</p>
-              <button className="card-button" onClick={() => handleNavigate('users')}>Open</button>
+              <p className="card-desc">Access user administration controls.</p>
+              <button type="button" className="card-button" onClick={() => handleNavigate('users')}>Open</button>
             </div>
           )}
 
-          <div className="dashboard-card">
+          <div className="dashboard-card dashboard-card--registrations">
             <p className="card-kicker">Participants</p>
             <h3>Registrations</h3>
-            <p>View participant registration status.</p>
-            <button className="card-button" onClick={() => handleNavigate('registrations')}>Open</button>
+            <p className="card-desc">View participant registration status.</p>
+            <button type="button" className="card-button" onClick={() => handleNavigate('registrations')}>Open</button>
           </div>
         </div>
       </div>

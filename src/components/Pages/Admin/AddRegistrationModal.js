@@ -62,6 +62,13 @@ const AddRegistrationModal = ({ onClose, onAdd }) => {
 
         <form onSubmit={handleSubmit}>
           <div className="modal-body">
+            {loading ? (
+              <div className="modal-inline-loading" aria-busy="true">
+                <span className="loader-spinner" aria-hidden="true" />
+                <p>Loading events…</p>
+              </div>
+            ) : (
+              <>
             <div className="form-section">
               <h3>Participant Information</h3>
               <div className="form-grid">
@@ -132,7 +139,6 @@ const AddRegistrationModal = ({ onClose, onAdd }) => {
                     value={formData.eventName}
                     onChange={handleChange}
                     required
-                    disabled={loading}
                   >
                     <option value="">Select Event</option>
                     {events.map(event => (
@@ -200,11 +206,13 @@ const AddRegistrationModal = ({ onClose, onAdd }) => {
             <div className="info-box success">
               <p>✅ Registration number will be auto-generated upon submission</p>
             </div>
+              </>
+            )}
           </div>
 
           <div className="modal-footer">
             <button type="button" className="btn-secondary" onClick={onClose}>Cancel</button>
-            <button type="submit" className="btn-primary">Add Registration</button>
+            <button type="submit" className="btn-primary" disabled={loading}>Add Registration</button>
           </div>
         </form>
       </div>

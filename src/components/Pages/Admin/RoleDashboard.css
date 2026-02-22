@@ -28,6 +28,14 @@
 .dashboard-wrapper {
   max-width: 1400px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-wrapper--loading {
+  min-height: 70vh;
+  min-height: 70dvh;
+  justify-content: center;
 }
 
 /* Header */
@@ -46,11 +54,18 @@
   color: #374151;
   border-radius: 8px;
   padding: 8px 14px;
+  min-height: 40px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 8px;
   transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.back-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }
 
 .back-btn:hover {
@@ -119,6 +134,34 @@
   border-radius: 12px;
   padding: 18px;
   box-shadow: 0 4px 12px rgba(17, 24, 39, 0.04);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--stat-accent, #0f766e);
+  opacity: 0.85;
+}
+
+.stat-card--events { --stat-accent: #6366f1; }
+.stat-card--total { --stat-accent: #0f766e; }
+.stat-card--confirmed { --stat-accent: #059669; }
+.stat-card--pending { --stat-accent: #d97706; }
+
+.stat-card:hover {
+  border-color: #e5e7eb;
+  box-shadow: 0 8px 20px rgba(17, 24, 39, 0.06);
+}
+
+.stats-grid--overview {
+  gap: 16px;
 }
 
 .stat-label {
@@ -134,6 +177,7 @@
   font-size: 32px;
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 /* Controls Bar */
@@ -159,6 +203,18 @@
   outline: none;
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-input:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.event-filter:focus-visible,
+.add-btn:focus-visible,
+.export-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }
 
 .event-filter,
@@ -198,7 +254,8 @@
 }
 
 /* Registrations Section */
-.registrations-section {
+.registrations-section,
+.section-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 14px;
@@ -207,10 +264,17 @@
 }
 
 .section-title {
-  margin: 0 0 20px;
+  margin: 0 0 6px;
   color: #111827;
   font-size: 22px;
+  font-weight: 700;
   letter-spacing: -0.01em;
+}
+
+.section-subtitle {
+  margin: 0 0 20px;
+  color: #6b7280;
+  font-size: 14px;
 }
 
 /* Table View (Core) */
@@ -231,21 +295,52 @@
 }
 
 .data-table th {
-  padding: 12px;
+  padding: 14px 12px;
   text-align: left;
   font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: #374151;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 2px solid #e5e7eb;
 }
 
 .data-table td {
   padding: 12px;
   border-bottom: 1px solid #f3f4f6;
   color: #111827;
+  vertical-align: middle;
+}
+
+.data-table tbody tr {
+  transition: background 0.15s;
 }
 
 .data-table tbody tr:hover {
   background: #f9fafb;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-empty-cell {
+  text-align: center;
+  padding: 2.5rem 1rem !important;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.empty-state-inline {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  border-radius: 8px;
+  color: #6b7280;
+}
+
+.cell-muted {
+  color: #9ca3af;
 }
 
 .reg-number {
@@ -255,9 +350,33 @@
   color: #0f766e;
 }
 
+/* Prevent awkward mid-token wrapping for reg number and contact */
+.cell-nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reg-number.cell-nowrap {
+  min-width: 120px;
+}
+
+.contact-cell.cell-nowrap {
+  min-width: 100px;
+}
+
+.name-cell {
+  min-width: 100px;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .email-cell,
 .college-cell {
-  max-width: 200px;
+  min-width: 120px;
+  max-width: 220px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -267,10 +386,26 @@
   display: inline-block;
   background: #dbeafe;
   color: #1e40af;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 600;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-cell {
+  min-width: 120px;
+  max-width: 200px;
+}
+
+.event-cell .event-badge {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .status-select {
@@ -322,13 +457,24 @@
   background: transparent;
   cursor: pointer;
   font-size: 16px;
-  padding: 4px;
-  border-radius: 4px;
+  padding: 8px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 8px;
   transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .action-btn:hover {
   background: #f3f4f6;
+}
+
+.action-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }
 
 /* Cards Grid (Coordinator) */
@@ -533,48 +679,308 @@
   text-align: left;
 }
 
+/* Error state (used by RegistrationsPage, StatisticsPage) */
+.admin-error-state {
+  background: #ffffff;
+  border: 1px solid #fecaca;
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  max-width: 420px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(17, 24, 39, 0.04);
+}
+
+.admin-error-message {
+  margin: 0 0 1rem;
+  font-size: 15px;
+  color: #b91c1c;
+  font-weight: 500;
+}
+
+.admin-error-retry {
+  padding: 12px 24px;
+  min-height: 44px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.admin-error-retry:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.core-dashboard .admin-error-retry:hover {
+  border-color: #0f766e;
+  color: #0f766e;
+}
+
+.coordinator-dashboard .admin-error-retry:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.volunteer-dashboard .admin-error-retry:hover {
+  border-color: #9333ea;
+  color: #9333ea;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .role-dashboard {
     padding: 16px 12px;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .dashboard-wrapper {
+    max-width: 100%;
   }
 
   .dash-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .dash-title {
+    font-size: clamp(22px, 5vw, 28px);
+  }
+
+  .logout-btn {
+    padding: 12px 16px;
+    min-height: 44px;
+  }
+
+  .back-btn {
+    padding: 10px 14px;
+    min-height: 40px;
   }
 
   .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    padding: 14px;
+  }
+
+  .stat-value {
+    font-size: 26px;
+  }
+
+  .stat-label {
+    font-size: 12px;
   }
 
   .controls-bar {
     flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
   }
 
   .search-input {
     width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    min-height: 44px;
+  }
+
+  .event-filter,
+  .add-btn,
+  .export-btn {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .view-only-badge {
+    width: 100%;
+    text-align: center;
+  }
+
+  .registrations-section {
+    padding: 18px 16px;
+    border-radius: 12px;
+  }
+
+  .section-title {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .section-subtitle {
+    font-size: 13px;
+    margin-bottom: 16px;
   }
 
   .table-container {
-    font-size: 11px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -16px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    scrollbar-width: thin;
+  }
+
+  .data-table {
+    font-size: 12px;
+    min-width: 700px;
   }
 
   .data-table th,
   .data-table td {
-    padding: 8px;
+    padding: 10px 8px;
+    min-width: 0;
+  }
+
+  .reg-number {
+    font-size: 11px;
+  }
+
+  .email-cell,
+  .college-cell {
+    max-width: 140px;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .action-btn {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .status-select {
+    padding: 8px 10px;
+    font-size: 11px;
+    min-height: 36px;
   }
 
   .cards-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .registration-card {
+    padding: 16px;
+  }
+
+  .participant-name {
+    font-size: 16px;
+  }
+
+  .card-actions {
+    flex-direction: column;
+  }
+
+  .view-details-btn {
+    min-height: 44px;
   }
 
   .participant-main {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
   }
 
   .participant-details-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .participant-item {
+    padding: 16px;
+  }
+
+  .detail-item .detail-value {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .role-dashboard {
+    padding: 12px 10px;
+    padding-left: max(10px, env(safe-area-inset-left));
+    padding-right: max(10px, env(safe-area-inset-right));
+  }
+
+  .dash-header {
+    margin-bottom: 16px;
+  }
+
+  .dash-title {
+    font-size: 20px;
+  }
+
+  .dash-subtitle {
+    font-size: 13px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 14px 16px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+
+  .registrations-section {
+    padding: 14px 12px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+
+  .table-container {
+    margin: 0 -12px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 8px 6px;
+    font-size: 11px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .detail-value {
+    text-align: left;
+  }
+
+  .admin-error-state {
+    padding: 1.5rem 1rem;
+    margin: 0 4px;
+  }
+
+  .admin-error-retry {
+    width: 100%;
   }
 }

@@ -1,6 +1,27 @@
 import React, { useState } from 'react';
 import './Modal.css';
 
+/** Get email from registration object, checking all known and email-like keys. Display only. */
+function getEmailFromRegistration(reg) {
+  if (!reg || typeof reg !== 'object') return '';
+  const tryKeys = (obj) => {
+    for (const k of ['emailAddress', 'email', 'teamLeaderEmail', 'teamMember2Email']) {
+      const v = obj[k];
+      if (v != null && String(v).trim() !== '') return String(v).trim();
+    }
+    for (const key of Object.keys(obj)) {
+      if (key.toLowerCase().includes('email') && typeof obj[key] === 'string' && obj[key].trim() !== '')
+        return obj[key].trim();
+    }
+    return '';
+  };
+  const main = tryKeys(reg);
+  if (main) return main;
+  const first = reg.participants && reg.participants[0];
+  if (first && typeof first === 'object') return tryKeys(first);
+  return '';
+}
+
 const ViewRegistrationModal = ({ registration, onClose }) => {
   const [activeTab, setActiveTab] = useState('basic');
 
@@ -91,7 +112,7 @@ const ViewRegistrationModal = ({ registration, onClose }) => {
                 <div className="detail-grid">
                   <DetailField label="Registration Number" value={registration.registrationNumber} highlight />
                   <DetailField label="Full Name" value={registration.fullName} />
-                  <DetailField label="Email" value={registration.emailAddress || registration.email} />
+                  <DetailField label="Email" value={getEmailFromRegistration(registration)} />
                   <DetailField label="Contact Number" value={registration.contactNumber || registration.phone} />
                   <DetailField label="College Name" value={registration.collegeName || registration.college} />
                   <DetailField label="Year of Study" value={registration.year || registration.yearOfStudy} />

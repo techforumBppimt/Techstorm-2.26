@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getDashboardStats } from '../../../utils/adminDashboardAPI';
+import AdminLoading from './AdminLoading';
 import './RoleDashboard.css';
 
 const StatisticsPage = () => {
@@ -44,8 +45,8 @@ const StatisticsPage = () => {
   if (loading) {
     return (
       <div className={`role-dashboard ${role}-dashboard`}>
-        <div className="dashboard-wrapper">
-          <div className="loading">Loading statistics...</div>
+        <div className="dashboard-wrapper dashboard-wrapper--loading">
+          <AdminLoading message="Loading statistics..." roleColor={config.color} />
         </div>
       </div>
     );
@@ -55,8 +56,10 @@ const StatisticsPage = () => {
     return (
       <div className={`role-dashboard ${role}-dashboard`}>
         <div className="dashboard-wrapper">
-          <div className="error-message">Error: {error}</div>
-          <button onClick={fetchStats}>Retry</button>
+          <div className="admin-error-state">
+            <p className="admin-error-message">Error: {error}</p>
+            <button type="button" className="admin-error-retry" onClick={fetchStats}>Retry</button>
+          </div>
         </div>
       </div>
     );
@@ -74,29 +77,30 @@ const StatisticsPage = () => {
           </div>
         </header>
 
-        <div className="stats-grid">
-          <div className="stat-card">
+        <div className="stats-grid stats-grid--overview">
+          <div className="stat-card stat-card--events">
             <p className="stat-label">Total Events</p>
             <p className="stat-value">{stats?.totalEvents || 0}</p>
           </div>
-          <div className="stat-card">
+          <div className="stat-card stat-card--total">
             <p className="stat-label">Total Registrations</p>
             <p className="stat-value">{stats?.totals?.totalRegistrations || 0}</p>
           </div>
-          <div className="stat-card">
+          <div className="stat-card stat-card--confirmed">
             <p className="stat-label">Confirmed</p>
             <p className="stat-value">{stats?.totals?.confirmedRegistrations || 0}</p>
           </div>
-          <div className="stat-card">
+          <div className="stat-card stat-card--pending">
             <p className="stat-label">Pending Payments</p>
             <p className="stat-value">{stats?.totals?.pendingPayments || 0}</p>
           </div>
         </div>
 
-        <div className="registrations-section">
+        <div className="registrations-section section-card">
           <h2 className="section-title">Event-wise Statistics</h2>
+          <p className="section-subtitle">Breakdown by event</p>
           <div className="table-container">
-            <table className="data-table">
+            <table className="data-table data-table--stats">
               <thead>
                 <tr>
                   <th>Event Name</th>
@@ -114,12 +118,14 @@ const StatisticsPage = () => {
                       <td>{event.totalRegistrations}</td>
                       <td>{event.confirmedRegistrations}</td>
                       <td>{event.pendingRegistrations}</td>
-                      <td>-</td>
+                      <td className="cell-muted">—</td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5" style={{ textAlign: 'center' }}>No event data available</td>
+                    <td colSpan="5" className="table-empty-cell">
+                      <span className="empty-state-inline">No event data available</span>
+                    </td>
                   </tr>
                 )}
               </tbody>

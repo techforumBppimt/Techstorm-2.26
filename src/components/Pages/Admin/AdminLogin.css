@@ -149,12 +149,69 @@
   color: #6b7280;
 }
 
+@media (max-width: 768px) {
+  .admin-login {
+    padding: 24px 16px;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .login-container {
+    width: 100%;
+  }
+
+  .back-button {
+    min-height: 44px;
+    padding: 8px 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .submit-button {
+    min-height: 48px;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
 @media (max-width: 480px) {
+  .admin-login {
+    padding: 20px 12px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    align-items: flex-start;
+    padding-top: 28px;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .login-container {
+    max-width: 100%;
+  }
+
   .login-card {
-    padding: 22px;
+    padding: 20px 18px;
   }
 
   .login-title {
-    font-size: 26px;
+    font-size: 24px;
+  }
+
+  .login-subtitle {
+    font-size: 13px;
+  }
+
+  .form-input {
+    padding: 14px;
+    min-height: 48px;
+    font-size: 16px; /* avoids zoom on iOS */
+  }
+
+  .submit-button {
+    padding: 14px;
+    min-height: 48px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .security-notice p {
+    font-size: 11px;
   }
 }

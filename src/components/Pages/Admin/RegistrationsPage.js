@@ -1,10 +1,53 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getRegistrations, updateRegistration, updateRegistrationStatus, deleteRegistration, getEvents, createRegistration } from '../../../utils/adminDashboardAPI';
+import AdminLoading from './AdminLoading';
 import './RoleDashboard.css';
 import ViewRegistrationModal from './ViewRegistrationModal';
 import EditRegistrationModal from './EditRegistrationModal';
 import AddRegistrationModal from './AddRegistrationModal';
+
+/**
+ * Get display value from a registration object, checking multiple possible keys
+ * (API/documents may use different field names per event). Display only - no DB logic.
+ */
+function getDisplayValue(reg, ...keys) {
+  if (!reg || typeof reg !== 'object') return '';
+  for (const k of keys) {
+    const v = reg[k];
+    if (v != null && String(v).trim() !== '') return String(v).trim();
+  }
+  const first = reg.participants && reg.participants[0];
+  if (first && typeof first === 'object') {
+    for (const k of keys) {
+      const v = first[k];
+      if (v != null && String(v).trim() !== '') return String(v).trim();
+    }
+  }
+  return '';
+}
+
+/** Get email from registration, checking all known and email-like keys. Display only. */
+function getDisplayEmail(reg) {
+  const main = getDisplayValue(reg, 'emailAddress', 'email', 'teamLeaderEmail', 'teamMember2Email');
+  if (main) return main;
+  if (reg && typeof reg === 'object') {
+    for (const key of Object.keys(reg)) {
+      if (key.toLowerCase().includes('email') && typeof reg[key] === 'string' && reg[key].trim() !== '')
+        return reg[key].trim();
+    }
+    const first = reg.participants && reg.participants[0];
+    if (first && typeof first === 'object') {
+      const fromFirst = first.email || first.emailAddress || '';
+      if (String(fromFirst).trim()) return String(fromFirst).trim();
+      for (const key of Object.keys(first)) {
+        if (key.toLowerCase().includes('email') && typeof first[key] === 'string' && first[key].trim() !== '')
+          return first[key].trim();
+      }
+    }
+  }
+  return '';
+}
 
 const RegistrationsPage = () => {
   const history = useHistory();
@@ -181,8 +224,8 @@ const RegistrationsPage = () => {
   if (loading) {
     return (
       <div className={`role-dashboard ${role}-dashboard`}>
-        <div className="dashboard-wrapper">
-          <div className="loading">Loading registrations...</div>
+        <div className="dashboard-wrapper dashboard-wrapper--loading">
+          <AdminLoading message="Loading registrations..." roleColor={config.color} />
         </div>
       </div>
     );
@@ -192,8 +235,10 @@ const RegistrationsPage = () => {
     return (
       <div className={`role-dashboard ${role}-dashboard`}>
         <div className="dashboard-wrapper">
-          <div className="error-message">Error: {error}</div>
-          <button onClick={fetchRegistrations}>Retry</button>
+          <div className="admin-error-state">
+            <p className="admin-error-message">Error: {error}</p>
+            <button type="button" className="admin-error-retry" onClick={fetchRegistrations}>Retry</button>
+          </div>
         </div>
       </div>
     );
@@ -211,20 +256,20 @@ const RegistrationsPage = () => {
           </div>
         </header>
 
-        <div className="stats-grid">
-          <div className="stat-card">
+        <div className="stats-grid stats-grid--overview">
+          <div className="stat-card stat-card--total">
             <p className="stat-label">Total Registrations</p>
             <p className="stat-value">{stats.total}</p>
           </div>
-          <div className="stat-card">
+          <div className="stat-card stat-card--pending">
             <p className="stat-label">Pending Payments</p>
             <p className="stat-value">{stats.pendingPayments}</p>
           </div>
-          <div className="stat-card">
+          <div className="stat-card stat-card--confirmed">
             <p className="stat-label">Confirmed</p>
             <p className="stat-value">{stats.confirmed}</p>
           </div>
-          <div className="stat-card">
+          <div className="stat-card stat-card--events">
             <p className="stat-label">Events</p>
             <p className="stat-value">{role === 'core' ? events.length - 1 : 1}</p>
           </div>
@@ -256,10 +301,11 @@ const RegistrationsPage = () => {
           )}
         </div>
 
-        <div className="registrations-section">
+        <div className="registrations-section section-card">
           <h2 className="section-title">
             {role === 'core' ? 'All Registrations' : `${user?.eventName || 'Event'} Registrations`} ({filteredRegistrations.length})
           </h2>
+          <p className="section-subtitle">Search and filter below</p>
           
           <div className="table-container">
             <table className="data-table">
@@ -279,20 +325,26 @@ const RegistrationsPage = () => {
               <tbody>
                 {filteredRegistrations.length > 0 ? (
                   filteredRegistrations.map(reg => {
-                    // Get the name - check multiple sources
-                    const displayName = reg.fullName || 
-                                       (reg.participants && reg.participants[0]?.name) || 
-                                       reg.teamName || 
-                                       'N/A';
-                    
+                    const displayName = getDisplayValue(reg, 'fullName', 'full_name', 'name') ||
+                                       (reg.participants && reg.participants[0]?.name) ||
+                                       reg.teamName ||
+                                       '—';
+                    const displayEmail = getDisplayEmail(reg) || '—';
+                    const displayContact = getDisplayValue(reg, 'contactNumber', 'phone', 'contact') || '—';
+                    const displayCollege = getDisplayValue(reg, 'collegeName', 'college', 'institution') || '—';
+                    const displayRegNumber = getDisplayValue(reg, 'registrationNumber') || '—';
                     return (
                     <tr key={reg._id}>
-                      <td className="reg-number">{reg.registrationNumber}</td>
-                      <td>{displayName}</td>
-                      <td className="email-cell">{reg.emailAddress || reg.email}</td>
-                      <td>{reg.contactNumber || reg.phone}</td>
-                      <td className="college-cell">{reg.collegeName || reg.college}</td>
-                      {role === 'core' && <td><span className="event-badge">{reg.eventName}</span></td>}
+                      <td className="reg-number cell-nowrap" title={displayRegNumber}>{displayRegNumber}</td>
+                      <td className="name-cell">{displayName}</td>
+                      <td className="email-cell" title={displayEmail}>{displayEmail}</td>
+                      <td className="contact-cell cell-nowrap" title={displayContact}>{displayContact}</td>
+                      <td className="college-cell" title={displayCollege}>{displayCollege}</td>
+                      {role === 'core' && (
+                        <td className="event-cell" title={reg.eventName || ''}>
+                          <span className="event-badge">{reg.eventName || '—'}</span>
+                        </td>
+                      )}
                       <td>
                         {config.canEdit ? (
                           <select
@@ -343,8 +395,8 @@ const RegistrationsPage = () => {
                   )})
                 ) : (
                   <tr>
-                    <td colSpan={role === 'core' ? 9 : 8} style={{ textAlign: 'center', padding: '2rem' }}>
-                      No registrations found
+                    <td colSpan={role === 'core' ? 9 : 8} className="table-empty-cell">
+                      <span className="empty-state-inline">No registrations found</span>
                     </td>
                   </tr>
                 )}
