@@ -384,6 +384,13 @@ p.about-text {
     position: relative;
 }
 
+/* Rules dialog inner: own stacking context so scrollable content is never covered by page/sibling elements */
+.event-rules-dialog-inner {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+}
+
 .entry-content {
     margin-top: 30px;
 }

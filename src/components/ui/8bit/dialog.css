@@ -38,17 +38,17 @@
   }
 }
 
-/* High z-index for dialog overlay and content */
+/* Top-layer z-index so dialog is always above header, sidebar, footer (portal renders to body) */
 [data-radix-dialog-overlay],
 .dialog-overlay,
 .dialog-backdrop {
-  z-index: 9999998 !important;
+  z-index: 2147483646 !important;
 }
 
 [data-radix-dialog-content],
 .dialog-content,
 .dialog-container {
-  z-index: 9999999 !important;
+  z-index: 2147483647 !important;
 }
 
 /* Pixelated corners */

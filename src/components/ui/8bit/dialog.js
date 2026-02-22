@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import './dialog.css';
+
+// Z-index above all layout (header, offcanvas, overlay). Use max safe value so dialog always stays on top.
+const DIALOG_BACKDROP_Z = 2147483646;
+const DIALOG_CONTENT_Z = 2147483647;
 
 export const Dialog = ({ children, open, onOpenChange }) => {
   const [isOpen, setIsOpen] = useState(open || false);
@@ -79,9 +84,9 @@ export const DialogContent = ({ children, isOpen, onClose }) => {
 
   if (!shouldRender) return null;
 
-  return (
+  const dialogMarkup = (
     <>
-      {/* Backdrop */}
+      {/* Backdrop - rendered in portal so it's above all page layout */}
       <div
         className="dialog-backdrop"
         onClick={onClose}
@@ -92,12 +97,11 @@ export const DialogContent = ({ children, isOpen, onClose }) => {
           right: 0,
           bottom: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.85)',
-          zIndex: 9999998,
+          zIndex: DIALOG_BACKDROP_Z,
           animation: isClosing ? 'fadeOut 0.3s ease-in-out' : 'fadeIn 0.3s ease-in-out',
         }}
       />
-      
-      {/* Dialog */}
+      {/* Dialog - rendered in portal so fixed header/sidebar/footer cannot overlap when scrolling */}
       <div
         className="dialog-container"
         style={{
@@ -105,7 +109,7 @@ export const DialogContent = ({ children, isOpen, onClose }) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          zIndex: 9999999,
+          zIndex: DIALOG_CONTENT_Z,
           width: '60%',
           maxWidth: '700px',
           animation: isClosing ? 'scaleOut 0.3s ease-in-out' : 'scaleIn 0.3s ease-in-out',
@@ -138,7 +142,7 @@ export const DialogContent = ({ children, isOpen, onClose }) => {
               width: '35px',
               height: '35px',
               cursor: 'pointer',
-              zIndex: 10000000,
+              zIndex: 10,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -157,12 +161,13 @@ export const DialogContent = ({ children, isOpen, onClose }) => {
           >
             ×
           </button>
-          
           {children}
         </div>
       </div>
     </>
   );
+
+  return ReactDOM.createPortal(dialogMarkup, document.body);
 };
 
 export const DialogHeader = ({ children }) => {

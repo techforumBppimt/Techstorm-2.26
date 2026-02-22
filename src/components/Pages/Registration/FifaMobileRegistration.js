@@ -567,12 +567,12 @@ const FifaMobileRegistration = () => {
                   <label className="form-label">Link</label>
                   <p style={{ margin: '10px 0' }}>
                     <a
-                      href="https://chat.whatsapp.com/"
+                      href="https://chat.whatsapp.com/CEmHyQs0gdL0iM6l0PAFY3"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ color: '#ffc010' }}
                     >
-                      https://chat.whatsapp.com/
+                      https://chat.whatsapp.com/CEmHyQs0gdL0iM6l0PAFY3
                     </a>
                   </p>
                 </div>

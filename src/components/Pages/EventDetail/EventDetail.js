@@ -1087,12 +1087,9 @@ const EventDetail = ({ eventData }) => {
                   open={isRulesDialogOpen}
                   onOpenChange={setIsRulesDialogOpen}
                 >
-                  <DialogContent
-                    style={{
-                      zIndex: 9999999,
-                    }}
-                  >
+                  <DialogContent>
                     <div
+                      className="event-rules-dialog-inner"
                       style={{
                         backgroundColor: "#1a0e22",
                         padding: "30px",
@@ -1103,6 +1100,8 @@ const EventDetail = ({ eventData }) => {
                         boxShadow: "0 0 30px rgba(255, 192, 16, 0.3)",
                         margin: "20px",
                         position: "relative",
+                        zIndex: 1,
+                        isolation: "isolate",
                       }}
                     >
                       <div
