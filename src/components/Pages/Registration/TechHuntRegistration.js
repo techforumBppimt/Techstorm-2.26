@@ -155,19 +155,19 @@ const TechHuntRegistration = () => {
   const validateStep3 = () => {
     const nextErrors = {};
 
-    if (!formData.whatsappConfirmed) {
+    if (formData.whatsappConfirmed !== true) {
       nextErrors.whatsappConfirmed = 'Please confirm after joining the WhatsApp group';
     }
 
-    if (!formData.declarationRulesRead) {
+    if (formData.declarationRulesRead !== true) {
       nextErrors.declarationRulesRead = 'Please accept this declaration';
     }
 
-    if (!formData.declarationFairPlay) {
+    if (formData.declarationFairPlay !== true) {
       nextErrors.declarationFairPlay = 'Please accept this declaration';
     }
 
-    if (!formData.declarationLogistics) {
+    if (formData.declarationLogistics !== true) {
       nextErrors.declarationLogistics = 'Please accept this declaration';
     }
 

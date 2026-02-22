@@ -43,7 +43,7 @@ const CodeBeeEvent = () => {
     paymentLink: "", // Add online payment link here
     registerButton: {
       text: "Register Now",
-      link: "https://unstop.com/your-codebee-link", // Replace with actual Unstop registration link
+      link: "https://unstop.com/o/4YMPlkW?utm_medium=Share&utm_source=codebtec36887&utm_campaign=Online_coding_challenge",
     },
     // galleryImages is not a prop for EventDetail, must use previousYearImages
     previousYearImages: galleryImages,

@@ -172,11 +172,11 @@ const RoSumoRegistration = () => {
   const validateStep3 = () => {
     const nextErrors = {};
 
-    if (!formData.agreeToRules) {
+    if (formData.agreeToRules !== true) {
       nextErrors.agreeToRules = 'You must agree to the event rules and regulations';
     }
 
-    if (!formData.whatsappConfirmed) {
+    if (formData.whatsappConfirmed !== true) {
       nextErrors.whatsappConfirmed = 'Please confirm after joining the WhatsApp group';
     }
 
@@ -185,10 +185,10 @@ const RoSumoRegistration = () => {
   };
 
   const handleStepValidation = (step) => {
-    if (step === 0) return validateStep1();
-    if (step === 1) return validateStep2();
-    if (step === 2) return validateStep3();
-    return false;
+    if (step === 1) return validateStep1();
+    if (step === 2) return validateStep2();
+    if (step === 3) return validateStep3();
+    return true;
   };
 
   const handleComplete = async () => {

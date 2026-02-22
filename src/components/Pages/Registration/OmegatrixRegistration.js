@@ -111,16 +111,16 @@ const OmegatrixRegistration = () => {
   const validateStep3 = () => {
     const nextErrors = {};
 
-    if (!formData.declarationEligibility) {
+    if (formData.declarationEligibility !== true) {
       nextErrors.declarationEligibility = 'Please accept declaration 1';
     }
-    if (!formData.declarationRounds) {
+    if (formData.declarationRounds !== true) {
       nextErrors.declarationRounds = 'Please accept declaration 2';
     }
-    if (!formData.declarationCarryItems) {
+    if (formData.declarationCarryItems !== true) {
       nextErrors.declarationCarryItems = 'Please accept declaration 3';
     }
-    if (!formData.declarationRules) {
+    if (formData.declarationRules !== true) {
       nextErrors.declarationRules = 'Please accept declaration 4';
     }
 

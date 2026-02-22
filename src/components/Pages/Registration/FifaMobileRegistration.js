@@ -102,8 +102,8 @@ const FifaMobileRegistration = () => {
 
   const validateStep3 = () => {
     const nextErrors = {};
-    if (!formData.agreeToRules) nextErrors.agreeToRules = 'You must agree to tournament rules';
-    if (!formData.whatsappConfirmed) {
+    if (formData.agreeToRules !== true) nextErrors.agreeToRules = 'You must agree to tournament rules';
+    if (formData.whatsappConfirmed !== true) {
       nextErrors.whatsappConfirmed = 'Please confirm after joining the WhatsApp group';
     }
     setErrors(nextErrors);

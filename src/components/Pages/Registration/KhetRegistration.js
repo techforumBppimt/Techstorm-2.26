@@ -103,10 +103,10 @@ const KhetRegistration = () => {
 
   const validateStep3 = () => {
     const nextErrors = {};
-    if (!formData.joinWhatsappConfirmed) {
+    if (formData.joinWhatsappConfirmed !== true) {
       nextErrors.joinWhatsappConfirmed = 'Please confirm you joined the official WhatsApp group';
     }
-    if (!formData.declarationConfirmed) {
+    if (formData.declarationConfirmed !== true) {
       nextErrors.declarationConfirmed = 'Please confirm the mandatory declaration';
     }
     setErrors(nextErrors);

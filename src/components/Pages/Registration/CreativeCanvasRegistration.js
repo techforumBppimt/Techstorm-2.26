@@ -175,12 +175,12 @@ const CreativeCanvasRegistration = () => {
   const validateStep3 = () => {
     const nextErrors = {};
 
-    if (!formData.whatsappConfirmed) {
+    if (formData.whatsappConfirmed !== true) {
       nextErrors.whatsappConfirmed =
         "Please confirm after joining the WhatsApp group";
     }
 
-    if (!formData.agreeToRules) {
+    if (formData.agreeToRules !== true) {
       nextErrors.agreeToRules = "You must agree to the rules and regulations";
     }
 
@@ -579,99 +579,103 @@ const CreativeCanvasRegistration = () => {
                 </div>
 
                 {formData.paymentMode === 'online' && (
-                  <div className="payment-qr-section">
-                    <div className="payment-qr-title">SCAN QR CODE TO PAY</div>
-                    <div className="payment-qr-container">
-                      <div className="qr-code-wrapper">
-                        <img 
-                          src={qrCodeImage} 
-                          alt="Payment QR Code" 
-                          className="qr-code-image"
-                        />
+                  <>
+                    <div className="payment-qr-section">
+                      <div className="payment-qr-title">SCAN QR CODE TO PAY</div>
+                      <div className="payment-qr-container">
+                        <div className="qr-code-wrapper">
+                          <img 
+                            src={qrCodeImage} 
+                            alt="Payment QR Code" 
+                            className="qr-code-image"
+                          />
+                        </div>
+                        <div className="upi-id-container">
+                          <div className="upi-id-label">UPI ID</div>
+                          <div className="upi-id-value">bppoddar@iob</div>
+                        </div>
+                        <div className="payment-instruction-note">
+                          Scan the QR code or use the UPI ID to make payment
+                        </div>
                       </div>
-                      <div className="upi-id-container">
-                        <div className="upi-id-label">UPI ID</div>
-                        <div className="upi-id-value">bppoddar@iob</div>
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label required">Transaction ID</label>
+                      <input
+                        type="text"
+                        name="transactionId"
+                        value={formData.transactionId}
+                        onChange={handleFieldChange}
+                        className="retro-input"
+                        placeholder="Transaction ID"
+                      />
+                      {errors.transactionId && (
+                        <div className="error-message">{errors.transactionId}</div>
+                      )}
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label required">
+                        Payment Receipt (Upload the screenshot)
+                      </label>
+                      <div className="file-upload-wrapper">
+                        <div className="file-upload">
+                          <input
+                            type="file"
+                            name="paymentReceipt"
+                            id="paymentReceipt"
+                            className="file-upload-input"
+                            accept="image/jpeg,image/jpg,image/png,.jpg,.jpeg,.png"
+                            onChange={handleFieldChange}
+                          />
+                          <label
+                            htmlFor="paymentReceipt"
+                            className="file-upload-label"
+                          >
+                            <div className="file-upload-icon">💳</div>
+                            <div className="file-upload-text">
+                              <span className="highlight">Click to upload</span>
+                              <br />
+                              PNG, JPG, JPEG
+                            </div>
+                          </label>
+                        </div>
+                        {formData.paymentReceipt && (
+                          <div className="file-name">
+                            ✓ {formData.paymentReceipt.name}
+                          </div>
+                        )}
                       </div>
-                      <div className="payment-instruction-note">
-                        Scan the QR code or use the UPI ID to make payment
-                      </div>
+                      {errors.paymentReceipt && (
+                        <div className="error-message">{errors.paymentReceipt}</div>
+                      )}
+                    </div>
+                  </>
+                )}
+
+                {formData.paymentMode === 'cash' && (
+                  <div className="form-group">
+                    <div style={{
+                      backgroundColor: 'rgba(255, 192, 16, 0.1)',
+                      border: '2px solid #ffc010',
+                      padding: '20px',
+                      borderRadius: '5px',
+                      marginTop: '20px'
+                    }}>
+                      <h4 style={{ color: '#ffc010', marginTop: 0, marginBottom: '15px' }}>
+                        📌 Important: Cash Payment Instructions
+                      </h4>
+                      <p style={{ color: '#fff', lineHeight: '1.8', margin: 0 }}>
+                        You must pay the registration fee in cash within <strong style={{ color: '#ffc010' }}>7 days of registration</strong> at the <strong style={{ color: '#ffc010' }}>Alumni Room</strong> of the college. 
+                        <br /><br />
+                        Please collect the paper receipt during payment and <strong style={{ color: '#ffc010' }}>keep it safe for event day verification</strong>.
+                        <br /><br />
+                        <span style={{ color: '#ff6b6b' }}>⚠️ No receipt upload is required during registration.</span>
+                      </p>
                     </div>
                   </div>
                 )}
-
-                <div className="form-group">
-                  <label className="form-label">Transaction ID</label>
-                  <input
-                    type="text"
-                    name="transactionId"
-                    value={formData.transactionId}
-                    onChange={handleFieldChange}
-                    className="retro-input"
-                    placeholder="Transaction ID"
-                  />
-                  {errors.transactionId && (
-                    <div className="error-message">{errors.transactionId}</div>
-                  )}
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">
-                    Payment Receipt (Upload the screenshot)
-                  </label>
-                  <div className="file-upload-wrapper">
-                    <div className="file-upload">
-                      <input
-                        type="file"
-                        name="paymentReceipt"
-                        id="paymentReceipt"
-                        className="file-upload-input"
-                        accept="image/jpeg,image/jpg,image/png,.jpg,.jpeg,.png"
-                        onChange={handleFieldChange}
-                      />
-                      <label
-                        htmlFor="paymentReceipt"
-                        className="file-upload-label"
-                      >
-                        <div className="file-upload-icon">💳</div>
-                        <div className="file-upload-text">
-                          <span className="highlight">Click to upload</span>
-                          <br />
-                          PNG, JPG, JPEG
-                        </div>
-                      </label>
-                    </div>
-                    {formData.paymentReceipt && (
-                      <div className="file-name">
-                        ✓ {formData.paymentReceipt.name}
-                      </div>
-                    )}
-                  </div>
-                  {errors.paymentReceipt && (
-                    <div className="error-message">{errors.paymentReceipt}</div>
-                  )}
-                </div>
-
-                <div className="form-group">
-                  <div style={{
-                    backgroundColor: 'rgba(255, 192, 16, 0.1)',
-                    border: '2px solid #ffc010',
-                    padding: '20px',
-                    borderRadius: '5px',
-                    marginTop: '20px'
-                  }}>
-                    <h4 style={{ color: '#ffc010', marginTop: 0, marginBottom: '15px' }}>
-                      📌 Important: Cash Payment Instructions
-                    </h4>
-                    <p style={{ color: '#fff', lineHeight: '1.8', margin: 0 }}>
-                      You must pay the registration fee in cash within <strong style={{ color: '#ffc010' }}>7 days of registration</strong> at the <strong style={{ color: '#ffc010' }}>Alumni Room</strong> of the college. 
-                      <br /><br />
-                      Please collect the paper receipt during payment and <strong style={{ color: '#ffc010' }}>keep it safe for event day verification</strong>.
-                      <br /><br />
-                      <span style={{ color: '#ff6b6b' }}>⚠️ No receipt upload is required during registration.</span>
-                    </p>
-                  </div>
-                </div>
               </div>
             </Step>
 

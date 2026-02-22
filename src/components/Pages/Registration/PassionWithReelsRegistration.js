@@ -164,11 +164,11 @@ const PassionWithReelsRegistration = () => {
   const validateStep3 = () => {
     const nextErrors = {};
     
-    if (!formData.agreeToRules) {
+    if (formData.agreeToRules !== true) {
       nextErrors.agreeToRules = 'You must agree to the event rules and regulations';
     }
 
-    if (!formData.whatsappConfirmed) {
+    if (formData.whatsappConfirmed !== true) {
       nextErrors.whatsappConfirmed = 'Please confirm after joining the WhatsApp group';
     }
 

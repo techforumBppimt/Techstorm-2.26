@@ -93,7 +93,7 @@ const ForzaHorizonRegistration = () => {
 
   const validateStep3 = () => {
     const nextErrors = {};
-    if (!formData.whatsappConfirmed) {
+    if (formData.whatsappConfirmed !== true) {
       nextErrors.whatsappConfirmed = 'Please confirm after joining the WhatsApp group';
     }
     setErrors(nextErrors);
