@@ -14,10 +14,10 @@ This document maps ALL fields used across **13 event registration forms** (exclu
 7. **Passion With Reels** - Video Competition (1-2 participants)
 8. **Ro-Combat** - Robotics (2-4 participants)
 9. **Ro-Navigator** - Robotics (2-4 participants)
-10. **Ro-Soccer** - Robotics (2-4 participants)
-11. **Ro-Sumo** - Robotics (2-4 participants)
-12. **Ro-Terrance** - Robotics (2-4 participants)
-13. **Tech Hunt** - Treasure Hunt (2-4 participants)
+10. **Ro-Soccer** - Robotics (2-5 participants)
+11. **Ro-Sumo** - Robotics (2-5 participants)
+12. **Ro-Terrance** - Robotics (2-5 participants)
+13. **Tech Hunt** - Treasure Hunt (3-5 participants)
 
 ## Registration Form Types
 
@@ -64,8 +64,8 @@ This document maps ALL fields used across **13 event registration forms** (exclu
 ### 4. **RoSoccerRegistration.js** (& similar robotics events)
 **Structure:**
 - `teamName` - string *
-- `numberOfParticipants` - select (2-4) *
-- `participants` - array (2-4):
+- `numberOfParticipants` - select (2-5) *
+- `participants` - array (2-5):
   - `name` - string * (first 2)
   - `contact` - string * (first 2)
   - `email` - string * (first 2)

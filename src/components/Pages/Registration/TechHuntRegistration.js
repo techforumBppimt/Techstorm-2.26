@@ -8,7 +8,7 @@ import './Registration.css';
 import techHuntBanner from '../../../assets/img/event_specific_pictures/techHunt/techhunt_banner.png';
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
-const MIN_PARTICIPANTS = 2;
+const MIN_PARTICIPANTS = 3;
 const MAX_PARTICIPANTS = 5;
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
 const COLLEGE_OPTIONS = [
@@ -31,7 +31,7 @@ const TechHuntRegistration = () => {
 
   const [formData, setFormData] = useState({
     teamName: '',
-    numberOfParticipants: '2',
+    numberOfParticipants: '3',
     participants: Array.from({ length: MAX_PARTICIPANTS }, createParticipant),
     paymentMode: '',
     transactionId: '',
@@ -100,7 +100,7 @@ const TechHuntRegistration = () => {
     if (!String(formData.numberOfParticipants).trim()) {
       nextErrors.numberOfParticipants = 'Number of Participants is required';
     } else if (!Number.isInteger(numericCount) || numericCount < MIN_PARTICIPANTS || numericCount > MAX_PARTICIPANTS) {
-      nextErrors.numberOfParticipants = 'Participants must be an integer between 2 and 5';
+      nextErrors.numberOfParticipants = 'Participants must be an integer between 3 and 5';
     }
 
     for (let i = 0; i < participantCount; i += 1) {
@@ -176,11 +176,11 @@ const TechHuntRegistration = () => {
   };
 
   const handleStepValidation = (step) => {
-    if (step === 1) {
+    if (step === 0) {
       return validateStep1();
-    } else if (step === 2) {
+    } else if (step === 1) {
       return validateStep2();
-    } else if (step === 3) {
+    } else if (step === 2) {
       return validateStep3();
     }
     return true;
@@ -580,7 +580,7 @@ const TechHuntRegistration = () => {
                   <h3 style={{ color: '#ffc010', marginBottom: '20px' }}>Tech Hunt Event Rules</h3>
                   <ul style={{ color: '#ccc', lineHeight: '1.8', paddingLeft: '20px' }}>
                     <li>All participants must carry a valid college ID card</li>
-                    <li>Team size: 2-5 participants</li>
+                    <li>Team size: 3-5 participants</li>
                     <li>Registration is mandatory for all participants</li>
                     <li>Participants must follow the event schedule strictly</li>
                     <li>Mobile phones, smart devices, AI tools, and calculators are prohibited</li>

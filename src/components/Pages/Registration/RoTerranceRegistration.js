@@ -185,9 +185,9 @@ const RoTerranceRegistration = () => {
   };
 
   const handleStepValidation = (step) => {
-    if (step === 1) return validateStep1();
-    if (step === 2) return validateStep2();
-    if (step === 3) return validateStep3();
+    if (step === 0) return validateStep1();
+    if (step === 1) return validateStep2();
+    if (step === 2) return validateStep3();
     return true;
   };
 

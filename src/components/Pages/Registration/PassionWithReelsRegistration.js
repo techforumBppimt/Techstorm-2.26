@@ -177,11 +177,11 @@ const PassionWithReelsRegistration = () => {
   };
 
   const handleStepValidation = (step) => {
-    if (step === 1) {
+    if (step === 0) {
       return validateStep1();
-    } else if (step === 2) {
+    } else if (step === 1) {
       return validateStep2();
-    } else if (step === 3) {
+    } else if (step === 2) {
       return validateStep3();
     }
     return true;

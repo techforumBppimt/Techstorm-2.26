@@ -10,10 +10,7 @@ import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
 const STREAM_OPTIONS = ['CSE', 'IT', 'ECE', 'EE', 'Others'];
-const COLLEGE_OPTIONS = [
-  'B. P. Poddar Institute of Management & Technology',
-  'Others'
-];
+const COLLEGE_NAME = 'B. P. Poddar Institute of Management & Technology';
 
 const KhetRegistration = () => {
   const history = useHistory();
@@ -23,8 +20,7 @@ const KhetRegistration = () => {
     fullName: '',
     year: '',
     streamBranch: '',
-    collegeName: '',
-    collegeOther: '',
+    collegeName: COLLEGE_NAME,
     collegeIdProof: null,
     contactNumber: '',
     emailAddress: '',
@@ -66,10 +62,6 @@ const KhetRegistration = () => {
     if (!formData.fullName.trim()) nextErrors.fullName = 'Full Name is required';
     if (!formData.year) nextErrors.year = 'Year is required';
     if (!formData.streamBranch) nextErrors.streamBranch = 'Stream / Branch is required';
-    if (!formData.collegeName) nextErrors.collegeName = 'College selection is required';
-    if (formData.collegeName === 'Others' && !formData.collegeOther.trim()) {
-      nextErrors.collegeOther = 'Please specify your college name';
-    }
     if (!formData.collegeIdProof) nextErrors.collegeIdProof = 'College ID / Library Card upload is required';
     if (!formData.contactNumber.trim()) {
       nextErrors.contactNumber = 'Contact Number is required';
@@ -114,11 +106,11 @@ const KhetRegistration = () => {
   };
 
   const handleStepValidation = (step) => {
-    if (step === 1) {
+    if (step === 0) {
       return validateStep1();
-    } else if (step === 2) {
+    } else if (step === 1) {
       return validateStep2();
-    } else if (step === 3) {
+    } else if (step === 2) {
       return validateStep3();
     }
     return true;
@@ -245,37 +237,27 @@ const KhetRegistration = () => {
 
                 <div className="form-group">
                   <label className="form-label required">College Name</label>
-                  <div className="mcq-group">
-                    {COLLEGE_OPTIONS.map((option) => (
-                      <label className="mcq-option" key={option}>
-                        <input
-                          type="radio"
-                          name="collegeName"
-                          value={option}
-                          checked={formData.collegeName === option}
-                          onChange={handleInputChange}
-                        />
-                        <span className="mcq-option-label">{option}</span>
-                      </label>
-                    ))}
-                  </div>
-                  {errors.collegeName && <div className="error-message">{errors.collegeName}</div>}
+                  <input
+                    type="text"
+                    name="collegeName"
+                    value={formData.collegeName}
+                    className="retro-input"
+                    disabled
+                    style={{ 
+                      backgroundColor: 'rgba(255, 192, 16, 0.1)',
+                      cursor: 'not-allowed',
+                      color: '#ffc010'
+                    }}
+                  />
+                  <p style={{ 
+                    margin: '8px 0 0', 
+                    color: '#00ffea', 
+                    fontSize: '11px', 
+                    fontFamily: 'Press Start 2P, monospace' 
+                  }}>
+                    ⚠️ This event is only for BPPIMT students
+                  </p>
                 </div>
-
-                {formData.collegeName === 'Others' && (
-                  <div className="form-group">
-                    <label className="form-label required">Specify College Name</label>
-                    <input
-                      type="text"
-                      name="collegeOther"
-                      value={formData.collegeOther}
-                      onChange={handleInputChange}
-                      className="retro-input"
-                      placeholder="Enter your college name"
-                    />
-                    {errors.collegeOther && <div className="error-message">{errors.collegeOther}</div>}
-                  </div>
-                )}
 
                 <div className="form-group">
                   <label className="form-label required">College ID / Library Card Upload</label>

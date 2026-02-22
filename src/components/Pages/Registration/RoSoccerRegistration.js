@@ -9,7 +9,7 @@ import roSoccerBanner from '../../../assets/img/event_specific_pictures/robotics
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const MIN_PARTICIPANTS = 2;
-const MAX_PARTICIPANTS = 4;
+const MAX_PARTICIPANTS = 5;
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
 const COLLEGE_OPTIONS = [
   'B. P. Poddar Institute of Management & Technology',
@@ -99,7 +99,7 @@ const RoSoccerRegistration = () => {
     if (!String(formData.numberOfParticipants).trim()) {
       nextErrors.numberOfParticipants = 'Number of Participants is required';
     } else if (!Number.isInteger(numericCount) || numericCount < MIN_PARTICIPANTS || numericCount > MAX_PARTICIPANTS) {
-      nextErrors.numberOfParticipants = 'Participants must be an integer between 2 and 4';
+      nextErrors.numberOfParticipants = 'Participants must be an integer between 2 and 5';
     }
 
     for (let i = 0; i < participantCount; i += 1) {
@@ -185,11 +185,11 @@ const RoSoccerRegistration = () => {
   };
 
   const handleStepValidation = (step) => {
-    if (step === 1) {
+    if (step === 0) {
       return validateStep1();
-    } else if (step === 2) {
+    } else if (step === 1) {
       return validateStep2();
-    } else if (step === 3) {
+    } else if (step === 2) {
       return validateStep3();
     }
     return true;
