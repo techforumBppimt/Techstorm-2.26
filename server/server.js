@@ -63,7 +63,17 @@ const corsOptions = {
 
     const normalizedOrigin = normalizeOrigin(origin);
 
+    // In production, allow all origins from bppimt.ac.in domain
+    if (normalizedOrigin.includes('bppimt.ac.in') || normalizedOrigin.includes('techstorm')) {
+      return callback(null, true);
+    }
+
     if (allowedOrigins.includes(normalizedOrigin)) {
+      return callback(null, true);
+    }
+
+    // In development, be more permissive
+    if (process.env.NODE_ENV !== 'production') {
       return callback(null, true);
     }
 
