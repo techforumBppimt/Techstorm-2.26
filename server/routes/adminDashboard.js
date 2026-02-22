@@ -123,8 +123,11 @@ router.get('/registrations',
       paymentStatus, 
       registrationStatus,
       page = 1,
-      limit = 50
+      limit = 1000 // Increased default limit
     } = req.query;
+    
+    console.log(`📊 [REGISTRATIONS] Request from admin: ${admin.email} (${admin.role})`);
+    console.log(`📊 [REGISTRATIONS] Query params:`, { eventName, search, paymentStatus, registrationStatus, page, limit });
     
     // Get all events from role credentials
     const allEvents = [
@@ -208,9 +211,14 @@ router.get('/registrations',
     // Sort all registrations by date
     allRegistrations.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
     
+    console.log(`📊 [REGISTRATIONS] Total registrations found: ${allRegistrations.length}`);
+    console.log(`📊 [REGISTRATIONS] Events queried: ${eventsToQuery.map(e => e.name).join(', ')}`);
+    
     // Pagination
     const skip = (parseInt(page) - 1) * parseInt(limit);
     const paginatedRegistrations = allRegistrations.slice(skip, skip + parseInt(limit));
+    
+    console.log(`📊 [REGISTRATIONS] Returning ${paginatedRegistrations.length} registrations (page ${page}, limit ${limit})`);
     
     res.json({
       message: 'Registrations retrieved successfully',

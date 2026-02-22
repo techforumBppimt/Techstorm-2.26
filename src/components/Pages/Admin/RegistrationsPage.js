@@ -42,7 +42,9 @@ const RegistrationsPage = () => {
   const fetchRegistrations = useCallback(async () => {
     try {
       setLoading(true);
-      const params = {};
+      const params = {
+        limit: 1000 // Fetch up to 1000 registrations
+      };
       
       if (selectedEvent !== 'all') {
         params.eventName = selectedEvent;
