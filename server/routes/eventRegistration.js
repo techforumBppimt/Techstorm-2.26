@@ -16,12 +16,13 @@ router.post('/:eventName',
   uploadRegistrationFiles,
   handleMulterError,
   asyncHandler(async (req, res) => {
-    const { eventName } = req.params;
-    let registrationData = { ...req.body };
+    try {
+      const { eventName } = req.params;
+      let registrationData = { ...req.body };
 
-    console.log('📥 Received registration for:', eventName);
-    console.log('📝 Body data:', req.body);
-    console.log('📎 Files:', req.files && Array.isArray(req.files) ? req.files.map(f => f.fieldname).join(', ') : 'No files');
+      console.log('📥 Received registration for:', eventName);
+      console.log('📝 Body data:', req.body);
+      console.log('📎 Files:', req.files && Array.isArray(req.files) ? req.files.map(f => f.fieldname).join(', ') : 'No files');
 
     // Validate event name
     if (!eventName || eventName.trim().length === 0) {
@@ -291,6 +292,19 @@ router.post('/:eventName',
         submittedAt: registration.submittedAt
       }
     });
+    
+    } catch (error) {
+      console.error('❌ Registration error:', error);
+      console.error('❌ Error stack:', error.stack);
+      
+      // Return proper JSON error
+      return res.status(500).json({
+        error: 'Registration Failed',
+        message: error.message || 'An error occurred during registration',
+        details: process.env.NODE_ENV === 'development' ? error.stack : undefined,
+        timestamp: new Date().toISOString()
+      });
+    }
   })
 );
 

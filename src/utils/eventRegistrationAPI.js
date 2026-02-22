@@ -82,7 +82,19 @@ export const submitEventRegistration = async (eventName, registrationData) => {
 
     console.log('📡 Response status:', response.status);
     
-    const result = await response.json();
+    // Try to parse as JSON, but handle plain text errors
+    let result;
+    const contentType = response.headers.get('content-type');
+    
+    if (contentType && contentType.includes('application/json')) {
+      result = await response.json();
+    } else {
+      // Server returned plain text error
+      const textError = await response.text();
+      console.error('❌ Server returned non-JSON error:', textError);
+      throw new Error(`Server error: ${textError.substring(0, 200)}`);
+    }
+    
     console.log('📦 Response data:', result);
 
     if (!response.ok) {
