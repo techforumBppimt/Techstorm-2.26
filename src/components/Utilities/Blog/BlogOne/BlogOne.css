@@ -1,5 +1,5 @@
 .sponsor-preview-section {
-    height: clamp(360px, 52vw, 680px);
+    height: clamp(295px, 41vw, 500px);
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -32,7 +32,7 @@
 
 .sponsor-preview-section .container {
     padding-top: 60px;
-    padding-bottom: 40px;
+    padding-bottom: 0;
     position: relative;
     z-index: 2;
 }
@@ -120,17 +120,27 @@
 
 @media (max-width: 767px) {
     .sponsor-preview-section {
-        height: clamp(320px, 78vw, 500px);
+        height: clamp(275px, 66vw, 390px);
     }
 
     .sponsor-preview-section .container {
-        padding-top: 50px;
-        padding-bottom: 28px;
+        padding-top: 36px;
+        padding-bottom: 0;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .sponsor-preview-title {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 12px !important;
     }
 
     .sponsor-coming-soon {
-        font-size: 18px;
-        margin-bottom: 30px !important;
+        font-size: 13px;
+        line-height: 1.6;
+        max-width: 320px;
+        margin-bottom: 12px !important;
     }
 
     .sponsor-preview-label {
