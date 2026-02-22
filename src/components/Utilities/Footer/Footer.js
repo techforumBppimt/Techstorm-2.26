@@ -116,9 +116,6 @@ const Footer = () => {
                       <Link to={"/"}>{"Home"}</Link>
                     </li>
                     <li>
-                      <Link to={"/about"}>{"About Us"}</Link>
-                    </li>
-                    <li>
                       <Link to={"/events"}>{"Events"}</Link>
                     </li>
                     <li>
@@ -129,6 +126,9 @@ const Footer = () => {
                     </li>
                     <li>
                       <Link to={"/team"}>{"Teams"}</Link>
+                    </li>
+                    <li>
+                      <Link to={"/verify-registration"}>{"Verify Registration"}</Link>
                     </li>
                   </ul>
                 </div>
