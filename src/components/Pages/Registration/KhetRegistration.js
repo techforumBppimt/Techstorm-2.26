@@ -117,6 +117,12 @@ const KhetRegistration = () => {
   };
 
   const handleComplete = async () => {
+    // Validate the final step before submitting
+    if (!validateStep3()) {
+      console.log('❌ Final step validation failed');
+      return;
+    }
+    
     setIsSubmitting(true);
 
     try {
