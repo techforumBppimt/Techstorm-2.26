@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { submitEventRegistration } from '../../../utils/eventRegistrationAPI';
 import './Registration.css';
 import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
+import { Spinner } from '../../ui/8bit/spinner';
 
 const RegistrationForm = ({ eventConfig }) => {
     const history = useHistory();
@@ -719,7 +720,12 @@ const RegistrationForm = ({ eventConfig }) => {
                                 className="retro-button"
                                 disabled={isSubmitting}
                             >
-                                {isSubmitting ? 'Submitting...' : 'Submit Registration'}
+                                {isSubmitting ? (
+                                    <>
+                                        <Spinner variant="diamond" className="registration-submit-spinner" />
+                                        Submitting...
+                                    </>
+                                ) : 'Submit Registration'}
                             </button>
                             <button 
                                 type="button" 
@@ -730,6 +736,13 @@ const RegistrationForm = ({ eventConfig }) => {
                                 Cancel
                             </button>
                         </div>
+
+                        {isSubmitting && (
+                            <div className="registration-loading-status" role="status" aria-live="polite">
+                                <Spinner variant="diamond" className="registration-loading-spinner" />
+                                <span>Submitting your registration, please wait...</span>
+                            </div>
+                        )}
 
                         {submitSuccess && (
                             <div className="success-message" style={{ marginTop: '20px' }}>

@@ -79,6 +79,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   border-radius: 4px;
   background-color: #ffc010;
   color: #000;
@@ -96,6 +97,18 @@
 
 .next-button:active {
   background-color: #ffa000;
+}
+
+.next-button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.stepper-submit-spinner {
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+  flex-shrink: 0;
 }
 
 .step-indicator {

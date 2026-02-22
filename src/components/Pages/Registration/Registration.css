@@ -495,6 +495,10 @@
 }
 
 .retro-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   padding: 12px 35px;
   font-family: "Press Start 2P", monospace;
   font-size: 12px;
@@ -544,6 +548,33 @@
 .retro-button.secondary:hover {
   background: #ff6b35;
   color: #000000;
+}
+
+.registration-submit-spinner {
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+  flex-shrink: 0;
+}
+
+.registration-loading-status {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Space Mono', 'Consolas', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffc010;
+  text-align: center;
+}
+
+.registration-loading-spinner {
+  width: 18px;
+  height: 18px;
+  color: #ffc010;
+  flex-shrink: 0;
 }
 
 /* Checkbox Group */
@@ -894,6 +925,11 @@
     font-size: 11px;
     padding: 12px 20px;
     box-sizing: border-box;
+  }
+
+  .registration-loading-status {
+    font-size: 11px;
+    line-height: 1.6;
   }
 
   /* QR Code Section Mobile */

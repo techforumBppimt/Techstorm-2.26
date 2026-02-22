@@ -1,5 +1,6 @@
 import React, { useState, Children, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Spinner } from '../../ui/8bit/spinner';
 import './Stepper.css';
 
 export default function Stepper({
@@ -22,11 +23,14 @@ export default function Stepper({
 }) {
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [direction, setDirection] = useState(0);
+  const [isCompleting, setIsCompleting] = useState(false);
   const [validatedSteps, setValidatedSteps] = useState(new Set([1])); // Track validated steps, start with step 1 accessible
   const stepsArray = Children.toArray(children);
   const totalSteps = stepsArray.length;
   const isCompleted = currentStep > totalSteps;
   const isLastStep = currentStep === totalSteps;
+  const { onClick: backButtonOnClick, disabled: backButtonDisabled, ...backButtonRestProps } = backButtonProps;
+  const { onClick: nextButtonOnClick, disabled: nextButtonDisabled, ...nextButtonRestProps } = nextButtonProps;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -34,14 +38,14 @@ export default function Stepper({
 
   const updateStep = newStep => {
     setCurrentStep(newStep);
-    if (newStep > totalSteps) {
-      onFinalStepCompleted();
-    } else {
+    if (newStep <= totalSteps) {
       onStepChange(newStep);
     }
   };
 
   const handleBack = () => {
+    if (isCompleting) return;
+
     if (currentStep > 1) {
       setDirection(-1);
       updateStep(currentStep - 1);
@@ -49,6 +53,8 @@ export default function Stepper({
   };
 
   const handleNext = async () => {
+    if (isCompleting) return;
+
     // Validate current step before proceeding
     if (onStepValidation) {
       const isValid = await onStepValidation(currentStep - 1);
@@ -67,6 +73,8 @@ export default function Stepper({
   };
 
   const handleComplete = async () => {
+    if (isCompleting) return;
+
     // Validate final step before completing
     if (onStepValidation) {
       const isValid = await onStepValidation(currentStep - 1);
@@ -75,9 +83,39 @@ export default function Stepper({
       }
     }
 
-    setDirection(1);
-    updateStep(totalSteps + 1);
-    scrollToTop();
+    setIsCompleting(true);
+    try {
+      await Promise.resolve(onFinalStepCompleted());
+      setDirection(1);
+      updateStep(totalSteps + 1);
+      scrollToTop();
+    } finally {
+      setIsCompleting(false);
+    }
+  };
+
+  const handleBackButtonClick = e => {
+    if (backButtonOnClick) {
+      backButtonOnClick(e);
+    }
+
+    if (e.defaultPrevented) return;
+    handleBack();
+  };
+
+  const handleNextButtonClick = async e => {
+    if (nextButtonOnClick) {
+      nextButtonOnClick(e);
+    }
+
+    if (e.defaultPrevented) return;
+
+    if (isLastStep) {
+      await handleComplete();
+      return;
+    }
+
+    await handleNext();
   };
 
   return (
@@ -137,15 +175,29 @@ export default function Stepper({
               {currentStep !== 1 && (
                 <button
                   type="button"
-                  onClick={handleBack}
+                  onClick={handleBackButtonClick}
                   className={`back-button ${currentStep === 1 ? 'inactive' : ''}`}
-                  {...backButtonProps}
+                  disabled={isCompleting || backButtonDisabled}
+                  {...backButtonRestProps}
                 >
                   {backButtonText}
                 </button>
               )}
-              <button type="button" onClick={isLastStep ? handleComplete : handleNext} className="next-button" {...nextButtonProps}>
-                {isLastStep ? 'Complete' : nextButtonText}
+              <button
+                type="button"
+                onClick={handleNextButtonClick}
+                className="next-button"
+                disabled={isCompleting || nextButtonDisabled}
+                {...nextButtonRestProps}
+              >
+                {isLastStep ? (
+                  isCompleting ? (
+                    <>
+                      <Spinner variant="diamond" className="stepper-submit-spinner" />
+                      Submitting...
+                    </>
+                  ) : 'Complete'
+                ) : nextButtonText}
               </button>
             </div>
           </div>
