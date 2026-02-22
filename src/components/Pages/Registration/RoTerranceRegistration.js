@@ -11,6 +11,7 @@ import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 const MIN_PARTICIPANTS = 2;
 const MAX_PARTICIPANTS = 5;
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
+const DEPARTMENT_OPTIONS = ["CSE", "IT", "ECE", "EE", "BCA", "MCA", "Others"];
 const COLLEGE_OPTIONS = [
   'B. P. Poddar Institute of Management & Technology',
   'Others'
@@ -23,6 +24,7 @@ const createParticipant = () => ({
   college: '',
   collegeOther: '',
   year: '',
+  department: '',
   idFile: null
 });
 
@@ -403,6 +405,24 @@ const RoTerranceRegistration = () => {
                       </div>
 
                       <div className="form-group">
+                        <label className="form-label">Department</label>
+                        <div className="mcq-group">
+                          {DEPARTMENT_OPTIONS.map((deptOption) => (
+                            <label className="mcq-option" key={`${number}_${deptOption}`}>
+                              <input
+                                type="radio"
+                                name={`participantDepartment_${index}`}
+                                value={deptOption}
+                                checked={participant.department === deptOption}
+                                onChange={(e) => handleParticipantChange(index, 'department', e.target.value)}
+                              />
+                              <span className="mcq-option-label">{deptOption}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="form-group">
                         <label className={`form-label ${requiredClass}`}>
                           Participant ID Proof (College ID / Library Card)
                         </label>
@@ -631,8 +651,15 @@ const RoTerranceRegistration = () => {
                   <h2 className="form-section-title">&gt;&gt;&gt; Communication</h2>
                   <div className="form-group">
                     <label className="form-label required">Join WhatsApp Group</label>
-                    <p style={{ margin: 0, color: '#ffc010' }}>
-                      Link will be provided by organizers
+                    <p style={{ margin: '10px 0' }}>
+                      <a
+                        href="https://chat.whatsapp.com/HMp3lynznmj7pxl6JvrqaC?mode=gi_t"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: '#ffc010' }}
+                      >
+                        https://chat.whatsapp.com/HMp3lynznmj7pxl6JvrqaC?mode=gi_t
+                      </a>
                     </p>
                   </div>
 

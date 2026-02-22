@@ -9,7 +9,7 @@ import khetBanner from '../../../assets/img/event_specific_pictures/games/khet.p
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
-const STREAM_OPTIONS = ['CSE', 'IT', 'ECE', 'EE', 'Others'];
+const DEPARTMENT_OPTIONS = ["CSE", "IT", "ECE", "EE", "BCA", "MCA", "Others"];
 const COLLEGE_NAME = 'B. P. Poddar Institute of Management & Technology';
 
 const KhetRegistration = () => {
@@ -19,7 +19,7 @@ const KhetRegistration = () => {
     numberOfParticipants: '1',
     fullName: '',
     year: '',
-    streamBranch: '',
+    department: '',
     collegeName: COLLEGE_NAME,
     collegeIdProof: null,
     contactNumber: '',
@@ -61,7 +61,6 @@ const KhetRegistration = () => {
     }
     if (!formData.fullName.trim()) nextErrors.fullName = 'Full Name is required';
     if (!formData.year) nextErrors.year = 'Year is required';
-    if (!formData.streamBranch) nextErrors.streamBranch = 'Stream / Branch is required';
     if (!formData.collegeIdProof) nextErrors.collegeIdProof = 'College ID / Library Card upload is required';
     if (!formData.contactNumber.trim()) {
       nextErrors.contactNumber = 'Contact Number is required';
@@ -223,22 +222,21 @@ const KhetRegistration = () => {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label required">Stream / Branch</label>
+                  <label className="form-label">Department</label>
                   <div className="mcq-group">
-                    {STREAM_OPTIONS.map((option) => (
-                      <label className="mcq-option" key={option}>
+                    {DEPARTMENT_OPTIONS.map((deptOption) => (
+                      <label className="mcq-option" key={deptOption}>
                         <input
                           type="radio"
-                          name="streamBranch"
-                          value={option}
-                          checked={formData.streamBranch === option}
+                          name="department"
+                          value={deptOption}
+                          checked={formData.department === deptOption}
                           onChange={handleInputChange}
                         />
-                        <span className="mcq-option-label">{option}</span>
+                        <span className="mcq-option-label">{deptOption}</span>
                       </label>
                     ))}
                   </div>
-                  {errors.streamBranch && <div className="error-message">{errors.streamBranch}</div>}
                 </div>
 
                 <div className="form-group">

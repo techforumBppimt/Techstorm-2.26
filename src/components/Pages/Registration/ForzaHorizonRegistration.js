@@ -9,6 +9,7 @@ import forzaHorizonBanner from '../../../assets/img/event_specific_pictures/game
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
+const DEPARTMENT_OPTIONS = ["CSE", "IT", "ECE", "EE", "BCA", "MCA", "Others"];
 const COLLEGE_OPTIONS = [
   'B. P. Poddar Institute of Management & Technology',
   'Others'
@@ -17,13 +18,13 @@ const COLLEGE_OPTIONS = [
 const ForzaHorizonRegistration = () => {
   const history = useHistory();
   const [formData, setFormData] = useState({
-    participantName: '',
-    name: '',
+    fullName: '',
     contactNumber: '',
     emailId: '',
     collegeName: '',
     collegeOther: '',
     year: '',
+    department: '',
     participantIdProof: null,
     paymentMode: '',
     transactionId: '',
@@ -54,8 +55,7 @@ const ForzaHorizonRegistration = () => {
 
   const validateStep1 = () => {
     const nextErrors = {};
-    if (!formData.participantName.trim()) nextErrors.participantName = 'Participant Name is required';
-    if (!formData.name.trim()) nextErrors.name = 'Name is required';
+    if (!formData.fullName.trim()) nextErrors.fullName = 'Participant Name is required';
     if (!formData.contactNumber.trim()) {
       nextErrors.contactNumber = 'Contact Number is required';
     } else if (!/^\d{10,15}$/.test(formData.contactNumber.replace(/\D/g, ''))) {
@@ -186,26 +186,13 @@ const ForzaHorizonRegistration = () => {
                   <label className="form-label required">Participant Name</label>
                   <input
                     type="text"
-                    name="participantName"
-                    value={formData.participantName}
+                    name="fullName"
+                    value={formData.fullName}
                     onChange={handleInputChange}
                     className="retro-input"
-                    placeholder="Participant Name"
+                    placeholder="Enter your full name"
                   />
-                  {errors.participantName && <div className="error-message">{errors.participantName}</div>}
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label required">Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="retro-input"
-                    placeholder="Name"
-                  />
-                  {errors.name && <div className="error-message">{errors.name}</div>}
+                  {errors.fullName && <div className="error-message">{errors.fullName}</div>}
                 </div>
 
                 <div className="form-group">
@@ -285,6 +272,24 @@ const ForzaHorizonRegistration = () => {
                     ))}
                   </div>
                   {errors.year && <div className="error-message">{errors.year}</div>}
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Department</label>
+                  <div className="mcq-group">
+                    {DEPARTMENT_OPTIONS.map((deptOption) => (
+                      <label className="mcq-option" key={deptOption}>
+                        <input
+                          type="radio"
+                          name="department"
+                          value={deptOption}
+                          checked={formData.department === deptOption}
+                          onChange={handleInputChange}
+                        />
+                        <span className="mcq-option-label">{deptOption}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="form-group">
@@ -477,8 +482,15 @@ const ForzaHorizonRegistration = () => {
 
                 <div className="form-group">
                   <label className="form-label required">Join WhatsApp Group</label>
-                  <p style={{ margin: '10px 0', color: '#ffc010', fontFamily: 'Press Start 2P, monospace', fontSize: '10px' }}>
-                    Link will be provided by organizers
+                  <p style={{ margin: '10px 0' }}>
+                    <a
+                      href="https://chat.whatsapp.com/LUkCLLC2wS83vAKLMvS9O7?mode=gi_t"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: '#ffc010' }}
+                    >
+                      https://chat.whatsapp.com/LUkCLLC2wS83vAKLMvS9O7?mode=gi_t
+                    </a>
                   </p>
                 </div>
 

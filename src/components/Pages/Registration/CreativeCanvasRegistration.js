@@ -11,6 +11,7 @@ import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 const MIN_PARTICIPANTS = 1;
 const MAX_PARTICIPANTS = 2;
 const YEAR_OPTIONS = ["1st", "2nd", "3rd", "4th"];
+const DEPARTMENT_OPTIONS = ["CSE", "IT", "ECE", "EE", "BCA", "MCA", "Others"];
 const COLLEGE_OPTIONS = [
   "B. P. Poddar Institute of Management & Technology",
   "Others",
@@ -23,6 +24,7 @@ const createParticipant = () => ({
   college: "",
   collegeOther: "",
   year: "",
+  department: "",
   idFile: null,
 });
 
@@ -482,6 +484,33 @@ const CreativeCanvasRegistration = () => {
                     </div>
 
                     <div className="form-group">
+                      <label className="form-label">Department</label>
+                      <div className="mcq-group">
+                        {DEPARTMENT_OPTIONS.map((deptOption) => (
+                          <label
+                            className="mcq-option"
+                            key={`${number}_${deptOption}`}
+                          >
+                            <input
+                              type="radio"
+                              name={`participantDepartment_${index}`}
+                              value={deptOption}
+                              checked={participant.department === deptOption}
+                              onChange={(e) =>
+                                handleParticipantChange(
+                                  index,
+                                  "department",
+                                  e.target.value,
+                                )
+                              }
+                            />
+                            <span className="mcq-option-label">{deptOption}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="form-group">
                       <label className={`form-label ${requiredClass}`}>
                         Participants Id (if student then College id / library
                         card)
@@ -722,6 +751,20 @@ const CreativeCanvasRegistration = () => {
                     }}
                   >
                     Every Participants must join!
+                  </p>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Link</label>
+                  <p style={{ margin: '10px 0' }}>
+                    <a
+                      href="https://chat.whatsapp.com/IhyZJfScgjOGbjwcvsrq3O?mode=hqctsha"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: '#ffc010' }}
+                    >
+                      https://chat.whatsapp.com/IhyZJfScgjOGbjwcvsrq3O?mode=hqctsha
+                    </a>
                   </p>
                 </div>
 

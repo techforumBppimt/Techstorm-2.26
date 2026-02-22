@@ -9,6 +9,7 @@ import fifaMobileBanner from '../../../assets/img/event_specific_pictures/games/
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
+const DEPARTMENT_OPTIONS = ["CSE", "IT", "ECE", "EE", "BCA", "MCA", "Others"];
 const COLLEGE_OPTIONS = [
   'B. P. Poddar Institute of Management & Technology',
   'Others'
@@ -244,14 +245,20 @@ const FifaMobileRegistration = () => {
 
                 <div className="form-group">
                   <label className="form-label required">Department / Branch</label>
-                  <input
-                    type="text"
-                    name="department"
-                    value={formData.department}
-                    onChange={handleInputChange}
-                    className="retro-input"
-                    placeholder="Department / Branch"
-                  />
+                  <div className="mcq-group">
+                    {DEPARTMENT_OPTIONS.map((deptOption) => (
+                      <label className="mcq-option" key={deptOption}>
+                        <input
+                          type="radio"
+                          name="department"
+                          value={deptOption}
+                          checked={formData.department === deptOption}
+                          onChange={handleInputChange}
+                        />
+                        <span className="mcq-option-label">{deptOption}</span>
+                      </label>
+                    ))}
+                  </div>
                   {errors.department && <div className="error-message">{errors.department}</div>}
                 </div>
 

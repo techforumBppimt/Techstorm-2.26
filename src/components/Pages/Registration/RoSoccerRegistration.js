@@ -11,6 +11,7 @@ import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 const MIN_PARTICIPANTS = 2;
 const MAX_PARTICIPANTS = 5;
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
+const DEPARTMENT_OPTIONS = ["CSE", "IT", "ECE", "EE", "BCA", "MCA", "Others"];
 const COLLEGE_OPTIONS = [
   'B. P. Poddar Institute of Management & Technology',
   'Others'
@@ -23,6 +24,7 @@ const createParticipant = () => ({
   college: '',
   collegeOther: '',
   year: '',
+  department: '',
   idFile: null
 });
 
@@ -410,6 +412,24 @@ const RoSoccerRegistration = () => {
                     </div>
 
                     <div className="form-group">
+                      <label className="form-label">Department</label>
+                      <div className="mcq-group">
+                        {DEPARTMENT_OPTIONS.map((deptOption) => (
+                          <label className="mcq-option" key={`${number}_${deptOption}`}>
+                            <input
+                              type="radio"
+                              name={`participantDepartment_${index}`}
+                              value={deptOption}
+                              checked={participant.department === deptOption}
+                              onChange={(e) => handleParticipantChange(index, 'department', e.target.value)}
+                            />
+                            <span className="mcq-option-label">{deptOption}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="form-group">
                       <label className={`form-label ${requiredClass}`}>
                         Participants Id (if student then clg id / library card)
                       </label>
@@ -644,12 +664,12 @@ const RoSoccerRegistration = () => {
                   <label className="form-label">Link</label>
                   <p style={{ margin: '10px 0' }}>
                     <a
-                      href="https://chat.whatsapp.com/"
+                      href="https://chat.whatsapp.com/E5WZGtAa9lYIciywdQahHr?mode=gi_t"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ color: '#ffc010' }}
                     >
-                      https://chat.whatsapp.com/
+                      https://chat.whatsapp.com/E5WZGtAa9lYIciywdQahHr?mode=gi_t
                     </a>
                   </p>
                 </div>
@@ -664,7 +684,7 @@ const RoSoccerRegistration = () => {
                     />
                     <span className="checkbox-custom"></span>
                     <span className="checkbox-label">
-                      Yes, I have Done
+                      Yes, I have joined the WhatsApp group
                     </span>
                   </label>
                   {errors.whatsappConfirmed && <div className="error-message">{errors.whatsappConfirmed}</div>}

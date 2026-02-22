@@ -9,7 +9,7 @@ import omegatrixBanner from '../../../assets/img/event_specific_pictures/omegatr
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
-const STREAM_OPTIONS = ['CSE', 'IT', 'ECE', 'EE', 'Others'];
+const DEPARTMENT_OPTIONS = ["CSE", "IT", "ECE", "EE", "BCA", "MCA", "Others"];
 const COLLEGE_OPTIONS = [
   'B. P. Poddar Institute of Management & Technology',
   'Others'
@@ -20,7 +20,7 @@ const OmegatrixRegistration = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     year: '',
-    streamBranch: '',
+    department: '',
     collegeName: '',
     collegeOther: '',
     collegeIdProof: null,
@@ -62,7 +62,6 @@ const OmegatrixRegistration = () => {
 
     if (!formData.fullName.trim()) nextErrors.fullName = 'Full Name is required';
     if (!formData.year) nextErrors.year = 'Year is required';
-    if (!formData.streamBranch) nextErrors.streamBranch = 'Stream / Branch is required';
     if (!formData.collegeName) nextErrors.collegeName = 'College selection is required';
     if (formData.collegeName === 'Others' && !formData.collegeOther.trim()) {
       nextErrors.collegeOther = 'Please specify your college name';
@@ -250,22 +249,21 @@ const OmegatrixRegistration = () => {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label required">Stream / Branch</label>
+                  <label className="form-label">Department</label>
                   <div className="mcq-group">
-                    {STREAM_OPTIONS.map((option) => (
-                      <label className="mcq-option" key={option}>
+                    {DEPARTMENT_OPTIONS.map((deptOption) => (
+                      <label className="mcq-option" key={deptOption}>
                         <input
                           type="radio"
-                          name="streamBranch"
-                          value={option}
-                          checked={formData.streamBranch === option}
+                          name="department"
+                          value={deptOption}
+                          checked={formData.department === deptOption}
                           onChange={handleInputChange}
                         />
-                        <span className="mcq-option-label">{option}</span>
+                        <span className="mcq-option-label">{deptOption}</span>
                       </label>
                     ))}
                   </div>
-                  {errors.streamBranch && <div className="error-message">{errors.streamBranch}</div>}
                 </div>
 
                 <div className="form-group">

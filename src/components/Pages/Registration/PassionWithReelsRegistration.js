@@ -11,6 +11,7 @@ import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 const MIN_PARTICIPANTS = 2;
 const MAX_PARTICIPANTS = 8;
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
+const DEPARTMENT_OPTIONS = ["CSE", "IT", "ECE", "EE", "BCA", "MCA", "Others"];
 const COLLEGE_OPTIONS = [
   'B. P. Poddar Institute of Management & Technology',
   'Others'
@@ -394,13 +395,20 @@ const PassionWithReelsRegistration = () => {
 
                     <div className="form-group">
                       <label className="form-label required">Department</label>
-                      <input
-                        type="text"
-                        value={participant.department}
-                        onChange={(e) => handleParticipantChange(index, 'department', e.target.value)}
-                        className="retro-input"
-                        placeholder={`Participant ${number} Department`}
-                      />
+                      <div className="mcq-group">
+                        {DEPARTMENT_OPTIONS.map((deptOption) => (
+                          <label className="mcq-option" key={`${number}_${deptOption}`}>
+                            <input
+                              type="radio"
+                              name={`participantDepartment_${index}`}
+                              value={deptOption}
+                              checked={participant.department === deptOption}
+                              onChange={(e) => handleParticipantChange(index, 'department', e.target.value)}
+                            />
+                            <span className="mcq-option-label">{deptOption}</span>
+                          </label>
+                        ))}
+                      </div>
                       {errors[`participant_${index}_department`] && (
                         <div className="error-message">{errors[`participant_${index}_department`]}</div>
                       )}

@@ -10,6 +10,8 @@ import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const MIN_PARTICIPANTS = 2;
 const MAX_PARTICIPANTS = 5;
+const YEAR_OPTIONS = ['1st year', '2nd year', '3rd year', '4th year', 'Other'];
+const DEPARTMENT_OPTIONS = ["CSE", "IT", "ECE", "EE", "BCA", "MCA", "Others"];
 const COLLEGE_OPTIONS = [
   'B. P. Poddar Institute of Management & Technology',
   'Others'
@@ -21,6 +23,8 @@ const createParticipant = () => ({
   email: '',
   college: '',
   collegeOther: '',
+  year: '',
+  department: '',
   idFile: null
 });
 
@@ -377,6 +381,42 @@ const RoCombatRegistration = () => {
                     )}
 
                     <div className="form-group">
+                      <label className="form-label">Year</label>
+                      <div className="mcq-group">
+                        {YEAR_OPTIONS.map((yearOption) => (
+                          <label className="mcq-option" key={`${number}_${yearOption}`}>
+                            <input
+                              type="radio"
+                              name={`participantYear_${index}`}
+                              value={yearOption}
+                              checked={participant.year === yearOption}
+                              onChange={(e) => handleParticipantChange(index, 'year', e.target.value)}
+                            />
+                            <span className="mcq-option-label">{yearOption}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label">Department</label>
+                      <div className="mcq-group">
+                        {DEPARTMENT_OPTIONS.map((deptOption) => (
+                          <label className="mcq-option" key={`${number}_${deptOption}`}>
+                            <input
+                              type="radio"
+                              name={`participantDepartment_${index}`}
+                              value={deptOption}
+                              checked={participant.department === deptOption}
+                              onChange={(e) => handleParticipantChange(index, 'department', e.target.value)}
+                            />
+                            <span className="mcq-option-label">{deptOption}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="form-group">
                       <label className={`form-label ${index === 0 ? 'required' : ''}`}>
                         Participants Id ( if student then clg id / library card)
                       </label>
@@ -610,12 +650,12 @@ const RoCombatRegistration = () => {
                   <label className="form-label">Link</label>
                   <p style={{ margin: '10px 0' }}>
                     <a
-                      href="https://chat.whatsapp.com/"
+                      href="https://chat.whatsapp.com/IBCoIZXcUZDJRyW5Rqkmwy?mode=gi_t"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ color: '#ffc010' }}
                     >
-                      https://chat.whatsapp.com/
+                      https://chat.whatsapp.com/IBCoIZXcUZDJRyW5Rqkmwy?mode=gi_t
                     </a>
                   </p>
                 </div>
