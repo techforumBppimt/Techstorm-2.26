@@ -1,51 +1,149 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getRegistrationById } from '../../../utils/adminDashboardAPI';
 import './Modal.css';
 
-const EditRegistrationModal = ({ registration, onClose, onSave }) => {
-  const [formData, setFormData] = useState({
-    // Basic info
-    fullName: registration.fullName || '',
-    emailAddress: registration.emailAddress || registration.email || '',
-    contactNumber: registration.contactNumber || registration.phone || '',
-    collegeName: registration.collegeName || registration.college || '',
-    year: registration.year || registration.yearOfStudy || '',
-    department: registration.department || '',
-    streamBranch: registration.streamBranch || '',
-    
-    // Team info
-    teamName: registration.teamName || '',
-    teamSize: registration.teamSize || registration.numberOfParticipants || '1',
-    
-    // Team members
-    teamMember2Name: registration.teamMember2Name || '',
-    teamMember2Email: registration.teamMember2Email || '',
-    teamMember2Phone: registration.teamMember2Phone || '',
-    teamMember3Name: registration.teamMember3Name || '',
-    teamMember3Email: registration.teamMember3Email || '',
-    teamMember3Phone: registration.teamMember3Phone || '',
-    teamMember4Name: registration.teamMember4Name || '',
-    teamMember4Email: registration.teamMember4Email || '',
-    teamMember4Phone: registration.teamMember4Phone || '',
-    
-    // Participants array
-    participants: registration.participants || [],
-    
-    // Game-specific fields
-    fifaUsername: registration.fifaUsername || '',
-    teamOvr: registration.teamOvr || '',
-    deviceModel: registration.deviceModel || '',
-    gameUsername: registration.gameUsername || '',
-    playerRating: registration.playerRating || '',
-    gamingPlatform: registration.gamingPlatform || '',
-    
-    // Payment
-    paymentMode: registration.paymentMode || registration.paymentMethod || 'online',
-    transactionId: registration.transactionId || '',
-    paymentStatus: registration.paymentStatus || 'pending',
-    registrationStatus: registration.registrationStatus || 'pending',
-  });
+/** Get first non-empty string from an object for given keys. Display/initialization only. */
+function getFromObj(obj, ...keys) {
+  if (!obj || typeof obj !== 'object') return '';
+  for (const k of keys) {
+    const v = obj[k];
+    if (v != null && String(v).trim() !== '') return String(v).trim();
+  }
+  return '';
+}
 
+/** Get value by scanning object for any key whose name matches pattern (e.g. 'year', 'department'). */
+function getFromObjByKeyMatch(obj, ...patterns) {
+  if (!obj || typeof obj !== 'object') return '';
+  for (const key of Object.keys(obj)) {
+    const lower = key.toLowerCase();
+    if (patterns.some(p => lower.includes(p))) {
+      const v = obj[key];
+      if (v != null && typeof v === 'string' && v.trim() !== '') return v.trim();
+      if (v != null && typeof v === 'number') return String(v);
+    }
+  }
+  return '';
+}
+
+/** Get value from registration or first participant. Used to initialize edit form. */
+function getEditValue(reg, ...keys) {
+  if (!reg || typeof reg !== 'object') return '';
+  const fromReg = getFromObj(reg, ...keys);
+  if (fromReg) return fromReg;
+  const first = reg.participants && reg.participants[0];
+  if (first && typeof first === 'object') return getFromObj(first, ...keys);
+  return '';
+}
+
+/** Like getEditValue but also scans reg and first participant for keys matching patterns (e.g. year, department). */
+function getEditValueWithScan(reg, keys, patterns) {
+  const fromKeys = getEditValue(reg, ...keys);
+  if (fromKeys) return fromKeys;
+  if (!reg || typeof reg !== 'object') return '';
+  const fromRegScan = getFromObjByKeyMatch(reg, ...patterns);
+  if (fromRegScan) return fromRegScan;
+  const first = reg.participants && reg.participants[0];
+  if (first && typeof first === 'object') return getFromObjByKeyMatch(first, ...patterns);
+  return '';
+}
+
+/** Normalize participants array for edit form: ensure name, email, contact, etc. from any key. */
+function normalizeParticipants(participants) {
+  if (!Array.isArray(participants)) return [];
+  return participants.map(p => ({
+    ...p,
+    name: getFromObj(p, 'name', 'fullName', 'full_name') || p.name || '',
+    email: getFromObj(p, 'email', 'emailAddress') || p.email || '',
+    contact: getFromObj(p, 'contact', 'phone', 'contactNumber') || p.contact || '',
+    college: getFromObj(p, 'college', 'collegeName') || p.college || '',
+    year: getFromObj(p, 'year', 'yearOfStudy') || p.year || '',
+    department: getFromObj(p, 'department') || p.department || '',
+  }));
+}
+
+/** Build initial form state from a full registration object (from API or list). */
+function buildInitialFormData(reg) {
+  if (!reg || typeof reg !== 'object') return null;
+  return {
+    fullName: getEditValue(reg, 'fullName', 'full_name', 'name') || '',
+    emailAddress: getEditValue(reg, 'emailAddress', 'email') || '',
+    contactNumber: getEditValue(reg, 'contactNumber', 'phone', 'contact') || '',
+    collegeName: getEditValue(reg, 'collegeName', 'college', 'institution') || '',
+    year: getEditValueWithScan(reg, ['year', 'yearOfStudy', 'year_of_study'], ['year']) || '',
+    department: getEditValueWithScan(reg, ['department', 'dept'], ['department', 'dept']) || '',
+    streamBranch: getEditValueWithScan(reg, ['streamBranch', 'stream', 'stream_branch', 'branch'], ['stream', 'branch']) || '',
+    studentId: getEditValue(reg, 'studentId', 'rollNumber') || '',
+    teamName: getFromObj(reg, 'teamName') || '',
+    teamSize: getFromObj(reg, 'teamSize', 'numberOfParticipants') || '1',
+    teamMember2Name: getFromObj(reg, 'teamMember2Name') || '',
+    teamMember2Email: getFromObj(reg, 'teamMember2Email') || '',
+    teamMember2Phone: getFromObj(reg, 'teamMember2Phone') || '',
+    teamMember3Name: getFromObj(reg, 'teamMember3Name') || '',
+    teamMember3Email: getFromObj(reg, 'teamMember3Email') || '',
+    teamMember3Phone: getFromObj(reg, 'teamMember3Phone') || '',
+    teamMember4Name: getFromObj(reg, 'teamMember4Name') || '',
+    teamMember4Email: getFromObj(reg, 'teamMember4Email') || '',
+    teamMember4Phone: getFromObj(reg, 'teamMember4Phone') || '',
+    participants: normalizeParticipants(reg.participants || []),
+    fifaUsername: getFromObj(reg, 'fifaUsername') || '',
+    teamOvr: getFromObj(reg, 'teamOvr') || '',
+    deviceModel: getFromObj(reg, 'deviceModel') || '',
+    gameUsername: getFromObj(reg, 'gameUsername') || '',
+    playerRating: getFromObj(reg, 'playerRating') || '',
+    gamingPlatform: getFromObj(reg, 'gamingPlatform') || '',
+    paymentMode: getFromObj(reg, 'paymentMode', 'paymentMethod') || 'online',
+    transactionId: getFromObj(reg, 'transactionId') || '',
+    paymentStatus: getFromObj(reg, 'paymentStatus') || 'pending',
+    registrationStatus: getFromObj(reg, 'registrationStatus') || 'pending',
+  };
+}
+
+const EditRegistrationModal = ({ registration, onClose, onSave }) => {
+  const [fullRegistration, setFullRegistration] = useState(null);
+  const [formData, setFormData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
   const [activeTab, setActiveTab] = useState('basic');
+
+  // Fetch full registration from API when modal opens so the form has complete data
+  useEffect(() => {
+    if (!registration || !registration._id) {
+      setLoading(false);
+      setFetchError('No registration selected');
+      return;
+    }
+    const eventName = registration.eventName || registration.event;
+    if (!eventName) {
+      setFullRegistration(registration);
+      setFormData(buildInitialFormData(registration));
+      setLoading(false);
+      return;
+    }
+    let cancelled = false;
+    setLoading(true);
+    setFetchError(null);
+    getRegistrationById(eventName, registration._id)
+      .then((result) => {
+        if (cancelled) return;
+        const data = result.registration || result;
+        const regWithEvent = { ...data, eventName: data.eventName || eventName };
+        setFullRegistration(regWithEvent);
+        setFormData(buildInitialFormData(regWithEvent));
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        setFetchError(err.message || 'Failed to load registration');
+        setFullRegistration(registration);
+        setFormData(buildInitialFormData(registration));
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [registration?._id, registration?.eventName]);
+
+  const displayReg = fullRegistration || registration;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,7 +175,8 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    if (!formData) return;
+
     // Clean up data - remove empty fields
     const cleanedData = Object.entries(formData).reduce((acc, [key, value]) => {
       if (value !== '' && value !== null && value !== undefined) {
@@ -90,7 +189,7 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
     onClose();
   };
 
-  const teamSize = parseInt(formData.teamSize) || 1;
+  const teamSize = formData ? parseInt(formData.teamSize) || 1 : 0;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -98,10 +197,27 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
         <div className="modal-header">
           <div>
             <h2>Edit Registration</h2>
-            <p className="modal-subtitle">{registration.registrationNumber}</p>
+            <p className="modal-subtitle">{displayReg ? getFromObj(displayReg, 'registrationNumber') || '—' : '—'}</p>
           </div>
           <button className="modal-close" onClick={onClose}>✕</button>
         </div>
+
+        {loading ? (
+          <div className="modal-body">
+            <div className="modal-inline-loading" aria-busy="true">
+              <span className="loader-spinner" aria-hidden="true" />
+              <p>Loading registration details…</p>
+            </div>
+          </div>
+        ) : !formData ? (
+          <div className="modal-body">
+            <div className="admin-error-state" style={{ maxWidth: 'none', margin: 0 }}>
+              <p className="admin-error-message">{fetchError || 'Failed to load registration'}</p>
+              <button type="button" className="btn-secondary" onClick={onClose}>Close</button>
+            </div>
+          </div>
+        ) : (
+        <>
 
         {/* Tabs */}
         <div className="modal-tabs">
@@ -430,7 +546,7 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
                             <label>Name</label>
                             <input
                               type="text"
-                              value={participant.name || ''}
+                              value={getFromObj(participant, 'name', 'fullName', 'full_name') || ''}
                               onChange={(e) => handleParticipantChange(index, 'name', e.target.value)}
                             />
                           </div>
@@ -438,7 +554,7 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
                             <label>Email</label>
                             <input
                               type="email"
-                              value={participant.email || ''}
+                              value={getFromObj(participant, 'email', 'emailAddress') || ''}
                               onChange={(e) => handleParticipantChange(index, 'email', e.target.value)}
                             />
                           </div>
@@ -446,7 +562,7 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
                             <label>Contact</label>
                             <input
                               type="tel"
-                              value={participant.contact || ''}
+                              value={getFromObj(participant, 'contact', 'phone', 'contactNumber') || ''}
                               onChange={(e) => handleParticipantChange(index, 'contact', e.target.value)}
                             />
                           </div>
@@ -454,7 +570,7 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
                             <label>College</label>
                             <input
                               type="text"
-                              value={participant.college || ''}
+                              value={getFromObj(participant, 'college', 'collegeName') || ''}
                               onChange={(e) => handleParticipantChange(index, 'college', e.target.value)}
                             />
                           </div>
@@ -462,7 +578,7 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
                             <label>Year</label>
                             <input
                               type="text"
-                              value={participant.year || ''}
+                              value={getFromObj(participant, 'year', 'yearOfStudy') || ''}
                               onChange={(e) => handleParticipantChange(index, 'year', e.target.value)}
                             />
                           </div>
@@ -470,7 +586,7 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
                             <label>Department</label>
                             <input
                               type="text"
-                              value={participant.department || ''}
+                              value={getFromObj(participant, 'department') || ''}
                               onChange={(e) => handleParticipantChange(index, 'department', e.target.value)}
                             />
                           </div>
@@ -555,9 +671,9 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
                 </div>
 
                 <div className="info-box">
-                  <p>📝 Registration Number: <strong>{registration.registrationNumber}</strong></p>
-                  <p>🎯 Event: <strong>{registration.eventName}</strong></p>
-                  <p>📅 Submitted: <strong>{new Date(registration.submittedAt).toLocaleString('en-IN')}</strong></p>
+                  <p>📝 Registration Number: <strong>{displayReg ? getFromObj(displayReg, 'registrationNumber') || '—' : '—'}</strong></p>
+                  <p>🎯 Event: <strong>{displayReg ? getFromObj(displayReg, 'eventName') || '—' : '—'}</strong></p>
+                  <p>📅 Submitted: <strong>{displayReg?.submittedAt ? new Date(displayReg.submittedAt).toLocaleString('en-IN') : '—'}</strong></p>
                 </div>
               </>
             )}
@@ -568,6 +684,8 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
             <button type="submit" className="btn-primary">Save Changes</button>
           </div>
         </form>
+        </>
+        )}
       </div>
     </div>
   );

@@ -144,9 +144,9 @@ const RegistrationsPage = () => {
   // const events = ['all', 'Khet', 'FIFA Mobile', 'Combat', 'Hackstrom', 'Codebee'];
 
   const roleConfig = {
-    core: { name: 'Core', color: '#0f766e', canEdit: true, canDelete: true, canAdd: true },
-    coordinator: { name: 'Coordinator', color: '#2563eb', canEdit: true, canDelete: false, canAdd: false },
-    volunteer: { name: 'Volunteer', color: '#9333ea', canEdit: false, canDelete: false, canAdd: false }
+    core: { name: 'Core', color: '#0f766e', canEdit: true, canDelete: true, canAdd: true, canEditRegistration: true, canChangePaymentStatus: true, canChangeRegistrationStatus: true },
+    coordinator: { name: 'Coordinator', color: '#2563eb', canEdit: false, canDelete: false, canAdd: false, canEditRegistration: false, canChangePaymentStatus: false, canChangeRegistrationStatus: false },
+    volunteer: { name: 'Volunteer', color: '#9333ea', canEdit: false, canDelete: false, canAdd: false, canEditRegistration: false, canChangePaymentStatus: false, canChangeRegistrationStatus: false }
   };
 
   const config = roleConfig[role] || roleConfig.core;
@@ -346,7 +346,7 @@ const RegistrationsPage = () => {
                         </td>
                       )}
                       <td>
-                        {config.canEdit ? (
+                        {config.canChangePaymentStatus ? (
                           <select
                             className={`status-select payment-${reg.paymentStatus}`}
                             value={reg.paymentStatus}
@@ -363,7 +363,7 @@ const RegistrationsPage = () => {
                         )}
                       </td>
                       <td>
-                        {config.canEdit ? (
+                        {config.canChangeRegistrationStatus ? (
                           <select
                             className={`status-select reg-${reg.registrationStatus}`}
                             value={reg.registrationStatus}
@@ -383,7 +383,7 @@ const RegistrationsPage = () => {
                       <td>
                         <div className="action-buttons">
                           <button className="action-btn view-btn" onClick={() => handleView(reg)} title="View Details">👁️</button>
-                          {config.canEdit && (
+                          {config.canEditRegistration && (
                             <button className="action-btn edit-btn" onClick={() => handleEdit(reg)} title="Edit">✏️</button>
                           )}
                           {config.canDelete && (
@@ -413,7 +413,7 @@ const RegistrationsPage = () => {
           />
         )}
 
-        {editingRegistration && config.canEdit && (
+        {editingRegistration && config.canEditRegistration && (
           <EditRegistrationModal
             registration={editingRegistration}
             onClose={() => setEditingRegistration(null)}
