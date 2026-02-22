@@ -6694,6 +6694,12 @@ section:hover .section-title h2:before {
 	height: 4px;
 	width: 34px;
 	background: #ffc010;
+	-webkit-transition: width 0.3s ease;
+	transition: width 0.3s ease;
+}
+
+.f-widget-title h2:hover:before {
+	width: 60px;
 }
 
 .footer-link ul li i {

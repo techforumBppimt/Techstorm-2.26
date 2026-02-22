@@ -5,7 +5,7 @@ const ctaData = {
     bg: bgImg,
     title: 'Ready to Press Start? Register Now for TechStorm 2026!',
     description: 'Join thousands of tech enthusiasts, gamers, and innovators at the most electrifying technical fest of the year. Limited slots available for each event. Early bird registrations get exclusive retro arcade merchandise!',
-    btn: 'Register Now',
+    btn: 'Verify Registration',
 }
 const Cta = () => {
     const { bg, title, description, btn } = ctaData;
@@ -36,7 +36,7 @@ const Cta = () => {
                             </div>
                         </div>
                         <div className="slider-btn">
-                            <Button8bit to={'/contact'} variant="primary" size="large" className="mt-20 wow fadeInDown animated">{btn}</Button8bit>
+                            <Button8bit to={'/verify-registration'} variant="primary" size="large" className="mt-20 wow fadeInDown animated">{btn}</Button8bit>
                         </div>
                     </div>
                 </div>

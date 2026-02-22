@@ -5,30 +5,45 @@
     overflow: hidden;
 }
 
-/* Soft gradient blend between previous dark section and CTA background */
+/* Top fade — blends in from the section above */
 .features-area::before {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
-    top: -80px;           /* pull even further into the previous section */
-    height: 160px;        /* taller blend area for an even stronger effect */
+    top: 0;
+    height: 140px;
     background: linear-gradient(
         to bottom,
         #05030a 0%,
-        rgba(5, 3, 10, 1) 30%,
-        rgba(5, 3, 10, 0.9) 55%,
-        rgba(5, 3, 10, 0.5) 80%,
         transparent 100%
     );
     pointer-events: none;
-    z-index: 0;
+    z-index: 2;
 }
 
-/* Ensure CTA content stays above the gradient overlay */
+/* Bottom fade — softly fades the sky into the dark background below */
+.features-area::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 200px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(5, 11, 22, 0.6) 60%,
+        rgba(5, 11, 22, 0.95) 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Ensure CTA content stays above the gradient overlays */
 .features-area > * {
     position: relative;
-    z-index: 1;
+    z-index: 3;
 }
 
 /* CTA Mobile Responsive Styles */
