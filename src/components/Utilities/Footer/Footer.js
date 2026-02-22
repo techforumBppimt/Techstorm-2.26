@@ -68,7 +68,7 @@ const Footer = () => {
                     style={{ maxWidth: "350px", height: "auto" }}
                   />
                 </div>
-                <div className="footer-link" style={{ fontSize: "13px" }}>
+                <div className="footer-link" style={{ fontSize: "13px", lineHeight: "1.9" }}>
                   {
                     "TechStorm 2026 - Play the Past, Build the Future. The flagship technical fest celebrating retro arcade culture and modern innovation."
                   }
@@ -110,13 +110,10 @@ const Footer = () => {
                 <div className="f-widget-title">
                   <h2>{"Our Links"}</h2>
                 </div>
-                <div className="footer-link">
+                <div className="footer-link" style={{ lineHeight: "1.9" }}>
                   <ul>
                     <li>
                       <Link to={"/"}>{"Home"}</Link>
-                    </li>
-                    <li>
-                      <Link to={"/events"}>{"Events"}</Link>
                     </li>
                     <li>
                       <Link to={"/gallery"}>{"Gallery"}</Link>
@@ -141,11 +138,8 @@ const Footer = () => {
                 <div className="f-widget-title">
                   <h2>{"Events"}</h2>
                 </div>
-                <div className="footer-link">
+                <div className="footer-link" style={{ lineHeight: "1.9" }}>
                   <ul>
-                    <li>
-                      <Link to={"/events"}>{"All Events"}</Link>
-                    </li>
                     {eventCategories.map(({ label, query }) => (
                       <li key={query}>
                         <Link
