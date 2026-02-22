@@ -141,7 +141,7 @@ const EditRegistrationModal = ({ registration, onClose, onSave }) => {
         if (!cancelled) setLoading(false);
       });
     return () => { cancelled = true; };
-  }, [registration?._id, registration?.eventName]);
+  }, [registration]);
 
   const displayReg = fullRegistration || registration;
 
