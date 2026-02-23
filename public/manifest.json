@@ -19,25 +19,25 @@
   ],
   "icons": [
     {
-      "src": "logo192.png",
+      "src": "techfest_logo.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "logo192.png",
+      "src": "techfest_logo.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "maskable"
     },
     {
-      "src": "logo512.png",
+      "src": "techfest_logo.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
-      "src": "logo512.png",
+      "src": "techfest_logo.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
@@ -51,7 +51,7 @@
       "url": "/registration",
       "icons": [
         {
-          "src": "logo192.png",
+          "src": "techfest_logo.png",
           "sizes": "192x192"
         }
       ]
@@ -63,7 +63,7 @@
       "url": "/events",
       "icons": [
         {
-          "src": "logo192.png",
+          "src": "techfest_logo.png",
           "sizes": "192x192"
         }
       ]
@@ -75,7 +75,7 @@
       "url": "/admin",
       "icons": [
         {
-          "src": "logo192.png",
+          "src": "techfest_logo.png",
           "sizes": "192x192"
         }
       ]
@@ -83,7 +83,7 @@
   ],
   "screenshots": [
     {
-      "src": "logo512.png",
+      "src": "techfest_logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "narrow",
