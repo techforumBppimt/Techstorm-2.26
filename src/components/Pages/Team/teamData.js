@@ -39,6 +39,7 @@ const pranayChatterjeeImg = `${cloudinaryBase}/v1771534225/eoorox/team/Pranay.pn
 const souvikDeyImg = `${cloudinaryBase}/v1771534219/eoorox/team/IMG_20260219_130801%20-%20Souvik%20Dey.png`;
 const shivamKumarImg = `${cloudinaryBase}/v1771534190/eoorox/team/1771488293669%20-%20Shivam%20Kumar.png`;
 const adrishBasakImg = `${cloudinaryBase}/v1771534208/eoorox/team/IMG_20251226_234300%20-%20Adrish%20Basak.png`;
+const indraniBanikImg = `${cloudinaryBase}/v1771858328/indranibanik_myhv3i.png`;
 
 export const coreMembers = [
     // FINANCE MANAGEMENT TEAM
@@ -76,7 +77,7 @@ export const coreMembers = [
     { id: '23', avatar: gourabDeyImg, name: 'Gourab Dey', deg: 'Creative & Social Member' },
     { id: '25', avatar: shreyaSahaImg, name: 'Shreya Saha', deg: 'Disc. & Hospitality Member'},
     { id: '26', avatar: shivamKumarImg, name: 'Shivam Kumar', deg: 'Disc. & Hospitality Member' },
-    { id: '27', avatar: defaultAvatar, name: 'Indrani Banik', deg: 'Disc. & Hospitality Member' },
+    { id: '27', avatar: indraniBanikImg, name: 'Indrani Banik', deg: 'Disc. & Hospitality Member' },
     { id: '28', avatar: adityaChoubeyImg, name: 'Aditya Choubey', deg: 'Disc. & Hospitality Member' },
     
     // WEB DEVELOPMENT TEAM
