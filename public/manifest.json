@@ -5,7 +5,7 @@
   "description": "The ultimate college tech fest at BPPIMT - Retro Arcade Gaming, Coding, Robotics, Hackathons & More!",
   "start_url": "/",
   "scope": "/",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait-primary",
   "theme_color": "#FF6B00",
   "background_color": "#0a0a0a",
