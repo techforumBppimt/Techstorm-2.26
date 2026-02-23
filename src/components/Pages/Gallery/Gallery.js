@@ -1,9 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { cloudinaryImages } from '../../../config/cloudinary';
 import galleryBg from '../../../assets/img/eventroute.png';
 import galleryBgMobile from '../../../assets/img/1.png';
 import SectionTitle from '../../Utilities/SectionTitle/SectionTitle';
-import RetroGameConsole from './RetroGameConsole';
 import {
   Pagination,
   PaginationContent,
@@ -121,17 +121,30 @@ const Gallery = () => {
           aria-hidden="true"
         />
         <div className="gallery-hero-overlay">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12 text-center" style={{ paddingTop: '32px', paddingBottom: '8px' }}>
-                <SectionTitle
-                  titlefirst="RETRO ARCADE"
-                  className="gallery-heading-title techstorm-arcade-title"
-                />
+          {/* Breadcrumb */}
+          <section className="breadcrumb-area d-flex align-items-center gallery-breadcrumb">
+            <div className="container">
+              <div className="row align-items-center">
+                <div className="col-xl-12 col-lg-12">
+                  <div className="breadcrumb-wrap text-left">
+                    <div className="breadcrumb-title">
+                      <h2>Gallery</h2>
+                      <div className="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                          <ol className="breadcrumb">
+                            <li className="breadcrumb-item">
+                              <Link to="/">Home</Link>
+                            </li>
+                            <li className="breadcrumb-item active" aria-current="page">Gallery</li>
+                          </ol>
+                        </nav>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <RetroGameConsole />
+          </section>
           <section id="work" className="pt-40 gallery-work-section">
             <div className="container">
               <div className="row align-items-center mb-30">

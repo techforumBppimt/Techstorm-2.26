@@ -1177,6 +1177,22 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      {/* Bottom fade — blends into the Retro Arcade section */}
+      {!isMobile && (
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "160px",
+            background: "linear-gradient(to bottom, transparent 0%, #0a0a0a 100%)",
+            pointerEvents: "none",
+            zIndex: 20,
+          }}
+        />
+      )}
     </section>
   );
 }

@@ -40,26 +40,36 @@
 /* Breadcrumb heading (transparent over video) */
 .gallery-breadcrumb {
   background: transparent !important;
-  padding: 0 !important;
+  padding: 40px 0 30px !important;
   min-height: auto !important;
   margin: 0 !important;
 }
 
 .gallery-breadcrumb .breadcrumb-title h2 {
   color: #fff !important;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   margin-top: 0;
   font-size: 1.75rem;
   font-weight: 700;
+  font-family: 'Silkscreen', sans-serif;
+  line-height: 1;
 }
 
-.gallery-breadcrumb .breadcrumb a,
+.gallery-breadcrumb .breadcrumb a {
+  color: #ffbb00 !important;
+}
+
 .gallery-breadcrumb .breadcrumb-item.active {
   color: #ffbb00 !important;
 }
 
 .gallery-breadcrumb .breadcrumb-item+.breadcrumb-item::before {
-  color: rgb(255, 187, 1);
+  color: #fff;
+  content: '»';
+  font-family: inherit;
+  font-size: inherit;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* Allow brushstroke dash to show fully (avoid overflow clipping) */
