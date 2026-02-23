@@ -7,6 +7,11 @@ import {
 } from "react";
 import aboutBg from "../../../assets/img/aboutandform.png";
 import aboutBgMobile from "../../../assets/img/3.png";
+import arcade0 from "../../../assets/img/arcade0.png";
+import arcade1 from "../../../assets/img/arcade1.png";
+import arcade2 from "../../../assets/img/arcade2.png";
+import arcade3 from "../../../assets/img/arcade3.png";
+import arcade4 from "../../../assets/img/arcade4.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -17,62 +22,47 @@ const EVENT_PHOTOS = [
   {
     id: 0,
     label: "HACKATHON NIGHT",
-    year: "2024",
     bg: "linear-gradient(135deg,#1a0500 0%,#3d1200 50%,#1a0800 100%)",
     accent: "#FF6B00",
     nesIcon: "nes-mario",
-    caption: "300+ coders. 48 hours. Zero sleep. Maximum output.",
-    src: null,
+    caption: "A forgotten arcade machine flickers back to life as a single coin drops, awakening the digital storm once more.",
+    src: arcade0,
   },
   {
     id: 1,
     label: "ROBO CLASH ARENA",
-    year: "2024",
     bg: "linear-gradient(135deg,#00050f 0%,#001a2e 50%,#000814 100%)",
     accent: "#00B4FF",
     nesIcon: "nes-ash",
-    caption: "Steel meets code. Bots battle for supremacy on the main stage.",
-    src: null,
+    caption: "Builders enter a glowing grid world, shaping reality with code, turning ideas into structures of light and logic.",
+    src: arcade1,
   },
   {
     id: 2,
     label: "AI ARENA FINALS",
-    year: "2024",
     bg: "linear-gradient(135deg,#0d0018 0%,#1e0035 50%,#0a0015 100%)",
     accent: "#A855F7",
     nesIcon: "nes-bulbasaur",
-    caption: "Models trained, tested, and deployed live before 500 judges.",
-    src: null,
+    caption: "In the mechanical arena, robots clash with sparks flying, testing precision, strength, and strategy beneath pixelated skies.",
+    src: arcade2,
   },
   {
     id: 3,
     label: "PRIZE CEREMONY",
-    year: "2024",
     bg: "linear-gradient(135deg,#0f0a00 0%,#2a1f00 50%,#0f0900 100%)",
     accent: "#FFD700",
     nesIcon: "nes-pokeball",
-    caption: "5 Lakhs awarded. Champions crowned. Legends made.",
-    src: null,
+    caption: "Portals open to racing tracks, gaming arenas, and creative studios where imagination competes and creativity becomes power.",
+    src: arcade3,
   },
   {
     id: 4,
     label: "CTF STORM",
-    year: "2023",
     bg: "linear-gradient(135deg,#150010 0%,#2d0025 50%,#0f0010 100%)",
     accent: "#D946EF",
     nesIcon: "nes-squirtle",
-    caption: "Ethical hacking at its finest. Capture. Crack. Conquer.",
-    src: null,
-  },
-  {
-    id: 5,
-    label: "CLOSING NIGHT",
-    year: "2023",
-    bg: "linear-gradient(135deg,#1a0800 0%,#0d0018 50%,#001a2e 100%)",
-    accent: "#FF8C00",
-    nesIcon: "nes-kirby",
-    caption: "Three days of chaos ends with one epic celebration.",
-    src: null,
+    caption: "As sunrise rises over the digital horizon, participants stand victorious, transformed from players into creators of the future.",
+    src: arcade4,
   },
 ];
 
@@ -341,24 +331,6 @@ function ArcadeMachine({ current, onPrev, onNext, onSelect, onCardScroll }) {
                 "linear-gradient(180deg, rgba(255,255,255,0.05), transparent)",
             }}
           />
-          {/* Year badge */}
-          <div
-            style={{
-              position: "absolute",
-              top: "8px",
-              right: "8px",
-              zIndex: 7,
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: "7px",
-              color: photo.accent,
-              background: "rgba(0,0,0,0.85)",
-              border: `1px solid ${photo.accent}`,
-              padding: "4px 7px",
-              letterSpacing: "1px",
-            }}
-          >
-            {photo.year}
-          </div>
         </div>
 
         {/* Caption */}
@@ -377,7 +349,7 @@ function ArcadeMachine({ current, onPrev, onNext, onSelect, onCardScroll }) {
           <div
             style={{
               fontFamily: "'VT323', monospace",
-              fontSize: "14px",
+              fontSize: "11px",
               color: "#999",
               letterSpacing: "0.5px",
               lineHeight: 1.5,
