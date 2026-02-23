@@ -54,6 +54,7 @@ const RegistrationsPage = () => {
   const location = useLocation();
   const [selectedEvent, setSelectedEvent] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchInput, setSearchInput] = useState(''); // New: separate input state
   const [viewingRegistration, setViewingRegistration] = useState(null);
   const [editingRegistration, setEditingRegistration] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -61,6 +62,7 @@ const RegistrationsPage = () => {
   const [registrations, setRegistrations] = useState([]);
   const [events, setEvents] = useState(['all']);
   const [loading, setLoading] = useState(true);
+  const [tableLoading, setTableLoading] = useState(false); // New: separate loading for table only
   const [error, setError] = useState(null);
   const [stats, setStats] = useState({
     total: 0,
@@ -82,9 +84,15 @@ const RegistrationsPage = () => {
     }
   };
 
-  const fetchRegistrations = useCallback(async () => {
+  const fetchRegistrations = useCallback(async (isInitialLoad = false) => {
     try {
-      setLoading(true);
+      // Only show full page loading on initial load
+      if (isInitialLoad) {
+        setLoading(true);
+      } else {
+        setTableLoading(true);
+      }
+      
       const params = {
         limit: 1000 // Fetch up to 1000 registrations
       };
@@ -119,6 +127,7 @@ const RegistrationsPage = () => {
       setError(err.message);
     } finally {
       setLoading(false);
+      setTableLoading(false);
     }
   }, [selectedEvent, searchTerm]);
 
@@ -128,15 +137,34 @@ const RegistrationsPage = () => {
       setUser(JSON.parse(userData));
     }
     
-    // Fetch initial data
+    // Fetch initial data with full page loading
     fetchEvents();
-    fetchRegistrations();
+    fetchRegistrations(true); // Pass true for initial load
   }, [fetchRegistrations]);
 
   useEffect(() => {
-    // Refetch when filters change
-    fetchRegistrations();
+    // Refetch when filters change (but NOT searchInput, only searchTerm)
+    // Don't show full page loading, only table loading
+    fetchRegistrations(false);
   }, [selectedEvent, searchTerm, fetchRegistrations]);
+
+  // Handle search button click
+  const handleSearch = () => {
+    setSearchTerm(searchInput);
+  };
+
+  // Handle Enter key in search input
+  const handleSearchKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  // Handle clear search
+  const handleClearSearch = () => {
+    setSearchInput('');
+    setSearchTerm('');
+  };
 
   // Dummy registration data - REMOVED, now fetching from API
   // const [registrations, setRegistrations] = useState([...]);
@@ -276,13 +304,49 @@ const RegistrationsPage = () => {
         </div>
 
         <div className="controls-bar">
-          <input
-            type="text"
-            placeholder="Search by name, email, or registration number..."
-            className="search-input"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+          <div className="search-container" style={{ display: 'flex', gap: '10px', flex: 1 }}>
+            <input
+              type="text"
+              placeholder="Search by name, email, or registration number..."
+              className="search-input"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyPress={handleSearchKeyPress}
+              style={{ flex: 1 }}
+            />
+            <button 
+              className="search-btn" 
+              onClick={handleSearch}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: '#0f766e',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                fontWeight: '500'
+              }}
+            >
+              🔍 Search
+            </button>
+            {searchTerm && (
+              <button 
+                className="clear-btn" 
+                onClick={handleClearSearch}
+                style={{
+                  padding: '10px 20px',
+                  backgroundColor: '#dc2626',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                  fontWeight: '500'
+                }}
+              >
+                ✕ Clear
+              </button>
+            )}
+          </div>
           {role === 'core' && (
             <select
               className="event-filter"
@@ -307,7 +371,21 @@ const RegistrationsPage = () => {
           </h2>
           <p className="section-subtitle">Search and filter below</p>
           
-          <div className="table-container">
+          {tableLoading && (
+            <div style={{
+              padding: '20px',
+              textAlign: 'center',
+              backgroundColor: 'rgba(15, 118, 110, 0.1)',
+              borderRadius: '8px',
+              marginBottom: '20px',
+              color: '#0f766e',
+              fontWeight: '500'
+            }}>
+              🔄 Loading registrations...
+            </div>
+          )}
+          
+          <div className="table-container" style={{ opacity: tableLoading ? 0.5 : 1, transition: 'opacity 0.3s' }}>
             <table className="data-table">
               <thead>
                 <tr>
