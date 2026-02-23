@@ -6,6 +6,7 @@ import './RoleDashboard.css';
 import ViewRegistrationModal from './ViewRegistrationModal';
 import EditRegistrationModal from './EditRegistrationModal';
 import AddRegistrationModal from './AddRegistrationModal';
+import * as XLSX from 'xlsx';
 
 /**
  * Get display value from a registration object, checking multiple possible keys
@@ -277,6 +278,168 @@ const RegistrationsPage = () => {
     }
   };
 
+  // Export to Excel function
+  const handleExportToExcel = () => {
+    try {
+      // Prepare data for export
+      const exportData = filteredRegistrations.map((reg, index) => {
+        const row = {
+          'S.No': index + 1,
+          'Registration Number': getDisplayValue(reg, 'registrationNumber') || 'N/A',
+          'Event Name': reg.eventName || 'N/A',
+          'Registration Date': reg.submittedAt ? new Date(reg.submittedAt).toLocaleDateString('en-IN') + ' ' + new Date(reg.submittedAt).toLocaleTimeString('en-IN') : 'N/A',
+          'Registration Status': reg.registrationStatus || 'N/A',
+        };
+
+        // Check if it's a team event
+        if (reg.teamName || (reg.participants && reg.participants.length > 1)) {
+          row['Team Name'] = reg.teamName || 'N/A';
+          row['Number of Participants'] = reg.numberOfParticipants || reg.participants?.length || 'N/A';
+          
+          // Add participant details
+          if (reg.participants && Array.isArray(reg.participants)) {
+            reg.participants.forEach((participant, idx) => {
+              const num = idx + 1;
+              row[`P${num} Name`] = participant.name || 'N/A';
+              row[`P${num} Email`] = participant.email || 'N/A';
+              row[`P${num} Contact`] = participant.contact || 'N/A';
+              row[`P${num} College`] = participant.college || 'N/A';
+              row[`P${num} College Other`] = participant.collegeOther || 'N/A';
+              row[`P${num} Year`] = participant.year || 'N/A';
+              row[`P${num} Department`] = participant.department || 'N/A';
+              row[`P${num} ID File URL`] = participant.idFileUrl || 'N/A';
+              row[`P${num} ID Cloudinary ID`] = participant.idFileCloudinaryId || 'N/A';
+            });
+          }
+        } else {
+          // Solo event - check both top-level and participants array
+          const participant = reg.participants && reg.participants[0];
+          
+          row['Full Name'] = getDisplayValue(reg, 'fullName', 'full_name', 'name') || 
+                            participant?.name || 'N/A';
+          row['Email'] = getDisplayEmail(reg) || participant?.email || 'N/A';
+          row['Contact'] = getDisplayValue(reg, 'contactNumber', 'phone', 'contact') || 
+                          participant?.contact || 'N/A';
+          row['College'] = getDisplayValue(reg, 'collegeName', 'college', 'institution') || 
+                          participant?.college || 'N/A';
+          row['College Other'] = reg.collegeOther || participant?.collegeOther || 'N/A';
+          row['Year'] = getDisplayValue(reg, 'year', 'yearOfStudy') || 
+                       participant?.year || 'N/A';
+          row['Department'] = getDisplayValue(reg, 'department') || 
+                             participant?.department || 'N/A';
+          row['ID File URL'] = reg.idFileUrl || reg.idProofUrl || 
+                              participant?.idFileUrl || 'N/A';
+          row['ID Cloudinary ID'] = reg.idFileCloudinaryId || reg.idProofCloudinaryId || 
+                                   participant?.idFileCloudinaryId || 'N/A';
+        }
+
+        // Payment details
+        row['Payment Mode'] = reg.paymentMode || 'N/A';
+        row['Payment Date'] = reg.paymentDate || 'N/A';
+        row['Payment Status'] = reg.paymentStatus || 'N/A';
+        row['Transaction ID'] = reg.transactionId || 'N/A';
+        row['Payment Screenshot URL'] = reg.paymentScreenshotUrl || reg.paymentReceiptUrl || 'N/A';
+        row['Payment Screenshot Cloudinary ID'] = reg.paymentScreenshotCloudinaryId || reg.paymentReceiptCloudinaryId || 'N/A';
+
+        // Additional fields
+        row['WhatsApp Confirmed'] = reg.whatsappConfirmed ? 'Yes' : 'No';
+        row['Agree to Rules'] = reg.agreeToRules ? 'Yes' : 'No';
+        row['Source'] = reg.source || 'web';
+
+        return row;
+      });
+
+      // Create worksheet
+      const worksheet = XLSX.utils.json_to_sheet(exportData);
+      
+      // Set column widths - adjust based on content
+      const maxParticipants = Math.max(
+        ...filteredRegistrations.map(reg => reg.participants?.length || 1)
+      );
+      
+      const baseColumns = [
+        { wch: 6 },  // S.No
+        { wch: 22 }, // Registration Number
+        { wch: 20 }, // Event Name
+        { wch: 20 }, // Registration Date
+        { wch: 18 }, // Registration Status
+      ];
+      
+      // Add columns based on whether it's team or solo
+      const hasTeamEvents = filteredRegistrations.some(reg => reg.teamName || (reg.participants && reg.participants.length > 1));
+      
+      if (hasTeamEvents) {
+        baseColumns.push({ wch: 25 }); // Team Name
+        baseColumns.push({ wch: 12 }); // Number of Participants
+        
+        // Add participant columns
+        for (let i = 0; i < maxParticipants; i++) {
+          baseColumns.push(
+            { wch: 25 }, // Name
+            { wch: 30 }, // Email
+            { wch: 15 }, // Contact
+            { wch: 35 }, // College
+            { wch: 20 }, // College Other
+            { wch: 12 }, // Year
+            { wch: 15 }, // Department
+            { wch: 50 }, // ID File URL
+            { wch: 40 }  // ID Cloudinary ID
+          );
+        }
+      } else {
+        baseColumns.push(
+          { wch: 25 }, // Full Name
+          { wch: 30 }, // Email
+          { wch: 15 }, // Contact
+          { wch: 35 }, // College
+          { wch: 20 }, // College Other
+          { wch: 12 }, // Year
+          { wch: 15 }, // Department
+          { wch: 50 }, // ID File URL
+          { wch: 40 }  // ID Cloudinary ID
+        );
+      }
+      
+      // Payment columns
+      baseColumns.push(
+        { wch: 12 }, // Payment Mode
+        { wch: 15 }, // Payment Date
+        { wch: 15 }, // Payment Status
+        { wch: 25 }, // Transaction ID
+        { wch: 50 }, // Payment Screenshot URL
+        { wch: 40 }, // Payment Screenshot Cloudinary ID
+        { wch: 12 }, // WhatsApp Confirmed
+        { wch: 12 }, // Agree to Rules
+        { wch: 10 }  // Source
+      );
+      
+      worksheet['!cols'] = baseColumns;
+
+      // Create workbook
+      const workbook = XLSX.utils.book_new();
+      
+      // Generate sheet name
+      const sheetName = selectedEvent !== 'all' 
+        ? selectedEvent.substring(0, 31) // Excel sheet name limit is 31 chars
+        : 'All Events';
+      
+      XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+
+      // Generate filename
+      const timestamp = new Date().toISOString().split('T')[0];
+      const eventPart = selectedEvent !== 'all' ? `_${selectedEvent.replace(/\s+/g, '_')}` : '_All_Events';
+      const filename = `TechStorm_Registrations${eventPart}_${timestamp}.xlsx`;
+
+      // Download file
+      XLSX.writeFile(workbook, filename);
+
+      console.log(`✅ Exported ${exportData.length} registrations to ${filename}`);
+    } catch (error) {
+      console.error('❌ Error exporting to Excel:', error);
+      alert('Failed to export data. Please try again.');
+    }
+  };
+
   if (loading) {
     return (
       <div className={`role-dashboard ${role}-dashboard`}>
@@ -388,6 +551,26 @@ const RegistrationsPage = () => {
               ))}
             </select>
           )}
+          <button 
+            className="export-btn" 
+            onClick={handleExportToExcel}
+            disabled={filteredRegistrations.length === 0}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: filteredRegistrations.length === 0 ? '#9ca3af' : '#059669',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: filteredRegistrations.length === 0 ? 'not-allowed' : 'pointer',
+              fontWeight: '500',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+            title={filteredRegistrations.length === 0 ? 'No data to export' : 'Export to Excel'}
+          >
+            📊 Export Excel
+          </button>
           {config.canAdd && (
             <button className="add-btn" onClick={() => setShowAddModal(true)}>+ Add Registration</button>
           )}
