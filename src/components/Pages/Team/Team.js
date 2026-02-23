@@ -63,10 +63,10 @@ const Teams = () => {
               <div className="row">
                 <div className="col-lg-12 p-relative">
                   <SectionTitle
-                    titlefirst="Organizing"
-                    titleSec="Committee"
+                    titlefirst="Organizing Committee"
+                    
                     className="techstorm-arcade-title gallery-heading-title"
-                  />
+                Committee   />
                 </div>
               </div>
               <div className="row team-org-members-row">

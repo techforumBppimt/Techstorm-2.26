@@ -149,10 +149,10 @@ const Gallery = () => {
               <div className="row align-items-center mb-30">
                 <div className="col-lg-12">
                   <SectionTitle
-                    titlefirst="Glimpses of"
-                    titleSec="last year"
+                    titlefirst="Glimpses of Last Year"
+                    
                     className="gallery-heading-title techstorm-arcade-title"
-                  />
+                last year   />
                 </div>
               </div>
               <div className="portfolio gallery-retro">

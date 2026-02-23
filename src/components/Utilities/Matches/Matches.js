@@ -550,7 +550,7 @@ const Matches = () => {
 
         <div id="events-grid" className="row align-items-center mb-30">
           <div className="col-lg-12">
-            <SectionTitle titlefirst="Featured" titleSec="Events" className="gallery-heading-title" />
+            <SectionTitle titlefirst="Featured Events" className="gallery-heading-title" />
           </div>
           <div className="col-lg-12">
             <div
