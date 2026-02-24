@@ -6,17 +6,14 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "portrait-primary",
   "theme_color": "#FF6B00",
   "background_color": "#0a0a0a",
   "lang": "en-US",
   "dir": "ltr",
   "prefer_related_applications": false,
-  "categories": [
-    "education",
-    "entertainment",
-    "games"
-  ],
+  "categories": ["education", "entertainment", "games"],
   "icons": [
     {
       "src": "techfest_logo.png",
@@ -49,36 +46,21 @@
       "short_name": "Register",
       "description": "Register for TechStorm 2026 events",
       "url": "/registration",
-      "icons": [
-        {
-          "src": "techfest_logo.png",
-          "sizes": "192x192"
-        }
-      ]
+      "icons": [{ "src": "techfest_logo.png", "sizes": "192x192" }]
     },
     {
       "name": "View Events",
       "short_name": "Events",
       "description": "Browse all TechStorm events",
       "url": "/events",
-      "icons": [
-        {
-          "src": "techfest_logo.png",
-          "sizes": "192x192"
-        }
-      ]
+      "icons": [{ "src": "techfest_logo.png", "sizes": "192x192" }]
     },
     {
       "name": "Admin Portal",
       "short_name": "Admin",
       "description": "Access admin dashboard",
       "url": "/admin",
-      "icons": [
-        {
-          "src": "techfest_logo.png",
-          "sizes": "192x192"
-        }
-      ]
+      "icons": [{ "src": "techfest_logo.png", "sizes": "192x192" }]
     }
   ],
   "screenshots": [
