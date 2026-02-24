@@ -261,21 +261,7 @@ const WorkGallery = () => {
                 }}
             ></div>
             
-            <div className="container-fluid gallery-container" style={{ position: 'relative', zIndex: 1, paddingLeft: '40px', paddingRight: '40px' }}>
-                {/* Left edge fade over the padding */}
-                <div style={{
-                    position: 'absolute', top: 0, left: 0,
-                    width: '60px', height: '100%',
-                    background: 'linear-gradient(to right, #05030a 0%, transparent 100%)',
-                    pointerEvents: 'none', zIndex: 4,
-                }} />
-                {/* Right edge fade over the padding */}
-                <div style={{
-                    position: 'absolute', top: 0, right: 0,
-                    width: '60px', height: '100%',
-                    background: 'linear-gradient(to left, #05030a 0%, transparent 100%)',
-                    pointerEvents: 'none', zIndex: 4,
-                }} />
+            <div className="container-fluid gallery-container" style={{ position: 'relative', zIndex: 1 }}>
                 <div className="portfolio">
                     <div className="row align-items-center mb-30">
                         {/*
@@ -387,29 +373,6 @@ const WorkGallery = () => {
                         </div>
                     </div>
 
-                    <div style={{ position: 'relative' }}>
-                        {/* Left edge fade */}
-                        <div style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '60px',
-                            height: '100%',
-                            background: 'linear-gradient(to right, #05030a 0%, transparent 100%)',
-                            pointerEvents: 'none',
-                            zIndex: 2,
-                        }} />
-                        {/* Right edge fade */}
-                        <div style={{
-                            position: 'absolute',
-                            top: 0,
-                            right: 0,
-                            width: '60px',
-                            height: '100%',
-                            background: 'linear-gradient(to left, #05030a 0%, transparent 100%)',
-                            pointerEvents: 'none',
-                            zIndex: 2,
-                        }} />
                     <div 
                         ref={scrollContainerRef}
                         style={{
@@ -523,7 +486,6 @@ const WorkGallery = () => {
                             })
                         }
                     </div>
-                    </div> {/* end edge-fade wrapper */}
                 </div>
             </div>
             {/* Bottom fade blend into next section */}

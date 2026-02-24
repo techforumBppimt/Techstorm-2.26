@@ -300,8 +300,8 @@
 
 /* Gallery container padding control */
 .gallery-container {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 @media (max-width: 768px) {
