@@ -189,36 +189,52 @@ const PacManLoader = ({ onComplete }) => {
         drawPacMan(ctx, pacX, pacY, PAC_RADIUS, mouthAngle, direction === 1, '#0d0d0d');
         ctx.restore();
 
-        /* ── Loading text ── */
-        const pulse = 0.55 + 0.45 * Math.sin(Date.now() * 0.0025);
+        /* ── Loading text (retro pixel style) ── */
+        const dotCount   = Math.floor(Date.now() / 380) % 4;
+        const loadingStr = 'LOADING' + '.'.repeat(dotCount);
         ctx.save();
-        ctx.globalAlpha = pulse;
-        ctx.font        = '13px "Orbitron", "Press Start 2P", monospace';
-        ctx.fillStyle   = '#888888';
+        ctx.font        = '8px "Press Start 2P", "Orbitron", monospace';
         ctx.textAlign   = 'center';
-        ctx.fillText('Loading\u2026', W / 2, gridY + GRID_H + 58);
+        ctx.shadowColor = '#FFD700';
+        ctx.shadowBlur  = 10;
+        ctx.fillStyle   = '#FFD700';
+        ctx.globalAlpha = 0.85;
+        ctx.fillText(loadingStr, W / 2, gridY + GRID_H + 52);
         ctx.restore();
 
-        /* ── Subtle progress bar ── */
+        /* ── Pixel-segmented progress bar ── */
         const eaten      = dots.filter(d => d.eaten).length;
         const progress   = eaten / 100;
-        const barW       = GRID_W + 40;
+        const barW       = GRID_W + 20;
         const barX       = (W - barW) / 2;
-        const barY       = gridY + GRID_H + 76;
-        const barH       = 3;
+        const barY       = gridY + GRID_H + 64;
+        const barH       = 5;
+        const borderW    = 1;
+        const segCount   = 20;
+        const segGap     = 2;
+        const segW       = (barW - (segCount - 1) * segGap) / segCount;
+        const filledSegs = Math.round(progress * segCount);
 
-        // track
-        ctx.fillStyle = 'rgba(255,255,255,0.07)';
+        // gold pixel border
+        ctx.fillStyle   = 'rgba(255,215,0,0.5)';
+        ctx.fillRect(barX - borderW, barY - borderW, barW + borderW * 2, barH + borderW * 2);
+
+        // dark inner background
+        ctx.fillStyle = '#0d0d0d';
         ctx.fillRect(barX, barY, barW, barH);
 
-        // fill
-        if (progress > 0) {
-          const fillGrd = ctx.createLinearGradient(barX, 0, barX + barW * progress, 0);
-          fillGrd.addColorStop(0,   '#FF6B00');
-          fillGrd.addColorStop(0.5, '#FFD700');
-          fillGrd.addColorStop(1,   '#FF6B00');
-          ctx.fillStyle = fillGrd;
-          ctx.fillRect(barX, barY, barW * progress, barH);
+        // filled segments
+        for (let i = 0; i < filledSegs; i++) {
+          const sx = barX + i * (segW + segGap);
+          const isLast = i === filledSegs - 1;
+          ctx.save();
+          if (isLast && filledSegs > 0) {
+            ctx.shadowColor = '#FFD700';
+            ctx.shadowBlur  = 8;
+          }
+          ctx.fillStyle = i % 2 === 0 ? '#FF8C00' : '#FFA500';
+          ctx.fillRect(sx, barY, segW, barH);
+          ctx.restore();
         }
       }
 
