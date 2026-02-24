@@ -75,7 +75,7 @@ const Carousel8bit = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <SectionTitle
-                            titlefirst="PREV. YEAR HIGHLIGHTS"
+                            titlefirst="PREVIOUS YEAR HIGHLIGHTS"
                             titleSec=""
                             className="techstorm-arcade-title"
                         />

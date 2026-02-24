@@ -48,7 +48,7 @@ const BlogOne = () => {
                 </p>
 
                 <div className="sponsor-mystery-row" aria-label="Sponsors coming soon">
-                    {Array.from({ length: 3 }).map((_, idx) => (
+                    {Array.from({ length: 5 }).map((_, idx) => (
                         <img
                             key={idx}
                             src={mysteryBox}

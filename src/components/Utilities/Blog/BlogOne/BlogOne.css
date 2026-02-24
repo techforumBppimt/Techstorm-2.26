@@ -30,6 +30,24 @@
     z-index: 1;
 }
 
+/* Bottom fade — blends into the footer below */
+.sponsor-preview-section::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 160px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.7) 60%,
+        rgba(0, 0, 0, 0.98) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
 .sponsor-preview-section .container {
     padding-top: 60px;
     padding-bottom: 0;
@@ -88,17 +106,34 @@
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
-    gap: 24px;
+    gap: 1px;
     margin-top: 14px;
 }
 
 .sponsor-mystery-box {
-    width: 200px;
+    width: 220px;
     height: auto;
     flex: 0 0 auto;
     image-rendering: pixelated;
     opacity: 0.95;
     filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45));
+    transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+    cursor: pointer;
+}
+
+.sponsor-mystery-box:hover {
+    animation: mystery-box-bounce 0.4s cubic-bezier(0.36, 0.07, 0.12, 1.2) forwards;
+    filter: drop-shadow(0 0 18px rgba(255, 192, 16, 0.85)) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55));
+    opacity: 1;
+}
+
+@keyframes mystery-box-bounce {
+    0%   { transform: translateY(0)    scale(1); }
+    30%  { transform: translateY(-18px) scale(1.08); }
+    55%  { transform: translateY(-8px)  scale(1.04); }
+    75%  { transform: translateY(-14px) scale(1.06); }
+    90%  { transform: translateY(-4px)  scale(1.02); }
+    100% { transform: translateY(-10px) scale(1.05); }
 }
 
 .sponsor-name {
@@ -138,12 +173,13 @@
 
 @media (max-width: 767px) {
     .sponsor-preview-section {
-        height: clamp(275px, 66vw, 390px);
+        height: auto;
+        min-height: clamp(275px, 66vw, 390px);
     }
 
     .sponsor-preview-section .container {
         padding-top: 36px;
-        padding-bottom: 0;
+        padding-bottom: 100px;
         padding-left: 12px;
         padding-right: 12px;
     }
@@ -167,7 +203,7 @@
     }
 
     .sponsor-mystery-box {
-        width: 82px;
+        width: 56px;
     }
 
     .sponsor-preview-label {
@@ -187,6 +223,6 @@
 
 @media (max-width: 420px) {
     .sponsor-mystery-box {
-        width: 70px;
+        width: 46px;
     }
 }

@@ -24,16 +24,16 @@ const Footer = () => {
         position: "relative",
       }}
     >
-      {/* Top blend — page content always fades to #000 via the universal App overlay, footer picks up from there */}
+      {/* Top blend — strong fade from whatever section sits above into the footer */}
       <div
         style={{
           position: "absolute",
           top: 0,
           left: 0,
           right: 0,
-          height: "60px",
+          height: "160px",
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0) 100%)",
           zIndex: 1,
           pointerEvents: "none",
         }}
@@ -233,7 +233,7 @@ const Footer = () => {
       </div>
 
       <div
-        className="copyright-wrap"
+        className="copyright-wrap pl-40 pr-40"
         style={{ position: "relative", zIndex: 2 }}
       >
         <div className="container">

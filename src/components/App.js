@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   useLocation,
 } from "react-router-dom";
+
+import PacManLoader from "./PacManLoader/PacManLoader";
 
 import Header from "./Utilities/Header/Header";
 import Home from "./Pages/Home/HomeMain/HomeMain";
@@ -283,10 +285,19 @@ const AppContent = () => {
 };
 
 const App = () => {
+  const [loaderDone, setLoaderDone] = useState(false);
+
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <>
+      {/* Pac-Man loader – rendered above everything, removed from DOM once complete */}
+      {!loaderDone && (
+        <PacManLoader onComplete={() => setLoaderDone(true)} />
+      )}
+
+      <Router>
+        <AppContent />
+      </Router>
+    </>
   );
 };
 
