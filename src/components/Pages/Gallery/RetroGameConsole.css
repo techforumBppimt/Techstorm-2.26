@@ -727,31 +727,35 @@
   pointer-events: auto;
 }
 
-/* ── Fullscreen: wrapper div goes fullscreen, iframe fills it ── */
-.retro-iframe-wrap:fullscreen {
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-}
-
+/* ── Fullscreen: wrapper fills viewport, iframe scaled so embed fills screen ──
+   Archive.org embeds use a fixed internal size (~560×384); we scale the iframe
+   so that content fills the viewport (--fs-scale set by JS). */
+.retro-iframe-wrap:fullscreen,
 .retro-iframe-wrap:-webkit-full-screen {
   background: #000;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-width: 100vw;
+  min-height: 100vh;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
+  overflow: hidden;
 }
 
+/* Iframe at embed nominal size, scaled up to fill viewport (scale from JS) */
 .retro-iframe-wrap:fullscreen iframe,
 .retro-iframe-wrap:-webkit-full-screen iframe {
-  width: 100%;
-  height: 100%;
-  max-width: 100vw;
-  max-height: 100vh;
+  width: 560px !important;
+  height: 384px !important;
+  min-width: 560px;
+  min-height: 384px;
+  flex-shrink: 0;
+  border: 0;
+  transform: scale(var(--fs-scale, 1));
+  transform-origin: center center;
+  position: relative;
 }
 
 /* ─────────────────────────────────

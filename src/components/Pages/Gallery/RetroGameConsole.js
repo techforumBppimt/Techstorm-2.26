@@ -115,6 +115,33 @@ const RetroGameConsole = () => {
     };
   }, []);
 
+  /* ── fullscreen: scale iframe so Archive.org embed (fixed 560×384) fills viewport ── */
+  const EMBED_W = 560;
+  const EMBED_H = 384;
+  useEffect(() => {
+    const updateScale = () => {
+      const el = iframeWrapRef.current;
+      const isFs = !!document.fullscreenElement;
+      if (!el || !isFs) {
+        el?.style.removeProperty('--fs-scale');
+        return;
+      }
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const scale = Math.min(w / EMBED_W, h / EMBED_H, 4);
+      el.style.setProperty('--fs-scale', String(scale));
+    };
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    document.addEventListener('fullscreenchange', updateScale);
+    document.addEventListener('webkitfullscreenchange', updateScale);
+    return () => {
+      window.removeEventListener('resize', updateScale);
+      document.removeEventListener('fullscreenchange', updateScale);
+      document.removeEventListener('webkitfullscreenchange', updateScale);
+    };
+  }, [isFullscreen]);
+
   const handleFullscreen = () => {
     // Fullscreen the wrapper div — more reliable than the cross-origin iframe itself.
     // The browser will block requestFullscreen() on a cross-origin iframe triggered
