@@ -9,7 +9,7 @@ const ROWS        = 10;          // 10×10 = 100 dots
 const DOT_SPACING = 20;          // px between dot centres
 const DOT_RADIUS  = 3;           // pellet radius
 const PAC_RADIUS  = 9;           // Pac-Man radius
-const PAC_SPEED   = 5;           // px per animation frame
+const PAC_SPEED   = 8;           // px per animation frame (~5 s to eat all 100 dots)
 const MOUTH_SPEED = 0.18;        // radians per frame (mouth chop speed)
 const ENTRY_BUF   = PAC_RADIUS + 20; // extra px before first / after last dot
 
@@ -49,6 +49,13 @@ const PacManLoader = ({ onComplete }) => {
   const canvasRef   = useRef(null);
   const overlayRef  = useRef(null);
   const [fadingOut, setFadingOut] = useState(false);
+
+  /* Lock body scroll while the loader is visible */
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, []);
 
   /* stable callback so the effect dep array stays clean */
   const handleDone = useCallback(() => {
@@ -245,8 +252,8 @@ const PacManLoader = ({ onComplete }) => {
 
     rafId = requestAnimationFrame(animate);
 
-    /* ── Hard 3-second maximum duration ── */
-    const timer = setTimeout(handleDone, 3000);
+    /* ── Fallback 5-second maximum duration (animation should finish naturally first) ── */
+    const timer = setTimeout(handleDone, 5000);
 
     return () => {
       cancelAnimationFrame(rafId);
