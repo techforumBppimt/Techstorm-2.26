@@ -5,7 +5,7 @@
         ],
         "target": {
             "namespace": "android_app",
-            "package_name": "app.vercel.techstorm2_26.twa",
+            "package_name": "ac.in.bppimt.techstorm.twa",
             "sha256_cert_fingerprints": [
                 "FD:56:1A:96:ED:F9:70:70:6B:BC:64:5D:8C:9D:74:DD:93:D0:74:C5:38:C5:B0:4C:75:39:FD:87:F5:95:8E:C8"
             ]
