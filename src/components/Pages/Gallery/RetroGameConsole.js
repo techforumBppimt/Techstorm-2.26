@@ -9,14 +9,23 @@ const GAMES = [
     subtitle: 'THE CLASSIC FPS',
     archiveId: 'doom-2-play',
     color: '#ff4444',
+    controls: [
+      'WASD / ARROWS: MOVE',
+      'CTRL / LCLICK: SHOOT',
+      'SPACE: USE / OPEN DOOR',
+      'SHIFT: RUN FASTER',
+      'ALT+ARROWS: STRAFE',
+      '1-7: SWITCH WEAPON',
+    ],
   },
   {
     id: 2,
     key: 'mario',
     name: 'SUPER MARIO',
     subtitle: 'CLASSIC PLATFORMER',
-    archiveId: 'mario-gg',
+    archiveId: 'Dos_Mario',
     color: '#44ff44',
+    controls: ['ARROWS: MOVE', 'Z / CTRL: JUMP', 'X / ALT: RUN/FIRE', 'ENTER: START'],
   },
   {
     id: 3,
@@ -25,6 +34,7 @@ const GAMES = [
     subtitle: 'THE CLASSIC PLATFORMER',
     archiveId: 'msdos_Prince_of_Persia_1990',
     color: '#ffaa00',
+    controls: ['ARROWS: MOVE/CLIMB', 'SHIFT: CAREFUL WALK', 'SPACE: DRINK POTION', 'A: DRAW SWORD'],
   },
   {
     id: 4,
@@ -33,6 +43,7 @@ const GAMES = [
     subtitle: 'THE CLASSIC ARCADE',
     archiveId: 'msdos_Pac-Man_1983',
     color: '#ffff00',
+    controls: ['ARROWS: MOVE', 'EAT ALL DOTS', 'AVOID GHOSTS', 'POWER PELLET: HUNT'],
   },
 ];
 
@@ -105,12 +116,17 @@ const RetroGameConsole = () => {
   }, []);
 
   const handleFullscreen = () => {
-    const el = iframeRef.current;
+    // Fullscreen the wrapper div — more reliable than the cross-origin iframe itself.
+    // The browser will block requestFullscreen() on a cross-origin iframe triggered
+    // by a button outside it; fullscreening our own wrapper has no such restriction.
+    const el = iframeWrapRef.current;
     if (!el) return;
     if (!document.fullscreenElement) {
-      (el.requestFullscreen || el.webkitRequestFullscreen || (() => {})).call(el);
+      const req = el.requestFullscreen || el.webkitRequestFullscreen;
+      if (req) req.call(el).catch(() => {});
     } else {
-      (document.exitFullscreen || document.webkitExitFullscreen || (() => {})).call(document);
+      const exit = document.exitFullscreen || document.webkitExitFullscreen;
+      if (exit) exit.call(document).catch(() => {});
     }
   };
 
@@ -448,8 +464,22 @@ const RetroGameConsole = () => {
             <div className="rsp-hint">
               {!powerOn && 'PRESS POWER'}
               {powerOn && !selectedGame && 'TYPE 1-4 TO SELECT'}
-              {selectedGame && 'TYPE EJECT TO QUIT'}
+              {selectedGame && 'EJECT BTN TO QUIT'}
             </div>
+          </div>
+
+          {/* controls panel */}
+          <div className="retro-controls-panel">
+            <div className="rcp-header">CONTROLS</div>
+            {selectedGame ? (
+              <div className="rcp-list">
+                {selectedGame.controls.map((ctrl, i) => (
+                  <div key={i} className="rcp-ctrl-line">{ctrl}</div>
+                ))}
+              </div>
+            ) : (
+              <div className="rcp-idle">SELECT A GAME</div>
+            )}
           </div>
 
         </div>
