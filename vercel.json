@@ -1,11 +1,23 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "/.well-known/assetlinks.json",
-      "dest": "/assetlinks.json",
-      "headers": {
-        "Content-Type": "application/json"
-      }
+      "source": "/.well-known/assetlinks.json",
+      "destination": "/assetlinks.json"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/.well-known/assetlinks.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
     }
   ]
 }
