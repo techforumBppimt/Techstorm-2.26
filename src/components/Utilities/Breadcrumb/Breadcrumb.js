@@ -1,4 +1,4 @@
-import defaultBg from '../../../assets/img/bg/about-hd.png'
+import defaultBg from '../../../assets/img/herobg.png'
 import { Link } from 'react-router-dom';
 const Breadcrumb = ({ pageTitle, currentPage, bgImage})=>{
     const bg = bgImage || defaultBg;

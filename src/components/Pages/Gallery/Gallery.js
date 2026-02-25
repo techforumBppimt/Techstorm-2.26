@@ -153,7 +153,7 @@ const Gallery = () => {
                     titlefirst="Glimpses of Last Year"
                     
                     className="gallery-heading-title techstorm-arcade-title"
-                last year   />
+                />
                 </div>
               </div>
               <div className="portfolio gallery-retro">

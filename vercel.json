@@ -18,6 +18,15 @@
           "value": "*"
         }
       ]
+    },
+    {
+      "source": "/(.*)\\.(js|css|png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|eot|mp4|webm)$",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000"
+        }
+      ]
     }
   ]
 }

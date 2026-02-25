@@ -1,4 +1,4 @@
-import titleBottomImg from '../../../assets/img/bg/circle_left.png'
+import titleBottomImg from '../../../assets/img/brushstroke-dash.png'
 const SectionTitle = ({titlefirst,titleSec, className})=> {
     return ( 
         <div className={`section-title cta-title mb-35 ${className}`}>

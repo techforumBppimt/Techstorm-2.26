@@ -2,7 +2,6 @@ import React from 'react';
 import About from '../../Utilities/About/About';
 import Breadcrumb from "../../Utilities/Breadcrumb/Breadcrumb";
 import Team from '../../Utilities/Team/Team';
-import UpComingGameTwo from '../../Utilities/UpComingGameTwo/UpComingGameTwo';
 
 const AboutUs = () => {
     return (
@@ -15,9 +14,6 @@ const AboutUs = () => {
             <About/>
             {/* Team component */}
             <Team/>
-            {/* Up coming game component */}
-            <UpComingGameTwo/>
-
         </React.Fragment>
 
     );

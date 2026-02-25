@@ -1,6 +1,6 @@
 import React from "react";
-import errorImg from '../../../assets/img/bg/error-bg.png';
-import errorHdImg from '../../../assets/img/bg/about-hd.png';
+import errorImg from '../../../assets/img/mystery.png';
+import errorHdImg from '../../../assets/img/herobg.png';
 import Button8bit from '../../Utilities/Button/Button8bit';
 const Error404 = () => {
     return (

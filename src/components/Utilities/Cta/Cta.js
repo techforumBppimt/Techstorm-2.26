@@ -1,4 +1,4 @@
-import bgImg from '../../../assets/img/bg/newbg.png';
+import bgImg from '../../../assets/img/eventbg.png';
 import Button8bit from '../Button/Button8bit';
 import './Cta.css';
 const ctaData = {
