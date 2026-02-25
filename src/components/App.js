@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,62 +7,65 @@ import {
 } from "react-router-dom";
 
 import PacManLoader from "./PacManLoader/PacManLoader";
-
 import Header from "./Utilities/Header/Header";
-import Home from "./Pages/Home/HomeMain/HomeMain";
 import Footer from "./Utilities/Footer/Footer";
-import AboutUs from "./Pages/AboutUs/AboutUs";
-import Gallery from "./Pages/Gallery/Gallery";
-import Teams from "./Pages/Team/Team";
-import Faqs from "./Pages/Faq/Faq";
-import Error404 from "./Pages/404";
-import Events from "./Pages/Events/Events";
-import Schedule from "./Pages/Schedule/Schedule";
 
-// Import Event Detail Pages
-import CodeBeeEvent from "./Pages/EventDetail/CodeBee/CodeBeeEvent";
-import HackStormEvent from "./Pages/EventDetail/HackStorm/HackStormEvent";
-import TechnomaniaEvent from "./Pages/EventDetail/Technomania/TechnomaniaEvent";
-import OmegatrixEvent from "./Pages/EventDetail/Omegatrix/OmegatrixEvent";
-import TechHuntEvent from "./Pages/EventDetail/TechHunt/TechHuntEvent";
-import RoNavigatorEvent from "./Pages/EventDetail/RoNavigator/RoNavigatorEvent";
-import RoCombatEvent from "./Pages/EventDetail/RoCombat/RoCombatEvent";
-import RoSoccerEvent from "./Pages/EventDetail/RoSoccer/RoSoccerEvent";
-import RoTerranceEvent from "./Pages/EventDetail/RoTerrance/RoTerranceEvent";
-import CreativeCanvasEvent from "./Pages/EventDetail/CreativeCanvas/CreativeCanvasEvent";
-import PassionWithReelsEvent from "./Pages/EventDetail/PassionWithReels/PassionWithReelsEvent";
-import ForzaHorizonEvent from "./Pages/EventDetail/ForzaHorizon/ForzaHorizonEvent";
-import FifaMobileEvent from "./Pages/EventDetail/FifaMobile/FifaMobileEvent";
-import KhetEvent from "./Pages/EventDetail/Khet/KhetEvent";
-import RoSumoEvent from "./Pages/EventDetail/RoSumo/RoSumoEvent";
+// Eager load only critical components (Home page)
+import Home from "./Pages/Home/HomeMain/HomeMain";
 
-// Import Registration Pages
-import CodeBeeRegistration from "./Pages/Registration/CodeBeeRegistration";
-import HackStormRegistration from "./Pages/Registration/HackStormRegistration";
-import TechnomaniaRegistration from "./Pages/Registration/TechnomaniaRegistration";
-import OmegatrixRegistration from "./Pages/Registration/OmegatrixRegistration";
-import TechHuntRegistration from "./Pages/Registration/TechHuntRegistration";
-import RoNavigatorRegistration from "./Pages/Registration/RoNavigatorRegistration";
-import RoCombatRegistration from "./Pages/Registration/RoCombatRegistration";
-import RoSoccerRegistration from "./Pages/Registration/RoSoccerRegistration";
-import RoTerranceRegistration from "./Pages/Registration/RoTerranceRegistration";
-import RoSumoRegistration from "./Pages/Registration/RoSumoRegistration";
-import CreativeCanvasRegistration from "./Pages/Registration/CreativeCanvasRegistration";
-import PassionWithReelsRegistration from "./Pages/Registration/PassionWithReelsRegistration";
-import ForzaHorizonRegistration from "./Pages/Registration/ForzaHorizonRegistration";
-import FifaMobileRegistration from "./Pages/Registration/FifaMobileRegistration";
-import KhetRegistration from "./Pages/Registration/KhetRegistration";
+// Lazy load all other pages to reduce initial bundle size
+const AboutUs = lazy(() => import("./Pages/AboutUs/AboutUs"));
+const Gallery = lazy(() => import("./Pages/Gallery/Gallery"));
+const Teams = lazy(() => import("./Pages/Team/Team"));
+const Faqs = lazy(() => import("./Pages/Faq/Faq"));
+const Error404 = lazy(() => import("./Pages/404"));
+const Events = lazy(() => import("./Pages/Events/Events"));
+const Schedule = lazy(() => import("./Pages/Schedule/Schedule"));
 
-// Import Admin Pages
-import AdminRoleSelection from "./Pages/Admin/AdminRoleSelection";
-import AdminLogin from "./Pages/Admin/AdminLogin";
-import AdminDashboard from "./Pages/Admin/AdminDashboard";
-import RegistrationsPage from "./Pages/Admin/RegistrationsPage";
-import EventsPage from "./Pages/Admin/EventsPage";
-import StatisticsPage from "./Pages/Admin/StatisticsPage";
+// Lazy load Event Detail Pages
+const CodeBeeEvent = lazy(() => import("./Pages/EventDetail/CodeBee/CodeBeeEvent"));
+const HackStormEvent = lazy(() => import("./Pages/EventDetail/HackStorm/HackStormEvent"));
+const TechnomaniaEvent = lazy(() => import("./Pages/EventDetail/Technomania/TechnomaniaEvent"));
+const OmegatrixEvent = lazy(() => import("./Pages/EventDetail/Omegatrix/OmegatrixEvent"));
+const TechHuntEvent = lazy(() => import("./Pages/EventDetail/TechHunt/TechHuntEvent"));
+const RoNavigatorEvent = lazy(() => import("./Pages/EventDetail/RoNavigator/RoNavigatorEvent"));
+const RoCombatEvent = lazy(() => import("./Pages/EventDetail/RoCombat/RoCombatEvent"));
+const RoSoccerEvent = lazy(() => import("./Pages/EventDetail/RoSoccer/RoSoccerEvent"));
+const RoTerranceEvent = lazy(() => import("./Pages/EventDetail/RoTerrance/RoTerranceEvent"));
+const CreativeCanvasEvent = lazy(() => import("./Pages/EventDetail/CreativeCanvas/CreativeCanvasEvent"));
+const PassionWithReelsEvent = lazy(() => import("./Pages/EventDetail/PassionWithReels/PassionWithReelsEvent"));
+const ForzaHorizonEvent = lazy(() => import("./Pages/EventDetail/ForzaHorizon/ForzaHorizonEvent"));
+const FifaMobileEvent = lazy(() => import("./Pages/EventDetail/FifaMobile/FifaMobileEvent"));
+const KhetEvent = lazy(() => import("./Pages/EventDetail/Khet/KhetEvent"));
+const RoSumoEvent = lazy(() => import("./Pages/EventDetail/RoSumo/RoSumoEvent"));
 
-// Import Verify Registration Page
-import VerifyRegistration from "./Pages/VerifyRegistration/VerifyRegistration";
+// Lazy load Registration Pages
+const CodeBeeRegistration = lazy(() => import("./Pages/Registration/CodeBeeRegistration"));
+const HackStormRegistration = lazy(() => import("./Pages/Registration/HackStormRegistration"));
+const TechnomaniaRegistration = lazy(() => import("./Pages/Registration/TechnomaniaRegistration"));
+const OmegatrixRegistration = lazy(() => import("./Pages/Registration/OmegatrixRegistration"));
+const TechHuntRegistration = lazy(() => import("./Pages/Registration/TechHuntRegistration"));
+const RoNavigatorRegistration = lazy(() => import("./Pages/Registration/RoNavigatorRegistration"));
+const RoCombatRegistration = lazy(() => import("./Pages/Registration/RoCombatRegistration"));
+const RoSoccerRegistration = lazy(() => import("./Pages/Registration/RoSoccerRegistration"));
+const RoTerranceRegistration = lazy(() => import("./Pages/Registration/RoTerranceRegistration"));
+const RoSumoRegistration = lazy(() => import("./Pages/Registration/RoSumoRegistration"));
+const CreativeCanvasRegistration = lazy(() => import("./Pages/Registration/CreativeCanvasRegistration"));
+const PassionWithReelsRegistration = lazy(() => import("./Pages/Registration/PassionWithReelsRegistration"));
+const ForzaHorizonRegistration = lazy(() => import("./Pages/Registration/ForzaHorizonRegistration"));
+const FifaMobileRegistration = lazy(() => import("./Pages/Registration/FifaMobileRegistration"));
+const KhetRegistration = lazy(() => import("./Pages/Registration/KhetRegistration"));
+
+// Lazy load Admin Pages
+const AdminRoleSelection = lazy(() => import("./Pages/Admin/AdminRoleSelection"));
+const AdminLogin = lazy(() => import("./Pages/Admin/AdminLogin"));
+const AdminDashboard = lazy(() => import("./Pages/Admin/AdminDashboard"));
+const RegistrationsPage = lazy(() => import("./Pages/Admin/RegistrationsPage"));
+const EventsPage = lazy(() => import("./Pages/Admin/EventsPage"));
+const StatisticsPage = lazy(() => import("./Pages/Admin/StatisticsPage"));
+
+// Lazy load Verify Registration Page
+const VerifyRegistration = lazy(() => import("./Pages/VerifyRegistration/VerifyRegistration"));
 
 const navItems = [
   { label: "Home", href: "/#home" },
@@ -111,38 +114,52 @@ const AppContent = () => {
 
       {/* Page content wrapper — the ::after fade bleeds into the footer on every page */}
       <div style={{ position: "relative" }}>
-        <Switch>
-          {/* Admin Routes */}
-          <Route exact path="/admin" component={AdminRoleSelection} />
-          <Route exact path="/admin/core" component={AdminLogin} />
-          <Route exact path="/admin/coordinator" component={AdminLogin} />
-          <Route exact path="/admin/volunteer" component={AdminLogin} />
-          <Route
-            exact
-            path="/admin/core/dashboard"
-            component={AdminDashboard}
-          />
-          <Route
-            exact
-            path="/admin/coordinator/dashboard"
-            component={AdminDashboard}
-          />
-          <Route
-            exact
-            path="/admin/volunteer/dashboard"
-            component={AdminDashboard}
-          />
-          <Route
-            exact
-            path="/admin/:role/registrations"
-            component={RegistrationsPage}
-          />
-          <Route exact path="/admin/:role/events" component={EventsPage} />
-          <Route
-            exact
-            path="/admin/:role/statistics"
-            component={StatisticsPage}
-          />
+        <Suspense
+          fallback={
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '50vh',
+              fontSize: '1.5rem',
+              color: '#fff'
+            }}>
+              Loading...
+            </div>
+          }
+        >
+          <Switch>
+            {/* Admin Routes */}
+            <Route exact path="/admin" component={AdminRoleSelection} />
+            <Route exact path="/admin/core" component={AdminLogin} />
+            <Route exact path="/admin/coordinator" component={AdminLogin} />
+            <Route exact path="/admin/volunteer" component={AdminLogin} />
+            <Route
+              exact
+              path="/admin/core/dashboard"
+              component={AdminDashboard}
+            />
+            <Route
+              exact
+              path="/admin/coordinator/dashboard"
+              component={AdminDashboard}
+            />
+            <Route
+              exact
+              path="/admin/volunteer/dashboard"
+              component={AdminDashboard}
+            />
+            <Route
+              exact
+              path="/admin/:role/registrations"
+              component={RegistrationsPage}
+            />
+            <Route exact path="/admin/:role/events" component={EventsPage} />
+            <Route
+              exact
+              path="/admin/:role/statistics"
+              component={StatisticsPage}
+            />
 
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={AboutUs} />
@@ -267,6 +284,7 @@ const AppContent = () => {
           <Route exact path="/faq" component={Faqs} />
           <Route exact path="/404" component={Error404} />
         </Switch>
+        </Suspense>
       </div>
 
       {/* Footer - Hide on admin routes */}

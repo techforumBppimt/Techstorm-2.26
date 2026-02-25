@@ -1,11 +1,13 @@
 // TechStorm 2026 - Service Worker
 // Strategy: Cache-first for static assets, Network-first for pages, Workbox for routing
+// OPTIMIZED FOR LOW BANDWIDTH (100 daily visitors)
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.6.0/workbox-sw.js');
 
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const STATIC_CACHE = `techstorm-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `techstorm-dynamic-${CACHE_VERSION}`;
+const IMAGE_CACHE = `techstorm-images-${CACHE_VERSION}`;
 const OFFLINE_PAGE = '/offline.html';
 
 const PRECACHE_ASSETS = [
@@ -44,7 +46,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) =>
       Promise.all(
         cacheNames
-          .filter((name) => name !== STATIC_CACHE && name !== DYNAMIC_CACHE)
+          .filter((name) => name !== STATIC_CACHE && name !== DYNAMIC_CACHE && name !== IMAGE_CACHE)
           .map((name) => {
             console.log('[SW] Deleting old cache:', name);
             return caches.delete(name);
@@ -64,29 +66,50 @@ if (workbox) {
     workbox.navigationPreload.enable();
   }
 
-  // Cache-first for static assets (images, fonts, icons)
+  // AGGRESSIVE Cache-first for images (reduces bandwidth significantly)
   workbox.routing.registerRoute(
-    ({ request }) =>
-      request.destination === 'image' ||
-      request.destination === 'font',
+    ({ request }) => request.destination === 'image',
     new workbox.strategies.CacheFirst({
-      cacheName: STATIC_CACHE,
+      cacheName: IMAGE_CACHE,
       plugins: [
         new workbox.expiration.ExpirationPlugin({
-          maxEntries: 60,
-          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+          maxEntries: 100,
+          maxAgeSeconds: 90 * 24 * 60 * 60, // 90 days (was 30)
+        }),
+        new workbox.cacheableResponse.CacheableResponsePlugin({
+          statuses: [0, 200],
         }),
       ],
     })
   );
 
-  // Stale-while-revalidate for JS and CSS
+  // Cache-first for fonts
+  workbox.routing.registerRoute(
+    ({ request }) => request.destination === 'font',
+    new workbox.strategies.CacheFirst({
+      cacheName: STATIC_CACHE,
+      plugins: [
+        new workbox.expiration.ExpirationPlugin({
+          maxEntries: 30,
+          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
+        }),
+      ],
+    })
+  );
+
+  // Stale-while-revalidate for JS and CSS (serve cached, update in background)
   workbox.routing.registerRoute(
     ({ request }) =>
       request.destination === 'script' ||
       request.destination === 'style',
     new workbox.strategies.StaleWhileRevalidate({
       cacheName: DYNAMIC_CACHE,
+      plugins: [
+        new workbox.expiration.ExpirationPlugin({
+          maxEntries: 60,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+        }),
+      ],
     })
   );
 
