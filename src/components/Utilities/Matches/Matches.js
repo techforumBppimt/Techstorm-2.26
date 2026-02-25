@@ -89,7 +89,7 @@ const Matches = () => {
     if (cat) {
       // Map URL query values to the filter button labels used by filterEvents()
       const queryToFilter = {
-        Coding: "Coding",
+        Coding: "Technicals",
         Robotics: "Robotics",
         Gaming: "Gaming",
         "Brain Teaser": "Brain Teaser",
