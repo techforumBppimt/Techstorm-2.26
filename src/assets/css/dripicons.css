@@ -2,6 +2,7 @@
 
 @font-face {
   font-family: "dripicons-v2";
+  font-display: swap;
   src:url("../fonts/dripicons-v2.eot");
   src:url("../fonts/dripicons-v2.eot?#iefix") format("embedded-opentype"),
     url("../fonts/dripicons-v2.woff") format("woff"),

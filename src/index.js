@@ -19,6 +19,7 @@ import './components/Utilities/Button/Button8bit.css';
 import './assets/css/nes-custom.css';
 import './assets/css/scroll-animations.css';
 import './assets/css/techstorm-theme.css';
+import './assets/css/font-display-optimizations.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);

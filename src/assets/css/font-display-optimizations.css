@@ -1,0 +1,88 @@
+/**
+ * Font Display Optimizations
+ * Overrides font-display property for all web fonts to use 'swap' strategy
+ * This ensures text remains visible during font loading and improves FCP
+ */
+
+/* Font Awesome 5 Brands - Override */
+@font-face {
+  font-family: "Font Awesome 5 Brands";
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url(../fontawesome/webfonts/fa-brands-400.eot);
+  src: url(../fontawesome/webfonts/fa-brands-400.eot?#iefix) format("embedded-opentype"),
+       url(../fontawesome/webfonts/fa-brands-400.woff2) format("woff2"),
+       url(../fontawesome/webfonts/fa-brands-400.woff) format("woff"),
+       url(../fontawesome/webfonts/fa-brands-400.ttf) format("truetype"),
+       url(../fontawesome/webfonts/fa-brands-400.svg#fontawesome) format("svg");
+}
+
+/* Font Awesome 5 Pro - Light (300) - Override */
+@font-face {
+  font-family: "Font Awesome 5 Pro";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(../fontawesome/webfonts/fa-light-300.eot);
+  src: url(../fontawesome/webfonts/fa-light-300.eot?#iefix) format("embedded-opentype"),
+       url(../fontawesome/webfonts/fa-light-300.woff2) format("woff2"),
+       url(../fontawesome/webfonts/fa-light-300.woff) format("woff"),
+       url(../fontawesome/webfonts/fa-light-300.ttf) format("truetype"),
+       url(../fontawesome/webfonts/fa-light-300.svg#fontawesome) format("svg");
+}
+
+/* Font Awesome 5 Pro - Regular (400) - Override */
+@font-face {
+  font-family: "Font Awesome 5 Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fontawesome/webfonts/fa-regular-400.eot);
+  src: url(../fontawesome/webfonts/fa-regular-400.eot?#iefix) format("embedded-opentype"),
+       url(../fontawesome/webfonts/fa-regular-400.woff2) format("woff2"),
+       url(../fontawesome/webfonts/fa-regular-400.woff) format("woff"),
+       url(../fontawesome/webfonts/fa-regular-400.ttf) format("truetype"),
+       url(../fontawesome/webfonts/fa-regular-400.svg#fontawesome) format("svg");
+}
+
+/* Font Awesome 5 Pro - Solid (900) - Override */
+@font-face {
+  font-family: "Font Awesome 5 Pro";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(../fontawesome/webfonts/fa-solid-900.eot);
+  src: url(../fontawesome/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"),
+       url(../fontawesome/webfonts/fa-solid-900.woff2) format("woff2"),
+       url(../fontawesome/webfonts/fa-solid-900.woff) format("woff"),
+       url(../fontawesome/webfonts/fa-solid-900.ttf) format("truetype"),
+       url(../fontawesome/webfonts/fa-solid-900.svg#fontawesome) format("svg");
+}
+
+/* Font Awesome 5 Duotone - Override */
+@font-face {
+  font-family: "Font Awesome 5 Duotone";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(../fontawesome/webfonts/fa-duotone-900.eot);
+  src: url(../fontawesome/webfonts/fa-duotone-900.eot?#iefix) format("embedded-opentype"),
+       url(../fontawesome/webfonts/fa-duotone-900.woff2) format("woff2"),
+       url(../fontawesome/webfonts/fa-duotone-900.woff) format("woff"),
+       url(../fontawesome/webfonts/fa-duotone-900.ttf) format("truetype"),
+       url(../fontawesome/webfonts/fa-duotone-900.svg#fontawesome) format("svg");
+}
+
+/* Dripicons V2 - Override with swap */
+@font-face {
+  font-family: "dripicons-v2";
+  font-display: swap;
+  src: url("../fonts/dripicons-v2.eot");
+  src: url("../fonts/dripicons-v2.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/dripicons-v2.woff") format("woff"),
+       url("../fonts/dripicons-v2.ttf") format("truetype"),
+       url("../fonts/dripicons-v2.svg#dripicons-v2") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
