@@ -295,11 +295,12 @@ const AppContent = () => {
 
 const App = () => {
   const [loaderDone, setLoaderDone] = useState(false);
+  const isAdminPath = window.location.pathname.startsWith('/admin');
 
   return (
     <>
-      {/* Pac-Man loader – rendered above everything, removed from DOM once complete */}
-      {!loaderDone && (
+      {/* Pac-Man loader – rendered above everything, removed from DOM once complete; hidden on admin routes */}
+      {!loaderDone && !isAdminPath && (
         <PacManLoader onComplete={() => setLoaderDone(true)} />
       )}
 

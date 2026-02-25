@@ -263,7 +263,7 @@ const EventDetail = ({ eventData }) => {
         type: "coordinator",
       },
       {
-        name: "Sagor Paul (CSE2)",
+        name: "Sagar Paul (CSE2)",
         role: "Student Volunteer",
         type: "volunteer",
       },
@@ -330,6 +330,11 @@ const EventDetail = ({ eventData }) => {
         role: "Student Co-Ordinator",
         phone: "8777726522",
         type: "coordinator",
+      },
+      {
+        name: "Urba Das (ECE2)",
+        role: "Student Volunteer",
+        type: "volunteer",
       },
     ],
     "Ro-Soccer": [

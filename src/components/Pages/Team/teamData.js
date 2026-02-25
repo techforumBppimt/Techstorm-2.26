@@ -138,7 +138,7 @@ export const eventTeams = [
             { name: 'Arpita Gupta', dept: 'ECE3' },
         ],
         volunteers: [
-            { name: 'Sagor Paul', dept: 'CSE2' },
+            { name: 'Sagar Paul', dept: 'CSE2' },
             { name: 'Ayush Saha', dept: 'ECE2' },
             { name: 'Anjali Kumari Mahato', dept: 'ECE1' },
             { name: 'Jishanuddin Mondal', dept: 'EE1' },
