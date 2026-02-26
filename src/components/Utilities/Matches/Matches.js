@@ -38,7 +38,7 @@ const fifaMobile = `${CLOUDINARY_BASE}/PIXELATED%20EVENT%20MASCOTS/FIFA%20Mobile
 const rosumo = `${CLOUDINARY_BASE}/PIXELATED%20EVENT%20MASCOTS/rosumo`;
 
 // Event card backgrounds from Cloudinary
-const codeBeeBg = `${CLOUDINARY_BASE}/event_specific_pictures/codebee/codebeefibg.gif`;
+const codeBeeBg = `https://res.cloudinary.com/ds3vepmkd/image/upload/v1772133027/codebee_8bit_vjmv1v.gif`;
 const hackStormBg = `${CLOUDINARY_BASE}/event_specific_pictures/hackstorm/hstorm`;
 const technomaniaBg = `${CLOUDINARY_BASE}/event_specific_pictures/technomania/technomania`;
 const roNavigatorBg = `${CLOUDINARY_BASE}/event_specific_pictures/robotics/ro_navigator`;
