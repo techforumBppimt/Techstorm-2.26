@@ -1,14 +1,15 @@
                            
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import coordinatorCardBg from "../../../assets/img/coordinatorcardbg.png";
-import entryFeeBg from "../../../assets/img/event-1.png";
-import entryFeeBgMobile from "../../../assets/img/4.png";
-import coordinatorsBg from "../../../assets/img/event-2.png";
-import coordinatorsBgMobile from "../../../assets/img/5.png";
+import { cloudinaryImages } from "../../../config/cloudinary";
 import { useHistory } from "react-router-dom";
 import "./EventDetail.css";
 import { Button } from "../../ui/8bit/button";
 import { Dialog, DialogContent } from "../../ui/8bit/dialog";
+const coordinatorCardBg = cloudinaryImages.backgrounds.coordinatorcardbg;
+const entryFeeBg = cloudinaryImages.backgrounds.event1;
+const entryFeeBgMobile = cloudinaryImages.mobile.bg4;
+const coordinatorsBg = cloudinaryImages.backgrounds.event2;
+const coordinatorsBgMobile = cloudinaryImages.mobile.bg5;
 
 const omegatrixHeadings = [
   "omegatrix 2.26 rules",
