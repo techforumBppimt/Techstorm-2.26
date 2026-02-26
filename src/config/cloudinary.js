@@ -121,7 +121,7 @@ export const cloudinaryImages = {
   // Miscellaneous assets
   misc: {
     heroph:       `${CDN}/heroph`,
-    qrCode:       `${CDN}/QrCode_For_Payment.jpg`,
+    qrCode:       `${CLOUDINARY_BASE_URL}/v1772115057/eoorox/QrCode_For_Payment.jpg.webp`,
     victoryMascot:`${CDN}/victory_mascot`,
   },
 
