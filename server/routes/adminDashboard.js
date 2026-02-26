@@ -2,7 +2,7 @@ const express = require('express');
 const { authenticateAdmin } = require('../middleware/adminAuth');
 const { asyncHandler } = require('../middleware/errorHandler');
 const EventRegistrationFactory = require('../models/EventRegistration');
-const roleCredentials = require('../config/roleCredentials.json');
+const roleCredentials = require('../config/loadCredentials');
 
 const router = express.Router();
 

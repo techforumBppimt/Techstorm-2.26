@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { User, ROLES } = require('../models/User');
-const roleCredentials = require('../config/roleCredentials.json');
+const roleCredentials = require('../config/loadCredentials');
 const { asyncHandler } = require('../middleware/errorHandler');
 const { securityLogger } = require('../middleware/logger');
 

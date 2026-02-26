@@ -10,9 +10,8 @@ async function setupAdminUsers() {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('✅ Connected to MongoDB');
 
-    // Load role credentials from JSON file
-    const credentialsPath = path.join(__dirname, 'roleCredentials.json');
-    const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
+    // Load role credentials (from env vars or JSON file)
+    const credentials = require('./config/loadCredentials');
 
     let created = 0;
     let skipped = 0;
@@ -37,7 +36,7 @@ async function setupAdminUsers() {
     }
 
     // Create Coordinators
-    for (const [eventAbbr, coord] of Object.entries(credentials.coordinators)) {
+    for (const coord of credentials.coordinator) {
       const existing = await User.findOne({ email: coord.email });
       if (!existing) {
         const coordUser = new User({
@@ -46,7 +45,7 @@ async function setupAdminUsers() {
           password: coord.password,
           role: ROLES.COORDINATOR,
           eventName: coord.event,
-          eventAbbr: eventAbbr,
+          eventAbbr: coord.eventAbbr,
           department: 'Event Coordination',
           isActive: true
         });
@@ -60,7 +59,7 @@ async function setupAdminUsers() {
     }
 
     // Create Volunteers
-    for (const [eventAbbr, volt] of Object.entries(credentials.volunteers)) {
+    for (const volt of credentials.volunteer) {
       const existing = await User.findOne({ email: volt.email });
       if (!existing) {
         const voltUser = new User({
@@ -69,7 +68,7 @@ async function setupAdminUsers() {
           password: volt.password,
           role: ROLES.VOLUNTEER,
           eventName: volt.event,
-          eventAbbr: eventAbbr,
+          eventAbbr: volt.eventAbbr,
           department: 'Volunteer',
           isActive: true
         });
