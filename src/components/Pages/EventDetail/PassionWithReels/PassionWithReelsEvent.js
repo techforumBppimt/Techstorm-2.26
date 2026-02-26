@@ -1,9 +1,9 @@
-   
 import React from "react";
 import EventDetail from "../EventDetail";
-import passionWithReels from "../../../../assets/img/PIXELATED EVENT MASCOTS/PASSION WITH REELS.png";
-import passionWithReelsBanner from "../../../../assets/img/event_specific_pictures/creative/passion_with_reels.png";
 import { getCloudinaryUrl } from "../../../../config/cloudinary";
+
+const passionWithReels = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/PASSION%20WITH%20REELS.png";
+const passionWithReelsBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/creative/passion_with_reels.png";
 
 const PassionWithReelsEvent = () => {
   // Convert themed rules array to plain strings for EventDetail.js rendering
@@ -33,6 +33,7 @@ const PassionWithReelsEvent = () => {
     "• Registration fees are non-refundable.",
   ];
   const eventData = {
+    eventDate: "10th April, 2026",
     previousYearImages: [
       getCloudinaryUrl(
         "pictures_of_gallery/Passion with reels-20260216T161844Z-1-001/Passion with reels",

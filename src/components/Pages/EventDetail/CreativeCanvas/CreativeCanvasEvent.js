@@ -1,11 +1,13 @@
 import React from "react";
 import EventDetail from "../EventDetail";
-import creativeCanvas from "../../../../assets/img/PIXELATED EVENT MASCOTS/CREATIVE CANVAS.png";
-import creativeCanvasBanner from "../../../../assets/img/event_specific_pictures/creative/creative_canvas.png";
 import { getCloudinaryUrl } from "../../../../config/cloudinary";
+
+const creativeCanvas = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/CREATIVE%20CANVAS.png";
+const creativeCanvasBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/creative/creative_canvas.png";
 
 const CreativeCanvasEvent = () => {
   const eventData = {
+    eventDate: "11th April, 2026",
     previousYearImages: [
       getCloudinaryUrl(
         "pictures_of_gallery/Creative Canva_",

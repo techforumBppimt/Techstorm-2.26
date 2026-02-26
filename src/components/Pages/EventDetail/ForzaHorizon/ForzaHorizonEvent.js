@@ -1,10 +1,12 @@
 import React from "react";
 import EventDetail from "../EventDetail";
-import forzaHorizon from "../../../../assets/img/PIXELATED EVENT MASCOTS/FORZA HORIZON.png";
-import forzaHorizonBanner from "../../../../assets/img/event_specific_pictures/games/forza_horizon.png";
+
+const forzaHorizon = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/FORZA%20HORIZON.png";
+const forzaHorizonBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/games/forza_horizon.png";
 
 const ForzaHorizonEvent = () => {
   const eventData = {
+    eventDate: "9th and 10th April, 2026",
     name: "Forza Horizon",
     logo: forzaHorizon,
     category: "Gaming",

@@ -1,8 +1,9 @@
 import React from "react";
 import EventDetail from "../EventDetail";
-import codeBee from "../../../../assets/img/PIXELATED EVENT MASCOTS/CODE BEE.png";
-import codeBeeGif from "../../../../assets/img/event_specific_pictures/codebee/codebeefibg.gif";
 import { getCloudinaryUrl } from "../../../../config/cloudinary";
+
+const codeBee = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/CODE%20BEE.png";
+const codeBeeGif = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/codebee/codebeefibg.gif";
 
 const CodeBeeEvent = () => {
   const galleryImages = [
@@ -32,6 +33,7 @@ const CodeBeeEvent = () => {
     logo: codeBee,
     category: "Coding",
     breadcrumbBg: codeBeeGif,
+    eventDate: "10th April, 2026",
     description:
       "Code-Bee is an engaging offline coding event that tests your logical thinking, mathematical skills, and programming fundamentals. Dive into challenging problems, crack smart algorithms, and showcase your problem-solving abilities. Unravel coding secrets and emerge with the best algorithm!",
     teamSize: "Max 2 Members (Solo or Duo)",

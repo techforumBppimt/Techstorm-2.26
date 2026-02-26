@@ -5,7 +5,8 @@ import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
 import Stepper, { Step } from '../../Utilities/Stepper/Stepper';
 import RegistrationSuccess from './RegistrationSuccess';
 import './Registration.css';
-import forzaHorizonBanner from '../../../assets/img/event_specific_pictures/games/forza_horizon.png';
+
+const forzaHorizonBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/games/forza_horizon.png";
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const YEAR_OPTIONS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];

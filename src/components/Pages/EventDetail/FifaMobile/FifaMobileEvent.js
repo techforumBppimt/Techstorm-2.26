@@ -1,11 +1,13 @@
 import React from "react";
 import EventDetail from "../EventDetail";
-import fifaMobile from "../../../../assets/img/PIXELATED EVENT MASCOTS/FIFA Mobile.png";
-import fifaMobileBanner from "../../../../assets/img/event_specific_pictures/games/fifa_mobile.png";
 import { getCloudinaryUrl } from "../../../../config/cloudinary";
+
+const fifaMobile = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/FIFA%20Mobile.png";
+const fifaMobileBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/games/fifa_mobile.png";
 
 const FifaMobileEvent = () => {
   const eventData = {
+    eventDate: "10th and 11th April, 2026",
     previousYearImages: [
       getCloudinaryUrl(
         "pictures_of_gallery/FIFA mobile_",

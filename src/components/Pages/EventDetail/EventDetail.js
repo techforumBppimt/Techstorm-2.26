@@ -2479,7 +2479,7 @@ const EventDetail = ({ eventData }) => {
                   >
                     <p style={{ fontSize: "16px" }}>
                       📅 <span style={{ color: "#00ffea" }}>Event Dates: </span>{" "}
-                      9-10th April
+                      {eventData.eventDate || "9-10th April"}
                     </p>
                   </div>
                   <i

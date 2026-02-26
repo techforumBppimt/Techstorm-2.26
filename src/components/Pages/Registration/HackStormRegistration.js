@@ -1,6 +1,7 @@
 import React from 'react';
 import RegistrationForm from './RegistrationForm';
-import hackStormBanner from '../../../assets/img/event_specific_pictures/hackstorm/hstorm.png';
+
+const hackStormBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/hackstorm/hstorm.png";
 
 const HackStormRegistration = () => {
     const eventConfig = {

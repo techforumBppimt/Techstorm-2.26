@@ -1,11 +1,13 @@
 import React from "react";
 import EventDetail from "../EventDetail";
-import khet from "../../../../assets/img/PIXELATED EVENT MASCOTS/KHET.png";
-import khetBanner from "../../../../assets/img/event_specific_pictures/games/khet.png";
+
+const khet = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/KHET.png";
+const khetBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/games/khet.png";
 // import { getCloudinaryUrl } from '../../../../config/cloudinary';
 
 const KhetEvent = () => {
   const eventData = {
+    eventDate: "10th and 11th April, 2026",
     previousYearImages: [
       // Add Cloudinary URLs here if images exist for Khet event
     ],

@@ -1,11 +1,13 @@
 import React from "react";
 import EventDetail from "../EventDetail";
-import roSoccer from "../../../../assets/img/PIXELATED EVENT MASCOTS/RO-SOCCER.png";
-import roSoccerBanner from "../../../../assets/img/event_specific_pictures/robotics/ro_soccer.png";
 import { getCloudinaryUrl } from "../../../../config/cloudinary";
+
+const roSoccer = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/RO-SOCCER.png";
+const roSoccerBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/robotics/ro_soccer.png";
 
 const RoSoccerEvent = () => {
   const eventData = {
+    eventDate: "10th and 11th April, 2026",
     previousYearImages: [
       getCloudinaryUrl(
         "pictures_of_gallery/Ro Soccer_",

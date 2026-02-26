@@ -5,8 +5,9 @@ import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
 import Stepper, { Step } from '../../Utilities/Stepper/Stepper';
 import RegistrationSuccess from './RegistrationSuccess';
 import './Registration.css';
-import passionWithReelsBanner from '../../../assets/img/event_specific_pictures/creative/passion_with_reels.png';
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
+
+const passionWithReelsBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/creative/passion_with_reels.png";
 
 const MIN_PARTICIPANTS = 2;
 const MAX_PARTICIPANTS = 8;

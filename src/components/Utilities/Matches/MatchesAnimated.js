@@ -1,22 +1,25 @@
 import React from 'react';
 import matchBgImg from '../../../assets/img/bg/match-bg.png';
 
-// Import pixelated event mascots
-import codeBee from '../../../assets/img/PIXELATED EVENT MASCOTS/CODE BEE.png';
-import hackStorm from '../../../assets/img/PIXELATED EVENT MASCOTS/HACKSTORM.png';
-import technomania from '../../../assets/img/PIXELATED EVENT MASCOTS/TECHNOMANIA.png';
-import roNavigator from '../../../assets/img/PIXELATED EVENT MASCOTS/RO-NAVIGATOR.png';
-import roCombat from '../../../assets/img/PIXELATED EVENT MASCOTS/RO-COMBAT.png';
-import roSoccer from '../../../assets/img/PIXELATED EVENT MASCOTS/RO-SOCCER.png';
-import roTerrance from '../../../assets/img/PIXELATED EVENT MASCOTS/RO-TERRANCE.png';
-import techHunt from '../../../assets/img/PIXELATED EVENT MASCOTS/TECH HUNT.png';
-import omegatrix from '../../../assets/img/PIXELATED EVENT MASCOTS/OMEGATRIX.png';
-import creativeCanvas from '../../../assets/img/PIXELATED EVENT MASCOTS/CREATIVE CANVAS.png';
-import passionWithReels from '../../../assets/img/PIXELATED EVENT MASCOTS/PASSION WITH REELS.png';
-import khet from '../../../assets/img/PIXELATED EVENT MASCOTS/KHET.png';
-import forzaHorizon from '../../../assets/img/PIXELATED EVENT MASCOTS/FORZA HORIZON.png';
-import fifaMobile from '../../../assets/img/PIXELATED EVENT MASCOTS/FIFA Mobile.png';
-import rosumo from '../../../assets/img/events/rosumo.png';
+// Cloudinary base URL
+const CLOUDINARY_BASE = "https://res.cloudinary.com/dyj3kxni2/image/upload";
+
+// Pixelated event mascots from Cloudinary
+const codeBee = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/CODE%20BEE.png`;
+const hackStorm = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/HACKSTORM.png`;
+const technomania = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/TECHNOMANIA.png`;
+const roNavigator = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/RO-NAVIGATOR.png`;
+const roCombat = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/RO-COMBAT.png`;
+const roSoccer = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/RO-SOCCER.png`;
+const roTerrance = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/RO-TERRANCE.png`;
+const techHunt = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/TECH%20HUNT.png`;
+const omegatrix = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/OMEGATRIX.png`;
+const creativeCanvas = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/CREATIVE%20CANVAS.png`;
+const passionWithReels = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/PASSION%20WITH%20REELS.png`;
+const khet = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/KHET.png`;
+const forzaHorizon = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/FORZA%20HORIZON.png`;
+const fifaMobile = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/FIFA%20Mobile.png`;
+const rosumo = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/rosumo.png`;
 
 import SectionTitle from '../SectionTitle/SectionTitle';
 import RetroCard from '../RetroCard/RetroCard';

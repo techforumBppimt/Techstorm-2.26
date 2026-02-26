@@ -1,11 +1,13 @@
 import React from "react";
 import EventDetail from "../EventDetail";
-import omegatrix from "../../../../assets/img/PIXELATED EVENT MASCOTS/OMEGATRIX.png";
-import omegatrixBanner from "../../../../assets/img/event_specific_pictures/omegatrix/OMEGATRIX_banner.png";
+
+const omegatrix = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/OMEGATRIX.png";
+const omegatrixBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/omegatrix/OMEGATRIX_banner.png";
 import { getCloudinaryUrl } from "../../../../config/cloudinary";
 
 const OmegatrixEvent = () => {
   const eventData = {
+    eventDate: "10th and 11th April, 2026",
     previousYearImages: [
       getCloudinaryUrl(
         "pictures_of_gallery/Omega trix_",

@@ -1,11 +1,13 @@
 import React from "react";
 import EventDetail from "../EventDetail";
-import hackStorm from "../../../../assets/img/PIXELATED EVENT MASCOTS/HACKSTORM.png";
-import hackStormBanner from "../../../../assets/img/event_specific_pictures/hackstorm/hstorm.png";
 import { getCloudinaryUrl } from "../../../../config/cloudinary";
+
+const hackStorm = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/HACKSTORM.png";
+const hackStormBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/hackstorm/hstorm.png";
 
 const HackStormEvent = () => {
   const eventData = {
+    eventDate: "9th April, 2026",
     previousYearImages: [
       getCloudinaryUrl(
         "pictures_of_gallery/Hackstrom",

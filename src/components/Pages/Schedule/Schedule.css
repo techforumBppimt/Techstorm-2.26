@@ -42,8 +42,6 @@
   margin-top: 0;
   width: 200px;
   height: 28px;
-  background: url('../../../assets/img/brushstroke-dash.png') no-repeat left center;
-  background-size: contain;
   position: relative;
   left: 0;
 }

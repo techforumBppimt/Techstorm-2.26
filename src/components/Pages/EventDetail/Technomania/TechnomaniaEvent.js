@@ -1,11 +1,13 @@
 import React from "react";
 import EventDetail from "../EventDetail";
-import technomania from "../../../../assets/img/PIXELATED EVENT MASCOTS/TECHNOMANIA.png";
-import technomaniaBanner from "../../../../assets/img/event_specific_pictures/technomania/technomania.png";
 import { getCloudinaryUrl } from "../../../../config/cloudinary";
+
+const technomania = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/TECHNOMANIA.png";
+const technomaniaBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/technomania/technomania.png";
 
 const TechnomaniaEvent = () => {
   const eventData = {
+    eventDate: "9th April, 2026",
     previousYearImages: [
       getCloudinaryUrl(
         "pictures_of_gallery/Technomania",

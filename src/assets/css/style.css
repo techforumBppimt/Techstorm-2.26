@@ -1844,7 +1844,7 @@ label {
 /* breadcrumb */
 
 .breadcrumb-area {
-	background-image: url('../img/event_specific_pictures/codebee/codebee_8bit.gif');
+	background-image: url('https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/codebee/codebeefibg.gif');
 	background-size: cover;
 	position: relative;
 	min-height: 552px;

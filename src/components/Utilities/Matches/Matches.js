@@ -2,44 +2,46 @@ import React, { useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cloudinaryImages } from "../../../config/cloudinary";
 
-// Import pixelated event mascots
-import codeBee from "../../../assets/img/PIXELATED EVENT MASCOTS/CODE BEE.png";
-import hackStorm from "../../../assets/img/PIXELATED EVENT MASCOTS/HACKSTORM.png";
-import technomania from "../../../assets/img/PIXELATED EVENT MASCOTS/TECHNOMANIA.png";
-import roNavigator from "../../../assets/img/PIXELATED EVENT MASCOTS/RO-NAVIGATOR.png";
-import roCombat from "../../../assets/img/PIXELATED EVENT MASCOTS/RO-COMBAT.png";
-import roSoccer from "../../../assets/img/PIXELATED EVENT MASCOTS/RO-SOCCER.png";
-import roTerrance from "../../../assets/img/PIXELATED EVENT MASCOTS/RO-TERRANCE.png";
-import techHunt from "../../../assets/img/PIXELATED EVENT MASCOTS/TECH HUNT.png";
-import omegatrix from "../../../assets/img/PIXELATED EVENT MASCOTS/OMEGATRIX.png";
-import creativeCanvas from "../../../assets/img/PIXELATED EVENT MASCOTS/CREATIVE CANVAS.png";
-import passionWithReels from "../../../assets/img/PIXELATED EVENT MASCOTS/PASSION WITH REELS.png";
-import khet from "../../../assets/img/PIXELATED EVENT MASCOTS/KHET.png";
-import forzaHorizon from "../../../assets/img/PIXELATED EVENT MASCOTS/FORZA HORIZON.png";
-import fifaMobile from "../../../assets/img/PIXELATED EVENT MASCOTS/FIFA Mobile.png";
-import rosumo from "../../../assets/img/PIXELATED EVENT MASCOTS/rosumo.png";
-
-// Import event card backgrounds
-import codeBeeBg from "../../../assets/img/event_specific_pictures/codebee/codebeefibg.gif";
-import hackStormBg from "../../../assets/img/event_specific_pictures/hackstorm/hstorm.png";
-import technomaniaBg from "../../../assets/img/event_specific_pictures/technomania/technomania.png";
-import roNavigatorBg from "../../../assets/img/event_specific_pictures/robotics/ro_navigator.png";
-import roCombatBg from "../../../assets/img/event_specific_pictures/robotics/ro_combat.png";
-import roSoccerBg from "../../../assets/img/event_specific_pictures/robotics/ro_soccer.png";
-import roTerranceBg from "../../../assets/img/event_specific_pictures/robotics/ro_terrance.png";
-import techHuntBg from "../../../assets/img/event_specific_pictures/techHunt/techhunt_banner.png";
-import omegatrixBg from "../../../assets/img/event_specific_pictures/omegatrix/OMEGATRIX_banner.png";
-import creativeCanvasBg from "../../../assets/img/event_specific_pictures/creative/creative_canvas.png";
-import passionWithReelsBg from "../../../assets/img/event_specific_pictures/creative/passion_with_reels.png";
-import khetBg from "../../../assets/img/event_specific_pictures/games/khet.png";
-import forzaHorizonBg from "../../../assets/img/event_specific_pictures/games/forza_horizon.png";
-import fifaMobileBg from "../../../assets/img/event_specific_pictures/games/fifa_mobile.png";
-// Note: rosumo doesn't have a specific background, using a robotics one as fallback
-import rosumoBg from "../../../assets/img/event_specific_pictures/robotics/ro_combat.png";
-
 import SectionTitle from "../SectionTitle/SectionTitle";
 import RetroCard from "../RetroCard/RetroCard";
 import "./Matches.css";
+
+// Cloudinary base URL
+const CLOUDINARY_BASE = "https://res.cloudinary.com/dyj3kxni2/image/upload";
+
+// Pixelated event mascots from Cloudinary
+const codeBee = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/CODE%20BEE.png`;
+const hackStorm = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/HACKSTORM.png`;
+const technomania = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/TECHNOMANIA.png`;
+const roNavigator = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/RO-NAVIGATOR.png`;
+const roCombat = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/RO-COMBAT.png`;
+const roSoccer = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/RO-SOCCER.png`;
+const roTerrance = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/RO-TERRANCE.png`;
+const techHunt = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/TECH%20HUNT.png`;
+const omegatrix = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/OMEGATRIX.png`;
+const creativeCanvas = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/CREATIVE%20CANVAS.png`;
+const passionWithReels = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/PASSION%20WITH%20REELS.png`;
+const khet = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/KHET.png`;
+const forzaHorizon = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/FORZA%20HORIZON.png`;
+const fifaMobile = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/FIFA%20Mobile.png`;
+const rosumo = `${CLOUDINARY_BASE}/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/rosumo.png`;
+
+// Event card backgrounds from Cloudinary
+const codeBeeBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/codebee/codebeefibg.gif`;
+const hackStormBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/hackstorm/hstorm.png`;
+const technomaniaBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/technomania/technomania.png`;
+const roNavigatorBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/robotics/ro_navigator.png`;
+const roCombatBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/robotics/ro_combat.png`;
+const roSoccerBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/robotics/ro_soccer.png`;
+const roTerranceBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/robotics/ro_terrance.png`;
+const techHuntBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/techHunt/techhunt_banner.png`;
+const omegatrixBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/omegatrix/OMEGATRIX_banner.png`;
+const creativeCanvasBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/creative/creative_canvas.png`;
+const passionWithReelsBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/creative/passion_with_reels.png`;
+const khetBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/games/khet.png`;
+const forzaHorizonBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/games/forza_horizon.png`;
+const fifaMobileBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/games/fifa_mobile.png`;
+const rosumoBg = `${CLOUDINARY_BASE}/v1772034191/eoorox/event_specific_pictures/robotics/ro_sumo.png`;
 
 const Matches = () => {
   const [hoveredIndex, setHoveredIndex] = React.useState(null);
@@ -311,7 +313,7 @@ const Matches = () => {
       category: "Games",
       url: "/events/khet",
       entryFeeInternal: "₹50",
-      entryFeeExternal: "FREE",
+      entryFeeExternal: "NA",
       teamSize: "Solo",
     },
   ];

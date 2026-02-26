@@ -5,7 +5,8 @@ import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
 import Stepper, { Step } from '../../Utilities/Stepper/Stepper';
 import RegistrationSuccess from './RegistrationSuccess';
 import './Registration.css';
-import roTerranceBanner from '../../../assets/img/event_specific_pictures/robotics/ro_terrance.png';
+
+const roTerranceBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/robotics/ro_terrance.png";
 import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const MIN_PARTICIPANTS = 2;
