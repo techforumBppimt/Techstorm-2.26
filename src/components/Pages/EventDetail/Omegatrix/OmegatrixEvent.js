@@ -1,9 +1,9 @@
 import React from "react";
 import EventDetail from "../EventDetail";
+import { getCloudinaryUrl } from "../../../../config/cloudinary";
 
 const omegatrix = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034548/eoorox/PIXELATED%20EVENT%20MASCOTS/OMEGATRIX.png";
 const omegatrixBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/omegatrix/OMEGATRIX_banner.png";
-import { getCloudinaryUrl } from "../../../../config/cloudinary";
 
 const OmegatrixEvent = () => {
   const eventData = {
