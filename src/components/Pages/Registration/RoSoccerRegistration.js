@@ -5,9 +5,9 @@ import Breadcrumb from '../../Utilities/Breadcrumb/Breadcrumb';
 import Stepper, { Step } from '../../Utilities/Stepper/Stepper';
 import RegistrationSuccess from './RegistrationSuccess';
 import './Registration.css';
+import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const roSoccerBanner = "https://res.cloudinary.com/dyj3kxni2/image/upload/v1772034191/eoorox/event_specific_pictures/robotics/ro_soccer.png";
-import qrCodeImage from '../../../assets/img/QrCode_For_Payment.jpg.jpeg';
 
 const MIN_PARTICIPANTS = 2;
 const MAX_PARTICIPANTS = 5;
@@ -713,3 +713,4 @@ const RoSoccerRegistration = () => {
 };
 
 export default RoSoccerRegistration;
+
