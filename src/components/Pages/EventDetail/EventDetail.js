@@ -130,6 +130,7 @@ const EventDetail = ({ eventData }) => {
     coordinators,
     breadcrumbBg,
     registerButton,
+    devfolioSlug,
   } = eventData;
 
   // Refs for auto-scroll functionality
@@ -150,6 +151,7 @@ const EventDetail = ({ eventData }) => {
     check();
     return () => window.removeEventListener("resize", check);
   }, []);
+
   const entryFeeImg = isMobile ? entryFeeBgMobile : entryFeeBg;
   const coordinatorsImg = isMobile ? coordinatorsBgMobile : coordinatorsBg;
   // Lighter overlay on mobile so background images are more visible
@@ -1023,7 +1025,14 @@ const EventDetail = ({ eventData }) => {
                     flexWrap: "wrap",
                   }}
                 >
-                  {registerButton && (
+                  {devfolioSlug ? (
+                    <div
+                      className="apply-button"
+                      data-hackathon-slug={devfolioSlug}
+                      data-button-theme="dark"
+                      style={{ height: "44px", width: "312px" }}
+                    />
+                  ) : registerButton && (
                     <Button
                       variant="default"
                       onClick={

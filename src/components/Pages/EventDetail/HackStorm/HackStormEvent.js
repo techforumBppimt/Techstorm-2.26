@@ -80,10 +80,7 @@ const HackStormEvent = () => {
             a: `No. This is an offline event and requires physical presence at the venue for participation.`
           }
         ],
-    registerButton: {
-      text: "Register Now",
-      link: "https://hack-storm.devfolio.co/overview",
-    },
+    devfolioSlug: "hack-storm",
     rules: [
       "HACKSTORM HACKATHON RULES",
       "",
