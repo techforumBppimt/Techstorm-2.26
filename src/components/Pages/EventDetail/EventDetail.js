@@ -151,13 +151,12 @@ const EventDetail = ({ eventData }) => {
     check();
     return () => window.removeEventListener("resize", check);
   }, []);
-
   const entryFeeImg = isMobile ? entryFeeBgMobile : entryFeeBg;
   const coordinatorsImg = isMobile ? coordinatorsBgMobile : coordinatorsBg;
   // Lighter overlay on mobile so background images are more visible
   const sectionOverlay = isMobile
     ? "linear-gradient(to bottom, rgba(10,4,20,0.42) 0%, rgba(10,4,20,0.02) 22%, rgba(10,4,20,0.02) 78%, rgba(10,4,20,0.42) 100%)"
-    : "linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,0.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%)";
+    : "linear-gradient(to bottom, rgba(10,4,20,0.97) 0%, rgba(10,4,20,z.22) 18%, rgba(10,4,20,0.22) 82%, rgba(10,4,20,0.97) 100%)";
 
   // Event-specific coordinators data
   const eventCoordinators = {
@@ -1026,12 +1025,30 @@ const EventDetail = ({ eventData }) => {
                   }}
                 >
                   {devfolioSlug ? (
-                    <div
-                      className="apply-button"
-                      data-hackathon-slug={devfolioSlug}
-                      data-button-theme="dark"
-                      style={{ height: "44px", width: "312px" }}
-                    />
+                    <a
+                      href={`https://${devfolioSlug}.devfolio.co`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "8px",
+                        backgroundColor: "#3870FF",
+                        color: "#ffffff",
+                        fontSize: "13px",
+                        fontWeight: "600",
+                        padding: "0 24px",
+                        height: "42px",
+                        borderRadius: "4px",
+                        textDecoration: "none",
+                        letterSpacing: "0.5px",
+                        transition: "background-color 0.2s ease",
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#2558e0"}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#3870FF"}
+                    >
+                      Apply with Devfolio
+                    </a>
                   ) : registerButton && (
                     <Button
                       variant="default"
