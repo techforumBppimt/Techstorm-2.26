@@ -69,7 +69,10 @@
       ]
     }
   ],
-  "buildCommand": "react-scripts build",
+  "buildCommand": "craco build",
   "outputDirectory": "build",
-  "framework": "create-react-app"
+  "framework": "create-react-app",
+  "env": {
+    "GENERATE_SOURCEMAP": "false"
+  }
 }
